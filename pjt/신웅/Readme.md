@@ -157,3 +157,8 @@
     - 특화 4주차 때 전문가 리뷰 한번 더 진행한다.
 
 ---
+
+## 03.07
+### 와이어 프레임 구상
+- https://www.figma.com/file/dNdEEw5UlgWYUiBOwhtN25/%EC%95%88%EC%8F%AD%EB%A7%9E%EC%B6%A4?type=design&node-id=0-1&mode=design&t=rFqeaTnWACEWP1zm-0
+- 유저 플로우 흐름을 기반으로 전체적인 와이어 프레임 러프하게 구상
