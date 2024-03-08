@@ -230,3 +230,5 @@ fake voice generator ⇒ 검색해보삼
     https://ddeck.tistory.com/48
 
 
+# 와이어 프레임
+<img src="../정유나/안쏭맞춤.png" />
