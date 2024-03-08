@@ -162,3 +162,9 @@
 ### 와이어 프레임 구상
 - https://www.figma.com/file/dNdEEw5UlgWYUiBOwhtN25/%EC%95%88%EC%8F%AD%EB%A7%9E%EC%B6%A4?type=design&node-id=0-1&mode=design&t=rFqeaTnWACEWP1zm-0
 - 유저 플로우 흐름을 기반으로 전체적인 와이어 프레임 러프하게 구상
+
+
+## 03. 08
+### 와이어 프레임 구체화 및 수정 
+- https://www.figma.com/file/dNdEEw5UlgWYUiBOwhtN25/%EC%95%88%EC%8F%AD%EB%A7%9E%EC%B6%A4?type=design&node-id=0-1&mode=design&t=rFqeaTnWACEWP1zm-0
+- 디테일한 기능들과 필요한 부분들 구체화
