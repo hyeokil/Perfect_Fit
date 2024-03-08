@@ -203,3 +203,30 @@ fake voice generator ⇒ 검색해보삼
     prometheus ⇒ 오픈소스 시스템 모니터링 및 경고 툴킷
     
     grafana ⇒ 오픈소스 시각화 및 분석 도구 툴킷, 다양한 유형의 차트와 그래프 제공
+
+
+# Vite 시작시 환경설정
+- React-vite-eslint(airbnb)-prettier-typescript 설정
+    
+    참고링크: [https://velog.io/@kmh060020/React-vite-eslintairbnb-prettier-typescript-설정](https://velog.io/@kmh060020/React-vite-eslintairbnb-prettier-typescript-%EC%84%A4%EC%A0%95)
+    
+- vite에서 절대경로 사용하기
+    
+    참고링크: [https://velog.io/@navyjeongs/vite로-리액트-프로젝트-초기-세팅하기-1-with.-typescript-eslint-prettier-husky-절대경로](https://velog.io/@navyjeongs/vite%EB%A1%9C-%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%B4%88%EA%B8%B0-%EC%84%B8%ED%8C%85%ED%95%98%EA%B8%B0-1-with.-typescript-eslint-prettier-husky-%EC%A0%88%EB%8C%80%EA%B2%BD%EB%A1%9C)
+    
+    tsconfig.json 파일을 열어 complierOptions에 baseUrl과 paths를 추가
+    tsconfig에서 작성한 path를 vite.config.ts에 작성해야 사용할 수 있는데 vite-tsconfig-paths 플러그인을 사용하여 간단하게 등록
+    
+- vite pwa 설정
+    
+    pwa 최소 요구사항(공식문서) https://vite-pwa-org.netlify.app/guide/pwa-minimal-requirements.html
+    
+    pwa란 무엇인가 https://velog.io/@gsh723/0715-pwa
+    vite pwa 적용해보기 [https://jonghoonpark.com/2023/08/27/pwa-만들어보기](https://jonghoonpark.com/2023/08/27/pwa-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EA%B8%B0)
+    pwa setting [https://velog.io/@strong-minsu/PWA-세팅](https://velog.io/@strong-minsu/PWA-%EC%84%B8%ED%8C%85)
+    
+- linebreak-style(lf, crlf)
+    
+    https://ddeck.tistory.com/48
+
+
