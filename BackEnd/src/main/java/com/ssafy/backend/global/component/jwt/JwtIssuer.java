@@ -1,4 +1,4 @@
-package com.ssafy.Backend.global.component.jwt;
+package com.ssafy.backend.global.component.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
