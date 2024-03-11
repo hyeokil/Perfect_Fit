@@ -168,3 +168,7 @@
 ### 와이어 프레임 구체화 및 수정 
 - https://www.figma.com/file/dNdEEw5UlgWYUiBOwhtN25/%EC%95%88%EC%8F%AD%EB%A7%9E%EC%B6%A4?type=design&node-id=0-1&mode=design&t=rFqeaTnWACEWP1zm-0
 - 디테일한 기능들과 필요한 부분들 구체화
+
+## 03. 11
+### UI / UX 구체화
+- https://www.figma.com/file/4TppoMuTLn0dh7VfBiAEYe/%EC%95%88%EC%8F%AD%EB%A7%9E%EC%B6%A4-UI-%2F-UX?type=design&node-id=0-1&mode=design&t=vNt50na1L3tMa3gq-0
