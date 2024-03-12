@@ -1,13 +1,21 @@
 package com.ssafy.backend.domain.member.service;
 
 import com.ssafy.backend.domain.member.dto.MemberGetResponseDto;
+import com.ssafy.backend.domain.member.dto.MemberLoginRequestDto;
 import com.ssafy.backend.domain.member.dto.MemberUpdateDto;
 import com.ssafy.backend.global.component.jwt.dto.TokenMemberInfoDto;
 import com.ssafy.backend.global.component.oauth.vendor.enums.OAuthDomain;
 
 public interface MemberService {
+
+    // 일반 회원가입 test
+    void signUpMember(String email);
+    // 일반 로그인
+    TokenMemberInfoDto loginCheckMember(MemberLoginRequestDto loginRequestDto);
+
     String provideAuthCodeRequestUrl(OAuthDomain oauthDomain);
 
+    // 소셜 로그인
     TokenMemberInfoDto login(OAuthDomain oauthDomain, String authCode);
 
     // 로그아웃

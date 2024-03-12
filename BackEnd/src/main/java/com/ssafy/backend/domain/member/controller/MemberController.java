@@ -1,9 +1,6 @@
 package com.ssafy.backend.domain.member.controller;
 
-import com.ssafy.backend.domain.member.dto.MemberGetResponseDto;
-import com.ssafy.backend.domain.member.dto.MemberLoginActiveDto;
-import com.ssafy.backend.domain.member.dto.MemberLoginResponseDto;
-import com.ssafy.backend.domain.member.dto.MemberUpdateDto;
+import com.ssafy.backend.domain.member.dto.*;
 import com.ssafy.backend.domain.member.service.MemberService;
 import com.ssafy.backend.global.common.dto.Message;
 import com.ssafy.backend.global.component.jwt.dto.TokenDto;
@@ -26,6 +23,32 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
     private final JwtService jwtService;
+
+    // test를 위한 일반 회원가입
+    @PostMapping("/signup")
+    public ResponseEntity<Message<Void>> signUpMember(@RequestBody String email) {
+        memberService.signUpMember(email);
+        return ResponseEntity.ok().body(Message.success());
+    }
+
+    // test를 위한 일반 로그인
+    @PostMapping("/login")
+    public ResponseEntity<Message<MemberLoginResponseDto>> login(@RequestBody MemberLoginRequestDto loginRequestDto,
+                                                                 HttpServletResponse response) {
+        TokenMemberInfoDto tokenMemberInfoDto = memberService.loginCheckMember(loginRequestDto);
+        TokenDto tokenDto = jwtService.issueToken(tokenMemberInfoDto);
+        MemberLoginResponseDto loginResponseDto = MemberLoginResponseDto.builder()
+                .memberInfo(tokenMemberInfoDto)
+                .token(tokenDto)
+                .build();
+        // JWT 토큰을 쿠키에 저장
+        Cookie accessTokenCookie = new Cookie("accessToken", tokenDto.getAccessToken());
+        accessTokenCookie.setPath("/");
+        accessTokenCookie.setMaxAge(100000000);
+        response.addCookie(accessTokenCookie);
+
+        return ResponseEntity.ok().body(Message.success(loginResponseDto));
+    }
 
     @GetMapping("/{oAuthDomain}")
     public ResponseEntity<Message<String>> provideAuthCodeRequestUrl(@PathVariable("oAuthDomain") OAuthDomain oAuthDomain) {
@@ -52,7 +75,7 @@ public class MemberController {
     }
 
     @PostMapping("/logout")
-//    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
+    @PreAuthorize("isAuthenticated()") // 로그인 한 사용자만 접근 가능
     public ResponseEntity<Message<Void>> logoutMember(@AuthenticationPrincipal MemberLoginActiveDto loginActiveDto,
                                                       HttpServletResponse response) {
         memberService.logoutMember(loginActiveDto.getEmail());
@@ -66,7 +89,7 @@ public class MemberController {
     }
 
     @PatchMapping("/update/image/nickname")
-//    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
+    @PreAuthorize("isAuthenticated()") // 로그인 한 사용자만 접근 가능
     public ResponseEntity<Message<Void>> updateImageAndNicknameMember(@AuthenticationPrincipal MemberLoginActiveDto loginActiveDto,
                                                                       @RequestBody MemberUpdateDto updateDto) {
         memberService.updateImageAndNicknameMember(loginActiveDto.getId(), updateDto);
@@ -74,7 +97,7 @@ public class MemberController {
     }
 
     @GetMapping("/get")
-//    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
+    @PreAuthorize("isAuthenticated()") // 로그인 한 사용자만 접근 가능
     public ResponseEntity<Message<MemberGetResponseDto>> getMember(@AuthenticationPrincipal MemberLoginActiveDto loginActiveDto) {
         MemberGetResponseDto memberGetResponseDto = memberService.getMember(loginActiveDto.getId());
         return ResponseEntity.ok().body(Message.success(memberGetResponseDto));

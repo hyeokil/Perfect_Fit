@@ -1,6 +1,7 @@
 package com.ssafy.backend.domain.member.service;
 
 import com.ssafy.backend.domain.member.dto.MemberGetResponseDto;
+import com.ssafy.backend.domain.member.dto.MemberLoginRequestDto;
 import com.ssafy.backend.domain.member.dto.MemberUpdateDto;
 import com.ssafy.backend.domain.member.entity.Member;
 import com.ssafy.backend.domain.member.exception.MemberError;
@@ -28,6 +29,30 @@ public class MemberServiceImpl implements MemberService {
     private final OAuthMemberClient oAuthMemberClient;
     private final MemberRepository memberRepository;
     private final RefreshRepository refreshRepository;
+
+    @Override
+    public void signUpMember(String email) {
+        Member member = Member.builder()
+                .email(email)
+//                .nickname(null)
+//                .image(null)
+//                .oAuthDomain(null)
+                .build();
+        memberRepository.save(member);
+    }
+
+    @Override
+    public TokenMemberInfoDto loginCheckMember(MemberLoginRequestDto loginRequestDto) {
+        Member member = memberRepository.findByEmail(loginRequestDto.getEmail()).orElseThrow(()
+                -> new MemberException(MemberError.NOT_FOUND_MEMBER));
+
+        return TokenMemberInfoDto.builder()
+                .id(member.getId())
+                .email(member.getEmail())
+                .nickname(member.getNickname())
+                .image(member.getImage())
+                .build();
+    }
 
     @Transactional(readOnly = true)
     @Override
