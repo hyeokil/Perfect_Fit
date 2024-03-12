@@ -233,3 +233,7 @@ fake voice generator ⇒ 검색해보삼
 # 와이어 프레임
 <img src="../정유나/안쏭맞춤와이어프레임.png" />
 와이어 프레임 설계 완료
+
+
+# UI / UX 설계
+<img src='//pjt/정유나/안쏭맞춤 UI _ UX.png' />
