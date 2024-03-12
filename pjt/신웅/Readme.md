@@ -172,3 +172,8 @@
 ## 03. 11
 ### UI / UX 구체화
 - https://www.figma.com/file/4TppoMuTLn0dh7VfBiAEYe/%EC%95%88%EC%8F%AD%EB%A7%9E%EC%B6%A4-UI-%2F-UX?type=design&node-id=0-1&mode=design&t=vNt50na1L3tMa3gq-0
+
+## 03.12
+### UI / UX 디자인
+- https://www.figma.com/file/4TppoMuTLn0dh7VfBiAEYe/%EC%95%88%EC%8F%AD%EB%A7%9E%EC%B6%A4-UI-%2F-UX?type=design&node-id=0-1&mode=design&t=vNt50na1L3tMa3gq-0
+- 메인 컨셉과 전체적인 색감 확정
