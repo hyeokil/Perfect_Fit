@@ -25,7 +25,7 @@ pipeline {
         stage("Build") {
             steps {
                 script {
-                    sh "sudo docker build -t ${DOCKERHUB_REGISTRY} BackEnd"
+                    sh "docker build -t ${DOCKERHUB_REGISTRY} BackEnd"
                 }
             }
         }
