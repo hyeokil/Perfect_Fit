@@ -237,3 +237,49 @@ fake voice generator ⇒ 검색해보삼
 
 # UI / UX 설계
 <img src='//pjt/정유나/안쏭맞춤 UI _ UX.png' />
+
+
+## TypeScript + Vite 환경에서 절대경로 설정하기
+
+1. `vite-tsconfig-paths` install 
+2. plugin 에 `tsconfigPaths()` 추가
+
+    ```tsx
+    // vite.config.ts
+
+    import { defineConfig } from "vite";
+    import react from "@vitejs/plugin-react-swc";
+    //...//
+    import tsconfigPaths from "vite-tsconfig-paths";
+
+    // https://vitejs.dev/config/
+    export default defineConfig({
+    plugins: [
+        react(),
+            //... //
+        tsconfigPaths()
+    ],
+    });
+
+    ```
+
+3. tsconfig.json compilerOptions에 경로 설정
+    
+    ```json
+    {
+      "compilerOptions": {
+    		/* ... */
+        /* 절대경로 설정 */
+        "baseUrl": ".",
+        "paths": {
+          "@/*" : ["src/*"],
+          "@pages/*" : ["src/pages/*"],
+          "@styles/*" : ["src/styles/*"],
+          "@components/*" : ["src/components/*"],
+        }
+      },
+      "include": ["src"],
+      "references": [{ "path": "./tsconfig.node.json" }]
+    }
+    
+    ```
