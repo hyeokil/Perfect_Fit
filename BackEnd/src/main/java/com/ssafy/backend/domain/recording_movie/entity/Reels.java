@@ -19,9 +19,12 @@ public class Reels extends BaseEntity {
     @JoinColumn(name = "recording_id")
     private Recording recording;
 
+    // 조회 수
     private Long view;
 
+    // 릴스 영상 길이
     private Long time;
 
+    // 파일 경로
     private String path;
 }

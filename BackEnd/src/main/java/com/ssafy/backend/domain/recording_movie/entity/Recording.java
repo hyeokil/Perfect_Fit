@@ -18,20 +18,22 @@ public class Recording extends BaseEntity {
 
     private Long id;
 
-    @OneToMany(mappedBy = "recording", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Reels> reels;
-
+    // 자기 자신
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "creator_member_id")
-    private Member creatorMember;
+    @JoinColumn(name = "single_id")
+    private Member single;
 
+    // 듀엣모드에서 상대방
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "participant_member_id")
-    private Member participantMember;
+    @JoinColumn(name = "multi_id")
+    private Member multi;
 
+    // 영상 이름
     private String name;
 
+    // 파일 경로
     private String path;
 
+    // 사용자에게 보여줄지 여부
     private boolean display;
 }
