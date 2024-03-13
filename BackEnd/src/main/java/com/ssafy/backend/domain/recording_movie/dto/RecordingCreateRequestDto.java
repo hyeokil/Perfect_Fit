@@ -21,10 +21,10 @@ public class RecordingCreateRequestDto {
 
     private boolean display;
 
-    public Recording toEntity(Member single, Member multi) {
+    public Recording toEntity(Member singleId, Member multiId) {
         return Recording.builder()
-                .single(single)
-                .multi(multi)
+                .single(singleId)
+                .multi(multiId)
                 .name(name)
                 .path(path)
                 .display(display)
