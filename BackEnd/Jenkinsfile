@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
     environment {
@@ -14,7 +13,7 @@ pipeline {
         }
         stage('Setup Environment') {
             steps {
-                dir("${env.WORKSPACE}/BackEnd"){
+                dir("${env.WORKSPACE}/BackEnd") {
                     script {
                         sh "ls -al"
                         sh "chmod +x ./gradlew"
@@ -25,28 +24,28 @@ pipeline {
         stage("Build") {
             steps {
                 script {
-                    sh "docker build -t ${DOCKERHUB_REGISTRY} BackEnd"
+                    sh "/usr/bin/docker build -t ${DOCKERHUB_REGISTRY} BackEnd"
                 }
             }
         }
         stage("Login") {
             steps {
-                 sh "echo \${DOCKERHUB_CREDENTIALS_PSW} | docker login -u \${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
+                 sh "echo \${DOCKERHUB_CREDENTIALS_PSW} | /usr/bin/docker login -u \${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
             }
         }
         stage("Tag and Push") {
             steps {
                 script {
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'Docker-hub', usernameVariable: 'DOCKER_USER_ID', passwordVariable: 'DOCKER_USER_PASSWORD']]) {
-                        sh "docker push ${DOCKERHUB_REGISTRY}"
+                        sh "/usr/bin/docker push ${DOCKERHUB_REGISTRY}"
                     }
                 }
             }
         }
-        stage('Prune old images'){
-            steps{
-                script{
-                    sh "docker ps"
+        stage('Prune old images') {
+            steps {
+                script {
+                    sh "/usr/bin/docker ps"
                 }
             }
         }
@@ -54,10 +53,10 @@ pipeline {
             steps {
                 script {
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'Docker-hub', usernameVariable: 'DOCKER_USER_ID', passwordVariable: 'DOCKER_USER_PASSWORD']]) {
-                        sh "docker stop back || true"  // Ignore error ifgit  container doesn't exist
-                        sh "docker rm back || true"    // Ignore error if container doesn't exist
-                        sh "docker rmi ${DOCKERHUB_REGISTRY}|| true"     //images 날리기
-                        sh "docker pull ${DOCKERHUB_REGISTRY}"
+                        sh "/usr/bin/docker stop back || true"  // Ignore error if container doesn't exist
+                        sh "/usr/bin/docker rm back || true"    // Ignore error if container doesn't exist
+                        sh "/usr/bin/docker rmi ${DOCKERHUB_REGISTRY}|| true"     //images 날리기
+                        sh "/usr/bin/docker pull ${DOCKERHUB_REGISTRY}"
                     }
                 }
             }
@@ -67,16 +66,13 @@ pipeline {
                 script {
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'Docker-hub', usernameVariable: 'DOCKER_USER_ID', passwordVariable: 'DOCKER_USER_PASSWORD']]) {
                         try {
-                            sh "docker-compose -f ${env.WORKSPACE}/docker-compose.yml up -d"
-
+                            sh "/usr/bin/docker-compose -f ${env.WORKSPACE}/docker-compose.yml up -d"
                         } catch(Exception e) {
-                            sh "docker restart back || true"  // Ignore error if container doesn't exist
+                            sh "/usr/bin/docker restart back || true"  // Ignore error if container doesn't exist
                         }
                     }
                 }
             }
         }
-
-
     }
 }
