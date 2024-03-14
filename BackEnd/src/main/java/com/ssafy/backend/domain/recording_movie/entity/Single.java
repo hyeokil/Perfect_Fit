@@ -21,7 +21,9 @@ public class Single extends BaseEntity {
 
     private boolean display;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    // postman에서 요청을 보낼 때 fetch의 요청이 LAZY일 경우 지연이 발생해 400에러가 발생 나중에 주석을 풀어주어야 한다.
+//            (fetch = FetchType.LAZY)
     @JoinColumn(name = "single_id")
     private Member single;
 
