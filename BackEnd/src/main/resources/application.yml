@@ -4,8 +4,8 @@ spring:
     url: jdbc:mysql://host.docker.internal:3306/perfectfit?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true       # 데이터베이스 URL
     username: root                     # 데이터베이스 계정명
     password: c205c205
-
   jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
     open-in-view: false
     defer-datasource-initialization: true
     generate-ddl: true
