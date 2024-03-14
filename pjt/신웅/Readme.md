@@ -182,3 +182,8 @@
 ### UI / UX 디자인
 - https://www.figma.com/file/4TppoMuTLn0dh7VfBiAEYe/%EC%95%88%EC%8F%AD%EB%A7%9E%EC%B6%A4-UI-%2F-UX?type=design&node-id=0-1&mode=design&t=vNt50na1L3tMa3gq-0
 - 메인 기능들 구체화 내일은 꼭 끝내자
+
+## 03.14
+### UI / UX 디자인
+- https://www.figma.com/file/4TppoMuTLn0dh7VfBiAEYe/%EC%95%88%EC%8F%AD%EB%A7%9E%EC%B6%A4-UI-%2F-UX?type=design&node-id=0-1&mode=design&t=vNt50na1L3tMa3gq-0
+- 피그마 마무리 및 발표자료 제공
