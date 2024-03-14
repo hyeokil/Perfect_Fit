@@ -3,11 +3,14 @@ package com.ssafy.backend.domain.recording_movie.service;
 import com.ssafy.backend.domain.member.entity.Member;
 import com.ssafy.backend.domain.member.repository.MemberRepository;
 import com.ssafy.backend.domain.recording_movie.dto.MultiCreateRequestDto;
+import com.ssafy.backend.domain.recording_movie.entity.Multi;
 import com.ssafy.backend.domain.recording_movie.repository.MultiRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -33,5 +36,15 @@ public class MultiServiceImpl implements MultiService{
         }
 
         multiRepository.save(multiCreateRequestDto.toEntity(player1, player2));
+    }
+
+    @Override
+    public List<Multi> getRecordingPlayer2IsNull(Long player1) {
+        return multiRepository.findByPlayer1IdAndDisplayTrueAndPlayer2IdIsNull(player1);
+    }
+
+    @Override
+    public List<Multi> getRecordingMulti(Long player1, Long player2) {
+        return multiRepository.findByPlayer1IdAndDisplayTrueAndPlayer2IdIsNotNull(player1);
     }
 }
