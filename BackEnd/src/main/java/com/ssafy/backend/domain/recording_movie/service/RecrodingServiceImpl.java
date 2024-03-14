@@ -4,6 +4,7 @@ import com.ssafy.backend.domain.member.entity.Member;
 import com.ssafy.backend.domain.member.repository.MemberRepository;
 import com.ssafy.backend.domain.recording_movie.dto.RecordingCreateRequestDto;
 import com.ssafy.backend.domain.recording_movie.entity.Recording;
+import com.ssafy.backend.domain.recording_movie.entity.enums.MultiPlay;
 import com.ssafy.backend.domain.recording_movie.repository.RecordingRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -44,5 +45,21 @@ public class RecrodingServiceImpl implements RecordingService {
     @Override
     public List<Recording> getRecordingsByMemberId(Long singleId) {
         return recordingRepository.findBySingleId(singleId);
+    }
+
+    @Override
+    public List<Recording> getRecordingsWhereMultiIdIsNull() {
+        return recordingRepository.findByMultiIsNull();
+    }
+
+    @Override
+    public List<Recording> getRecordingsByMemberIdAndDisplay(Long singleId) {
+        return recordingRepository.findBySingleIdAndDisplayTrue(singleId);
+    }
+
+    @Override
+    public List<Recording> getRecordingsBySingleIdAndDisplayTrueAndMultiPlayTrue(Long singleId) {
+
+        return recordingRepository.findBySingleIdAndDisplayTrueAndMultiPlayTrue(singleId);
     }
 }

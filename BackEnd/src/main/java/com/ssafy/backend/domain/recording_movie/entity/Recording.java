@@ -5,8 +5,6 @@ import com.ssafy.backend.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Builder
@@ -19,7 +17,8 @@ public class Recording extends BaseEntity {
     private Long id;
 
     // 자기 자신 (postman에서 작동 여부 판단할 때는 fetch 주석처리하기!!)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+//            (fetch = FetchType.LAZY)
     @JoinColumn(name = "single_id")
     private Member single;
 
@@ -38,5 +37,5 @@ public class Recording extends BaseEntity {
     // 사용자에게 보여줄지 여부
     private boolean display;
 
-
+    private boolean multiPlay;
 }
