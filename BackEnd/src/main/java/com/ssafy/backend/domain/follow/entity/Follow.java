@@ -16,7 +16,7 @@ public class Follow {
 
     @ManyToOne
     @JoinColumn(name="to_member")
-    private member toMember;
+    private Member toMember;
 
 
 }
