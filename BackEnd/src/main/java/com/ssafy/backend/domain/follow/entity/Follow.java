@@ -15,7 +15,7 @@ public class Follow {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="to_member")
+    @JoinColumn(name = "to_member")
     private Member toMember;
 
 
