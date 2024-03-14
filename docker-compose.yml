@@ -11,6 +11,7 @@ services:
       - "9002:8080"
     networks:
       - jenkins-network
+      
 
 # Docker volume 정의
 networks:
