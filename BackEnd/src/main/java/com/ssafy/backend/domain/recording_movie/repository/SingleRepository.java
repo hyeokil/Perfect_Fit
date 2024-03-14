@@ -9,5 +9,7 @@ import java.util.List;
 
 @Repository
 public interface SingleRepository extends JpaRepository<Single, Long> {
-    List<Single> findBySingleId(Long memberId);
+
+    // display가 true이며 singleId가 memberId와 일치하는 값을 찾기
+    List<Single> findBySingleIdAndDisplayTrue(Long memberId);
 }
