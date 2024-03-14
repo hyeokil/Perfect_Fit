@@ -10,7 +10,8 @@ spring:
     defer-datasource-initialization: true
     generate-ddl: true
     hibernate:
-      ddl-auto: create-drop                # ddl 자동 작성 여부
+      ddl-auto: update
+#      ddl-auto: create-drop                # ddl 자동 작성 여부
   # NoSQL setting
   data:
     # Redis setting
