@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @Transactional
@@ -24,6 +26,7 @@ public class RecrodingServiceImpl implements RecordingService {
         Member single = memberRepository.findById(createRequestDto.getSingleId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid singleId"));
 
+        // multi의 경우 null 값일 경우도 존재한다.
         Member multi = null;
         if (createRequestDto.getMultiId() != null) {
             multi = memberRepository.findById(createRequestDto.getMultiId())
@@ -31,5 +34,15 @@ public class RecrodingServiceImpl implements RecordingService {
         }
         recordingRepository.save(createRequestDto.toEntity(single, multi));
 
+    }
+
+//    @Override
+//    public List<Recording> getAllRecording() {
+//        return recordingRepository.findAll();
+//    }
+
+    @Override
+    public List<Recording> getRecordingsByMemberId(Long singleId) {
+        return recordingRepository.findBySingleId(singleId);
     }
 }

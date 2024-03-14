@@ -18,13 +18,14 @@ public class Recording extends BaseEntity {
 
     private Long id;
 
-    // 자기 자신
+    // 자기 자신 (postman에서 작동 여부 판단할 때는 fetch 주석처리하기!!)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "single_id")
     private Member single;
 
     // 듀엣모드에서 상대방
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+//            (fetch = FetchType.LAZY)
     @JoinColumn(name = "multi_id")
     private Member multi;
 
@@ -36,4 +37,6 @@ public class Recording extends BaseEntity {
 
     // 사용자에게 보여줄지 여부
     private boolean display;
+
+
 }
