@@ -23,7 +23,6 @@ jwt:
   secret-key:
     access: 612834t213b497d23d94h2374693471269477h9qf87weonm8urcnhrnh8723y4n83294j93278queue8wqhrowrlsdhf7842298347r2y3er87y3wdhsaduh2398eyue8ue8dwidjasd938ue8dj12
     refresh: 612834t213b497d23d94h2374693471269477h9qf87weonm8urcnhrnh8723y4n83294j93278queue8wqhrowrlsdhf7842298347r2y3er87y3wdhsaduh2398eyue8ue8dwidjasd938ue8dj12
-
   expired-min:
     access: 60   # 액세스 토큰 만료제한시간 60분 (1시간) (60)
     refresh: 10080  # 리프레쉬 토큰 만료제한시간 10080분 (7일) (10080)
