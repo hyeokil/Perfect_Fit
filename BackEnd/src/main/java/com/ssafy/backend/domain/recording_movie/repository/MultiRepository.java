@@ -12,4 +12,8 @@ public interface MultiRepository extends JpaRepository<Multi, Long> {
     List<Multi> findByPlayer1IdAndDisplayTrueAndPlayer2IdIsNull(Long Player1);
 
     List<Multi> findByPlayer1IdAndDisplayTrueAndPlayer2IdIsNotNull(Long Player1);
+
+    List<Multi> findByPlayer2IdAndDisplayTrue(Long Player2);
+
+    List<Multi> findByDisplayTrueAndPlayer2IdIsNull();
 }

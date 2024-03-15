@@ -11,7 +11,11 @@ public interface MultiService {
     // MultiCreateRequestDto에 해당하는 값을 받아 영상 저장하기 위한 로직
     void createRecording(MultiCreateRequestDto multiCreateRequestDto);
 
+//    void createRecordings();
+
     List<Multi> getRecordingPlayer2IsNull(Long player1);
 
-    List<Multi> getRecordingMulti(Long player1, Long player2);
+    List<Multi> getRecordingMulti(Long player1);
+
+    List<Multi> getAllRecordingPlayer2IsNull();
 }

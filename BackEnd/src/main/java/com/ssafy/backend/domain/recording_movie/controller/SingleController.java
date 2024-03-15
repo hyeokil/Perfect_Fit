@@ -33,4 +33,7 @@ public class SingleController {
         List<Single> recordings = singleService.getSingleRecording(singleId);
         return ResponseEntity.ok(recordings);
     }
+
+    // single로 부른 나의 노래 영상 출력
+    // @GetMapping("list/{singleId}/{recordingId}")
 }
