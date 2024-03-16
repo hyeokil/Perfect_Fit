@@ -9,7 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class SingleCreateRequestDto {
 
-    private Long singleId;
+    private Long memberId;
 
     private String name;
 
@@ -17,9 +17,9 @@ public class SingleCreateRequestDto {
 
     private boolean display;
 
-    public Single toEntity(Member singleId) {
+    public Single toEntity(Member memberId) {
         return Single.builder()
-                .single(singleId)
+                .member(memberId)
                 .name(name)
                 .path(path)
                 .display(display)
