@@ -28,12 +28,22 @@ public class SingleController {
 
     // single로 부른 나의 노래 리스트
     // display = true로 설정되어 있는 리스트만 출력
-    @GetMapping("list/{singleId}")
+    @GetMapping("/list/{singleId}")
     public ResponseEntity<List<Single>> getSingleRecording(@PathVariable Long singleId) {
         List<Single> recordings = singleService.getSingleRecording(singleId);
         return ResponseEntity.ok(recordings);
     }
 
     // single로 부른 나의 노래 영상 출력
-    // @GetMapping("list/{singleId}/{recordingId}")
+    @GetMapping("/{singleId}/{memberId}")
+    public ResponseEntity<String> getRecording(@PathVariable Long singleId, @PathVariable Long memberId) {
+        String path = singleService.getRecording(singleId, memberId);
+        return ResponseEntity.ok().body(path);
+    }
+    // 더미 데이터 생성
+//    @PostMapping("/UM")
+//    public ResponseEntity<Message<Void>> createRecordings() {
+//        singleService.createRecordings();
+//        return ResponseEntity.ok().body(Message.success());
+//    }
 }

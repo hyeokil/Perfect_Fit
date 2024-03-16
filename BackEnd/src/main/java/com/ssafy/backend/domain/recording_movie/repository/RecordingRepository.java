@@ -22,4 +22,5 @@ public interface RecordingRepository extends JpaRepository<Recording, Long> {
     List<Recording> findBySingleIdAndDisplayTrue(Long singleId);
 
     List<Recording> findBySingleIdAndDisplayTrueAndMultiPlayTrue(Long singleId);
+
 }
