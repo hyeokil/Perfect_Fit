@@ -4,7 +4,9 @@ import com.ssafy.backend.domain.member.entity.Member;
 import com.ssafy.backend.domain.member.repository.MemberRepository;
 import com.ssafy.backend.domain.recording_movie.dto.MultiCreateRequestDto;
 import com.ssafy.backend.domain.recording_movie.entity.Multi;
+import com.ssafy.backend.domain.recording_movie.entity.Single;
 import com.ssafy.backend.domain.recording_movie.repository.MultiRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -43,6 +46,10 @@ public class MultiServiceImpl implements MultiService{
 //        multiRepository.save(multiCreateRequestDto.toEntity(player1, player2));
 //    }
 
+    // 영상 저장 로직
+    // player1이 없는 경우 현재 로그인된 memeberId가 player1이 되도록
+    // player1이 있는 경우 player2가 현재 로그인된 memberId가 되도록
+    // 아직 검증이 완료되지 않음
     @Override
     public void createRecording(MultiCreateRequestDto multiCreateRequestDto) {
         // player1에 해당하는 id값 찾는 로직
@@ -63,15 +70,16 @@ public class MultiServiceImpl implements MultiService{
         multiRepository.save(multiCreateRequestDto.toEntity(player1, player2));
     }
 
-//    @Override
-//    public void createRecordings(){
-//        Member P1 = memberRepository.findById(1L).orElseThrow();
-//        Member P2 = memberRepository.findById(2L).orElseThrow();
-//        for (int i = 0; i < 10000; i++) {
-//            multiRepository.save(Multi.builder().player1(P1).player2(P2).display(true).build());
-//            multiRepository.save(Multi.builder().player1(P1).player2(P1).display(true).build());
-//        }
-//    }
+    //더미 데이터 생성
+    @Override
+    public void createRecordings(){
+        Member P1 = memberRepository.findById(1L).orElseThrow();
+        Member P2 = memberRepository.findById(2L).orElseThrow();
+        for (int i = 0; i < 10000; i++) {
+            multiRepository.save(Multi.builder().player1(P1).player2(P2).path("www").display(true).build());
+            multiRepository.save(Multi.builder().player1(P1).player2(P1).path("aaaa").display(true).build());
+        }
+    }
 
     @Override
     public List<Multi> getRecordingPlayer2IsNull(Long player1) {
@@ -96,4 +104,10 @@ public class MultiServiceImpl implements MultiService{
         return multiRepository.findByDisplayTrueAndPlayer2IdIsNull();
     }
 
+    @Override
+    public String getMultiRecording(Long multiId) {
+        return multiRepository.findByIdAndDisplayTrue(multiId)
+                .map(Multi::getPath)
+                .orElseThrow(() -> new EntityNotFoundException("Single not found"));
+    }
 }

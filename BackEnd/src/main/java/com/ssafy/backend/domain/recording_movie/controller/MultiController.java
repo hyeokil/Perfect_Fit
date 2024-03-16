@@ -26,12 +26,12 @@ public class MultiController {
         return ResponseEntity.ok().body(Message.success());
     }
 
-    // 더미 데이터 생성
-//    @PostMapping("/UM")
-//    public ResponseEntity<Message<Void>> createRecordings() {
-//        multiService.createRecordings();
-//        return ResponseEntity.ok().body(Message.success());
-//    }
+//     더미 데이터 생성
+    @PostMapping("/UM")
+    public ResponseEntity<Message<Void>> createRecordings() {
+        multiService.createRecordings();
+        return ResponseEntity.ok().body(Message.success());
+    }
 
     // display가 true이며 아직 듀엣이 완성되지 않은 player1만 노래를 부른 데이터 출력
     // player2의 값이 null값인 데이터 출력
@@ -43,13 +43,14 @@ public class MultiController {
     }
 
     // 영상을 볼 수 있는 get 요청
-    // @GetMapping("/{recordingid}"}
-
+     @GetMapping("/record/{multiId}")
+    public ResponseEntity<String> getMultiRecording(@PathVariable Long multiId) {
+         String path = multiService.getMultiRecording(multiId);
+         return ResponseEntity.ok().body(path);
+    }
 
     // 듀엣이 완성된 값을 출력
-    // 아직은 player1의 값으로만 검색 가능
-    // 나중에 부른 사람은 볼 수 없는 코드...
-    // 생각을 해보면 player1과 player2의 id값중 큰 값을 찾고 api를 작은 값 먼저, 큰 값 나중에 참조 하는 코드를 만들면 가능할지도?
+
     @GetMapping("/list/{playerId}")
     public ResponseEntity<List<Multi>> getRecordingMulti(@PathVariable Long playerId) {
         List<Multi> multi = multiService.getRecordingMulti(playerId);
@@ -63,5 +64,4 @@ public class MultiController {
         List<Multi> multi = multiService.getAllRecordingPlayer2IsNull();
         return ResponseEntity.ok(multi);
     }
-    // 듀엣이 완료된 모든 노래 출력
 }
