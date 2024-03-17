@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface MultiService {
 
     // MultiCreateRequestDto에 해당하는 값을 받아 영상 저장하기 위한 로직
-    void createRecording(MultiCreateRequestDto multiCreateRequestDto);
+//    void createRecording(MultiCreateRequestDto multiCreateRequestDto);
 
     void createRecordings();
 

@@ -50,25 +50,25 @@ public class MultiServiceImpl implements MultiService{
     // player1이 없는 경우 현재 로그인된 memeberId가 player1이 되도록
     // player1이 있는 경우 player2가 현재 로그인된 memberId가 되도록
     // 아직 검증이 완료되지 않음
-    @Override
-    public void createRecording(MultiCreateRequestDto multiCreateRequestDto) {
-        // player1에 해당하는 id값 찾는 로직
-        // 이미 player1에 값이 있으면 -> 밑에 로직이 player2로 가게 만들려고 하는거지
-
-        Member player1;
-        Member player2 = null;
-        if (multiCreateRequestDto.getPlayer1() != null) {
-            player1 = memberRepository.findById(multiCreateRequestDto.getPlayer1())
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid player1 Id"));
-
-            player2 = memberRepository.findById(multiCreateRequestDto.getPlayer2())
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid player2 Id"));
-        } else {
-            player1 = memberRepository.findById(multiCreateRequestDto.getPlayer1())
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid player1 Id"));
-        }
-        multiRepository.save(multiCreateRequestDto.toEntity(player1, player2));
-    }
+//    @Override
+//    public void createRecording(MultiCreateRequestDto multiCreateRequestDto) {
+//        // player1에 해당하는 id값 찾는 로직
+//        // 이미 player1에 값이 있으면 -> 밑에 로직이 player2로 가게 만들려고 하는거지
+//
+//        Member player1;
+//        Member player2 = null;
+//        if (multiCreateRequestDto.getPlayer1() != null) {
+//            player1 = memberRepository.findById(multiCreateRequestDto.getPlayer1())
+//                    .orElseThrow(() -> new IllegalArgumentException("Invalid player1 Id"));
+//
+//            player2 = memberRepository.findById(multiCreateRequestDto.getPlayer2())
+//                    .orElseThrow(() -> new IllegalArgumentException("Invalid player2 Id"));
+//        } else {
+//            player1 = memberRepository.findById(multiCreateRequestDto.getPlayer1())
+//                    .orElseThrow(() -> new IllegalArgumentException("Invalid player1 Id"));
+//        }
+//        multiRepository.save(multiCreateRequestDto.toEntity(player1, player2));
+//    }
 
     //더미 데이터 생성
     @Override
