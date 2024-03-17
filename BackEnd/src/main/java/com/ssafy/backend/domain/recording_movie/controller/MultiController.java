@@ -2,7 +2,6 @@ package com.ssafy.backend.domain.recording_movie.controller;
 
 import com.ssafy.backend.domain.recording_movie.dto.MultiCreateRequestDto;
 import com.ssafy.backend.domain.recording_movie.entity.Multi;
-import com.ssafy.backend.domain.recording_movie.entity.Recording;
 import com.ssafy.backend.domain.recording_movie.service.MultiService;
 import com.ssafy.backend.global.common.dto.Message;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +19,11 @@ public class MultiController {
     private final MultiService multiService;
 
     // 멀티 플레이에서 영상 저장 로직
-    @PostMapping("")
-    public ResponseEntity<Message<Void>> createRecording(@RequestBody MultiCreateRequestDto multiCreateRequestDto) {
-        multiService.createRecording(multiCreateRequestDto);
-        return ResponseEntity.ok().body(Message.success());
-    }
+//    @PostMapping("")
+//    public ResponseEntity<Message<Void>> createRecording(@RequestBody MultiCreateRequestDto multiCreateRequestDto) {
+//        multiService.createRecording(multiCreateRequestDto);
+//        return ResponseEntity.ok().body(Message.success());
+//    }
 
 //     더미 데이터 생성
     @PostMapping("/UM")
