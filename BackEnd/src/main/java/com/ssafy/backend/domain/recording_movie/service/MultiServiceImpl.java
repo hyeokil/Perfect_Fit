@@ -1,10 +1,8 @@
 package com.ssafy.backend.domain.recording_movie.service;
 
-import com.ssafy.backend.domain.member.entity.Member;
+
 import com.ssafy.backend.domain.member.repository.MemberRepository;
-import com.ssafy.backend.domain.recording_movie.dto.MultiCreateRequestDto;
 import com.ssafy.backend.domain.recording_movie.entity.Multi;
-import com.ssafy.backend.domain.recording_movie.entity.Single;
 import com.ssafy.backend.domain.recording_movie.repository.MultiRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -71,15 +68,15 @@ public class MultiServiceImpl implements MultiService{
 //    }
 
     //더미 데이터 생성
-    @Override
-    public void createRecordings(){
-        Member P1 = memberRepository.findById(1L).orElseThrow();
-        Member P2 = memberRepository.findById(2L).orElseThrow();
-        for (int i = 0; i < 10000; i++) {
-            multiRepository.save(Multi.builder().player1(P1).player2(P2).path("www").display(true).build());
-            multiRepository.save(Multi.builder().player1(P1).player2(P1).path("aaaa").display(true).build());
-        }
-    }
+//    @Override
+//    public void createRecordings(){
+//        Member P1 = memberRepository.findById(1L).orElseThrow();
+//        Member P2 = memberRepository.findById(2L).orElseThrow();
+//        for (int i = 0; i < 1000; i++) {
+//            multiRepository.save(Multi.builder().player1(P1).player2(P2).path("www").display(true).build());
+//            multiRepository.save(Multi.builder().player1(P1).player2(P1).path("aaaa").display(true).build());
+//        }
+//    }
 
     @Override
     public List<Multi> getRecordingPlayer2IsNull(Long player1) {

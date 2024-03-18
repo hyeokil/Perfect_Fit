@@ -4,7 +4,6 @@ import com.ssafy.backend.domain.member.entity.Member;
 import com.ssafy.backend.domain.member.repository.MemberRepository;
 import com.ssafy.backend.domain.recording_movie.dto.SingleCreateRequestDto;
 import com.ssafy.backend.domain.recording_movie.entity.Single;
-import com.ssafy.backend.domain.recording_movie.repository.RecordingRepository;
 import com.ssafy.backend.domain.recording_movie.repository.SingleRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -22,7 +21,7 @@ public class SingleServiceImpl implements SingleService{
 
     private final SingleRepository singleRepository;
     private final MemberRepository memberRepository;
-    private final RecordingRepository recordingRepository;
+
 
     //
     @Override

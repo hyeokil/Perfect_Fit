@@ -1,6 +1,5 @@
 package com.ssafy.backend.domain.recording_movie.controller;
 
-import com.ssafy.backend.domain.recording_movie.dto.MultiCreateRequestDto;
 import com.ssafy.backend.domain.recording_movie.entity.Multi;
 import com.ssafy.backend.domain.recording_movie.service.MultiService;
 import com.ssafy.backend.global.common.dto.Message;
@@ -26,11 +25,11 @@ public class MultiController {
 //    }
 
 //     더미 데이터 생성
-    @PostMapping("/UM")
-    public ResponseEntity<Message<Void>> createRecordings() {
-        multiService.createRecordings();
-        return ResponseEntity.ok().body(Message.success());
-    }
+//    @PostMapping("/UM")
+//    public ResponseEntity<Message<Void>> createRecordings() {
+//        multiService.createRecordings();
+//        return ResponseEntity.ok().body(Message.success());
+//    }
 
     // display가 true이며 아직 듀엣이 완성되지 않은 player1만 노래를 부른 데이터 출력
     // player2의 값이 null값인 데이터 출력
