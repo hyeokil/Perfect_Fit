@@ -1,8 +1,13 @@
 package com.ssafy.backend.domain.recording.service;
 
 
+import com.ssafy.backend.domain.member.entity.Member;
+import com.ssafy.backend.domain.member.exception.MemberError;
+import com.ssafy.backend.domain.member.exception.MemberException;
 import com.ssafy.backend.domain.member.repository.MemberRepository;
-import com.ssafy.backend.domain.recording.entity.Multi;
+import com.ssafy.backend.domain.recording.dto.DuetCreateRequestDto;
+import com.ssafy.backend.domain.recording.dto.DuetParticipateReqeustDto;
+import com.ssafy.backend.domain.recording.entity.Duet;
 import com.ssafy.backend.domain.recording.repository.DuetRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -19,8 +24,57 @@ import java.util.stream.Stream;
 @Transactional
 @RequiredArgsConstructor
 public class DuetServiceImpl implements DuetService {
-    private final DuetRepository multiRepository;
+
+    private final DuetRepository duetRepository;
     private final MemberRepository memberRepository;
+
+    // duet upload
+    @Override
+    public void createDuet(Long memberId, DuetCreateRequestDto duetCreateRequestDto) {
+        Member member = memberRepository.findById(memberId).orElseThrow(()
+                -> new MemberException(MemberError.NOT_FOUND_MEMBER));
+        duetRepository.save(duetCreateRequestDto.toEntity(member));
+    }
+
+    // duet participate
+    @Override
+    public void participateDuet(Long memberId, DuetParticipateReqeustDto duetParticipateReqeustDto) {
+        Member uploader = memberRepository.findById(duetParticipateReqeustDto.getUploaderId()).orElseThrow(()
+                -> new MemberException(MemberError.NOT_FOUND_MEMBER));
+        Member participant = memberRepository.findById(memberId).orElseThrow(()
+                -> new MemberException(MemberError.NOT_FOUND_MEMBER));
+        duetRepository.save(duetParticipateReqeustDto.toEntity(uploader, participant));
+    }
+
+    @Override
+    public List<Duet> getRecordingPlayer2IsNull(Long player1) {
+        return duetRepository.findByPlayer1IdAndDisplayTrueAndPlayer2IdIsNull(player1);
+    }
+
+    @Override
+    public List<Duet> getRecordingMulti(Long player1) {
+        List<Duet> list1 = duetRepository.findByPlayer1IdAndDisplayTrueAndPlayer2IdIsNotNull(player1);
+        List<Duet> list2 = duetRepository.findByPlayer2IdAndDisplayTrue(player1);
+        List<Duet> playlist = Stream.of(list1, list2)
+                .flatMap(Collection::stream)
+                .toList();
+//        List<Multi> playlist = new ArrayList<>();
+//        playlist.addAll(list1);
+//        playlist.addAll(list2);
+        return playlist;
+    }
+
+    @Override
+    public List<Duet> getAllRecordingPlayer2IsNull(){
+        return duetRepository.findByDisplayTrueAndPlayer2IdIsNull();
+    }
+
+    @Override
+    public String getMultiRecording(Long multiId) {
+        return duetRepository.findByIdAndDisplayTrue(multiId)
+                .map(Duet::getPath)
+                .orElseThrow(() -> new EntityNotFoundException("Single not found"));
+    }
 
     // 멀티 플레이에서의 영상 저장 로직
 //    @Override
@@ -78,33 +132,4 @@ public class DuetServiceImpl implements DuetService {
 //        }
 //    }
 
-    @Override
-    public List<Duet> getRecordingPlayer2IsNull(Long player1) {
-        return multiRepository.findByPlayer1IdAndDisplayTrueAndPlayer2IdIsNull(player1);
-    }
-
-    @Override
-    public List<Duet> getRecordingMulti(Long player1) {
-        List<Duet> list1 = multiRepository.findByPlayer1IdAndDisplayTrueAndPlayer2IdIsNotNull(player1);
-        List<Duet> list2 = multiRepository.findByPlayer2IdAndDisplayTrue(player1);
-        List<Duet> playlist = Stream.of(list1, list2)
-                .flatMap(Collection::stream)
-                .toList();
-//        List<Multi> playlist = new ArrayList<>();
-//        playlist.addAll(list1);
-//        playlist.addAll(list2);
-        return playlist;
-    }
-
-    @Override
-    public List<Multi> getAllRecordingPlayer2IsNull(){
-        return multiRepository.findByDisplayTrueAndPlayer2IdIsNull();
-    }
-
-    @Override
-    public String getMultiRecording(Long multiId) {
-        return multiRepository.findByIdAndDisplayTrue(multiId)
-                .map(Multi::getPath)
-                .orElseThrow(() -> new EntityNotFoundException("Single not found"));
-    }
 }
