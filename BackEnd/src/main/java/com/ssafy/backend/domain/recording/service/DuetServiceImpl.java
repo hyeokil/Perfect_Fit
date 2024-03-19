@@ -6,18 +6,18 @@ import com.ssafy.backend.domain.member.exception.MemberError;
 import com.ssafy.backend.domain.member.exception.MemberException;
 import com.ssafy.backend.domain.member.repository.MemberRepository;
 import com.ssafy.backend.domain.recording.dto.DuetCreateRequestDto;
+import com.ssafy.backend.domain.recording.dto.DuetListResponseDto;
 import com.ssafy.backend.domain.recording.dto.DuetParticipateReqeustDto;
 import com.ssafy.backend.domain.recording.entity.Duet;
 import com.ssafy.backend.domain.recording.repository.DuetRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
+
 
 @Slf4j
 @Service
@@ -45,35 +45,41 @@ public class DuetServiceImpl implements DuetService {
                 -> new MemberException(MemberError.NOT_FOUND_MEMBER));
         duetRepository.save(duetParticipateReqeustDto.toEntity(uploader, participant));
     }
-
+    // 완성안된 모든 duet 조회
     @Override
-    public List<Duet> getRecordingPlayer2IsNull(Long player1) {
-        return duetRepository.findByPlayer1IdAndDisplayTrueAndPlayer2IdIsNull(player1);
+    public List<DuetListResponseDto> getAllDuetList() {
+        List<Duet> duets = duetRepository.findByParticipantIsNullAndDisplayTrueOrderByCreatedAtDesc();
+        List<DuetListResponseDto> duetListResponseDtoList = new ArrayList<>();
+        for (Duet duet : duets) {
+            DuetListResponseDto duetListResponseDto = new DuetListResponseDto(
+                    duet.getId(),
+                    duet.getName(),
+                    duet.getPath(),
+                    duet.getUploader().getNickname(),
+                    duet.getCreatedAt()
+            );
+            duetListResponseDtoList.add(duetListResponseDto);
+        }
+        return duetListResponseDtoList;
     }
-
+    // 완성안된 내 duet list 조회
     @Override
-    public List<Duet> getRecordingMulti(Long player1) {
-        List<Duet> list1 = duetRepository.findByPlayer1IdAndDisplayTrueAndPlayer2IdIsNotNull(player1);
-        List<Duet> list2 = duetRepository.findByPlayer2IdAndDisplayTrue(player1);
-        List<Duet> playlist = Stream.of(list1, list2)
-                .flatMap(Collection::stream)
-                .toList();
-//        List<Multi> playlist = new ArrayList<>();
-//        playlist.addAll(list1);
-//        playlist.addAll(list2);
-        return playlist;
-    }
-
-    @Override
-    public List<Duet> getAllRecordingPlayer2IsNull(){
-        return duetRepository.findByDisplayTrueAndPlayer2IdIsNull();
-    }
-
-    @Override
-    public String getMultiRecording(Long multiId) {
-        return duetRepository.findByIdAndDisplayTrue(multiId)
-                .map(Duet::getPath)
-                .orElseThrow(() -> new EntityNotFoundException("Single not found"));
+    public List<DuetListResponseDto> getMyDuetList(Long memberId) {
+        Member uploader = memberRepository.findById(memberId).orElseThrow(()
+                -> new MemberException(MemberError.NOT_FOUND_MEMBER));
+        List<Duet> duets = duetRepository.findByUploaderAndParticipantIsNullAndDisplayTrueOrderByCreatedAtDesc(uploader);
+        List<DuetListResponseDto> myDuetListResponseDtoList = new ArrayList<>();
+        for (Duet duet : duets) {
+            DuetListResponseDto duetListResponseDto = new DuetListResponseDto(
+                    duet.getId(),
+                    duet.getName(),
+                    duet.getPath(),
+                    duet.getUploader().getNickname(),
+                    duet.getCreatedAt()
+            );
+            myDuetListResponseDtoList.add(duetListResponseDto);
+        }
+        return myDuetListResponseDtoList;
     }
 
     // 멀티 플레이에서의 영상 저장 로직

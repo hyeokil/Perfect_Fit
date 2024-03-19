@@ -3,6 +3,7 @@ package com.ssafy.backend.domain.recording.controller;
 
 import com.ssafy.backend.domain.member.dto.MemberLoginActiveDto;
 import com.ssafy.backend.domain.recording.dto.DuetCreateRequestDto;
+import com.ssafy.backend.domain.recording.dto.DuetListResponseDto;
 import com.ssafy.backend.domain.recording.dto.DuetParticipateReqeustDto;
 import com.ssafy.backend.domain.recording.entity.Duet;
 import com.ssafy.backend.domain.recording.service.DuetService;
@@ -43,36 +44,27 @@ public class DuetController {
     }
 
 
-
-    // display가 true이며 아직 듀엣이 완성되지 않은 player1만 노래를 부른 데이터 출력
-    // player2의 값이 null값인 데이터 출력
-    // 나의 노래만 볼 수 있음
-    @GetMapping("/{player1}")
-    public ResponseEntity<Message<List<Duet>>> getRecordingPlayer2IsNull(@PathVariable Long player1) {
-        List<Duet> multi = duetService.getRecordingPlayer2IsNull(player1);
-        return ResponseEntity.ok().body(Message.success(multi));
+    // 완성안된 모든 duet 조회
+    @GetMapping("/list")
+    public ResponseEntity<Message<List<DuetListResponseDto>>> getAllDuetList() {
+        List<DuetListResponseDto> duetList = duetService.getAllDuetList();
+        return ResponseEntity.ok().body(Message.success(duetList));
     }
 
-    // 영상을 볼 수 있는 get 요청
-    @GetMapping("/record/{multiId}")
-    public ResponseEntity<String> getMultiRecording(@PathVariable Long multiId) {
-         String path = duetService.getMultiRecording(multiId);
-         return ResponseEntity.ok().body(path);
+    // 완성안된 내 duet list 조회
+    @GetMapping("/myList")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Message<List<DuetListResponseDto>>>  getMyDuetList(@AuthenticationPrincipal MemberLoginActiveDto loginActiveDto) {
+        List<DuetListResponseDto> myDuetList = duetService.getMyDuetList(loginActiveDto.getId());
+        return ResponseEntity.ok().body(Message.success(myDuetList));
     }
+
 
     // 듀엣이 완성된 값을 출력
 
     @GetMapping("/list/{playerId}")
     public ResponseEntity<List<Duet>> getRecordingMulti(@PathVariable Long playerId) {
         List<Duet> multi = duetService.getRecordingMulti(playerId);
-        return ResponseEntity.ok(multi);
-    }
-
-    // 모든 player2가 없는 노래를 출력해야 함.
-    // @GetMapping(/list)
-    @GetMapping("/list")
-    public ResponseEntity<List<Duet>> getAllRecordingPlayer2IsNull(){
-        List<Duet> multi = duetService.getAllRecordingPlayer2IsNull();
         return ResponseEntity.ok(multi);
     }
 

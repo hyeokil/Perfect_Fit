@@ -37,9 +37,9 @@ public class SingleServiceImpl implements SingleService{
     // 내가 single모드로 부른 노래 리스트 조회 단순 포문 사용
     @Override
     public List<SingleResponseDto> getSingleList(Long memberId) {
-        List<Single> Singles = singleRepository.findByMemberIdAndDisplayTrue(memberId);
+        List<Single> singles = singleRepository.findByMemberIdAndDisplayTrue(memberId);
         List<SingleResponseDto> singleResponseDtoList = new ArrayList<>();
-        for (Single single : Singles) {
+        for (Single single : singles) {
             SingleResponseDto singleResponseDto = new SingleResponseDto(
                     single.getId(),
                     single.getName(),
