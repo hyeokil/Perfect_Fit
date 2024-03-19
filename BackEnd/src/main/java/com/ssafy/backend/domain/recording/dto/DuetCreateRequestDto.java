@@ -8,23 +8,17 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class DuetCreateRequestDto {
-    private Long player1;
-
-    private Long player2;
 
     private String name;
 
     private String path;
 
-    private boolean display;
-
-    public Duet toEntity(Member player1, Member player2) {
+    public Duet toEntity(Member member) {
         return Duet.builder()
-                .player1(player1)
-                .player2(player2)
                 .name(name)
                 .path(path)
-                .display(display)
+                .display(true)
+                .uploader(member)
                 .build();
     }
 }
