@@ -1,8 +1,7 @@
-package com.ssafy.backend.domain.recording_movie.controller;
+package com.ssafy.backend.domain.recording.controller;
 
-import com.ssafy.backend.domain.recording_movie.entity.Multi;
-import com.ssafy.backend.domain.recording_movie.service.MultiService;
-import com.ssafy.backend.global.common.dto.Message;
+import com.ssafy.backend.domain.recording.entity.Multi;
+import com.ssafy.backend.domain.recording.service.DuetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +13,8 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/multi")
-public class MultiController {
-    private final MultiService multiService;
+public class DuetController {
+    private final DuetService multiService;
 
     // 멀티 플레이에서 영상 저장 로직
 //    @PostMapping("")

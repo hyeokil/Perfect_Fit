@@ -1,7 +1,7 @@
-package com.ssafy.backend.domain.recording_movie.dto;
+package com.ssafy.backend.domain.recording.dto;
 
 import com.ssafy.backend.domain.member.entity.Member;
-import com.ssafy.backend.domain.recording_movie.entity.Single;
+import com.ssafy.backend.domain.recording.entity.Single;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -9,20 +9,16 @@ import lombok.Getter;
 @AllArgsConstructor
 public class SingleCreateRequestDto {
 
-    private Long memberId;
-
     private String name;
 
     private String path;
 
-    private boolean display;
-
-    public Single toEntity(Member memberId) {
+    public Single toEntity(Member member) {
         return Single.builder()
-                .member(memberId)
+                .member(member)
                 .name(name)
                 .path(path)
-                .display(display)
+                .display(true)
                 .build();
     }
 }

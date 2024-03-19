@@ -1,10 +1,12 @@
-package com.ssafy.backend.domain.recording_movie.service;
+package com.ssafy.backend.domain.recording.service;
 
 import com.ssafy.backend.domain.member.entity.Member;
+import com.ssafy.backend.domain.member.exception.MemberError;
+import com.ssafy.backend.domain.member.exception.MemberException;
 import com.ssafy.backend.domain.member.repository.MemberRepository;
-import com.ssafy.backend.domain.recording_movie.dto.SingleCreateRequestDto;
-import com.ssafy.backend.domain.recording_movie.entity.Single;
-import com.ssafy.backend.domain.recording_movie.repository.SingleRepository;
+import com.ssafy.backend.domain.recording.dto.SingleCreateRequestDto;
+import com.ssafy.backend.domain.recording.entity.Single;
+import com.ssafy.backend.domain.recording.repository.SingleRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -23,14 +25,12 @@ public class SingleServiceImpl implements SingleService{
     private final MemberRepository memberRepository;
 
 
-    //
+    // single recording 저장
     @Override
-    public void createRecording(SingleCreateRequestDto singleCreateRequestDto) {
-        // singleCreateRequestDto에서 제공된 singleId에 해당하는 Member엔터티를 db에서 조회
-        Member single = memberRepository.findById(singleCreateRequestDto.getMemberId())
-                // singleId에 해당하는 Member가 없을 경우 예외 표시
-                .orElseThrow(() -> new IllegalArgumentException("Invalid singleId"));
-        singleRepository.save(singleCreateRequestDto.toEntity(single));
+    public void createRecording(Long memberId, SingleCreateRequestDto singleCreateRequestDto) {
+        Member member = memberRepository.findById(memberId).orElseThrow(()
+                -> new MemberException(MemberError.NOT_FOUND_MEMBER));
+        singleRepository.save(singleCreateRequestDto.toEntity(member));
     }
 
     // single모드로 부른 노래 조회

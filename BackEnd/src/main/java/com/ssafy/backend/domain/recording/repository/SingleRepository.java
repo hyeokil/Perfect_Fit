@@ -1,7 +1,7 @@
-package com.ssafy.backend.domain.recording_movie.repository;
+package com.ssafy.backend.domain.recording.repository;
 
 
-import com.ssafy.backend.domain.recording_movie.entity.Single;
+import com.ssafy.backend.domain.recording.entity.Single;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

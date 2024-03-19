@@ -1,9 +1,9 @@
-package com.ssafy.backend.domain.recording_movie.service;
+package com.ssafy.backend.domain.recording.service;
 
 
 import com.ssafy.backend.domain.member.repository.MemberRepository;
-import com.ssafy.backend.domain.recording_movie.entity.Multi;
-import com.ssafy.backend.domain.recording_movie.repository.MultiRepository;
+import com.ssafy.backend.domain.recording.entity.Multi;
+import com.ssafy.backend.domain.recording.repository.DuetRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +18,8 @@ import java.util.stream.Stream;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MultiServiceImpl implements MultiService{
-    private final MultiRepository multiRepository;
+public class DuetServiceImpl implements DuetService {
+    private final DuetRepository multiRepository;
     private final MemberRepository memberRepository;
 
     // 멀티 플레이에서의 영상 저장 로직
@@ -79,15 +79,15 @@ public class MultiServiceImpl implements MultiService{
 //    }
 
     @Override
-    public List<Multi> getRecordingPlayer2IsNull(Long player1) {
+    public List<Duet> getRecordingPlayer2IsNull(Long player1) {
         return multiRepository.findByPlayer1IdAndDisplayTrueAndPlayer2IdIsNull(player1);
     }
 
     @Override
-    public List<Multi> getRecordingMulti(Long player1) {
-        List<Multi> list1 = multiRepository.findByPlayer1IdAndDisplayTrueAndPlayer2IdIsNotNull(player1);
-        List<Multi> list2 = multiRepository.findByPlayer2IdAndDisplayTrue(player1);
-        List<Multi> playlist = Stream.of(list1, list2)
+    public List<Duet> getRecordingMulti(Long player1) {
+        List<Duet> list1 = multiRepository.findByPlayer1IdAndDisplayTrueAndPlayer2IdIsNotNull(player1);
+        List<Duet> list2 = multiRepository.findByPlayer2IdAndDisplayTrue(player1);
+        List<Duet> playlist = Stream.of(list1, list2)
                 .flatMap(Collection::stream)
                 .toList();
 //        List<Multi> playlist = new ArrayList<>();

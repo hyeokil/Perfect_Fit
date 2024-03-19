@@ -1,13 +1,13 @@
-package com.ssafy.backend.domain.recording_movie.dto;
+package com.ssafy.backend.domain.recording.dto;
 
 import com.ssafy.backend.domain.member.entity.Member;
-import com.ssafy.backend.domain.recording_movie.entity.Multi;
+import com.ssafy.backend.domain.recording.entity.Duet;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class MultiCreateRequestDto {
+public class DuetCreateRequestDto {
     private Long player1;
 
     private Long player2;
@@ -18,8 +18,8 @@ public class MultiCreateRequestDto {
 
     private boolean display;
 
-    public Multi toEntity(Member player1, Member player2) {
-        return Multi.builder()
+    public Duet toEntity(Member player1, Member player2) {
+        return Duet.builder()
                 .player1(player1)
                 .player2(player2)
                 .name(name)
