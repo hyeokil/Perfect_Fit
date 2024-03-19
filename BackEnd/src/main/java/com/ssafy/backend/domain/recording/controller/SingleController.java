@@ -1,12 +1,14 @@
-package com.ssafy.backend.domain.recording_movie.controller;
+package com.ssafy.backend.domain.recording.controller;
 
-import com.ssafy.backend.domain.recording_movie.dto.SingleCreateRequestDto;
-import com.ssafy.backend.domain.recording_movie.entity.Single;
-import com.ssafy.backend.domain.recording_movie.service.SingleService;
+import com.ssafy.backend.domain.member.dto.MemberLoginActiveDto;
+import com.ssafy.backend.domain.recording.dto.SingleCreateRequestDto;
+import com.ssafy.backend.domain.recording.entity.Single;
+import com.ssafy.backend.domain.recording.service.SingleService;
 import com.ssafy.backend.global.common.dto.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +22,9 @@ public class SingleController {
 
     // single로 부른 노래 저장
     @PostMapping("")
-    public ResponseEntity<Message<Void>> createRecording(@RequestBody SingleCreateRequestDto singleCreateRequestDto) {
-        singleService.createRecording(singleCreateRequestDto);
+    public ResponseEntity<Message<Void>> createRecording(@AuthenticationPrincipal MemberLoginActiveDto loginActiveDto,
+                                                         @RequestBody SingleCreateRequestDto singleCreateRequestDto) {
+        singleService.createRecording(loginActiveDto.getId(), singleCreateRequestDto);
         return ResponseEntity.ok().body(Message.success());
     }
 
