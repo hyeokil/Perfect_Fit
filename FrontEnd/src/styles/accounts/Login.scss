@@ -1,0 +1,54 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: linear-gradient(to right, #2DFFF5, #FFF878);
+  font-size: 30px;
+  font-family: 'Dongle', sans-serif;
+}
+
+.logo {
+  margin-bottom: 8rem;
+  text-align: center;
+  color: black
+}
+
+@mixin button-style {
+  margin-bottom: 1rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: 'Noto Sans KR', sans-serif;
+  width: 300px;
+  cursor: pointer;
+}
+
+@mixin button-img {
+  margin-right: 20px
+}
+
+.kakao-login,
+.naver-login {
+  @include button-style;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.kakao-login img,
+.naver-login img {
+  @include button-img()
+}
+
+.kakao-login {
+  background-color: #fee500;
+}
+
+.naver-login {
+  background-color: #03c75a;
+  color: white;
+}

@@ -1,0 +1,36 @@
+nav {
+  justify-content: center;
+  border-top: 1px solid gray;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  border-top: 2px solid grey;
+  div {
+    // font-size: x-small;
+    /* 수평정렬, 5개의 button을 각각 20% width만큼 할당 */
+    text-align: center;
+    float: left;
+    width: 20%;
+    padding-top: 1%;
+    /* 세로길이 설정 */
+    height: 45px;
+    line-height: 20px;
+  }
+  p {
+    font-size: xx-small;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: gray;
+    
+  }
+}
+.wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45px;
+}
+.menu {
+  justify-content: center;
+}
+

@@ -1,0 +1,66 @@
+.access-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  height: 700px;
+}
+.access-container p {
+  font-size: 13px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  // margin-left: 20px;
+  color: #a5a5a5;
+  word-break: keep-all; // 한글일 경우 단어 잘리지 않게 줄바꿈
+  // word-break: break-all; 영어일 경우 단어 잘리지 않게 줄바꿈
+}
+
+.access-header {
+  margin-bottom: 30px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.access-content {
+  border: 1px solid black;
+  border: none;
+  background-color: #fafafa;
+  border-radius: 20px;
+  padding: 10px;
+  width: 300px;
+  height: 150px;
+}
+
+.permission-item p {
+  margin-left: 30px;
+}
+
+.permission-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+
+  .icon {
+    margin-right: 10px;
+    // 이곳에 실제 아이콘 폰트나 이미지를 적용할 수 있습니다.
+  }
+}
+
+.access-info {
+  margin-top: 20px;
+}
+
+.access-button {
+  background: linear-gradient(to right, #103CE7, #64E9FF);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  width: 300px;
+  height: 50px;
+  cursor: pointer;
+  margin-top: auto;
+}
