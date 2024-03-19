@@ -35,7 +35,6 @@ public class MyListController {
     public ResponseEntity<Message<List<MyListGetMyLikeSongDto>>> getLikedSongs(@RequestBody MyListGetMyLikeSongDto myListGetMyLikeSongDto) {
         List<MyListGetMyLikeSongDto> myLikedSongs = myListService.getLikedSongs(myListGetMyLikeSongDto);
         return ResponseEntity.ok().body(Message.success(myLikedSongs));
-
     }
 
 

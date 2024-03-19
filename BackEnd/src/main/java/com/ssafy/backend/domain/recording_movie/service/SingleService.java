@@ -1,7 +1,6 @@
 package com.ssafy.backend.domain.recording_movie.service;
 
 import com.ssafy.backend.domain.recording_movie.dto.SingleCreateRequestDto;
-import com.ssafy.backend.domain.recording_movie.entity.Recording;
 import com.ssafy.backend.domain.recording_movie.entity.Single;
 
 import java.util.List;

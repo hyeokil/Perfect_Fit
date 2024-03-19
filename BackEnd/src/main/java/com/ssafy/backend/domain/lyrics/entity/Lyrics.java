@@ -1,10 +1,8 @@
 package com.ssafy.backend.domain.lyrics.entity;
 
+import com.ssafy.backend.domain.song.entity.Song;
 import com.ssafy.backend.global.common.entity.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -18,5 +16,16 @@ public class Lyrics extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "song_id")
+    private Song song;
 
+    private String script;
+
+
+    public void setSong(Song song) {
+    }
+
+    public void setScript(String lyrics) {
+    }
 }
