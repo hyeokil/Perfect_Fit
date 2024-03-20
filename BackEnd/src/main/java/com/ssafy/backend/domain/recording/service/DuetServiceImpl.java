@@ -6,6 +6,7 @@ import com.ssafy.backend.domain.member.exception.MemberError;
 import com.ssafy.backend.domain.member.exception.MemberException;
 import com.ssafy.backend.domain.member.repository.MemberRepository;
 import com.ssafy.backend.domain.recording.dto.DuetCreateRequestDto;
+import com.ssafy.backend.domain.recording.dto.DuetFinishedListResponseDto;
 import com.ssafy.backend.domain.recording.dto.DuetListResponseDto;
 import com.ssafy.backend.domain.recording.dto.DuetParticipateReqeustDto;
 import com.ssafy.backend.domain.recording.entity.Duet;
@@ -56,6 +57,7 @@ public class DuetServiceImpl implements DuetService {
                     duet.getName(),
                     duet.getPath(),
                     duet.getUploader().getNickname(),
+                    duet.getUploader().getImage(),
                     duet.getCreatedAt()
             );
             duetListResponseDtoList.add(duetListResponseDto);
@@ -75,11 +77,34 @@ public class DuetServiceImpl implements DuetService {
                     duet.getName(),
                     duet.getPath(),
                     duet.getUploader().getNickname(),
+                    duet.getUploader().getImage(),
                     duet.getCreatedAt()
             );
             myDuetListResponseDtoList.add(duetListResponseDto);
         }
         return myDuetListResponseDtoList;
+    }
+    // 완성된 내 duet list 조회
+    @Override
+    public List<DuetFinishedListResponseDto> getMyDuetFinishedList(Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(()
+                -> new MemberException(MemberError.NOT_FOUND_MEMBER));
+        List<Duet> duets = duetRepository.findDuetByMemberAndDisplayOrderByCreatedAtDesc(member);
+        List<DuetFinishedListResponseDto> myDuetFinishedListResponseDtoList = new ArrayList<>();
+        for (Duet duet : duets) {
+            DuetFinishedListResponseDto duetFinishedListResponseDto = new DuetFinishedListResponseDto(
+                    duet.getId(),
+                    duet.getName(),
+                    duet.getPath(),
+                    duet.getUploader().getNickname(),
+                    duet.getUploader().getImage(),
+                    duet.getParticipant().getNickname(),
+                    duet.getParticipant().getImage(),
+                    duet.getCreatedAt()
+            );
+            myDuetFinishedListResponseDtoList.add(duetFinishedListResponseDto);
+        }
+        return myDuetFinishedListResponseDtoList;
     }
 
     // 멀티 플레이에서의 영상 저장 로직
