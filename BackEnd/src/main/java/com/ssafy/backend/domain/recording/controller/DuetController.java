@@ -3,9 +3,9 @@ package com.ssafy.backend.domain.recording.controller;
 
 import com.ssafy.backend.domain.member.dto.MemberLoginActiveDto;
 import com.ssafy.backend.domain.recording.dto.DuetCreateRequestDto;
+import com.ssafy.backend.domain.recording.dto.DuetFinishedListResponseDto;
 import com.ssafy.backend.domain.recording.dto.DuetListResponseDto;
 import com.ssafy.backend.domain.recording.dto.DuetParticipateReqeustDto;
-import com.ssafy.backend.domain.recording.entity.Duet;
 import com.ssafy.backend.domain.recording.service.DuetService;
 import com.ssafy.backend.global.common.dto.Message;
 import lombok.RequiredArgsConstructor;
@@ -45,28 +45,40 @@ public class DuetController {
 
 
     // 완성안된 모든 duet 조회
-    @GetMapping("/list")
+    @GetMapping("/unfinished/list")
     public ResponseEntity<Message<List<DuetListResponseDto>>> getAllDuetList() {
         List<DuetListResponseDto> duetList = duetService.getAllDuetList();
         return ResponseEntity.ok().body(Message.success(duetList));
     }
 
     // 완성안된 내 duet list 조회
-    @GetMapping("/myList")
+    @GetMapping("/unfinished/myList")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Message<List<DuetListResponseDto>>>  getMyDuetList(@AuthenticationPrincipal MemberLoginActiveDto loginActiveDto) {
         List<DuetListResponseDto> myDuetList = duetService.getMyDuetList(loginActiveDto.getId());
         return ResponseEntity.ok().body(Message.success(myDuetList));
     }
 
+    // 완성된 내 duet list 조회 업로더 참여자 모두
+    @GetMapping("/finished/myList")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Message<List<DuetFinishedListResponseDto>>>  getMyDuetFinishedList(@AuthenticationPrincipal MemberLoginActiveDto loginActiveDto) {
+        List<DuetFinishedListResponseDto> myDuetFinishedList = duetService.getMyDuetFinishedList(loginActiveDto.getId());
+        return ResponseEntity.ok().body(Message.success(myDuetFinishedList));
+    }
+
+
+
+
+
 
     // 듀엣이 완성된 값을 출력
 
-    @GetMapping("/list/{playerId}")
-    public ResponseEntity<List<Duet>> getRecordingMulti(@PathVariable Long playerId) {
-        List<Duet> multi = duetService.getRecordingMulti(playerId);
-        return ResponseEntity.ok(multi);
-    }
+//    @GetMapping("/list/{playerId}")
+//    public ResponseEntity<List<Duet>> getRecordingMulti(@PathVariable Long playerId) {
+//        List<Duet> multi = duetService.getRecordingMulti(playerId);
+//        return ResponseEntity.ok(multi);
+//    }
 
     // 멀티 플레이에서 영상 저장 로직
 //    @PostMapping("")

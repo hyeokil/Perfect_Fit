@@ -1,6 +1,7 @@
 package com.ssafy.backend.domain.member.entity;
 
 import com.ssafy.backend.domain.member.dto.MemberUpdateDto;
+import com.ssafy.backend.global.common.entity.BaseEntity;
 import com.ssafy.backend.global.component.oauth.vendor.enums.OAuthDomain;
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,7 +11,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
