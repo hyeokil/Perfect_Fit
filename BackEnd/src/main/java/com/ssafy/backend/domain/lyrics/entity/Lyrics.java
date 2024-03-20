@@ -20,12 +20,8 @@ public class Lyrics extends BaseEntity {
     @JoinColumn(name = "song_id")
     private Song song;
 
+    @Column(columnDefinition = "LONGTEXT")
     private String script;
 
 
-    public void setSong(Song song) {
-    }
-
-    public void setScript(String lyrics) {
-    }
 }
