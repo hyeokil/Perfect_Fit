@@ -14,25 +14,34 @@ public class Song extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 영상의 id값
+    // 영상의 id값(MR)
     private String songVideoId;
 
     // 노래 제목
     private String songTitle;
 
-    // 가수
+    // 가수명
     private String songArtist;
 
-    // 영상 URL
+    // 장르
+    private String songGenre;
+
+    // MR 영상 URL
     private String songUrl;
+
+    // 노래 영상 URL
+    private String songOriginUrl;
 
     // 썸네일 이미지 URL
     private String songThumbnail;
 
-    // 업로드 날짜
+    // 노래 발매일
     private String songReleaseDate;
 
     // 조회수
     private Long SongView;
+
+    // 노래길이
+    private String songLength;
 
 }

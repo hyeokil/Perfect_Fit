@@ -54,6 +54,6 @@ oauth:
 
 youtube:
   api:
-    #    key: AIzaSyDqnJkym6OA2vJAasKGP8gjsP4sOwMZfxo
-    key: AIzaSyBNubMlambtTEEnjTUdw-W5Ch6Hk6BHxQo
+    key: AIzaSyDqnJkym6OA2vJAasKGP8gjsP4sOwMZfxo
+#    key: AIzaSyBNubMlambtTEEnjTUdw-W5Ch6Hk6BHxQo
 

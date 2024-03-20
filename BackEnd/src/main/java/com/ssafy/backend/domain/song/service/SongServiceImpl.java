@@ -32,6 +32,8 @@ public class SongServiceImpl implements SongService {
 
     // 유튜브 TJ미디어 채널 ID
     private static final String CHANNEL_ID = "UCZUhx8ClCv6paFW7qi3qljg";
+    // 유튜브 금영노래방 채널 ID
+//    private static final String CHANNEL_ID = "";
 
 
     // 노래 정보 저장 함수
@@ -114,13 +116,17 @@ public class SongServiceImpl implements SongService {
     // 영상 title에서 노래명, 가수명 추출하는 메서드
     public String[] extractSongInfo(String inputData) {
         // 정규 표현식
-        final Pattern pattern = Pattern.compile("\\[TJ노래방( / 남자키| / 여자키)?\\] (.+) - (.+) / TJ Karaoke");
-
+        final Pattern pattern = Pattern.compile("\\[TJ노래방( / 남자키| / 여자키)?\\] (.+) - (.+) / TJ Karaoke");  // TJ 미디어
+//        final Pattern pattern = Pattern.compile("\\[(?:.+?)\\]\\s*(?:\\[.+?\\])?\\s*(.+?)\\s*\\-\\s*(.+?)\\s*\\(KY\\.\\d+\\)\\s*/\\s*KY Karaoke");  // 금영노래방
         Matcher matcher = pattern.matcher(inputData);
 
         if (matcher.find()) {
+            // TJ
             String songTitle = matcher.group(2);  // 노래 제목
             String songArtist = matcher.group(3);  // 가수 이름
+            // 금영
+//            String songTitle = matcher.group(1);  // 노래 제목
+//            String songArtist = matcher.group(2);  // 가수 이름
             return new String[] {songTitle, songArtist};  // 0번 index는 제목, 1번 index는 가수명
         } else {
             return new String[] {"", ""};  // 없으면 빈 문자열 반환

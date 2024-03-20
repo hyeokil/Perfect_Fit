@@ -37,7 +37,7 @@ public class YoutubeService {
         search.setKey(apiKey);
 
         // 검색어 설정
-        search.setQ(query + "TJ");
+        search.setQ(query);
 
         // 검색 요청 실행 및 응답 받아오기
         SearchListResponse searchResponse = search.execute();
