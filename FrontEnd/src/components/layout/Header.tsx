@@ -1,24 +1,29 @@
 import styles from "@styles/layout/header.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-// title, 뒤로가기 true, x 버튼 false 눌렀을때 event
-type ChildProps = {
+/**
+ * 헤더 사용법
+ * 사용하고자 하는 페이지에 불러오기
+ * title, state, page => prop으로 내려주기
+ */
+
+type HeaderProps = {
+  // 타이틀
   title: string;
+  // 뒤로가기=back or 닫기 = close
   state: string;
+  // 닫기 버튼 클릭 시 이동 할 페이지 주소
   page: string;
-  // event: () => void;
 };
 
-const Header = (props: ChildProps) => {
+const Header = (props: HeaderProps) => {
   const navigate = useNavigate();
-  const state = "back";
-  const page = "access";
   return (
     <header className={styles.wrapper}>
       <div>
-        {state === "back" && (
+        {props.state === "back" && (
           <FontAwesomeIcon
             icon={faArrowLeft}
             className={styles.back}
@@ -26,12 +31,12 @@ const Header = (props: ChildProps) => {
           />
         )}
         <p className={styles.title}>{props.title}</p>
-        {state !== "back" && (
+        {props.state === "close" && (
           <div className={styles.close}>
             <FontAwesomeIcon
               icon={faX}
               onClick={() => {
-                navigate(`/${page}`);
+                navigate(`/${props.page}`);
               }}
             />
           </div>
