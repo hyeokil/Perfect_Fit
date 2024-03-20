@@ -16,12 +16,14 @@ public class Lyrics extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "song_id")
     private Song song;
 
     @Column(columnDefinition = "LONGTEXT")
-    private String script;
+    private String lyricsScript;
+
+    private Long lyricsOrder;
 
 
 }

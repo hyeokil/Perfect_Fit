@@ -15,11 +15,13 @@ public class LyricsDto {
 
     private Long songId;
     private String script;
+    private Long order;
 
-    public static Lyrics toEntity(Song song, String script) {
+    public static Lyrics toEntity(Song song, String script, Long order) {
         return Lyrics.builder()
                 .song(song)
-                .script(script)
+                .lyricsScript(script)
+                .lyricsOrder(order)
                 .build();
     }
 

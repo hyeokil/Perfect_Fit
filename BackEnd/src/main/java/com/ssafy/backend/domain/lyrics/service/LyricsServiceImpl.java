@@ -29,6 +29,11 @@ public class LyricsServiceImpl implements LyricsService {
         for (Song song : songRepository.findAll()) {
             try {
                 Long songId = song.getId();
+
+                // 여기서 체크
+                if (lyricsRepository.existsBySongId(songId)) {
+                    continue; // 이미 존재하면 다음 노래로 넘어감
+                }
                 String keyword = song.getSongArtist() + " " + song.getSongTitle();
                 String searchFloSongIdUrl = "https://www.music-flo.com/api/search/v2/search/integration?keyword=" + keyword;
 //                System.out.println(songId + ":" + keyword);
@@ -51,8 +56,12 @@ public class LyricsServiceImpl implements LyricsService {
                         .getJSONObject("data")
                         .getString("lyrics")
                 );
-
-                lyricsRepository.save(LyricsDto.toEntity(song, floLyrics));
+                String[] lyricsList = floLyrics.split("\n");
+                Long songOrder = 1L;
+                for (String lyric : lyricsList) {
+                    lyricsRepository.save(LyricsDto.toEntity(song, lyric, songOrder));
+                    songOrder += 1;
+                }
                 System.out.println("저장 ok" + songId);
             } catch (Exception e) {
                 continue;
