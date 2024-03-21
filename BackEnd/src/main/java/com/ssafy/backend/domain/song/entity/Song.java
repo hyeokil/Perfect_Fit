@@ -4,6 +4,8 @@ import com.ssafy.backend.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Builder
@@ -43,5 +45,19 @@ public class Song extends BaseEntity {
 
     // 노래길이
     private String songLength;
+
+
+    public void setSongGenre(String songGenre) {
+        this.songGenre = songGenre;
+    }
+
+    public void setSongReleaseDate(String songReleaseDate) {
+        this.songReleaseDate = songReleaseDate;
+    }
+
+    public void setSongThumbnail(String songThumbnail) {
+        this.songThumbnail = songThumbnail;
+    }
+
 
 }

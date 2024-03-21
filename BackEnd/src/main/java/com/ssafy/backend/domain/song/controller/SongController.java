@@ -18,9 +18,14 @@ public class SongController {
 
     // MR의 정보 가져오는 요청 (Youtube data v3 API)
     @GetMapping("/searchVideo")
-    public ResponseEntity<String> searchVideo2() throws IOException {
+    public ResponseEntity<String> searchVideo() throws IOException {
         String result = songServiceImpl.getChannelVideos();
         return ResponseEntity.ok(result);
+    }
+
+    @PatchMapping("/flo")
+    public void updateSongsFlo() {
+        songServiceImpl.updateSongsFlo();
     }
 
 
