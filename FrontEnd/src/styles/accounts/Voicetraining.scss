@@ -1,0 +1,37 @@
+.voicetraining-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+  height: 700px;
+}
+
+.voice-header {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.voice-mic {
+  text-align: center;
+  img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+  }
+  h3 {
+    word-break: keep-all;
+  }
+}
+.voice-button {
+  background: linear-gradient(to right, #103ce7, #64e9ff,);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  width: 350px;
+  height: 50px;
+  cursor: pointer;
+  margin-top: auto;
+}

@@ -15,7 +15,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/oauth" element={<KakaoRedirect />} />
+        <Route path="/member/loading/kakao" element={<KakaoRedirect />} />
         <Route path="/access" element={<Access />} />
         <Route path="/information" element={<Information />} />
         <Route path="/voicetraining" element={<Voicetraining />} />

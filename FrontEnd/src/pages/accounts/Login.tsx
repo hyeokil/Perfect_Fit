@@ -1,13 +1,21 @@
 import React from "react";
 import "../../styles/accounts/Login.scss";
-
-const K_REST_API_KEY = ``
-const K_REDIRECT_URI = `http://j10c205.p.ssafy.io:9002/`;
-const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${K_REST_API_KEY}&redirect_uri=${K_REDIRECT_URI}&response_type=code`;
+import axios from "axios";
+import useAuthStore from "@/store/useAuthStroe";
 
 const Login: React.FC = () => {
+  const { login } = useAuthStore();
+
   const handleKakaoLogin = () => {
-    window.location.href = kakaoURL;
+    axios
+      .get(`http://j10c205.p.ssafy.io:9002/api/v1/member/kakao`)
+      .then((res) => {
+        console.log(res.data.dataBody);
+        window.location.href = res.data.dataBody;
+        // 로그인 성공시 zustand에 저장
+        login(res.data.accessToken);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -23,10 +31,6 @@ const Login: React.FC = () => {
       <button className="kakao-login" onClick={handleKakaoLogin}>
         <img src="././src/assets/icon/kakao.png" alt="kakao" />
         카카오 로그인
-      </button>
-      <button className="naver-login" >
-        <img src="././src/assets/icon/naver.png" alt="naver" />
-        네이버 로그인
       </button>
     </div>
   );
