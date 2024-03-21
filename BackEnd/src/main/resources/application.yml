@@ -65,3 +65,7 @@ oauth:
       - nickname
       - email
       - profile_image
+
+youtube:
+  api:
+    key: AIzaSyDqnJkym6OA2vJAasKGP8gjsP4sOwMZfxo
