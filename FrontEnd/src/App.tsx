@@ -8,6 +8,7 @@ import Information from "./pages/accounts/Information.tsx";
 import Voicetraining from "./pages/accounts/Voicetraining.tsx";
 import KakaoRedirect from "./components/accounts/KakaoRedirect.tsx";
 import Layout from "./layout/Layout";
+import Record from "./components/sing/Record.tsx";
 
 const App: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const App: React.FC = () => {
         <Route path="/access" element={<Access />} />
         <Route path="/information" element={<Information />} />
         <Route path="/voicetraining" element={<Voicetraining />} />
+        <Route path="/record" element={<Record />} />
         {/* 로그인 상태에 따라 수정하기 // 중첩 라우팅 사용하기 */}
         <Route path="/layout" element={<Layout />}>
 
