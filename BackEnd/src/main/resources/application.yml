@@ -10,7 +10,7 @@ spring:
     defer-datasource-initialization: true
     generate-ddl: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: false                   # 하이버네이트가 실행한 SQL을 출력할 때 보기 좋게 정렬
