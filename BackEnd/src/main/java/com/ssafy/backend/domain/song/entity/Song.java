@@ -4,7 +4,6 @@ import com.ssafy.backend.global.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 
 @Entity
 @Getter

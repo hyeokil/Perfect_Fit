@@ -30,4 +30,7 @@ public class MyList extends BaseEntity {
     private boolean myListDisplay;
 
 
+    public boolean getMyListDisplay0() {
+        return myListDisplay;
+    }
 }

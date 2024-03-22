@@ -17,5 +17,8 @@ public interface MyListRepository extends JpaRepository<MyList, Long> {
 
     List<MyList> findByMemberAndMyListDisplayTrue(Member member);
 
+    Optional<MyList> findByMemberIdAndSongId(Long memberId, Long songId);
+
+
 
 }

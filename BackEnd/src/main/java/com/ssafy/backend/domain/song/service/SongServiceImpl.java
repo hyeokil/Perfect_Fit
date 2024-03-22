@@ -5,13 +5,20 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.*;
+import com.ssafy.backend.domain.my_list.repository.MyListRepository;
+import com.ssafy.backend.domain.song.dto.SongPopularChartDto;
 import com.ssafy.backend.domain.song.entity.Song;
+import com.ssafy.backend.domain.my_list.entity.MyList;
+
 import com.ssafy.backend.domain.song.repository.SongRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -28,18 +36,98 @@ import java.util.regex.Pattern;
 public class SongServiceImpl implements SongService {
 
     private final SongRepository songRepository;
+    private final MyListRepository myListRepository;
     private final RestTemplate restTemplate;
 
 
-    //@Value 어노테이션을 사용하여 application.yml에서 정의한 YouTube API 키를 주입 받음 (cmd+click하면 추적가능)
+    //  인기차트100 조회
+    @Override
+    public List<SongPopularChartDto> getPopular100Songs(Long memberId) {
+        return songRepository.findPopular100(memberId)
+                .stream()
+                .map(song -> {
+                    Boolean myListDisplay = myListRepository.findByMemberIdAndSongId(memberId, song.getId())
+                            .map(MyList::getMyListDisplay0)
+                            .orElse(false); // myListDisplay 값이 없으면 false로 설정
+
+                    return SongPopularChartDto.builder()
+                            .songVideoId(song.getSongVideoId())
+                            .songTitle(song.getSongTitle())
+                            .songArtist(song.getSongArtist())
+                            .songGenre(song.getSongGenre())
+                            .songUrl(song.getSongUrl())
+                            .songThumbnail(song.getSongThumbnail())
+                            .songReleaseDate(song.getSongReleaseDate())
+                            .SongView(song.getSongView())
+                            .songLength(song.getSongLength())
+                            .myListDisplay(myListDisplay)
+                            .build();
+                })
+                .collect(Collectors.toList());
+    }
+
+
+
+    //  최신차트100 조회
+    @Override
+    public List<SongPopularChartDto> getLatest100Songs(Long memberId) {
+        return songRepository.findLatest100(memberId)
+                .stream()
+                .map(song -> {
+                    Boolean myListDisplay = myListRepository.findByMemberIdAndSongId(memberId, song.getId())
+                            .map(MyList::getMyListDisplay0)
+                            .orElse(false);
+
+                    return SongPopularChartDto.builder()
+                            .songVideoId(song.getSongVideoId())
+                            .songTitle(song.getSongTitle())
+                            .songArtist(song.getSongArtist())
+                            .songGenre(song.getSongGenre())
+                            .songUrl(song.getSongUrl())
+                            .songThumbnail(song.getSongThumbnail())
+                            .songReleaseDate(song.getSongReleaseDate())
+                            .SongView(song.getSongView())
+                            .songLength(song.getSongLength())
+                            .myListDisplay(myListDisplay)
+                            .build();
+                })
+                .collect(Collectors.toList());
+    }
+
+
+    // 장르차트100 조회
+    @Override
+    public List<SongPopularChartDto> getGenre100Songs(Long memberId, String genre) {
+        return songRepository.findGenre100(memberId, "%" + genre + "%")
+                .stream()
+                .map(song -> {
+                    Boolean myListDisplay = myListRepository.findByMemberIdAndSongId(memberId, song.getId())
+                            .map(MyList::getMyListDisplay0)
+                            .orElse(false);
+
+                    return SongPopularChartDto.builder()
+                            .songVideoId(song.getSongVideoId())
+                            .songTitle(song.getSongTitle())
+                            .songArtist(song.getSongArtist())
+                            .songGenre(song.getSongGenre())
+                            .songUrl(song.getSongUrl())
+                            .songThumbnail(song.getSongThumbnail())
+                            .songReleaseDate(song.getSongReleaseDate())
+                            .SongView(song.getSongView())
+                            .songLength(song.getSongLength())
+                            .myListDisplay(myListDisplay)
+                            .build();
+                })
+                .collect(Collectors.toList());    }
+
+
+    // @Value 어노테이션을 사용하여 application.yml에서 정의한 YouTube API 키를 주입 받음 (cmd+click하면 추적가능)
     @Value("${youtube.api.key}")
     private String apiKey;
-
     // 유튜브 TJ미디어 채널 ID
     private static final String CHANNEL_ID = "UCZUhx8ClCv6paFW7qi3qljg";
     // 유튜브 금영노래방 채널 ID
 //    private static final String CHANNEL_ID = "";
-
 
     // 노래 정보 저장 함수
     @Override
@@ -97,8 +185,6 @@ public class SongServiceImpl implements SongService {
                 }
                 String songArtist = extractSongInfo(video.getSnippet().getTitle())[1];
                 String songUrl = "https://www.youtube.com/watch?v=" + songVideoId;
-                String songThumbnail = video.getSnippet().getThumbnails().getDefault().getUrl();
-                String songReleaseDate = video.getSnippet().getPublishedAt().toStringRfc3339();
                 Long songView = video.getStatistics().getViewCount().longValue();
 
                 Song song = Song.builder()
@@ -106,8 +192,6 @@ public class SongServiceImpl implements SongService {
                         .songTitle(songTitle)
                         .songArtist(songArtist)
                         .songUrl(songUrl)
-                        .songThumbnail(songThumbnail)
-                        .songReleaseDate(songReleaseDate)
                         .SongView(songView)
                         .build();
                 songRepository.save(song);
@@ -188,8 +272,9 @@ public class SongServiceImpl implements SongService {
             } catch (Exception e) {
                 continue;
             }
-
         }
     }
+
+
 
 }
