@@ -65,8 +65,9 @@ public class Message<T> {
 
     /**
      * 본문을 포함한 성공 메시지를 생성합니다.
+     *
      * @param dataBody 메시지 본문입니다.
-     * @param <T> 데이터 본문의 타입입니다.
+     * @param <T>      데이터 본문의 타입입니다.
      * @return 성공한 메시지 인스턴스입니다.
      */
     public static <T> Message<T> success(T dataBody) {
