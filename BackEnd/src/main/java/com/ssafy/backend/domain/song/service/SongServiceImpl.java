@@ -118,7 +118,8 @@ public class SongServiceImpl implements SongService {
                             .myListDisplay(myListDisplay)
                             .build();
                 })
-                .collect(Collectors.toList());    }
+                .collect(Collectors.toList());
+    }
 
 
     // @Value 어노테이션을 사용하여 application.yml에서 정의한 YouTube API 키를 주입 받음 (cmd+click하면 추적가능)

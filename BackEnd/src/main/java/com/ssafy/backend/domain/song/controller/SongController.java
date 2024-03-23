@@ -37,8 +37,9 @@ public class SongController {
 
 
     // 장르차트100 조회
-    @GetMapping("/chart/genre")
-    public ResponseEntity<Message<List<SongPopularChartDto>>> getGenre100Songs(@RequestParam Long memberId, String genre) {
+    @GetMapping("/chart/genre/{genre}")
+    public ResponseEntity<Message<List<SongPopularChartDto>>> getGenre100Songs(@RequestParam Long memberId,
+                                                                               @PathVariable String genre) {
         List<SongPopularChartDto> result = songServiceImpl.getGenre100Songs(memberId, genre);
         return ResponseEntity.ok().body(Message.success(result));
     }
