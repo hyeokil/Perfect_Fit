@@ -47,7 +47,7 @@ public class SongServiceImpl implements SongService {
                 .stream()
                 .map(song -> {
                     Boolean myListDisplay = myListRepository.findByMemberIdAndSongId(memberId, song.getId())
-                            .map(MyList::getMyListDisplay0)
+                            .map(MyList::getMyListDisplay)
                             .orElse(false); // myListDisplay 값이 없으면 false로 설정
 
                     return SongPopularChartDto.builder()
@@ -75,7 +75,7 @@ public class SongServiceImpl implements SongService {
                 .stream()
                 .map(song -> {
                     Boolean myListDisplay = myListRepository.findByMemberIdAndSongId(memberId, song.getId())
-                            .map(MyList::getMyListDisplay0)
+                            .map(MyList::getMyListDisplay)
                             .orElse(false);
 
                     return SongPopularChartDto.builder()
@@ -102,7 +102,7 @@ public class SongServiceImpl implements SongService {
                 .stream()
                 .map(song -> {
                     Boolean myListDisplay = myListRepository.findByMemberIdAndSongId(memberId, song.getId())
-                            .map(MyList::getMyListDisplay0)
+                            .map(MyList::getMyListDisplay)
                             .orElse(false);
 
                     return SongPopularChartDto.builder()

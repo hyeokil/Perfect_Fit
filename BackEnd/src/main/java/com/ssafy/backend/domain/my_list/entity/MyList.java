@@ -27,10 +27,7 @@ public class MyList extends BaseEntity {
     private Song song;
 
     @Setter
-    private boolean myListDisplay;
+    private Boolean myListDisplay;
 
 
-    public boolean getMyListDisplay0() {
-        return myListDisplay;
-    }
 }

@@ -41,7 +41,7 @@ public class MyListServiceImpl implements MyListService{
         if (myListOptional.isPresent()) {
             // DB에 기록이 있으면 -> 좋아요 토글
             MyList myList = myListOptional.get();
-            myList.setMyListDisplay(!myList.isMyListDisplay());
+            myList.setMyListDisplay(!myList.getMyListDisplay());
             myListRepository.save(myList);
             return myList.getId();
         } else {
@@ -61,7 +61,7 @@ public class MyListServiceImpl implements MyListService{
         List<MyList> likedSongs = myListRepository.findByMemberAndMyListDisplayTrue(member);
 
         return likedSongs.stream()
-                .map(song -> new MyListGetMyLikeSongDto(memberId, song.getSong().getId(), song.isMyListDisplay()))
+                .map(song -> new MyListGetMyLikeSongDto(memberId, song.getSong().getId(), song.getMyListDisplay()))
                 .collect(Collectors.toList());
     }
 
