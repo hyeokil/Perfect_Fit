@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Black">
+<<<<<<< HEAD
     <option name="sdkName" value="ssafytest" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="ssafytest" project-jdk-type="Python SDK" />
+=======
+    <option name="sdkName" value="Python 3.12 (Django_Data)" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (Django_Data)" project-jdk-type="Python SDK" />
+>>>>>>> 75e364b878e58d351f3ac3a7cc305b36d6509cdb
 </project>
