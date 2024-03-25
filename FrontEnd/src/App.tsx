@@ -9,8 +9,12 @@ import Voicetraining from "./pages/accounts/Voicetraining.tsx";
 import KakaoRedirect from "./components/accounts/KakaoRedirect.tsx";
 import Layout from "./layout/Layout";
 import Record from "./components/sing/Record.tsx";
+import '@/api/axios.ts'
+import { instance } from "@/api/axios.ts";
+
 
 const App: React.FC = () => {
+  instance.get(`api/v1/single/list`).then(res => console.log(res)).catch(err=>console.log(err))
   return (
     <BrowserRouter>
       <Routes>
