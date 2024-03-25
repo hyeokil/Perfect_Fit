@@ -1,29 +1,17 @@
 package com.ssafy.backend.domain.song.service;
 
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.youtube.YouTube;
-import com.google.api.services.youtube.model.*;
 import com.ssafy.backend.domain.my_list.repository.MyListRepository;
 import com.ssafy.backend.domain.song.dto.SongChartDto;
-import com.ssafy.backend.domain.song.entity.Song;
 import com.ssafy.backend.domain.my_list.entity.MyList;
 
 import com.ssafy.backend.domain.song.repository.SongRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -96,6 +84,34 @@ public class SongServiceImpl implements SongService {
     @Override
     public List<SongChartDto> getGenre100Songs(Long memberId, String genre) {
         return songRepository.findGenre100(memberId, "%" + genre + "%")
+                .stream()
+                .map(song -> {
+                    Boolean myListDisplay = myListRepository.findByMemberIdAndSongId(memberId, song.getId())
+                            .map(MyList::getMyListDisplay)
+                            .orElse(false);
+
+                    return SongChartDto.builder()
+                            .songVideoId(song.getSongVideoId())
+                            .songTitle(song.getSongTitle())
+                            .artist(song.getArtist().getArtist())
+                            .genre(song.getGenre().getGenre())
+                            .songUrl(song.getSongUrl())
+                            .songThumbnail(song.getSongThumbnail())
+                            .songReleaseDate(song.getSongReleaseDate())
+                            .SongView(song.getSongView())
+                            .songLength(song.getSongLength())
+                            .myListDisplay(myListDisplay)
+                            .build();
+                })
+                .collect(Collectors.toList());
+    }
+
+
+    // 전체 차트 조회
+    @Override
+    public List<SongChartDto> getAllSongs(Long memberId, int page, int pageSize) {
+        int pageNumber = (page - 1) * pageSize;
+        return songRepository.findRandomAll(memberId, pageNumber, pageSize)
                 .stream()
                 .map(song -> {
                     Boolean myListDisplay = myListRepository.findByMemberIdAndSongId(memberId, song.getId())

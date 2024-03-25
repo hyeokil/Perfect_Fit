@@ -45,6 +45,15 @@ public class SongController {
     }
 
 
+    // 전체차트 조회
+    @GetMapping("/chart/all/{page}")
+    public ResponseEntity<Message<List<SongChartDto>>> getAllSongs(@RequestParam Long memberId,
+                                                                   @PathVariable("page") int page) {
+        List<SongChartDto> result = songServiceImpl.getAllSongs(memberId, page, 20);
+        return ResponseEntity.ok().body(Message.success(result));
+    }
+
+
 
 
 
