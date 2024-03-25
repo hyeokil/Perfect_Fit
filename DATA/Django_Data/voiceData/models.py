@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+
+
 class SoundFeature(models.Model):
     user_pk = models.IntegerField()
     harmony_mean = models.FloatField()
@@ -56,3 +58,5 @@ class SoundFeature(models.Model):
     tempo = models.FloatField()
     zero_crossing_rate_mean = models.FloatField()
     zero_crossing_rate_var = models.FloatField()
+    chroma_stft_mean = models.FloatField()
+    chroma_stft_var = models.FloatField()

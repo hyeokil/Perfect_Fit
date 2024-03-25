@@ -10,7 +10,10 @@ import sklearn
 import os
 import urllib.request
 import logging
+# import matplotlib.pyplot as plt
+import numpy as np
 
+logging.getLogger('matplotlib').setLevel(logging.WARNING)
 logger = logging.getLogger('voiceData')
 
 @api_view(['POST', 'PUT'])
@@ -68,6 +71,9 @@ def record(request):
     # 12개의 Bin은 옥타브에서 12개의 각기 다른 반응(Semitones(반음) = Chroma)을 의미.
     chromagram = librosa.feature.chroma_stft(y=y, sr=sr, hop_length=512)
     data['chroma_stft_mean'], data['chroma_stft_var'] = chromagram.mean(), chromagram.var()
+    # librosa.display.specshow(chromagram, y_axis='chroma', x_axis='time')
+    # plt.colorbar()
+    # plt.show()
 
     # p'차 스펙트럼 대역폭을 계산
     spectral_bandwidth = librosa.feature.spectral_bandwidth(y=y, sr=sr)
@@ -82,5 +88,19 @@ def record(request):
     for i in range(len(mfccs)):
         data['mfcc'+ str(i) + '_mean'], data['mfcc' + str(i) + '_var'] = mfccs[i].mean(),mfccs[i].var()
 
+    logger.info(f"현재까지 저장된 data -> {data}")
 
+    pitches, magnitudes = librosa.piptrack(y=y, sr=sr)
+    pitches = pitches[magnitudes > np.median(magnitudes)]
+    logger.info(f'모든 Pitches -> {pitches}')
+    minPitch, maxPitch = min(pitches), max(pitches)
+    average_pitch = np.mean(pitches[pitches > 0])
+    logger.info(f'최소 Pitch : {min(pitches)} / 최대 Pitch : {max(pitches)}')
+    logger.info(f'Pitch의 길이 : {len(pitches)} / 평균 Pitch : {average_pitch}')
+    result = librosa.hz_to_midi([minPitch, maxPitch])
+    result = librosa.midi_to_note(result)
+    # result = librosa.hz_to_note([minPitch, maxPitch])
+    print(f'최소 음계 = {result[0]} / 최대 음계 = {result[1]}')  # data dictionary에 컬럼 생성 해야함.
+
+    return Response({'data': data}, status=status.HTTP_200_OK)
 
