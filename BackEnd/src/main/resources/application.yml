@@ -10,7 +10,7 @@ spring:
     defer-datasource-initialization: true
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     properties:
       hibernate:
         format_sql: false                   # 하이버네이트가 실행한 SQL을 출력할 때 보기 좋게 정렬
@@ -26,6 +26,9 @@ spring:
       mode: always
       data-locations:
         - 'classpath:/data_member.sql'
+        - 'classpath:/data_song.sql'
+        - 'classpath:/data_genre.sql'
+        - 'classpath:/data_artist.sql'
   # NoSQL setting
   data:
     # Redis setting
