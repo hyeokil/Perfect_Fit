@@ -1,16 +1,8 @@
 from django.db import models
 
-<<<<<<< HEAD
-
 # Create your models here.
 class SoundFeature(models.Model):
     user_pk = models.IntegerField()
-=======
-# Create your models here.
-class SoundFeature(models.Model):
-    user_pk = models.IntegerField()
-    # 컬럼 다 적기...
->>>>>>> 75e364b878e58d351f3ac3a7cc305b36d6509cdb
     harmony_mean = models.FloatField()
     harmony_var = models.FloatField()
     mfcc0_mean = models.FloatField()
@@ -63,9 +55,4 @@ class SoundFeature(models.Model):
     spectral_centroid_var = models.FloatField()
     tempo = models.FloatField()
     zero_crossing_rate_mean = models.FloatField()
-<<<<<<< HEAD
     zero_crossing_rate_var = models.FloatField()
-=======
-    zero_crossing_rate_var = models.FloatField()
-
->>>>>>> 75e364b878e58d351f3ac3a7cc305b36d6509cdb
