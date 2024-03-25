@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SongPopularChartDto {
+public class SongChartDto {
 
     // 영상의 id값(MR)
     private String songVideoId;
@@ -18,10 +18,10 @@ public class SongPopularChartDto {
     private String songTitle;
 
     // 가수명
-    private String songArtist;
+    private String artist;
 
     // 장르
-    private String songGenre;
+    private String genre;
 
     // MR 영상 URL
     private String songUrl;

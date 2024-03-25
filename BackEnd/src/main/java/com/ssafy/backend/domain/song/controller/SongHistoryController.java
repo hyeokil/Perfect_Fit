@@ -1,6 +1,5 @@
 package com.ssafy.backend.domain.song.controller;
 
-import com.ssafy.backend.domain.my_list.dto.MyListLikeSongDto;
 import com.ssafy.backend.domain.song.dto.SongHistoryDto;
 import com.ssafy.backend.domain.song.service.SongHistoryServiceImpl;
 import com.ssafy.backend.global.common.dto.Message;

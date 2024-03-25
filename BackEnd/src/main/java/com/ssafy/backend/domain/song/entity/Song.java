@@ -21,11 +21,11 @@ public class Song extends BaseEntity {
     // 노래 제목
     private String songTitle;
 
-    // 가수명
-    private String songArtist;
-
-    // 장르
-    private String songGenre;
+//    // 가수명
+//    private String songArtist;
+//
+//    // 장르
+//    private String songGenre;
 
     // MR 영상 URL
     private String songUrl;
@@ -45,18 +45,28 @@ public class Song extends BaseEntity {
     // 노래길이
     private String songLength;
 
+    // 가수 참조
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "artist_id")
+    private Artist artist;
 
-    public void setSongGenre(String songGenre) {
-        this.songGenre = songGenre;
-    }
+    // 장르 참조
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "genre_id")
+    private Genre genre;
 
-    public void setSongReleaseDate(String songReleaseDate) {
-        this.songReleaseDate = songReleaseDate;
-    }
 
-    public void setSongThumbnail(String songThumbnail) {
-        this.songThumbnail = songThumbnail;
-    }
+//    public void setSongGenre(String songGenre) {
+//        this.songGenre = songGenre;
+//    }
+//
+//    public void setSongReleaseDate(String songReleaseDate) {
+//        this.songReleaseDate = songReleaseDate;
+//    }
+//
+//    public void setSongThumbnail(String songThumbnail) {
+//        this.songThumbnail = songThumbnail;
+//    }
 
 
 }
