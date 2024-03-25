@@ -6,7 +6,6 @@ import axios, { AxiosError } from "axios";
 // }
 axios.defaults.baseURL = `${BASE_URL}`;
 
-
 export const instance = axios.create({
   baseURL: BASE_URL,
   // 요청 최대 대기시간 3초
@@ -23,6 +22,10 @@ instance.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${token}`;
     return config;
   }
+  else {
+    window.alert('로그인해주세염')
+    window.location.href = '/'
+  }
   (error: AxiosError<{ message: string; errorCode: string }>) => {
     return Promise.reject(error);
   };
@@ -37,16 +40,16 @@ instance.interceptors.response.use(
   (error: AxiosError<{ message: string; errorCode: string }>) => {
 
     switch (error.response?.status) {
-      case 400 : {
-        console.log(error.response.data.dataHeader.resultMessage)
+      case 400: {
+        console.log('Error code:', error.response.status,'|', 'Error Message :', error.response.data.dataHeader.resultMessage);
         // window.alert('잘못된 요청입니다.')
-        break
+        break;
       }
-      case 401 : {
-        console.log(error.response.data.dataHeader.resultMessage)
+      case 401: {
+        console.log(error.response.data.dataHeader.resultMessage);
         // window.location.href('/')
         // window.alert(error.response.data.dataHeader.resultMessage, '다시 로그인해주세요')
-        break
+        break;
       }
     }
     return Promise.reject(error);
