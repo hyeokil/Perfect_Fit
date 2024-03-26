@@ -7,6 +7,8 @@ import com.ssafy.backend.domain.member.entity.Member;
 import com.ssafy.backend.domain.member.exception.MemberError;
 import com.ssafy.backend.domain.member.exception.MemberException;
 import com.ssafy.backend.domain.member.repository.MemberRepository;
+import com.ssafy.backend.domain.recording.dto.DuetListResponseDto;
+import com.ssafy.backend.domain.recording.entity.Duet;
 import com.ssafy.backend.global.component.jwt.dto.TokenMemberInfoDto;
 import com.ssafy.backend.global.component.jwt.repository.RefreshRepository;
 import com.ssafy.backend.global.component.oauth.OAuthCodeUrlProvider;
@@ -17,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -100,10 +104,27 @@ public class MemberServiceImpl implements MemberService {
                 -> new MemberException(MemberError.NOT_FOUND_MEMBER));
 
         return MemberGetResponseDto.builder()
+                .id(member.getId())
                 .email(member.getEmail())
                 .nickname(member.getNickname())
                 .image(member.getImage())
                 .build();
+    }
+
+    @Override
+    public List<MemberGetResponseDto> searchMember(String keyword) {
+        List<Member> Members = memberRepository.findByNicknameContaining(keyword);
+        List<MemberGetResponseDto> memberGetResponseDtoList = new ArrayList<>();
+        for (Member member : Members) {
+            MemberGetResponseDto memberGetResponseDto = new MemberGetResponseDto(
+                    member.getId(),
+                    member.getEmail(),
+                    member.getNickname(),
+                    member.getImage()
+            );
+            memberGetResponseDtoList.add(memberGetResponseDto);
+        }
+        return memberGetResponseDtoList;
     }
 
 }

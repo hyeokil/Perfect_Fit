@@ -26,9 +26,9 @@ spring:
       mode: always
       data-locations:
         - 'classpath:/data_member.sql'
-        - 'classpath:/data_song.sql'
         - 'classpath:/data_genre.sql'
         - 'classpath:/data_artist.sql'
+        - 'classpath:/data_song.sql'
   # NoSQL setting
   data:
     # Redis setting
