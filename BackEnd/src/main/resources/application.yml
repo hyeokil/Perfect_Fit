@@ -29,6 +29,7 @@ spring:
         - 'classpath:/data_genre.sql'
         - 'classpath:/data_artist.sql'
         - 'classpath:/data_song.sql'
+        - 'classpath:/data_my_list.sql'
   # NoSQL setting
   data:
     # Redis setting
