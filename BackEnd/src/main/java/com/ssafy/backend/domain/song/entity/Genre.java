@@ -17,6 +17,6 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String genre;
+    private String name;
 
 }

@@ -11,7 +11,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -38,8 +41,8 @@ public class SongServiceImpl implements SongService {
                     return SongChartDto.builder()
                             .songVideoId(song.getSongVideoId())
                             .songTitle(song.getSongTitle())
-                            .artist(song.getArtist().getArtist())
-                            .genre(song.getGenre().getGenre())
+                            .artist(song.getArtist().getName())
+                            .genre(song.getGenre().getName())
                             .songUrl(song.getSongUrl())
                             .songThumbnail(song.getSongThumbnail())
                             .songReleaseDate(song.getSongReleaseDate())
@@ -66,8 +69,8 @@ public class SongServiceImpl implements SongService {
                     return SongChartDto.builder()
                             .songVideoId(song.getSongVideoId())
                             .songTitle(song.getSongTitle())
-                            .artist(song.getArtist().getArtist())
-                            .genre(song.getGenre().getGenre())
+                            .artist(song.getArtist().getName())
+                            .genre(song.getGenre().getName())
                             .songUrl(song.getSongUrl())
                             .songThumbnail(song.getSongThumbnail())
                             .songReleaseDate(song.getSongReleaseDate())
@@ -80,10 +83,26 @@ public class SongServiceImpl implements SongService {
     }
 
 
+
+    // 장르별 관련 장르 목록을 저장하는 맵
+    private static final Map<String, List<String>> GENRE_KEYWORDS = new HashMap<>();
+    static {
+        GENRE_KEYWORDS.put("팝", Arrays.asList("팝", "팝록", "일렉트로팝", "팝포크", "팝 락"));
+        GENRE_KEYWORDS.put("록", Arrays.asList("록", "모던록", "하드록", "블랙 메탈"));
+        GENRE_KEYWORDS.put("힙합", Arrays.asList("힙합", "랩", "랩발라드", "웨스트코스트 힙합"));
+        GENRE_KEYWORDS.put("댄스", Arrays.asList("댄스", "일렉트로닉", "하우스", "트랩/크렁크"));
+        GENRE_KEYWORDS.put("어쿠스틱", Arrays.asList("어쿠스틱팝", "포크", "인디 포크", "어덜트 컨템포러리 포크"));
+        GENRE_KEYWORDS.put("R&B", Arrays.asList("알앤비", "소울", "어번 알앤비", "힙합소울"));
+        GENRE_KEYWORDS.put("재즈", Arrays.asList("재즈", "보컬재즈", "재즈힙합", "스무드 재즈"));
+        GENRE_KEYWORDS.put("OST", Arrays.asList("OST", "영화", "TV 드라마", "영화 주제곡"));
+    }
+
     // 장르차트100 조회
     @Override
     public List<SongChartDto> getGenre100Songs(Long memberId, String genre) {
-        return songRepository.findGenre100(memberId, "%" + genre + "%")
+        List<String> searchGenres = GENRE_KEYWORDS.getOrDefault(genre, Arrays.asList(genre));
+        System.out.println(searchGenres);
+        return songRepository.findGenre100(memberId, searchGenres)
                 .stream()
                 .map(song -> {
                     Boolean myListDisplay = myListRepository.findByMemberIdAndSongId(memberId, song.getId())
@@ -93,8 +112,8 @@ public class SongServiceImpl implements SongService {
                     return SongChartDto.builder()
                             .songVideoId(song.getSongVideoId())
                             .songTitle(song.getSongTitle())
-                            .artist(song.getArtist().getArtist())
-                            .genre(song.getGenre().getGenre())
+                            .artist(song.getArtist().getName())
+                            .genre(song.getGenre().getName())
                             .songUrl(song.getSongUrl())
                             .songThumbnail(song.getSongThumbnail())
                             .songReleaseDate(song.getSongReleaseDate())
@@ -121,8 +140,8 @@ public class SongServiceImpl implements SongService {
                     return SongChartDto.builder()
                             .songVideoId(song.getSongVideoId())
                             .songTitle(song.getSongTitle())
-                            .artist(song.getArtist().getArtist())
-                            .genre(song.getGenre().getGenre())
+                            .artist(song.getArtist().getName())
+                            .genre(song.getGenre().getName())
                             .songUrl(song.getSongUrl())
                             .songThumbnail(song.getSongThumbnail())
                             .songReleaseDate(song.getSongReleaseDate())
