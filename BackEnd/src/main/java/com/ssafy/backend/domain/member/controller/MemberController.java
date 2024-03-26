@@ -16,6 +16,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -101,5 +103,13 @@ public class MemberController {
     public ResponseEntity<Message<MemberGetResponseDto>> getMember(@AuthenticationPrincipal MemberLoginActiveDto loginActiveDto) {
         MemberGetResponseDto memberGetResponseDto = memberService.getMember(loginActiveDto.getId());
         return ResponseEntity.ok().body(Message.success(memberGetResponseDto));
+    }
+
+    // 사용자 검색
+    @GetMapping("/search/{keyword}")
+    @PreAuthorize("isAuthenticated()") // 로그인 한 사용자만 접근 가능
+    public ResponseEntity<Message<List<MemberGetResponseDto>>> searchMember(@PathVariable("keyword") String keyword) {
+        List<MemberGetResponseDto> memberGetResponseDtoList = memberService.searchMember(keyword);
+        return ResponseEntity.ok().body(Message.success(memberGetResponseDtoList));
     }
 }

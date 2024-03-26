@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class MemberGetResponseDto {
+    Long id;
     String email;
     String nickname;
     String image;
