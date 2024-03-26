@@ -54,6 +54,13 @@ public class SongController {
     }
 
 
+    // 노래 검색
+    @GetMapping("/search/{keyword}")
+    public ResponseEntity<Message<List<SongChartDto>>> searchSongs(@PathVariable("keyword") String keyword) {
+        List<SongChartDto> result = songServiceImpl.searchSongs(keyword);
+        return ResponseEntity.ok().body(Message.success(result));
+    }
+
 
 
 

@@ -101,7 +101,7 @@ public class SongServiceImpl implements SongService {
     @Override
     public List<SongChartDto> getGenre100Songs(Long memberId, String genre) {
         List<String> searchGenres = GENRE_KEYWORDS.getOrDefault(genre, Arrays.asList(genre));
-        System.out.println(searchGenres);
+//        System.out.println(searchGenres);
         return songRepository.findGenre100(memberId, searchGenres)
                 .stream()
                 .map(song -> {
@@ -152,6 +152,29 @@ public class SongServiceImpl implements SongService {
                 })
                 .collect(Collectors.toList());
     }
+
+
+    // 노래 검색
+    @Override
+    public List<SongChartDto> searchSongs(String keyword) {
+        return songRepository.searchSongs(keyword)
+                .stream()
+                .map(song -> {
+                    return SongChartDto.builder()
+                            .songVideoId(song.getSongVideoId())
+                            .songTitle(song.getSongTitle())
+                            .artist(song.getArtist().getName())
+                            .genre(song.getGenre().getName())
+                            .songUrl(song.getSongUrl())
+                            .songThumbnail(song.getSongThumbnail())
+                            .songReleaseDate(song.getSongReleaseDate())
+                            .SongView(song.getSongView())
+                            .songLength(song.getSongLength())
+                            .build();
+                })
+                .collect(Collectors.toList());
+    }
+
 
 
 

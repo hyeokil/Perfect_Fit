@@ -20,6 +20,9 @@ public interface SongService {
     // 전체 차트 조회
     List<SongChartDto> getAllSongs(Long memberId, int pageSize, int page);
 
+    // 노래 검색
+    List<SongChartDto> searchSongs(String keyword);
+
 
 //    // MR의 정보 가져오는 함수 (Youtube data v3 API)
 //    String getChannelVideos() throws IOException;

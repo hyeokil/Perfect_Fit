@@ -47,7 +47,7 @@ public class ReelsServiceImpl implements ReelsService{
         List<Reels> reels = reelsRepository.findByMemberId(memberId);
         List<ReelsListResponseDto> reelsListResposeDtoList = new ArrayList<>();
         for (Reels reel : reels) {
-            String artistName = reel.getSong().getArtist().getArtist();
+            String artistName = reel.getSong().getArtist().getName();
             ReelsListResponseDto reelsListResponseDto = new ReelsListResponseDto(
                     reel.getId(),
                     reel.getTime(),

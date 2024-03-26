@@ -28,5 +28,9 @@ public interface SongRepository extends JpaRepository<Song, Long> {
     @Query(value = "SELECT song.*, my_list.my_list_display FROM song LEFT OUTER JOIN my_list ON song.id = my_list.song_id AND my_list.member_id = :memberId ORDER BY RAND() LIMIT :pageSize OFFSET :page", nativeQuery = true)
     List<Song> findRandomAll(@Param("memberId") Long memberId, @Param("page") int page, @Param("pageSize") int pageSize);
 
+    @Query(value = "SELECT song.*, artist.name FROM song JOIN artist ON song.artist_id = artist.id WHERE song.song_title LIKE :keyword OR artist.name LIKE :keyword", nativeQuery = true)
+    List<Song> searchSongs(@Param("keyword") String keyword);
+
+
 
 }
