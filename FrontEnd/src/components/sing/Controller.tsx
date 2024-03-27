@@ -4,17 +4,22 @@ import { PitchShifter } from "soundtouchjs";
 import { buffer } from 'stream/consumers';
 
 
-
 const Controller = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
   const [shift, setShift] = useState<any>(null)
-  console.log('시프트', shift)
   const audioCtx = new AudioContext();
+  const gainNode = audioCtx.createGain()
   const state = audioCtx.state
+  const musicRef = useRef<HTMLAudioElement>(null);
+  // console.log(shift.pitch)
+
+  console.log('시프트', shift)
   console.log('오디오 상ㅅ태', state)
   // const music = new Audio('/src/assets/sounds/꽃길.mp3')
-  const musicRef = useRef<HTMLAudioElement>(null);
   console.log('오디오',audioCtx)
+  
+  
+  
   const togglePlay = () => {
     if (isPlaying) {
       musicRef.current?.pause();
@@ -31,11 +36,14 @@ const Controller = () => {
   }, [])
 
   const newShifter = (buffer) => {
+    console.log('버퍼', buffer)
     const myShift = new PitchShifter(audioCtx, buffer, 16384)
-    console.log(myShift)
+    console.log('나의 시프트',myShift)
     setShift(myShift)
-    myShift.tempo = 2
-    myShift.pitch = 1
+    myShift.pitch = 1.4
+    myShift.tempo = 1
+    // console.log('s나의 템포',myShift.tempo)
+    myShift.connect(audioCtx.destination);
     // myShift.tempo
   }
 
@@ -52,6 +60,24 @@ const Controller = () => {
       });
   }, []);
   
+  const PlayAudio = () => {
+    if (shift) {
+      shift.connect(gainNode)
+      gainNode.connect(audioCtx.destination)
+      audioCtx.resume()
+      setIsPlaying(true)    }
+  }
+
+  const PauseAudio = () => {
+    if (shift) {
+      shift.disconnect()
+      if (!isPlaying) {
+        setIsPlaying(false)
+      }
+
+    }
+  }
+
 
   // useCallback(() => {
   //   // const buffer = new AudioBuffer()
@@ -121,8 +147,8 @@ const Controller = () => {
   return (
     <div>
       <h1>컨트롤러!!!</h1>
-      <button  onClick={togglePlay}>{!isPlaying? '재생' : '정지'}</button>
-      <audio ref={musicRef} id="music" src="/src/assets/sounds/꽃길.mp3"></audio>
+      <button  onClick={() => (!isPlaying? PlayAudio() : PauseAudio()) }>{!isPlaying? '재생' : '정지'}</button>
+      {/* <audio ref={musicRef} id="music" src="/src/assets/sounds/꽃길.mp3"></audio> */}
       {/* <audio id="music" ref={audioRef} src="/src/assets/sounds/꽃길.mp3"></audio> */}
       {/* <button onClick={togglePlay}>{isPlaying ? "일시정지" : "재생"}</button>
       <label>피치</label>
