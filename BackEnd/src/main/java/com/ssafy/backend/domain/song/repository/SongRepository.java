@@ -11,8 +11,6 @@ import java.util.List;
 @Repository
 public interface SongRepository extends JpaRepository<Song, Long> {
 
-    List<Song> find;
-
     @Query(value = "SELECT song.*, my_list.my_list_display FROM song LEFT OUTER JOIN my_list ON song.id = my_list.song_id AND my_list.member_id = :memberId ORDER BY song.song_view DESC LIMIT 100", nativeQuery = true)
     List<Song> findPopular100(@Param("memberId") Long memberId);
 
