@@ -176,6 +176,33 @@ public class SongServiceImpl implements SongService {
     }
 
 
+    //  현 시간대에 많이 부른 노래 차트100 조회
+    @Override
+    public List<SongChartResponseDto> findPopularSongs100ByHour(Long memberId) {
+        return songRepository.findPopularSongs100ByHour(memberId)
+                .stream()
+                .map(song -> {
+                    Boolean myListDisplay = myListRepository.findByMemberIdAndSongId(memberId, song.getId())
+                            .map(MyList::getMyListDisplay)
+                            .orElse(false);
+
+                    return SongChartResponseDto.builder()
+                            .songId(song.getId())
+                            .songTitle(song.getSongTitle())
+                            .artist(song.getArtist().getName())
+                            .genre(song.getGenre().getName())
+                            .songUrl(song.getSongUrl())
+                            .songThumbnail(song.getSongThumbnail())
+                            .songReleaseDate(song.getSongReleaseDate())
+                            .SongView(song.getSongView())
+                            .songLength(song.getSongLength())
+                            .myListDisplay(myListDisplay)
+                            .build();
+                })
+                .collect(Collectors.toList());
+    }
+
+
 
 
 //    // @Value 어노테이션을 사용하여 application.yml에서 정의한 YouTube API 키를 주입 받음 (cmd+click하면 추적가능)

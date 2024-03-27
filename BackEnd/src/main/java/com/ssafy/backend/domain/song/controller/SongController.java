@@ -67,6 +67,14 @@ public class SongController {
         return ResponseEntity.ok().body(Message.success(result));
     }
 
+    //  현 시간대에 많이 부른 노래 차트100 조회
+    @GetMapping("/chart/current")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Message<List<SongChartResponseDto>>> findPopularSongs100ByHour(@AuthenticationPrincipal MemberLoginActiveDto loginActiveDto) {
+        List<SongChartResponseDto> result = songServiceImpl.findPopularSongs100ByHour(loginActiveDto.getId());
+        return ResponseEntity.ok().body(Message.success(result));
+    }
+
 
 
 

@@ -22,6 +22,9 @@ public interface SongService {
     // 노래 검색
     List<SongChartResponseDto> searchSongs(String keyword);
 
+    //  현 시간대에 많이 부른 노래 차트100 조회
+    List<SongChartResponseDto> findPopularSongs100ByHour(Long memberId);
+
 
 //    // MR의 정보 가져오는 함수 (Youtube data v3 API)
 //    String getChannelVideos() throws IOException;
