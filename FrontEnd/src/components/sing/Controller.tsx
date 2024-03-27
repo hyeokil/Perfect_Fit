@@ -1,83 +1,87 @@
 import { PitchShifterType } from "@/types/soundtouch";
-import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { PitchShifter } from "soundtouchjs";
-import { buffer } from 'stream/consumers';
-
+import { buffer } from "stream/consumers";
 
 const Controller = () => {
-  const [isPlaying, setIsPlaying] = useState<boolean>(false)
-  const [shift, setShift] = useState<any>(null)
+  // -------------------------------------------------------
+  const [pitch, setPitch] = useState<number>(1.0);
+  const [tempo, setTempo] = useState<number>(1.0);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [shift, setShift] = useState<any>(null);
   const audioCtx = new AudioContext();
-  const gainNode = audioCtx.createGain()
-  const state = audioCtx.state
+  const gainNode = audioCtx.createGain();
+  const state = audioCtx.state;
   const musicRef = useRef<HTMLAudioElement>(null);
   // console.log(shift.pitch)
 
-  console.log('시프트', shift)
-  console.log('오디오 상ㅅ태', state)
+  console.log("시프트", shift);
+  console.log("오디오 상ㅅ태", state);
   // const music = new Audio('/src/assets/sounds/꽃길.mp3')
-  console.log('오디오',audioCtx)
-  
-  
-  
+  console.log("오디오", audioCtx);
+
   const togglePlay = () => {
     if (isPlaying) {
       musicRef.current?.pause();
       // shift.disconnect()
     } else {
       musicRef.current?.play();
-
     }
     setIsPlaying(!isPlaying);
   };
 
   useEffect(() => {
-    audioCtx.resume()
-  }, [])
+    audioCtx.resume();
+  }, []);
 
   const newShifter = (buffer) => {
-    console.log('버퍼', buffer)
-    const myShift = new PitchShifter(audioCtx, buffer, 16384)
-    console.log('나의 시프트',myShift)
-    setShift(myShift)
-    myShift.pitch = 1.4
-    myShift.tempo = 1
+    console.log("버퍼", buffer);
+    const myShift = new PitchShifter(audioCtx, buffer, 16384);
+    console.log("나의 시프트", myShift);
+    setShift(myShift);
+    myShift.tempo = tempo;
+    myShift.pitch = pitch;
     // console.log('s나의 템포',myShift.tempo)
     myShift.connect(audioCtx.destination);
     // myShift.tempo
-  }
+  };
 
   useEffect(() => {
     fetch("/src/assets/sounds/꽃길.mp3")
-      .then(response => response.arrayBuffer())
-      .then(arrayBuffer => {
+      .then((response) => response.arrayBuffer())
+      .then((arrayBuffer) => {
         audioCtx.decodeAudioData(arrayBuffer, (audioBuffer: AudioBuffer) => {
           newShifter(audioBuffer);
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error decoding audio data:", error);
       });
   }, []);
-  
+
   const PlayAudio = () => {
     if (shift) {
-      shift.connect(gainNode)
-      gainNode.connect(audioCtx.destination)
-      audioCtx.resume()
-      setIsPlaying(true)    }
-  }
+      shift.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      audioCtx.resume();
+      setIsPlaying(true);
+    }
+  };
 
   const PauseAudio = () => {
     if (shift) {
-      shift.disconnect()
+      shift.disconnect();
       if (!isPlaying) {
-        setIsPlaying(false)
+        setIsPlaying(false);
       }
-
     }
-  }
-
+  };
 
   // useCallback(() => {
   //   // const buffer = new AudioBuffer()
@@ -147,10 +151,9 @@ const Controller = () => {
   return (
     <div>
       <h1>컨트롤러!!!</h1>
-      <button  onClick={() => (!isPlaying? PlayAudio() : PauseAudio()) }>{!isPlaying? '재생' : '정지'}</button>
-      {/* <audio ref={musicRef} id="music" src="/src/assets/sounds/꽃길.mp3"></audio> */}
-      {/* <audio id="music" ref={audioRef} src="/src/assets/sounds/꽃길.mp3"></audio> */}
-      {/* <button onClick={togglePlay}>{isPlaying ? "일시정지" : "재생"}</button>
+      <button onClick={() => (!isPlaying ? PlayAudio() : PauseAudio())}>
+        {!isPlaying ? "재생" : "정지"}
+      </button>
       <label>피치</label>
       <input
         type="range"
@@ -160,7 +163,7 @@ const Controller = () => {
         max="2"
         step="0.01"
         disabled={!isPlaying} // 재생 중일 때만 조절 가능하도록 설정
-      /> */}
+      />
     </div>
   );
 };
