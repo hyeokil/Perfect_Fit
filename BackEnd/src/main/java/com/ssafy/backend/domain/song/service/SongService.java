@@ -1,27 +1,26 @@
 package com.ssafy.backend.domain.song.service;
 
 
-import com.ssafy.backend.domain.song.dto.SongChartDto;
+import com.ssafy.backend.domain.song.dto.SongChartResponseDto;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface SongService {
 
     // 인기차트100 조회
-    List<SongChartDto> getPopular100Songs(Long memberId);
+    List<SongChartResponseDto> getPopular100Songs(Long memberId);
 
     // 최신차트100 조회
-    List<SongChartDto> getLatest100Songs(Long memberId);
+    List<SongChartResponseDto> getLatest100Songs(Long memberId);
 
     // 장르차트100 조회
-    List<SongChartDto> getGenre100Songs(Long memberId, String genre);
+    List<SongChartResponseDto> getGenre100Songs(Long memberId, String genre);
 
     // 전체 차트 조회
-    List<SongChartDto> getAllSongs(Long memberId, int pageSize, int page);
+    List<SongChartResponseDto> getAllSongs(Long memberId, int pageSize, int page);
 
     // 노래 검색
-    List<SongChartDto> searchSongs(String keyword);
+    List<SongChartResponseDto> searchSongs(String keyword);
 
 
 //    // MR의 정보 가져오는 함수 (Youtube data v3 API)

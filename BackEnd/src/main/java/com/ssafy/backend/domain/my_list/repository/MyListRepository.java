@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface MyListRepository extends JpaRepository<MyList, Long> {
 
-    Optional<MyList> findByMemberAndSong(Member member, Song song);
+    MyList findByMemberAndSong(Member member, Song song);
 
     List<MyList> findByMemberAndMyListDisplayTrue(Member member);
 

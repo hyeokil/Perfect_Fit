@@ -1,7 +1,7 @@
 package com.ssafy.backend.domain.song.service;
 
 import com.ssafy.backend.domain.my_list.repository.MyListRepository;
-import com.ssafy.backend.domain.song.dto.SongChartDto;
+import com.ssafy.backend.domain.song.dto.SongChartResponseDto;
 import com.ssafy.backend.domain.my_list.entity.MyList;
 
 import com.ssafy.backend.domain.song.repository.SongRepository;
@@ -30,7 +30,7 @@ public class SongServiceImpl implements SongService {
 
     //  인기차트100 조회
     @Override
-    public List<SongChartDto> getPopular100Songs(Long memberId) {
+    public List<SongChartResponseDto> getPopular100Songs(Long memberId) {
         return songRepository.findPopular100(memberId)
                 .stream()
                 .map(song -> {
@@ -38,7 +38,8 @@ public class SongServiceImpl implements SongService {
                             .map(MyList::getMyListDisplay)
                             .orElse(false); // myListDisplay 값이 없으면 false로 설정
 
-                    return SongChartDto.builder()
+                    return SongChartResponseDto.builder()
+                            .songId(song.getId())
                             .songTitle(song.getSongTitle())
                             .artist(song.getArtist().getName())
                             .genre(song.getGenre().getName())
@@ -57,7 +58,7 @@ public class SongServiceImpl implements SongService {
 
     //  최신차트100 조회
     @Override
-    public List<SongChartDto> getLatest100Songs(Long memberId) {
+    public List<SongChartResponseDto> getLatest100Songs(Long memberId) {
         return songRepository.findLatest100(memberId)
                 .stream()
                 .map(song -> {
@@ -65,7 +66,8 @@ public class SongServiceImpl implements SongService {
                             .map(MyList::getMyListDisplay)
                             .orElse(false);
 
-                    return SongChartDto.builder()
+                    return SongChartResponseDto.builder()
+                            .songId(song.getId())
                             .songTitle(song.getSongTitle())
                             .artist(song.getArtist().getName())
                             .genre(song.getGenre().getName())
@@ -97,7 +99,7 @@ public class SongServiceImpl implements SongService {
 
     // 장르차트100 조회
     @Override
-    public List<SongChartDto> getGenre100Songs(Long memberId, String genre) {
+    public List<SongChartResponseDto> getGenre100Songs(Long memberId, String genre) {
         List<String> searchGenres = GENRE_KEYWORDS.getOrDefault(genre, Arrays.asList(genre));
 //        System.out.println(searchGenres);
         return songRepository.findGenre100(memberId, searchGenres)
@@ -107,7 +109,8 @@ public class SongServiceImpl implements SongService {
                             .map(MyList::getMyListDisplay)
                             .orElse(false);
 
-                    return SongChartDto.builder()
+                    return SongChartResponseDto.builder()
+                            .songId(song.getId())
                             .songTitle(song.getSongTitle())
                             .artist(song.getArtist().getName())
                             .genre(song.getGenre().getName())
@@ -125,7 +128,7 @@ public class SongServiceImpl implements SongService {
 
     // 전체 차트 조회
     @Override
-    public List<SongChartDto> getAllSongs(Long memberId, int page, int pageSize) {
+    public List<SongChartResponseDto> getAllSongs(Long memberId, int page, int pageSize) {
         int pageNumber = (page - 1) * pageSize;
         return songRepository.findRandomAll(memberId, pageNumber, pageSize)
                 .stream()
@@ -134,7 +137,8 @@ public class SongServiceImpl implements SongService {
                             .map(MyList::getMyListDisplay)
                             .orElse(false);
 
-                    return SongChartDto.builder()
+                    return SongChartResponseDto.builder()
+                            .songId(song.getId())
                             .songTitle(song.getSongTitle())
                             .artist(song.getArtist().getName())
                             .genre(song.getGenre().getName())
@@ -152,11 +156,12 @@ public class SongServiceImpl implements SongService {
 
     // 노래 검색
     @Override
-    public List<SongChartDto> searchSongs(String keyword) {
+    public List<SongChartResponseDto> searchSongs(String keyword) {
         return songRepository.searchSongs(keyword)
                 .stream()
                 .map(song -> {
-                    return SongChartDto.builder()
+                    return SongChartResponseDto.builder()
+                            .songId(song.getId())
                             .songTitle(song.getSongTitle())
                             .artist(song.getArtist().getName())
                             .genre(song.getGenre().getName())

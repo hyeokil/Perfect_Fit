@@ -1,9 +1,9 @@
 package com.ssafy.backend.domain.song.service;
 
 import com.ssafy.backend.domain.member.entity.Member;
+import com.ssafy.backend.domain.member.exception.MemberError;
+import com.ssafy.backend.domain.member.exception.MemberException;
 import com.ssafy.backend.domain.member.repository.MemberRepository;
-import com.ssafy.backend.domain.my_list.entity.MyList;
-import com.ssafy.backend.domain.song.dto.SongHistoryDto;
 import com.ssafy.backend.domain.song.entity.Song;
 import com.ssafy.backend.domain.song.entity.SongHistory;
 import com.ssafy.backend.domain.song.repository.SongHistoryRepository;
@@ -26,18 +26,16 @@ public class SongHistoryServiceImpl implements SongHistoryService{
 
     // 부른 노래 기록 생성
     @Override
-    public Long createSongHistory(Long songId, SongHistoryDto songHistoryDto) {
-        Long memberId = songHistoryDto.getMemberId();
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 사용자를 찾을 수 없다 ! : " + memberId));
+    public void createSongHistory(Long songId, Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(()
+                -> new MemberException(MemberError.NOT_FOUND_MEMBER));
         Song song = songRepository.findById(songId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 노래를 찾을 수 없다 ! : " + songId));
 
-        SongHistory songHistory = songHistoryRepository.save(songHistoryDto.toEntity(member, song));
-
-        return songHistory.getId();
+        SongHistory songHistory = SongHistory.builder()
+                .song(song)
+                .member(member)
+                .build();
+        songHistoryRepository.save(songHistory);
     }
-
-
-
 }

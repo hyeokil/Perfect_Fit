@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SongChartDto {
+public class SongChartResponseDto {
 
 
+    private Long songId;
     // 노래 제목
     private String songTitle;
 
