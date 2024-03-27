@@ -28,8 +28,12 @@
       "@styles/*" : ["src/styles/*"],
       "@components/*" : ["src/components/*"],
       "@assets/*" : ["src/assets/*"]
-    }
+    },
+
+    // 라이브러리
+    "allowJs": true,
+    
   },
-  "include": ["src"],
+  "include": ["src", "@types/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

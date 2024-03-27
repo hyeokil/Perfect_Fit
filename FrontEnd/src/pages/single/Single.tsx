@@ -4,6 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import styles from "@styles/single/Single.module.scss";
 import AlbumCover from "@/components/single/AlbumCover";
+import Controller from "@/components/sing/Controller";
 
 const Background = styled.div`
   height: 100vh;
@@ -36,6 +37,7 @@ const Single = () => {
           <Lyrics />
         </div>
       </Background>
+      <Controller />
     </div>
   );
 };

@@ -10,6 +10,7 @@ import KakaoRedirect from "./components/accounts/KakaoRedirect.tsx";
 import Layout from "./layout/Layout";
 import Record from "./components/sing/Record.tsx";
 import '@/api/axios.ts'
+import Single from "./pages/single/Single.tsx";
 
 
 const App: React.FC = () => {
@@ -22,6 +23,7 @@ const App: React.FC = () => {
         <Route path="/information" element={<Information />} />
         <Route path="/voicetraining" element={<Voicetraining />} />
         <Route path="/record" element={<Record />} />
+        <Route path="/single" element={<Single />} />
         {/* 로그인 상태에 따라 수정하기 // 중첩 라우팅 사용하기 */}
         <Route path="/layout" element={<Layout />}>
 
