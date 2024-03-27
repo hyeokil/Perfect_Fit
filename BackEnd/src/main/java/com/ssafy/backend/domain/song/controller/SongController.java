@@ -76,6 +76,15 @@ public class SongController {
     }
 
 
+    // 동요 차트 100 조회
+    @GetMapping("/chart/children")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Message<List<SongChartResponseDto>>> findChildrenSongs100(@AuthenticationPrincipal MemberLoginActiveDto loginActiveDto) {
+        List<SongChartResponseDto> result = songServiceImpl.findChildrenSongs100(loginActiveDto.getId());
+        return ResponseEntity.ok().body(Message.success(result));
+    }
+
+
 
 
 

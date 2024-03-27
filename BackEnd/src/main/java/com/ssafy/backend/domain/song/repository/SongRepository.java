@@ -45,4 +45,18 @@ public interface SongRepository extends JpaRepository<Song, Long> {
     List<Song> findPopularSongs100ByHour(@Param("memberId") Long memberId);
 
 
+    // 동요 차트 100 조회
+    @Query(
+            value = "SELECT song.*, my_list.my_list_display " +
+                    "FROM song " +
+                    "JOIN genre ON genre.id = song.genre_id " +
+                    "LEFT OUTER JOIN my_list ON song.id = my_list.song_id AND my_list.member_id = :memberId " +
+                    "WHERE genre.name LIKE '%동요%' " +
+                    "ORDER BY song.song_view DESC " +
+                    "LIMIT 100",
+            nativeQuery = true)
+    List<Song> findChildrenSongs100(@Param("memberId") Long memberId);
+
+
+
 }
