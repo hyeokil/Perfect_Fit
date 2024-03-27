@@ -39,7 +39,6 @@ public class SongServiceImpl implements SongService {
                             .orElse(false); // myListDisplay 값이 없으면 false로 설정
 
                     return SongChartDto.builder()
-                            .songVideoId(song.getSongVideoId())
                             .songTitle(song.getSongTitle())
                             .artist(song.getArtist().getName())
                             .genre(song.getGenre().getName())
@@ -67,7 +66,6 @@ public class SongServiceImpl implements SongService {
                             .orElse(false);
 
                     return SongChartDto.builder()
-                            .songVideoId(song.getSongVideoId())
                             .songTitle(song.getSongTitle())
                             .artist(song.getArtist().getName())
                             .genre(song.getGenre().getName())
@@ -110,7 +108,6 @@ public class SongServiceImpl implements SongService {
                             .orElse(false);
 
                     return SongChartDto.builder()
-                            .songVideoId(song.getSongVideoId())
                             .songTitle(song.getSongTitle())
                             .artist(song.getArtist().getName())
                             .genre(song.getGenre().getName())
@@ -138,7 +135,6 @@ public class SongServiceImpl implements SongService {
                             .orElse(false);
 
                     return SongChartDto.builder()
-                            .songVideoId(song.getSongVideoId())
                             .songTitle(song.getSongTitle())
                             .artist(song.getArtist().getName())
                             .genre(song.getGenre().getName())
@@ -161,7 +157,6 @@ public class SongServiceImpl implements SongService {
                 .stream()
                 .map(song -> {
                     return SongChartDto.builder()
-                            .songVideoId(song.getSongVideoId())
                             .songTitle(song.getSongTitle())
                             .artist(song.getArtist().getName())
                             .genre(song.getGenre().getName())

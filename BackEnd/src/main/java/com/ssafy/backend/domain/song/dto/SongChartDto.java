@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SongChartDto {
 
-    // 영상의 id값(MR)
-    private String songVideoId;
 
     // 노래 제목
     private String songTitle;
