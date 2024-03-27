@@ -1,0 +1,31 @@
+.tab-menu {
+  background-color: #fff;
+  color: #c5c5c5;
+  font-weight: bold;
+  font-family: "Noto Sans KR", sans-serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  
+
+  .submenu {
+    flex: 1;
+    padding: 5px;
+    text-align: center;
+    font-size: 15px;
+    transition: 0.3s;
+    border-radius: 10px 10px 0px 0px;
+    height: 30px;
+    margin-top: 10px;
+
+  }
+
+  .focused {
+    background-color: rgb(255, 255, 255);
+    color: rgb(21, 20, 20);
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(to right, #103ce7, #64e9ff) 1;
+  }
+}

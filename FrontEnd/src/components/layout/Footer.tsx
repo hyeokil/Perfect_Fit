@@ -31,7 +31,7 @@ const Footer = () => {
         <p>릴스</p>
       </div>
       <div>
-        <Link to="/">
+        <Link to="/mainchart">
           <StyledFontAwesomeIcon icon={faMicrophoneAlt} size="lg" />
         </Link>
         <p>부르기</p>

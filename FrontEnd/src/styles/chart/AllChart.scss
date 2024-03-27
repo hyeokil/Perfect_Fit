@@ -1,0 +1,37 @@
+.all-container {
+  font-family: "Noto Sans KR";
+
+  .AllChart {
+    width: 100vw;
+  }
+
+  .all-category {
+    margin: 10px;
+    border-radius: 20px;
+    background-color: #f3f3f3;
+    width: 95%;
+    height: 110px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .all-recommend {
+    padding: 10px;
+    margin-top: 30px;
+
+    .all-recommend-border {
+      border-radius: 20px;
+      background-color: #f3f3f3;
+      padding: 10px;
+    }
+
+    .recommend-chart {
+      border: 1px solid #dbdbdb;
+      border-radius: 10px;
+      padding: 10px;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/accounts/Login.scss";
 import axios from "axios";
-import useAuthStore from "@/store/useAuthStroe";
+import useAuthStore from "@/store/useAuthStore";
 
 const Login: React.FC = () => {
   const { login } = useAuthStore();

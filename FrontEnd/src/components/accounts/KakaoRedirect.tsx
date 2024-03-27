@@ -27,6 +27,7 @@ const KakaoRedirect: React.FC = () => {
 
       // 토큰 받아오기 성공 시
       const token: string = response.data.dataBody.token.accessToken;
+      localStorage.setItem("accessToken", token); // 토큰을 localStorage에 저장
       document.cookie = `accessToken=${token}; path=/`; // 토큰을 쿠키에 저장
       navigate("/access");
     } catch (error) {
@@ -34,9 +35,11 @@ const KakaoRedirect: React.FC = () => {
     }
   };
 
-  return <div>
-    <Loading />
-  </div>;
+  return (
+    <div>
+      <Loading />
+    </div>
+  );
 };
 
 export default KakaoRedirect;

@@ -1,6 +1,6 @@
 import { BASE_URL } from "@/constants/api";
 import { getCookie } from "@/util/cookies";
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 // type dataHeader = {
 
 // }
@@ -15,21 +15,22 @@ export const instance = axios.create({
 // request 시 적용
 instance.defaults.headers.common["Authorization"] = "";
 
-instance.interceptors.request.use((config) => {
-  const token = getCookie("accessToken");
+instance.interceptors.request.use(
+  (config) => {
+    const token = getCookie("accessToken");
 
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    } else {
+      window.alert("로그인해주세염");
+      window.location.href = "/";
+    }
     return config;
-  }
-  else {
-    window.alert('로그인해주세염')
-    window.location.href = '/'
-  }
+  },
   (error: AxiosError<{ message: string; errorCode: string }>) => {
     return Promise.reject(error);
-  };
-});
+  }
+);
 
 instance.interceptors.response.use(
   (res) => {
@@ -38,10 +39,15 @@ instance.interceptors.response.use(
     }
   },
   (error: AxiosError<{ message: string; errorCode: string }>) => {
-
     switch (error.response?.status) {
       case 400: {
-        console.log('Error code:', error.response.status,'|', 'Error Message :', error.response.data.dataHeader.resultMessage);
+        console.log(
+          "Error code:",
+          error.response.status,
+          "|",
+          "Error Message :",
+          error.response.data.dataHeader.resultMessage
+        );
         // window.alert('잘못된 요청입니다.')
         break;
       }

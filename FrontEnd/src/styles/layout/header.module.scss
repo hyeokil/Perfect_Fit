@@ -1,55 +1,55 @@
 .wrapper {
-  // 부모를 기준으로 
   position: relative;
-
-  // top: 0;
-  // left: 0;
-  // right: 0;
   height: 45px;
   border-bottom: 1px solid gray;
-  // display: flex; 
-  // justify-content: space-between; 
-  align-items: center; 
+  align-items: center;
 
   div {
     display: flex;
-    // justify-content: space-between;
     align-items: center;
     text-align: center;
     padding-top: 2%;
   }
   p {
     text-align: center;
-  };
+  }
   .close {
-    // margin-right: 16pt;
-    // text-align: center;
-    // margin-bottom: 7px;
-    // margin-right: 16pt;
-
-    // 얘는 그냥 절대적인 위치로 빼버림(그림 위로 올려버린 효과)
     position: absolute;
     right: 13px; // 오른쪽으로 옮겨서 끝에서 13PX 띄우고
     bottom: 13px; // 바텀 기준으로 13PX 띄움
+    width: 20px;
+    height: 20px;
   }
-  
-  .back {
-    // margin-left: 16pt;
 
-    // 같은 원리로 백 아이콘도 똑같이 작동 시킬거임
-    // 확인 당장 어렵지만 아마 되지 않을까 싶음 
+  .back {
     position: absolute;
     left: 13px; // 왼쪽으로 옮겨서 끝에서 13PX 띄우고
     bottom: 13px; // 바텀 기준으로 13PX 띄움
+    width: 20px;
+    height: 20px;
+  }
+
+  .search {
+    position: absolute;
+    right: 13px; // 오른쪽으로 옮겨서 끝에서 13PX 띄우고
+    bottom: 13px; // 바텀 기준으로 13PX 띄움
+    width: 20px;
+    height: 20px;
+  }
+
+  .setting {
+    position: absolute;
+    right: 13px; // 오른쪽으로 옮겨서 끝에서 13PX 띄우고
+    bottom: 13px; // 바텀 기준으로 13PX 띄움
+    width: 20px;
+    height: 20px;
   }
 }
 
 .title {
-  // padding-left: 20pt;
   font-weight: bold;
   font-size: large;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   width: 400px;
   margin: 0 auto;
 }
-
