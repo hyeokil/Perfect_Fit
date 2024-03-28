@@ -1,6 +1,5 @@
 import Header from "@/components/layout/Header";
 import Lyrics from "@/components/single/Lyrics";
-import React from "react";
 import styled from "styled-components";
 import styles from "@styles/single/Single.module.scss";
 import AlbumCover from "@/components/single/AlbumCover";
@@ -26,10 +25,6 @@ const Background = styled.div`
 `;
 
 const Single = () => {
-  const audioCtx = new AudioContext()
-  const gainNode = audioCtx.createGain()
-
-  
   return (
     <div>
       {/* title, state, page */}

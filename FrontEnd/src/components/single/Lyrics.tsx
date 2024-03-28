@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "@styles/single/Lyrics.module.scss";
 
 const Lyrics = () => {

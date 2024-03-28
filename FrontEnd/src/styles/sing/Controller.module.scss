@@ -1,0 +1,37 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.play {
+  width: fit-content;
+  display: flex;
+  border: 1px solid black;
+  justify-content: center;
+}
+.icon {
+  font-size: xx-large;
+  color: gray;
+}
+.controlbutton {
+  border: 0;
+  background-color: transparent;
+}
+
+.controlbox {
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: linear-gradient(to right, #FFE283 0%, #FFE283 50%, #ececec 50%, #ececec 100%);
+    border-radius: 8px;
+    outline: none;
+    // transition: background 450ms ease-in;
+    accent-color: #ffca1d;
+  }
+  input[type=range] ::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+  display: flex;
+  flex-direction: column;
+}

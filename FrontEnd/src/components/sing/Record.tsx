@@ -1,5 +1,5 @@
 import { SendRecord } from "@/api/record";
-import React, { useEffect, useState, useCallback } from "react";
+import  { useEffect, useState, useCallback } from "react";
 // type StreamType = {
 //   active: boolean;
 //   id: string;
@@ -86,6 +86,7 @@ const Record = () => {
     }
 
   };
+
 
   
   useEffect(() => {}, []);
