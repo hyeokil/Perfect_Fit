@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver  # DB 드라이버
-    url: jdbc:mysql://localhost:3306/perfectfit?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true       # 데이터베이스 URL
-    username : ssafy
-    password : ssafy
+    url: jdbc:mysql://j10c205.p.ssafy.io:3306/perfectfit?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true       # 데이터베이스 URL
+    username : root
+    password : c205c205
 
   jpa:
     open-in-view: false
@@ -19,22 +19,22 @@ spring:
         jdbc:
           batch_size: 100                  #   insert/update 쿼리를 원하는 개수만큼 모아서 DB에 날릴 수 있는 옵션
         default_batch_fetch_size: 100
-#      ddl-auto: create-drop                # ddl 자동 작성 여부
+  #      ddl-auto: create-drop                # ddl 자동 작성 여부
   # data_테이블명.sql 관련 실행 setting
   sql:
     init:
       mode: always
       data-locations:
         - 'classpath:/data_member.sql'
-        - 'classpath:/data_genre.sql'
         - 'classpath:/data_artist.sql'
+        - 'classpath:/data_genre.sql'
         - 'classpath:/data_song.sql'
         - 'classpath:/data_my_list.sql'
   # NoSQL setting
   data:
     # Redis setting
     redis:
-      host: localhost
+      host: j10c205.p.ssafy.io
       port: 6379
 
 # jwt setting
@@ -52,7 +52,7 @@ oauth:
     client-id: df089f203219a3b6f8b59089d4381d02
     client-secret: w3dHiDuDOiluFi2vjWpzSo1BbBhTnvpu
     redirect-uri: http://localhost:5173/member/loading/kakao
-#    redirect-uri: http://localhost:8080/member/kakao
+    #    redirect-uri: http://localhost:8080/member/kakao
     scope:
       - profile_nickname
       - profile_image
