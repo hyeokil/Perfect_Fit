@@ -26,6 +26,10 @@ const Background = styled.div`
 `;
 
 const Single = () => {
+  const audioCtx = new AudioContext()
+  const gainNode = audioCtx.createGain()
+
+  
   return (
     <div>
       {/* title, state, page */}
