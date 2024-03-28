@@ -14,3 +14,5 @@ export const useMusicStore = create<MusicStoreType>((set) => ({
   title : '바보',
   setUrl: (url: string) => set(() => ({ albumUrl: url })),
 }));
+
+
