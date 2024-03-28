@@ -1,0 +1,138 @@
+{
+  "videoId": "ZMCTjAMg3O8",
+  "headline": {
+    "simpleText": "[노래방레전드] 라울님의 이방인(Live Ver.)(김동률) COVER / TJ노래방 #shorts"
+  },
+  "thumbnail": {
+    "thumbnails": [
+      {
+        "url": "https://i.ytimg.com/vi/ZMCTjAMg3O8/oar2.jpg?sqp=-oaymwEdCJUDENAFSFWQAgHyq4qpAwwIARUAAIhCcAHAAQY=&rs=AOn4CLCSEqDToQobknYo20a35msEdHUrbw",
+        "width": 405,
+        "height": 720
+      }
+    ],
+    "isOriginalAspectRatio": "True"
+  },
+  "viewCountText": {
+    "accessibility": {
+      "accessibilityData": {
+        "label": "3.6K views"
+      }
+    },
+    "simpleText": "3.6K views"
+  },
+  "navigationEndpoint": {
+    "clickTrackingParams": "CLMBEIf2BBgAIhMI67enqLz_hAMV_Dh7Bx2nOg6D",
+    "commandMetadata": {
+      "webCommandMetadata": {
+        "url": "/shorts/ZMCTjAMg3O8",
+        "webPageType": "WEB_PAGE_TYPE_SHORTS",
+        "rootVe": 37414
+      }
+    },
+    "reelWatchEndpoint": {
+      "videoId": "ZMCTjAMg3O8",
+      "playerParams": "8AEByAMkuAQ0ogYVAdXZ-jubIr-bF5Kxjte873iT2bd_",
+      "thumbnail": {
+        "thumbnails": [
+          {
+            "url": "https://i.ytimg.com/vi/ZMCTjAMg3O8/frame0.jpg",
+            "width": 1080,
+            "height": 1920
+          }
+        ],
+        "isOriginalAspectRatio": "True"
+      },
+      "overlay": {
+        "reelPlayerOverlayRenderer": {
+          "style": "REEL_PLAYER_OVERLAY_STYLE_SHORTS",
+          "trackingParams": "CLQBELC1BCITCOu3p6i8_4QDFfw4ewcdpzoOgw==",
+          "reelPlayerNavigationModel": "REEL_PLAYER_NAVIGATION_MODEL_UNSPECIFIED"
+        }
+      },
+      "params": "CDMwAg%3D%3D",
+      "sequenceProvider": "REEL_WATCH_SEQUENCE_PROVIDER_RPC",
+      "sequenceParams": "GqkGIAFCpAYIABAjGo4G-gaKBgqHBkFmanEwdlBmYjhCX2xQTFc2ZklGNWlrci12X0duVHFuZ1RNYnUySDhWVkRDUlRvU1YyTm40UVplVUtQa3pNaW9nNU9HYlJEWHVaWG9rTkNLQnJxSG9RbVptMUlGZ2pMVFdOa3A2NEpYS2p0QkI2bExCY2FXejZad2dDbHhTV1hkdERFYVlqX2lpUGtrUnRQYXUtV0tJb2xWMEROeW96QTNSeXFIRldPT1Y3Ty10SVBCZUY5bDhsOF9IanBEdU8xR0pERHNVcWZnZ3hBMHpiZUFTNkh1MFppOFlNcmZJNVNSRzk2Q1hheHNGMmVlOTd3QzF1RHlzcjFKY0J3dURUVURxRUdKd2ZjRUhWc1hQckFDR21mTmxCNUNQdlVyd2FLTkk1RUpHclBSM2xRQnVmTi13YW1LVDIxMHp5WUpXSTE1N3lwMERyREhzaXlBcnhBdGhaRmJNQ3RHNU5KSUdIdUt2dEtFVUNTSXZmNUV3SVRhaENXMktnUGJkSUJpMzhONE9tVXY0b1RfUUR6eTZxb01Jal9YTEE5Vi0xZ2ZtMGY4cW9sc2lYSVVEaVBUVkNaUkNBMWFHVERPY2FKTlc3SUtOYWw1aVJENEdwZXdESEpnVzZ6c3BJam5fcl8tdTFqMkEwVklLV2hoS0FYTmNuUlhnZEJYeHRCbUJPMG1sMG9VUWNVei1fRW9XQ1FJRGRNejJhS3EzYnN5MUFxZkdZMm9vRHhTSWpXSEpGb2NwMnRYTHlDeEpKc2ZqX2t1WE4xOFVvRzBydWd3aVpnbW1SS01vU1pJZjktZmRUMUg0QkY3ZGdRbTFYbnowQWc3ZlMwMDRHdHRsTmFnMW51XzQ5X25QRGFuODRXcHpHWEhYUHJFWXJtSDh6WDk5bF9feE5PSldwMjJmTVZaOFItVmRZZHRmeHZweGhINGNuMW9YWG1MRnJHU1FpaEdycGZmOG1WcnVRTy1BSFdtR2JmTUtBWTZVUlRlcWdiZzVhQk1MLWRkeEFReG5SMWtEbENEclF3MzVWODEtX28qDQoLWk1DVGpBTWczTzgqAhgzkAEN",
+      "loggingContext": {
+        "vssLoggingContext": {
+          "serializedContextData": "CgIIDA%3D%3D"
+        },
+        "qoeLoggingContext": {
+          "serializedContextData": "CgIIDA%3D%3D"
+        }
+      },
+      "ustreamerConfig": "CAwSGG1MdndaZU9qYzlpR3pxNnFMMkxGS1Q0PQ=="
+    }
+  },
+  "menu": {
+    "menuRenderer": {
+      "items": [
+        {
+          "menuNavigationItemRenderer": {
+            "text": {
+              "runs": [
+                {
+                  "text": "Send feedback"
+                }
+              ]
+            },
+            "icon": {
+              "iconType": "FEEDBACK"
+            },
+            "navigationEndpoint": {
+              "clickTrackingParams": "CLMBEIf2BBgAIhMI67enqLz_hAMV_Dh7Bx2nOg6D",
+              "commandMetadata": {
+                "webCommandMetadata": {
+                  "ignoreNavigation": "True"
+                }
+              },
+              "userFeedbackEndpoint": {
+                "additionalDatas": [
+                  {
+                    "userFeedbackEndpointProductSpecificValueData": {
+                      "key": "video_id",
+                      "value": "ZMCTjAMg3O8"
+                    }
+                  },
+                  {
+                    "userFeedbackEndpointProductSpecificValueData": {
+                      "key": "lockup",
+                      "value": "shelf"
+                    }
+                  }
+                ]
+              }
+            },
+            "trackingParams": "CLMBEIf2BBgAIhMI67enqLz_hAMV_Dh7Bx2nOg6D",
+            "accessibility": {
+              "accessibilityData": {
+                "label": "Send feedback"
+              }
+            }
+          }
+        }
+      ],
+      "trackingParams": "CLMBEIf2BBgAIhMI67enqLz_hAMV_Dh7Bx2nOg6D",
+      "accessibility": {
+        "accessibilityData": {
+          "label": "More actions"
+        }
+      }
+    }
+  },
+  "trackingParams": "CLMBEIf2BBgAIhMI67enqLz_hAMV_Dh7Bx2nOg6DQO-5g5nA8aTgZA==",
+  "accessibility": {
+    "accessibilityData": {
+      "label": "[노래방레전드] 라울님의 이방인(Live Ver.)(김동률) COVER / TJ노래방 #shorts - play Short"
+    }
+  },
+  "style": "REEL_ITEM_STYLE_AVATAR_CIRCLE",
+  "videoType": "REEL_VIDEO_TYPE_VIDEO",
+  "loggingDirectives": {
+    "trackingParams": "CLMBEIf2BBgAIhMI67enqLz_hAMV_Dh7Bx2nOg6D",
+    "visibility": {
+      "types": "12"
+    },
+    "enableDisplayloggerExperiment": "True"
+  }
+}

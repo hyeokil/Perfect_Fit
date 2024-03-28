@@ -1,0 +1,270 @@
+{
+  "videoId": "2og-bNGlLjE",
+  "thumbnail": {
+    "thumbnails": [
+      {
+        "url": "https://i.ytimg.com/vi/2og-bNGlLjE/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBeQcpuIAytbYlzfFiYWmcUjFabMw",
+        "width": 168,
+        "height": 94
+      },
+      {
+        "url": "https://i.ytimg.com/vi/2og-bNGlLjE/hqdefault.jpg?sqp=-oaymwEbCMQBEG5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLAh4aOrRVtsa5QqhqWZn_mXOf_hFA",
+        "width": 196,
+        "height": 110
+      },
+      {
+        "url": "https://i.ytimg.com/vi/2og-bNGlLjE/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCI80dWuosb2TxJJfN__alSPxsdFA",
+        "width": 246,
+        "height": 138
+      },
+      {
+        "url": "https://i.ytimg.com/vi/2og-bNGlLjE/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC0vzzQkOpSr4IenS5MXiMBfW_-PA",
+        "width": 336,
+        "height": 188
+      }
+    ]
+  },
+  "title": {
+    "runs": [
+      {
+        "text": "[TJ노래방] TTG - KISS OF LIFE / TJ Karaoke"
+      }
+    ],
+    "accessibility": {
+      "accessibilityData": {
+        "label": "[TJ노래방] TTG - KISS OF LIFE / TJ Karaoke by TJ KARAOKE TJ 노래방 공식 유튜브채널 532 views 3 weeks ago 3 minutes, 32 seconds"
+      }
+    }
+  },
+  "index": {
+    "simpleText": "1"
+  },
+  "shortBylineText": {
+    "runs": [
+      {
+        "text": "TJ KARAOKE TJ 노래방 공식 유튜브채널",
+        "navigationEndpoint": {
+          "clickTrackingParams": "CDgQxjQYACITCIn3kd-e-4QDFX4IewcdVMwEXA==",
+          "commandMetadata": {
+            "webCommandMetadata": {
+              "url": "/@TJKaraoke",
+              "webPageType": "WEB_PAGE_TYPE_CHANNEL",
+              "rootVe": 3611,
+              "apiUrl": "/youtubei/v1/browse"
+            }
+          },
+          "browseEndpoint": {
+            "browseId": "UCZUhx8ClCv6paFW7qi3qljg",
+            "canonicalBaseUrl": "/@TJKaraoke"
+          }
+        }
+      }
+    ]
+  },
+  "lengthText": {
+    "accessibility": {
+      "accessibilityData": {
+        "label": "3 minutes, 32 seconds"
+      }
+    },
+    "simpleText": "3:32"
+  },
+  "navigationEndpoint": {
+    "clickTrackingParams": "CDgQxjQYACITCIn3kd-e-4QDFX4IewcdVMwEXDIKcGxwcF92aWRlb1okVkxQTDVya01weEM1RXgtMEhuT2NHWk1Cd2stOHNsOFNxTGpCmgEDEPos",
+    "commandMetadata": {
+      "webCommandMetadata": {
+        "url": "/watch?v=2og-bNGlLjE&list=PL5rkMpxC5Ex-0HnOcGZMBwk-8sl8SqLjB&index=1&pp=iAQB8AUB",
+        "webPageType": "WEB_PAGE_TYPE_WATCH",
+        "rootVe": 3832
+      }
+    },
+    "watchEndpoint": {
+      "videoId": "2og-bNGlLjE",
+      "playlistId": "PL5rkMpxC5Ex-0HnOcGZMBwk-8sl8SqLjB",
+      "index": 0,
+      "params": "OAI%3D",
+      "playerParams": "iAQB8AUB",
+      "loggingContext": {
+        "vssLoggingContext": {
+          "serializedContextData": "GiJQTDVya01weEM1RXgtMEhuT2NHWk1Cd2stOHNsOFNxTGpC"
+        }
+      },
+      "watchEndpointSupportedOnesieConfig": {
+        "html5PlaybackOnesieConfig": {
+          "commonConfig": {
+            "url": "https://rr2---sn-jhcbf5ow0-3fwe.googlevideo.com/initplayback?source=youtube&oeis=1&c=WEB&oad=3200&ovd=3200&oaad=11000&oavd=11000&ocs=700&oewis=1&oputc=1&ofpcc=1&msp=1&odepv=1&id=da883e6cd1a52e31&ip=49.246.7.41&initcwndbps=847500&mt=1710676146&oweuc=&pxtags=Cg4KAnR4Egg1MTA2NjExOQ&rxtags=Cg4KAnR4Egg1MTA2NjExNg%2CCg4KAnR4Egg1MTA2NjExNw%2CCg4KAnR4Egg1MTA2NjExOA%2CCg4KAnR4Egg1MTA2NjExOQ%2CCg4KAnR4Egg1MTA2NjEyMA%2CCg4KAnR4Egg1MTA2NjEyMQ"
+          }
+        }
+      }
+    }
+  },
+  "lengthSeconds": "212",
+  "trackingParams": "CDgQxjQYACITCIn3kd-e-4QDFX4IewcdVMwEXA==",
+  "isPlayable": "True",
+  "menu": {
+    "menuRenderer": {
+      "items": [
+        {
+          "menuServiceItemRenderer": {
+            "text": {
+              "runs": [
+                {
+                  "text": "Add to queue"
+                }
+              ]
+            },
+            "icon": {
+              "iconType": "ADD_TO_QUEUE_TAIL"
+            },
+            "serviceEndpoint": {
+              "clickTrackingParams": "CDsQ_pgEGAYiEwiJ95HfnvuEAxV-CHsHHVTMBFw=",
+              "commandMetadata": {
+                "webCommandMetadata": {
+                  "sendPost": "True"
+                }
+              },
+              "signalServiceEndpoint": {
+                "signal": "CLIENT_SIGNAL",
+                "actions": [
+                  {
+                    "clickTrackingParams": "CDsQ_pgEGAYiEwiJ95HfnvuEAxV-CHsHHVTMBFw=",
+                    "addToPlaylistCommand": {
+                      "openMiniplayer": "True",
+                      "videoId": "2og-bNGlLjE",
+                      "listType": "PLAYLIST_EDIT_LIST_TYPE_QUEUE",
+                      "onCreateListCommand": {
+                        "clickTrackingParams": "CDsQ_pgEGAYiEwiJ95HfnvuEAxV-CHsHHVTMBFw=",
+                        "commandMetadata": {
+                          "webCommandMetadata": {
+                            "sendPost": "True",
+                            "apiUrl": "/youtubei/v1/playlist/create"
+                          }
+                        },
+                        "createPlaylistServiceEndpoint": {
+                          "videoIds": [
+                            "2og-bNGlLjE"
+                          ],
+                          "params": "CAQ%3D"
+                        }
+                      },
+                      "videoIds": [
+                        "2og-bNGlLjE"
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "trackingParams": "CDsQ_pgEGAYiEwiJ95HfnvuEAxV-CHsHHVTMBFw="
+          }
+        },
+        {
+          "menuServiceItemDownloadRenderer": {
+            "serviceEndpoint": {
+              "clickTrackingParams": "CDoQ0aoFGAciEwiJ95HfnvuEAxV-CHsHHVTMBFw=",
+              "offlineVideoEndpoint": {
+                "videoId": "2og-bNGlLjE",
+                "onAddCommand": {
+                  "clickTrackingParams": "CDoQ0aoFGAciEwiJ95HfnvuEAxV-CHsHHVTMBFw=",
+                  "getDownloadActionCommand": {
+                    "videoId": "2og-bNGlLjE",
+                    "params": "CAI%3D"
+                  }
+                }
+              }
+            },
+            "trackingParams": "CDoQ0aoFGAciEwiJ95HfnvuEAxV-CHsHHVTMBFw="
+          }
+        },
+        {
+          "menuServiceItemRenderer": {
+            "text": {
+              "runs": [
+                {
+                  "text": "Share"
+                }
+              ]
+            },
+            "icon": {
+              "iconType": "SHARE"
+            },
+            "serviceEndpoint": {
+              "clickTrackingParams": "CDgQxjQYACITCIn3kd-e-4QDFX4IewcdVMwEXA==",
+              "commandMetadata": {
+                "webCommandMetadata": {
+                  "sendPost": "True",
+                  "apiUrl": "/youtubei/v1/share/get_share_panel"
+                }
+              },
+              "shareEntityServiceEndpoint": {
+                "serializedShareEntity": "Cgsyb2ctYk5HbExqRQ%3D%3D",
+                "commands": [
+                  {
+                    "clickTrackingParams": "CDgQxjQYACITCIn3kd-e-4QDFX4IewcdVMwEXA==",
+                    "openPopupAction": {
+                      "popup": {
+                        "unifiedSharePanelRenderer": {
+                          "trackingParams": "CDkQjmIiEwiJ95HfnvuEAxV-CHsHHVTMBFw=",
+                          "showLoadingSpinner": "True"
+                        }
+                      },
+                      "popupType": "DIALOG",
+                      "beReused": "True"
+                    }
+                  }
+                ]
+              }
+            },
+            "trackingParams": "CDgQxjQYACITCIn3kd-e-4QDFX4IewcdVMwEXA==",
+            "hasSeparator": "True"
+          }
+        }
+      ],
+      "trackingParams": "CDgQxjQYACITCIn3kd-e-4QDFX4IewcdVMwEXA==",
+      "accessibility": {
+        "accessibilityData": {
+          "label": "Action menu"
+        }
+      }
+    }
+  },
+  "thumbnailOverlays": [
+    {
+      "thumbnailOverlayTimeStatusRenderer": {
+        "text": {
+          "accessibility": {
+            "accessibilityData": {
+              "label": "3 minutes, 32 seconds"
+            }
+          },
+          "simpleText": "3:32"
+        },
+        "style": "DEFAULT"
+      }
+    },
+    {
+      "thumbnailOverlayNowPlayingRenderer": {
+        "text": {
+          "runs": [
+            {
+              "text": "Now playing"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "videoInfo": {
+    "runs": [
+      {
+        "text": "532 views"
+      },
+      {
+        "text": " • "
+      },
+      {
+        "text": "3 weeks ago"
+      }
+    ]
+  }
+}
