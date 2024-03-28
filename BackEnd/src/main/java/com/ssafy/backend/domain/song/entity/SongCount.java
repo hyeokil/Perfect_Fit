@@ -19,6 +19,6 @@ public class SongCount {
     private Song song;
 
     // 초기값을 0으로 설정
-    private Long count = 0L;
+    private Long count;
 
 }
