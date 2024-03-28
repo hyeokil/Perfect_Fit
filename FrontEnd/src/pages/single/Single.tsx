@@ -52,10 +52,10 @@ const Single = () => {
       {/* title, state, page */}
       {/* page 부르기 메인 페이지로 이동하게 주소 수정 */}
       <Header title="싱글 모드" state="close" page="" />
+          <DisplayRecord />
       <Background>
         {/* <Filter></Filter> */}
         <ContentWrapper>
-          <DisplayRecord />
           <Camera />
           <div className={styles.container}>
             <AlbumCover musicInfo={info} />
