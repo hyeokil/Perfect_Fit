@@ -4,7 +4,7 @@
 // import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import styles from "@styles/sing/Controller.module.scss";
 const Controller = () => {
-  // // -------------------------------------------------------
+  // -------------------------------------------------------
   // const [pitch, setPitch] = useState<number>(1.0);
   // const [tempo, setTempo] = useState<number>(1.0);
   // const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -97,8 +97,8 @@ const Controller = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h1>컨트롤러!!!</h1>
-      {/* <div className={styles.play}>
+      {/* <h1>컨트롤러!!!</h1>
+      <div className={styles.play}>
         <button className={styles.controlbutton} onClick={togglePlayback}>
           {isPlaying ? (
             <FontAwesomeIcon className={styles.icon} icon={faPause} />
