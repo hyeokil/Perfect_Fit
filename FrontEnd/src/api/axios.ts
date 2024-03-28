@@ -1,9 +1,10 @@
 import { BASE_URL } from "@/constants/api";
 import { getCookie } from "@/util/cookies";
-import axios, { AxiosError } from "axios";
-// type dataHeader = {
+import axios, {
+  AxiosError,
+  InternalAxiosRequestConfig,
+} from "axios";
 
-// }
 axios.defaults.baseURL = `${BASE_URL}`;
 
 export const instance = axios.create({
@@ -11,25 +12,36 @@ export const instance = axios.create({
   // 요청 최대 대기시간 3초
   timeout: 3000,
 });
+//---------------------------------------------------
 
-// request 시 적용
-instance.defaults.headers.common["Authorization"] = "";
-
-instance.interceptors.request.use((config) => {
+const onRequest = (
+  config: InternalAxiosRequestConfig
+): InternalAxiosRequestConfig => {
+  const { method, url } = config;
+  console.log(`🛫 [API - REQUEST] ${method?.toUpperCase()} ${url}`);
   const token = getCookie("accessToken");
-
   if (token) {
+    // if (!config.headers) {
+    //   config.headers = {}; // config.headers가 undefined인 경우 빈 객체로 설정
+    // }
     config.headers.Authorization = `Bearer ${token}`;
     return config;
+  } else {
+    // window.alert('로그인해주세염')
+    window.location.href = "/";
   }
-  else {
-    window.alert('로그인해주세염')
-    window.location.href = '/'
-  }
-  (error: AxiosError<{ message: string; errorCode: string }>) => {
-    return Promise.reject(error);
-  };
-});
+  return config
+};
+
+const onRequestError = (error: AxiosError): Promise<AxiosError> => {
+  console.error(`[request error] [${JSON.stringify(error)}]`);
+  return Promise.reject(error);
+};
+
+//---------------------------------------------------
+// request 시 적용
+instance.defaults.headers.common["Authorization"] = "";
+instance.interceptors.request.use(onRequest, onRequestError);
 
 instance.interceptors.response.use(
   (res) => {
@@ -38,17 +50,29 @@ instance.interceptors.response.use(
     }
   },
   (error: AxiosError<{ message: string; errorCode: string }>) => {
-
     switch (error.response?.status) {
       case 400: {
-        console.log('Error code:', error.response.status,'|', 'Error Message :', error.response.data.dataHeader.resultMessage);
-        // window.alert('잘못된 요청입니다.')
+        console.log(
+          `🚀[${error.config?.method?.toUpperCase()}] ✔URL : ${
+            error.config?.url
+          }❌Error Code:`,
+          error.response.status,
+          "Bad request❌",
+          "|",
+          "💌Error Message :",
+          error.response.data
+        );
         break;
       }
       case 401: {
-        console.log(error.response.data.dataHeader.resultMessage);
-        // window.location.href('/')
-        // window.alert(error.response.data.dataHeader.resultMessage, '다시 로그인해주세요')
+        console.log(
+          "❌Error code:",
+          error.response.status,
+          "Unauthorized❌",
+          "|",
+          "💌Error Message :",
+          error.response.data
+        );
         break;
       }
     }

@@ -11,9 +11,11 @@ import Layout from "./layout/Layout";
 import Record from "./components/sing/Record.tsx";
 import '@/api/axios.ts'
 import Single from "./pages/single/Single.tsx";
+// import { instance } from "@/api/axios.ts";
 
 
 const App: React.FC = () => {
+  // instance.get(`/api/v1/single/ist`).then(res=>console.log(res))
   return (
     <BrowserRouter>
       <Routes>
