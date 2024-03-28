@@ -5,6 +5,8 @@ import styles from "@styles/single/Single.module.scss";
 import AlbumCover from "@/components/single/AlbumCover";
 import Controller from "@/components/sing/Controller";
 import { MusicInfoType } from "@/types/apiType";
+import DisplayRecord from "@/components/sing/DisplayRecord";
+import Camera from "@/components/sing/Camera";
 
 const Background = styled.div`
   height: fit-content;
@@ -53,12 +55,14 @@ const Single = () => {
       <Background>
         {/* <Filter></Filter> */}
         <ContentWrapper>
+          <DisplayRecord />
+          <Camera />
           <div className={styles.container}>
             <AlbumCover musicInfo={info} />
             <Lyrics />
           </div>
         </ContentWrapper>
-        <Controller />
+        {/* <Controller /> */}
       </Background>
     </div>
   );
