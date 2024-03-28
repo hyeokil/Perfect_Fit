@@ -21,24 +21,52 @@ const Controller = () => {
   const musicRef = useRef<HTMLAudioElement>(null);
   // console.log(shift.pitch)
 
+  console.log(isPlaying);
   console.log("시프트", shift);
   console.log("오디오 상ㅅ태", state);
-  // const music = new Audio('/src/assets/sounds/꽃길.mp3')
   console.log("오디오", audioCtx);
 
-  const togglePlay = () => {
-    if (isPlaying) {
-      musicRef.current?.pause();
-      // shift.disconnect()
-    } else {
-      musicRef.current?.play();
+  // const togglePlay = () => {
+  //   if (isPlaying) {
+  //     musicRef.current?.pause();
+  //     // shift.disconnect()
+  //   } else {
+  //     musicRef.current?.play();
+  //   }
+  //   setIsPlaying(!isPlaying);
+  // };
+
+  // useEffect(() => {
+  //   audioCtx.resume();
+  // }, []);
+
+  const onLoad = ({ target: { result: buffer } }) => {
+    if (shift) {
+      shift.off();
     }
-    setIsPlaying(!isPlaying);
+    if (buffer) {
+      audioCtx.decodeAudioData(buffer, (audioBuffer) => {
+        newShifter(audioBuffer);
+      });
+    }
   };
 
-  useEffect(() => {
-    audioCtx.resume();
-  }, []);
+  // 저장되어있는 파일 사용하기
+  const loadFile = async () => {
+    try {
+      const res = await fetch("/src/assets/sounds/꽃길.mp3");
+      console.log(res);
+      const buffer = await res.arrayBuffer();
+      onLoad({ target: { result: buffer } });
+      console.log(buffer);
+    } catch (error) {
+      console.error;
+    }
+  };
+
+  // const loadMusic =async () => {
+
+  // }
 
   const newShifter = (buffer) => {
     console.log("버퍼", buffer);
@@ -53,20 +81,13 @@ const Controller = () => {
   };
 
   useEffect(() => {
-    fetch("/src/assets/sounds/꽃길.mp3")
-      .then((response) => response.arrayBuffer())
-      .then((arrayBuffer) => {
-        audioCtx.decodeAudioData(arrayBuffer, (audioBuffer: AudioBuffer) => {
-          newShifter(audioBuffer);
-        });
-      })
-      .catch((error) => {
-        console.error("Error decoding audio data:", error);
-      });
+    loadFile();
   }, []);
+
 
   const PlayAudio = () => {
     if (shift) {
+      console.log("재생!!!");
       shift.connect(gainNode);
       gainNode.connect(audioCtx.destination);
       audioCtx.resume();
@@ -76,6 +97,7 @@ const Controller = () => {
 
   const PauseAudio = () => {
     if (shift) {
+      console.log("정지!!!");
       shift.disconnect();
       if (!isPlaying) {
         setIsPlaying(false);
@@ -83,6 +105,12 @@ const Controller = () => {
     }
   };
 
+  const ChagePitch = (e: ChangeEvent<HTMLInputElement>, value: number) => {
+    setPitch(value);
+    if (shift) {
+      shift.pitch = value;
+    }
+  };
   // useCallback(() => {
   //   // const buffer = new AudioBuffer()
   //   audioCtx.decodeAudioData(({audioBuffer} : {audioBuffer : AudioBuffer}) => {
@@ -151,18 +179,18 @@ const Controller = () => {
   return (
     <div>
       <h1>컨트롤러!!!</h1>
-      <button onClick={() => (!isPlaying ? PlayAudio() : PauseAudio())}>
+      <button onClick={() => (!isPlaying ? PauseAudio() : PlayAudio())}>
         {!isPlaying ? "재생" : "정지"}
       </button>
       <label>피치</label>
       <input
         type="range"
-        onChange={(e) => changePitch(e, parseFloat(e.target.value))}
+        onChange={(e) => ChagePitch(e, parseFloat(e.target.value))}
         value={pitch}
         min="0.5"
         max="2"
         step="0.01"
-        disabled={!isPlaying} // 재생 중일 때만 조절 가능하도록 설정
+        // disabled={!isPlaying} // 재생 중일 때만 조절 가능하도록 설정
       />
     </div>
   );
