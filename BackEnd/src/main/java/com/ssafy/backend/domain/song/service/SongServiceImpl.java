@@ -87,14 +87,18 @@ public class SongServiceImpl implements SongService {
     // 장르별 관련 장르 목록을 저장하는 맵
     private static final Map<String, List<String>> GENRE_KEYWORDS = new HashMap<>();
     static {
-        GENRE_KEYWORDS.put("팝", Arrays.asList("팝", "팝록", "일렉트로팝", "팝포크", "팝 락"));
-        GENRE_KEYWORDS.put("록", Arrays.asList("록", "모던록", "하드록", "블랙 메탈"));
-        GENRE_KEYWORDS.put("힙합", Arrays.asList("힙합", "랩", "랩발라드", "웨스트코스트 힙합"));
-        GENRE_KEYWORDS.put("댄스", Arrays.asList("댄스", "일렉트로닉", "하우스", "트랩/크렁크"));
+        GENRE_KEYWORDS.put("팝", Arrays.asList("팝", "팝록", "일렉트로팝", "팝포크", "팝 락", "포크팝", "포크 팝", "팝 포크", "어쿠스틱팝", "어쿠스틱 팝", "J-Pop", "틴팝", "스탠더드팝", "레게팝", "라틴팝", "틴 팝"));
+        GENRE_KEYWORDS.put("록", Arrays.asList("록", "락", "모던록", "하드록", "블랙 메탈", "인디록", "록발라드", "비주얼록", "개러지록", "일렉트로닉록", "펑크(Punk) 록", "얼터너티브록", "포크록", "로큰롤", "소프트록", "소프트 락", "재즈록", "팝 락", "인디 락", "모던 락"));
+        GENRE_KEYWORDS.put("힙합", Arrays.asList("힙합", "랩", "랩발라드", "웨스트코스트 힙합", "재즈힙합", "힙합소울", "인디힙합"));
+        GENRE_KEYWORDS.put("발라드", Arrays.asList("발라드", "미디엄 템포 발라드", "팝발라드"));
+        GENRE_KEYWORDS.put("댄스", Arrays.asList("댄스", "일렉트로닉", "하우스", "트랩/크렁크", "댄스팝", "댄스 팝", "댄스록"));
+        GENRE_KEYWORDS.put("트로트", Arrays.asList("트로트"));
         GENRE_KEYWORDS.put("어쿠스틱", Arrays.asList("어쿠스틱팝", "포크", "인디 포크", "어덜트 컨템포러리 포크"));
-        GENRE_KEYWORDS.put("R&B", Arrays.asList("알앤비", "소울", "어번 알앤비", "힙합소울"));
+        GENRE_KEYWORDS.put("R&B", Arrays.asList("알앤비", "소울", "어번 알앤비", "힙합소울", "알앤비/소울 발라드"));
         GENRE_KEYWORDS.put("재즈", Arrays.asList("재즈", "보컬재즈", "재즈힙합", "스무드 재즈"));
-        GENRE_KEYWORDS.put("OST", Arrays.asList("OST", "영화", "TV 드라마", "영화 주제곡"));
+        GENRE_KEYWORDS.put("OST", Arrays.asList("OST", "영화", "TV 드라마", "영화 주제곡", "TV 애니메이션", "TV 시리즈", "드라마", "게임", "만화 주제곡", "애니메이션", "카툰/웹툰", "코미디(OST)"));
+        GENRE_KEYWORDS.put("동요", Arrays.asList("동요", "창작동요", "영어동요", "자장가", "어린이/가족"));
+
     }
 
     // 장르차트100 조회
