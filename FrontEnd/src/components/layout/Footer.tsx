@@ -43,7 +43,9 @@ const Footer = () => {
         <p>알림</p>
       </div>
       <div>
-        <StyledFontAwesomeIcon icon={faUser} size="lg" />
+        <Link to="mainmypage">
+          <StyledFontAwesomeIcon icon={faUser} size="lg" />
+        </Link>
         <p>마이페이지</p>
       </div>
     </nav>

@@ -3,10 +3,21 @@ import React, { useEffect, useState } from "react";
 import "@/styles/chart/Singchart.scss";
 import axios from "axios";
 import Loading from "@/components/common/Loading";
+import BottomSheet from "@/components/charts/BottomSheet";
 
 const LatestChart: React.FC = () => {
   const [latestSongs, setLatestSongs] = useState<any[] | null>(null);
-  // const { toggleLike } = SongsLike();
+  const [selectedSong, setSelectedSong] = useState<any | null>(null);
+
+  const openBottomSheet = (song: any) => {
+    console.log(song);
+    console.log("클릭 됨");
+    setSelectedSong(song);
+  };
+
+  const closeBottomSheet = () => {
+    setSelectedSong(null);
+  };
 
   // 노래 조회
   useEffect(() => {
@@ -88,7 +99,11 @@ const LatestChart: React.FC = () => {
           <div className="sing-chart">
             {/* 최신곡 차트들 여기에 쫙 뿌리기 */}
             {latestSongs.map((song, index) => (
-              <div key={index} className="sing-song">
+              <div
+                key={index}
+                className="sing-song"
+                onClick={() => openBottomSheet(song)}
+              >
                 <img src={song.songThumbnail} alt={song.songThumbnail} />
                 <div className="sing-song-info">
                   <h3>{song.songTitle}</h3>
@@ -112,6 +127,20 @@ const LatestChart: React.FC = () => {
                 </div>
               </div>
             ))}
+            {/* 바텀시트 */}
+            <BottomSheet
+              isOpen={selectedSong !== null}
+              onClose={closeBottomSheet}
+            >
+              {selectedSong && (
+                <div>
+                  {/* 선택된 노래의 정보 표시 */}
+                  <h3>{selectedSong.songTitle}</h3>
+                  <p>{selectedSong.artist}</p>
+                  {/* 추가적인 기능 등 */}
+                </div>
+              )}
+            </BottomSheet>
           </div>
         </div>
       </div>
