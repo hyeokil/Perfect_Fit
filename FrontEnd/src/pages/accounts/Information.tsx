@@ -23,7 +23,7 @@ const Information: React.FC = () => {
 
         // 카카오 사용자 정보 요청
         const response = await axios.get(
-          "http://j10c205.p.ssafy.io:9002/api/v1/member/get",
+          "https://j10c205.p.ssafy.io/api/v1/member/get",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`, // 가져온 토큰을 헤더에 포함

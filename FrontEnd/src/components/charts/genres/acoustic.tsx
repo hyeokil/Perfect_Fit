@@ -1,11 +1,8 @@
-import React from 'react';
+import React from "react";
+import Genres from "../../charts/Genres"; 
 
 const acoustic: React.FC = () => {
-  return (
-    <div>
-      
-    </div>
-  );
+  return <Genres genre="어쿠스틱" />; 
 };
 
 export default acoustic;

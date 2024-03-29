@@ -8,7 +8,7 @@ const Login: React.FC = () => {
 
   const handleKakaoLogin = () => {
     axios
-      .get(`http://j10c205.p.ssafy.io:9002/api/v1/member/kakao`)
+      .get(`https://j10c205.p.ssafy.io/api/v1/member/kakao`)
       .then((res) => {
         console.log(res.data.dataBody);
         window.location.href = res.data.dataBody;

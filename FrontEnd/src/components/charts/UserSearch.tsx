@@ -32,7 +32,7 @@ const UserSearch: React.FC = () => {
         }
 
         const response = await axios.get(
-          `http://j10c205.p.ssafy.io:9002/api/v1/member/search/${term}`,
+          `https://j10c205.p.ssafy.io/api/v1/member/search/${term}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

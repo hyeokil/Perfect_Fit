@@ -1,9 +1,14 @@
 import { BASE_URL } from "@/constants/api";
 import { getCookie } from "@/util/cookies";
+<<<<<<< HEAD
 import axios, {
   AxiosError,
   InternalAxiosRequestConfig,
 } from "axios";
+=======
+import axios, { AxiosError } from "axios";
+// type dataHeader = {
+>>>>>>> fffbcf1 (feat: FE 검색 기능 완료(아마도))
 
 axios.defaults.baseURL = `${BASE_URL}`;
 
@@ -43,6 +48,8 @@ const onRequestError = (error: AxiosError): Promise<AxiosError> => {
 instance.defaults.headers.common["Authorization"] = "";
 instance.interceptors.request.use(onRequest, onRequestError);
 
+
+
 instance.interceptors.response.use(
   (res) => {
     if (res.data.dataHeader.successCode === 0) {
@@ -50,6 +57,7 @@ instance.interceptors.response.use(
     }
   },
   (error: AxiosError<{ message: string; errorCode: string }>) => {
+
     switch (error.response?.status) {
       case 400: {
         console.log(
