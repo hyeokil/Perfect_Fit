@@ -33,6 +33,7 @@ spring:
         - 'classpath:/data_genre.sql'
         - 'classpath:/data_song.sql'
         - 'classpath:/data_my_list.sql'
+        - 'classpath:/data_song_count.sql'
         - 'classpath:/data_song_history.sql'
 
   # NoSQL setting
