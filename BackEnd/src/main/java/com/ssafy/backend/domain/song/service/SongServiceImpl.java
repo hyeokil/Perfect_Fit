@@ -90,7 +90,7 @@ public class SongServiceImpl implements SongService {
         GENRE_KEYWORDS.put("팝", Arrays.asList("팝", "팝록", "일렉트로팝", "팝포크", "팝 락", "포크팝", "포크 팝", "팝 포크", "어쿠스틱팝", "어쿠스틱 팝", "J-Pop", "틴팝", "스탠더드팝", "레게팝", "라틴팝", "틴 팝"));
         GENRE_KEYWORDS.put("록", Arrays.asList("록", "락", "모던록", "하드록", "블랙 메탈", "인디록", "록발라드", "비주얼록", "개러지록", "일렉트로닉록", "펑크(Punk) 록", "얼터너티브록", "포크록", "로큰롤", "소프트록", "소프트 락", "재즈록", "팝 락", "인디 락", "모던 락"));
         GENRE_KEYWORDS.put("힙합", Arrays.asList("힙합", "랩", "랩발라드", "웨스트코스트 힙합", "재즈힙합", "힙합소울", "인디힙합"));
-        GENRE_KEYWORDS.put("발라드", Arrays.asList("발라드", "미디엄 템포 발라드", "팝발라드"));
+        GENRE_KEYWORDS.put("발라드", Arrays.asList("발라드"));
         GENRE_KEYWORDS.put("댄스", Arrays.asList("댄스", "일렉트로닉", "하우스", "트랩/크렁크", "댄스팝", "댄스 팝", "댄스록"));
         GENRE_KEYWORDS.put("트로트", Arrays.asList("트로트"));
         GENRE_KEYWORDS.put("어쿠스틱", Arrays.asList("어쿠스틱팝", "포크", "인디 포크", "어덜트 컨템포러리 포크"));
@@ -105,28 +105,52 @@ public class SongServiceImpl implements SongService {
     @Override
     public List<SongChartResponseDto> getGenre100Songs(Long memberId, String genre) {
         List<String> searchGenres = GENRE_KEYWORDS.getOrDefault(genre, Arrays.asList(genre));
-//        System.out.println(searchGenres);
-        return songRepository.findGenre100(memberId, searchGenres)
-                .stream()
-                .map(song -> {
-                    Boolean myListDisplay = myListRepository.findByMemberIdAndSongId(memberId, song.getId())
-                            .map(MyList::getMyListDisplay)
-                            .orElse(false);
 
-                    return SongChartResponseDto.builder()
-                            .songId(song.getId())
-                            .songTitle(song.getSongTitle())
-                            .artist(song.getArtist().getName())
-                            .genre(song.getGenre().getName())
-                            .songUrl(song.getSongUrl())
-                            .songThumbnail(song.getSongThumbnail())
-                            .songReleaseDate(song.getSongReleaseDate())
-                            .SongView(song.getSongView())
-                            .songLength(song.getSongLength())
-                            .myListDisplay(myListDisplay)
-                            .build();
-                })
-                .collect(Collectors.toList());
+        if ("힙합".equals(genre) || "발라드".equals(genre)) {
+            return songRepository.findGenre100ById(memberId, searchGenres)
+                    .stream()
+                    .map(song -> {
+                        Boolean myListDisplay = myListRepository.findByMemberIdAndSongId(memberId, song.getId())
+                                .map(MyList::getMyListDisplay)
+                                .orElse(false);
+
+                        return SongChartResponseDto.builder()
+                                .songId(song.getId())
+                                .songTitle(song.getSongTitle())
+                                .artist(song.getArtist().getName())
+                                .genre(song.getGenre().getName())
+                                .songUrl(song.getSongUrl())
+                                .songThumbnail(song.getSongThumbnail())
+                                .songReleaseDate(song.getSongReleaseDate())
+                                .SongView(song.getSongView())
+                                .songLength(song.getSongLength())
+                                .myListDisplay(myListDisplay)
+                                .build();
+                    })
+                    .collect(Collectors.toList());
+        } else {
+            return songRepository.findGenre100ByView(memberId, searchGenres)
+                    .stream()
+                    .map(song -> {
+                        Boolean myListDisplay = myListRepository.findByMemberIdAndSongId(memberId, song.getId())
+                                .map(MyList::getMyListDisplay)
+                                .orElse(false);
+
+                        return SongChartResponseDto.builder()
+                                .songId(song.getId())
+                                .songTitle(song.getSongTitle())
+                                .artist(song.getArtist().getName())
+                                .genre(song.getGenre().getName())
+                                .songUrl(song.getSongUrl())
+                                .songThumbnail(song.getSongThumbnail())
+                                .songReleaseDate(song.getSongReleaseDate())
+                                .SongView(song.getSongView())
+                                .songLength(song.getSongLength())
+                                .myListDisplay(myListDisplay)
+                                .build();
+                    })
+                    .collect(Collectors.toList());
+        }
     }
 
 
