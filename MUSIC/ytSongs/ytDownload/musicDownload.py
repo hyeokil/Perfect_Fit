@@ -3,6 +3,7 @@ import pymysql
 import pymysql.cursors
 from pytube import Search, YouTube
 from youtubesearchpython import VideosSearch
+import re
 
 conn = pymysql.connect(host='127.0.0.1', port=3306, user='ssafy', password='ssafy', database='perfectfit',
                                  charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
@@ -18,23 +19,23 @@ try:
 
         # 가져온 sql문 루프
         for idx, res in enumerate(result, start=1):
-            if idx <= 13:
-                print(idx)
-                continue
-
             start = time.time()
 
             artist = res['name'].strip()
             title = res['song_title'].strip()
             song_url = res['song_url']
             song_origin_url = "www.youtube.com/watch?v=" + res['song_video_id']
-            print(song_url)
-            print(song_origin_url)
+
+            # 파일명으로 사용할 수 없는 특수문자 치환
+            title = re.sub(r'[\\/:*?"<>|]', ' ', title)
+
+            print(f'{title}')
+            continue
 
             mrYT = YouTube(song_url)  # MR용 URL
             originYT = YouTube(song_origin_url)  # 원본용 URL
-            print(mrYT)
-            print(originYT)
+            # print(mrYT)
+            # print(originYT)
 
             # 1. 일반 다운로드 - 가능한 최고 해상도
             originStreams = originYT.streams.get_highest_resolution()  # 다운로드 가능한 최고 해상도
@@ -55,8 +56,8 @@ try:
             mrName = f'[MR] {artist} - {title}.wav'
 
             # 용도에 맞는 다운로드 경로
-            originStreams.download(filename=originName, output_path='../downloads/Origin')
-            mrStreams.download(filename=mrName, output_path='../downloads/MR')
+            # originStreams.download(filename=originName, output_path='../downloads/Origin')
+            # mrStreams.download(filename=mrName, output_path='../downloads/MR')
             end = time.time()
             print(f"{idx}번 째 다운로드 경과 시간 -> {round(end - start, 2)}초")
             print("--------------------------------------")
@@ -71,6 +72,8 @@ finally:
 ###########################################
 '''
 [ 예외 케이스 ]
+0. 다운로드 폴더 외부로 바꾸기 -> 용량
+
 1. FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\SSAFY\\Desktop\\repos\\song\\S10P22C205\\MUSIC\\ytSongs\\ytDownload\\../downloads/Origin\\[Origin] 기리보이 - 2000/90 .wav'
 - 파일명으로 들어가는데, "/"를 사용할 수 없음.
 "\ / : * ? " < > |"
