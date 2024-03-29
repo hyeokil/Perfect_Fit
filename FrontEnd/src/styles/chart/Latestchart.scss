@@ -1,0 +1,43 @@
+.latest-container {
+  margin: 10px;
+  margin-top: 20px;
+  .latest-content {
+    border-radius: 20px;
+    background-color: #f3f3f3;
+  }
+  .latest-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+    .latest-song {
+      display: flex;
+      border: 1px solid #9f9f9f;
+      border-radius: 10px;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      width: 90%;
+      .latest-song-info {
+        margin-left: 15px;
+        white-space: nowrap; /* 한 줄만 표시하도록 설정 */
+        overflow: hidden; /* 내용이 넘칠 때 숨김 처리 */
+        text-overflow: ellipsis; /* 넘친 내용에 대해 "..."으로 가려지도록 설정 */
+        p {
+          font-size: 13px;
+          color: #8b8b8b;
+          
+        }
+      }
+      .latest-song-like {
+        margin-left: auto;
+        img {
+          width: 12px;
+        }
+      }
+    }
+    img {
+      width: 50px;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import styles from "@styles/layout/header.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faX, faArrowLeft, faSearch, faCog } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 /**
@@ -13,9 +13,9 @@ type HeaderProps = {
   // 타이틀
   title: string;
   // 뒤로가기=back or 닫기 = close
-  state: string;
+  state: ("back" | "search" | "setting" | "close")[];
   // 닫기 버튼 클릭 시 이동 할 페이지 주소
-  page: string;
+  page?: string;
 };
 
 const Header = (props: HeaderProps) => {
@@ -23,15 +23,29 @@ const Header = (props: HeaderProps) => {
   return (
     <header className={styles.wrapper}>
       <div>
-        {props.state === "back" && (
+        {props.state.includes("back") && (
           <FontAwesomeIcon
             icon={faArrowLeft}
             className={styles.back}
             onClick={() => navigate(-1)}
           />
         )}
+        {props.state.includes("search") && (
+          <FontAwesomeIcon 
+            icon={faSearch}
+            className={styles.search}
+            onClick={() => navigate(`/search`)}
+          />
+        )}
+        {props.state.includes("setting") && (
+          <FontAwesomeIcon 
+            icon={faCog}
+            className={styles.setting}
+            onClick={() => navigate(`/setting`)}
+          />
+        )}
         <p className={styles.title}>{props.title}</p>
-        {props.state === "close" && (
+        {props.state.includes("close") && (
           <div className={styles.close}>
             <FontAwesomeIcon
               icon={faX}
