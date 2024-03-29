@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import SwipeableViews from "react-swipeable-views";
 import "@/styles/chart/TabMenu.scss";
 
 interface TabMenuItem {
@@ -18,7 +19,7 @@ const TabMenu: React.FC<TabMenuProps> = ({ items, localStorageKey }) => {
   });
 
   useEffect(() => {
-    const storedTab = localStorage.getItem("selectedTab");
+    const storedTab = localStorage.getItem(localStorageKey);
     if (storedTab !== null) {
       setCurrentTab(parseInt(storedTab));
     }
@@ -42,11 +43,14 @@ const TabMenu: React.FC<TabMenuProps> = ({ items, localStorageKey }) => {
           </li>
         ))}
       </div>
-      <div>
-        {/* 선택된 탭에 해당하는 컴포넌트 렌더링 */}
-        {currentTab !== null &&
-          React.createElement(items[currentTab].component)}
-      </div>
+      <SwipeableViews
+        index={currentTab || 0}
+        onChangeIndex={(index: number) => selectMenuHandler(index)}
+      >
+        {items.map((item, index) => (
+          <div key={index}>{React.createElement(item.component)}</div>
+        ))}
+      </SwipeableViews>
     </>
   );
 };
