@@ -25,4 +25,7 @@ public class SongHistory extends BaseEntity {
     private Song song;
 
 
+    public Long getSongId() {
+        return song.getId();
+    }
 }
