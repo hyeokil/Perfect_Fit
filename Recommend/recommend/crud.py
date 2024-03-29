@@ -10,15 +10,6 @@ from .models import Song, Reels, ReelsPlayTime, Member
 from decimal import Decimal
 
 
-def get_song_by_id(db: Session, song_id: int):
-    return db.query(models.Song).filter(models.Song.id == song_id).first()
-# models.Item을 사용하여 아이템을 조회 Item모델을 정의해아 한다.
-
-def get_user_reels_play_time(db: Session, user_id: int):
-    user_reels_play_times = db.query(models.ReelsPlayTime).filter(models.ReelsPlayTime.member_id == user_id).all()
-    return user_reels_play_times
-
-
 def fetch_data(db: Session):
     results = db.query(
         ReelsPlayTime.member_id.label("watcher_id"),
@@ -30,10 +21,7 @@ def fetch_data(db: Session):
     ).join(Song, Reels.song_id == Song.id
            ).group_by(ReelsPlayTime.member_id, Song.artist_id, Song.genre_id, Reels.member_id
                              ).all()
-    # print('여기야여기',results[0])
     return results
-
-
 
 
 def create_dataframe(results):
@@ -42,7 +30,6 @@ def create_dataframe(results):
         modified_row = list(row)
         modified_row[-1] = float(modified_row[-1]) if isinstance(modified_row[-1], Decimal) else modified_row[-1]
         modified_results.append(modified_row)
-
     # for row in modified_results:
         # print('나와라',[type(value) for value in row], row)
         # print(modified_results)
@@ -50,16 +37,11 @@ def create_dataframe(results):
     # 조회한 데이터를 DataFrame으로 변환
     data = pd.DataFrame(modified_results, columns=["member_id", "artist_id", "genre_id", "creator_id", "total_play_time"])
 
-    # 데이터 후처리 및 변환 작업을 진행할 수 있습니다.
-    # 예를 들어, artist_id, genre_id, creator_id를 'category' 컬럼으로 통합하고,
-    # 이에 따라 total_play_time을 집계할 수 있습니다.
-
     return data
 
 
 def calculate_similarity(df_watch_times):
-    # df_watch_times는 사용자별 비디오 시청 시간이 포함된 DataFrame입니다.
-    # 예: 각 열은 비디오를 나타내고, 각 행은 사용자를 나타냅니다.
+    # df_watch_times는 사용자별 비디오 시청 시간이 포함된 DataFrame
     similarity_matrix = cosine_similarity(df_watch_times)
     return pd.DataFrame(similarity_matrix, index=df_watch_times.index, columns=df_watch_times.index)
 
@@ -75,27 +57,6 @@ def recommend_videos_for_user(user_id, df_watch_times, similarity_matrix, num_re
     recommended_scores = recommended_scores[~watch_videos]
     return recommended_scores.sort_values(ascending=False).head(num_recommendation)
 
-
-# def fetch_user_preferences(db: Session, member_id: int):
-#     one_month_ago = datetime.now() - timedelta(days=30)
-#
-#     query = db.query(
-#         Reels.member_id.label("creator_id"),
-#         Song.artist_id,
-#         Song.genre_id,
-#         func.sum(ReelsPlayTime.play_time).label("total_play_time")
-#
-#     ).join(Reels, ReelsPlayTime.reels_id == Reels.id
-#            ).join(Song, Reels.song_id == Song.id
-#                   ).filter(
-#         and_(
-#             ReelsPlayTime.member_id == member_id,
-#             # ReelsPlayTime.create_at >= one_month_ago
-#         )
-#     ).group_by(Reels.member_id, Song.artist_id, Song.genre_id
-#                ).order_by(func.sum(ReelsPlayTime.play_time).desc())
-#     results = query.all()
-#     return results
 
 def fetch_user_preferences(db: Session, member_id: int):
 
@@ -132,24 +93,6 @@ def identify_preferences(results, n=3):
     return {"artist_id": artist_pref.index.tolist(), "genre_id": genre_pref.index.tolist(), "creator_id": creator_pref.index.tolist()}
 
 
-# def calculate_content_based_score(df_videos, user_prefer, member_id, db: Session):
-#     user_preferences_data = fetch_user_preferences(db, member_id)
-#     user_prefer = identify_preferences(user_preferences_data)
-#     scores = pd.Series(0, index=df_videos.index)
-#
-#     for index, video in df_videos.iterrows():
-#         score = 0
-#         if video['genre_id'] in user_prefer['genre_id']:
-#             score += 1
-#         if video['artist_id'] in user_prefer['artist_id']:
-#             score += 1
-#         if video['creator_id'] in user_prefer['creator_id']:
-#             score += 1
-#         # scores[video['Id']] = score
-#         scores.at[index] = score
-#
-#     return scores
-
 def calculate_content_based_score(df_videos, member_id, db: Session):
     user_preferences_data = fetch_user_preferences(db, member_id)
     # 리스트를 DataFrame으로 변환
@@ -173,31 +116,6 @@ def calculate_content_based_score(df_videos, member_id, db: Session):
         scores.at[index] = score
 
     return scores
-
-
-# def generate_hybrid_recommendations(member_id, db: Session, n_recommendations=200):
-#     watch_data = fetch_data(db)
-#     df_watch_times = create_dataframe(watch_data)
-#
-#     # 유사도 행렬 계산
-#     similarity_matrix = calculate_similarity(df_watch_times)
-#
-#     #협업 필터링 점수 생성
-#     collaborative_scores = recommend_videos_for_user(member_id, df_watch_times, similarity_matrix, n_recommendations)
-#     print('몇점', collaborative_scores)
-#     # 콘텐츠 기반 필터링 점수 생성을 위한 사용자 선호도 데이터
-#     member_preferences = fetch_user_preferences(db, member_id)
-#     df_preferences = create_dataframe(member_preferences)
-#
-#     # 콘텐츠 기반 필터링 점수 생성
-#     content_scores = calculate_content_based_score(df_preferences, member_preferences, member_id, db)
-#     print('너는', content_scores)
-#     # 하이브리드 점수 결합
-#     final_scores = (collaborative_scores + content_scores) / 2
-#
-#     # 최종 추천 리스트 생성 및 반환
-#     recommendations = final_scores.sort_values(ascending=False).head(n_recommendations)
-#     return recommendations
 
 
 def combine_scores(collab_scores, content_scores):
