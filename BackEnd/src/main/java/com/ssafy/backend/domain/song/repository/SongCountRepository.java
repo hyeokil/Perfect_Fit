@@ -13,8 +13,7 @@ import java.util.List;
 @Repository
 public interface SongCountRepository extends JpaRepository<SongCount, Long> {
 
-    @Query(value = "SELECT * FROM song_history WHERE created_at >= NOW() - INTERVAL 1 HOUR", nativeQuery = true)
-    List<SongHistory> findHistory();
-
+    @Query(value = "SELECT song_id, COUNT(*) AS count FROM song_history WHERE created_at >= NOW() - INTERVAL 1 HOUR GROUP BY song_id", nativeQuery = true)
+    List<SongCount> findCountByHour();
 
 }

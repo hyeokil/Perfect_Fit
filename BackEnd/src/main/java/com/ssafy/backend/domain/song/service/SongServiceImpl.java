@@ -105,7 +105,6 @@ public class SongServiceImpl implements SongService {
     @Override
     public List<SongChartResponseDto> getGenre100Songs(Long memberId, String genre) {
         List<String> searchGenres = GENRE_KEYWORDS.getOrDefault(genre, Arrays.asList(genre));
-
         if ("힙합".equals(genre) || "발라드".equals(genre)) {
             return songRepository.findGenre100ById(memberId, searchGenres)
                     .stream()

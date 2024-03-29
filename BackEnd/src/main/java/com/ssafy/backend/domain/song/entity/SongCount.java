@@ -6,6 +6,7 @@ import lombok.*;
 @Entity
 @Getter
 @Builder
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class SongCount {
@@ -21,7 +22,4 @@ public class SongCount {
     private Long count;
 
 
-    public void setCount(long count) {
-        this.count = count;
-    }
 }
