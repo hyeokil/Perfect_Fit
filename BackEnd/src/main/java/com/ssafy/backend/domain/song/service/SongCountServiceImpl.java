@@ -19,16 +19,16 @@ public class SongCountServiceImpl implements SongCountService {
     private final SongRepository songRepository;
 
 
-    @Override
-    public void setSongCount(Long songId) {
-        SongCount songCount = songCountRepository.findById(songId).orElseGet(() -> {
-            Song song = songRepository.findById(songId).orElseThrow();
-            return SongCount.builder()
-                    .song(song)
-                    .count(0L)
-                    .build();
-
-        });
-    }
+//    @Override
+//    public void setSongCount(Long songId) {
+//        SongCount songCount = songCountRepository.findById(songId).orElseGet(() -> {
+//            Song song = songRepository.findById(songId).orElseThrow();
+//            return SongCount.builder()
+//                    .song(song)
+//                    .count(0L)
+//                    .build();
+//
+//        });
+//    }
 
 }

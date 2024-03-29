@@ -10,15 +10,11 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class SongCount {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "song_id")
-    private Song song;
+    // 복합키
+    @EmbeddedId
+    private SongCountId songId;
 
     // 초기값을 0으로 설정
-    private Long count;
+    private Long count = 0L;
 
 }
