@@ -1,6 +1,4 @@
 from datetime import timedelta, datetime
-
-
 from sqlalchemy import func, and_
 from sqlalchemy.orm import Session
 from . import models
