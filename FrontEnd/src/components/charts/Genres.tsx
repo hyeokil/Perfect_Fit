@@ -92,12 +92,12 @@ const Genres: React.FC<GenreProps> = ({ genre }) => {
                   {song.myListDisplay ? (
                     <img
                       src="././src/assets/icon/chart/liketrue.png"
-                      alt="좋아요"
+                      alt="찜하기"
                     />
                   ) : (
                     <img
                       src="././src/assets/icon/chart/likefalse.png"
-                      alt="좋아요 취소"
+                      alt="찜하기 취소"
                     />
                   )}
                 </div>
