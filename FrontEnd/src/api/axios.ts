@@ -1,14 +1,9 @@
 import { BASE_URL } from "@/constants/api";
 import { getCookie } from "@/util/cookies";
-<<<<<<< HEAD
 import axios, {
   AxiosError,
   InternalAxiosRequestConfig,
 } from "axios";
-=======
-import axios, { AxiosError } from "axios";
-// type dataHeader = {
->>>>>>> fffbcf1 (feat: FE 검색 기능 완료(아마도))
 
 axios.defaults.baseURL = `${BASE_URL}`;
 
