@@ -22,7 +22,7 @@ const KakaoRedirect: React.FC = () => {
     try {
       // 카카오 서버에 코드 전달하여 토큰 요청
       const response = await axios.get(
-        `http://j10c205.p.ssafy.io:9002/api/v1/member/kakao/login?code=${code}&prompt=login`
+        `https://j10c205.p.ssafy.io/api/v1/member/kakao/login?code=${code}&prompt=login`
       );
 
       // 토큰 받아오기 성공 시

@@ -1,11 +1,8 @@
-import React from 'react';
+import React from "react";
+import Genres from "../../charts/Genres"; 
 
 const dance: React.FC = () => {
-  return (
-    <div>
-      
-    </div>
-  );
+  return <Genres genre="댄스" />; 
 };
 
 export default dance;
