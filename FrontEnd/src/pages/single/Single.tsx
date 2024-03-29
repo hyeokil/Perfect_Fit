@@ -4,39 +4,65 @@ import styled from "styled-components";
 import styles from "@styles/single/Single.module.scss";
 import AlbumCover from "@/components/single/AlbumCover";
 import Controller from "@/components/sing/Controller";
+import Camera from "@/components/sing/Camera";
+import DisplayRecord from "@/components/sing/DisplayRecord";
 
 const Background = styled.div`
-  height: 100vh;
-  width: '100%';
-  /* position: absolute; */
-  /* top: 0;
-  left: 0; */
+  height: fit-content;
+  width: "100%";
+  position: relative;
   overflow: hidden;
-  z-index: -1;
-  /* background-image: url("https://mblogthumb-phinf.pstatic.net/MjAxOTA4MTFfMTA2/MDAxNTY1NTE2ODUyNDI4.C0IrEvRkqqKKpZHJszebfMRGK2moIn4GLkYVTKZu8V4g.b9MC4Chb1X8Lnyk2kjQ6g5Wa7PXSWt9kKbbGVRN8LGUg.PNG.azzi_01/%EC%86%8D%EC%83%81%ED%95%B4.png?type=w800");
-  background-size: cover; */
-  /* position: relative;
-  z-index: -1;
-  box-shadow:  0 0 20px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  filter: blur(5px);
-  backdrop-filter: blur(); */
-  /* filter: blur(5px); */
+  z-index: -999;
+  background-image: url("https://cdn.music-flo.com/image/v2/album/714/417/05/04/405417714_5fb63783_s.jpg?1605777283588/dims/resize/500x500/quality/90");
+  background-size: cover;
+  background-position: center;
+`;
+const Filter = styled.div`
+  position: absolute;
+  left: 0.56%;
+  right: -0.56%;
+  top: 11.88%;
+  bottom: 0.38%;
+
+  background: rgba(191, 191, 191, 0.05);
+  backdrop-filter: blur(10px);
+`;
+const ContentWrapper = styled.div`
+  position: relative;
+  z-index: 1; /* 배경 이미지 위로 올리기 */
 `;
 
+
 const Single = () => {
+  const info: MusicInfoType = {
+    songTitle: "Life Goes On",
+    artist: "방탄소년단",
+    genre: "힙합",
+    songUrl: "www.youtube.com/watch?v=cMqfPYCQXTY",
+    songThumbnail:
+      "https://cdn.music-flo.com/image/v2/album/714/417/05/04/405417714_5fb63783_s.jpg?1605777283588/dims/resize/500x500/quality/90",
+    songReleaseDate: "20201120",
+    songLength: "3:28",
+    myListDisplay: false,
+    songView: 536458370,
+  };
   return (
     <div>
       {/* title, state, page */}
       {/* page 부르기 메인 페이지로 이동하게 주소 수정 */}
       <Header title="싱글 모드" state="close" page="" />
+      <DisplayRecord />
       <Background>
-        <div className={styles.container}>
-          <AlbumCover />
-          <Lyrics />
-        </div>
+        {/* <Filter></Filter> */}
+        <ContentWrapper>
+          <Camera />
+          <div className={styles.container}>
+            <AlbumCover musicInfo={info} />
+            <Lyrics />
+          </div>
+        </ContentWrapper>
+        <Controller />
       </Background>
-      <Controller />
     </div>
   );
 };
