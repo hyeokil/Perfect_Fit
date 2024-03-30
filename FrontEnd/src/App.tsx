@@ -30,6 +30,8 @@ import Rnb from "./pages/chart/genres/rnb.tsx";
 import Ost from "./pages/chart/genres/ost.tsx";
 import Agitation from "./pages/chart/genres/agitation.tsx";
 import Trot from "./pages/chart/genres/trot.tsx";
+import RecordRtc from "./components/sing/RecordRtc.tsx";
+
 
 const App: React.FC = () => {
   return (
@@ -43,6 +45,7 @@ const App: React.FC = () => {
         <Route path="/voicetraining" element={<Voicetraining />} />
         <Route path="/record" element={<Record />} />
         <Route path="/single" element={<Single />} />
+        <Route path="/rtc" element={<RecordRtc />} />
         {/* 로그인 상태에 따라 수정하기 // 중첩 라우팅 사용하기 */}
         <Route element={<Layout />}>
           {/* 차트 */}

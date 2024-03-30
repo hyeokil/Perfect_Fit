@@ -1,6 +1,6 @@
 export type MusicInfoType = {
   songTitle: string,
-  artist: string | null,
+  artist: string,
   genre: string,
   songUrl: string ,
   songThumbnail: string,

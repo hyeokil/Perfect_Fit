@@ -6,6 +6,8 @@ import AlbumCover from "@/components/single/AlbumCover";
 import Controller from "@/components/sing/Controller";
 import Camera from "@/components/sing/Camera";
 import DisplayRecord from "@/components/sing/DisplayRecord";
+import { MusicInfoType } from "@/types/apiType";
+import SingRecorder from "@/components/sing/SingRecorder";
 
 const Background = styled.div`
   height: fit-content;
@@ -51,7 +53,8 @@ const Single = () => {
       {/* title, state, page */}
       {/* page 부르기 메인 페이지로 이동하게 주소 수정 */}
       <Header title="싱글 모드" state="close" page="" />
-      <DisplayRecord />
+      {/* <DisplayRecord /> */}
+      <SingRecorder />
       <Background>
         {/* <Filter></Filter> */}
         <ContentWrapper>
@@ -61,8 +64,8 @@ const Single = () => {
             <Lyrics />
           </div>
         </ContentWrapper>
-        <Controller />
       </Background>
+        <Controller />
     </div>
   );
 };

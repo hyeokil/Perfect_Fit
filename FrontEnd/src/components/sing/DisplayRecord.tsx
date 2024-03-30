@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const DisplayRecord = () => {
   const [stream, setStream] = useState<MediaStream | null>(null);
@@ -8,23 +8,25 @@ const DisplayRecord = () => {
   const [audioStream, setAudioStream] = useState<MediaStream | null>(null);
 
   const getMedia = async () => {
-    const options = {
+    const displayOptions = {
       video: true,
       audio: true
     };
 
+    const audioOptions = {
+      audio: true
+    };
+
     try {
-      const mediaStream = await navigator.mediaDevices.getDisplayMedia(options);
-      const audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-
-      setStream(mediaStream);
-      setAudioStream(audioStream);
-
+      const displayStream = await navigator.mediaDevices.getDisplayMedia(displayOptions);
+      const audioStream = await navigator.mediaDevices.getUserMedia(audioOptions);
+      // setStream(displayStream)
       const mixedStream = new MediaStream();
       audioStream.getAudioTracks().forEach(track => mixedStream.addTrack(track));
-      mediaStream.getVideoTracks().forEach(track => mixedStream.addTrack(track));
+      displayStream.getTracks().forEach(track => mixedStream.addTrack(track));
 
       setStream(mixedStream);
+      // setAudioStream(audioStream);
     } catch (err) {
       console.log(`Error: ${err}`);
     }
@@ -36,6 +38,7 @@ const DisplayRecord = () => {
       const media = new MediaRecorder(stream as MediaStream, {
         mimeType: "video/webm"
       });
+      media.ondataavailable = handleDataAvailable;
       media.start();
       setMediaRecorder(media);
     } catch(err) {
@@ -45,13 +48,15 @@ const DisplayRecord = () => {
 
   const stopRecord = () => {
     if (mediaRecorder !== null) {
-      mediaRecorder.ondataavailable = (e) => {
-        const url: string = URL.createObjectURL(e.data);
-        setVideoUrl(url);
-      };
       mediaRecorder.stop();
     } else {
       console.log('Recording not active');
+    }
+  };
+
+  const handleDataAvailable = (event: BlobEvent) => {
+    if (event.data && event.data.size > 0) {
+      setRecordedBlobs((prevBlobs) => [...prevBlobs, event.data]);
     }
   };
 
@@ -62,15 +67,22 @@ const DisplayRecord = () => {
 
     return () => {
       if (stream) {
-        stream?.getTracks().forEach((track) => track.stop());
+        stream.getTracks().forEach((track) => track.stop());
       }
     };
   }, [stream]);
 
+  useEffect(() => {
+    if (recordedBlobs.length > 0) {
+      const blob = new Blob(recordedBlobs, { type: 'video/webm' });
+      const url = URL.createObjectURL(blob);
+      setVideoUrl(url);
+    }
+  }, [recordedBlobs]);
+
   return (
     <div>
       <iframe src='https://www.youtube.com/embed/OvIk6BDkVE4' />
-      {/* <audio src='/src/assets/sounds/꽃길.mp3' controls autoPlay></audio> */}
       <button onClick={startRecord}>Start Recording</button>
       <button onClick={stopRecord}>Stop Recording</button>
       {videoUrl !== null &&
