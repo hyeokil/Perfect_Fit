@@ -5,8 +5,6 @@ from fastapi import FastAPI, Depends
 from . import crud, models
 from typing import List
 
-from .models import ResponseModel
-
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()

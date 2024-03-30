@@ -27,6 +27,8 @@ class Reels(Base):
     id = Column(Integer, primary_key=True, index=True)
     song_id = Column(Integer, ForeignKey('song.id'))
     member_id = Column(Integer, ForeignKey('member.id'))
+    time = Column(Integer)
+    path = Column(String)
     song = relationship('Song', back_populates="reels")
     member = relationship('Member', back_populates="reels")
     reels_play_time = relationship('ReelsPlayTime', back_populates="reels")
