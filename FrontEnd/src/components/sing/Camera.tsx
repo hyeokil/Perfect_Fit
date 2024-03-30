@@ -1,4 +1,6 @@
 import { useEffect, useRef } from "react";
+import styles from '@styles/sing/Camera.module.scss'
+
 
 const Camera = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -23,7 +25,7 @@ const Camera = () => {
   return (
     <div>
       {/* <button onClick={() => startCamera()}>녹화 시작@</button> */}
-      <video autoPlay muted ref={videoRef} width='100%' height='80%' style={{transform : 'scaleX(-1)'}} ></video>
+      <video autoPlay muted ref={videoRef} className={styles.video} ></video>
     </div>
   );
 };

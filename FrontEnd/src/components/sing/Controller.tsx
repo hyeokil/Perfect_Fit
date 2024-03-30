@@ -16,6 +16,7 @@ const Controller = () => {
   const shiftRef = useRef<PitchShifter | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
 
+
   useEffect(() => {
     audioCtxRef.current = new AudioContext();
     return () => {
@@ -32,16 +33,39 @@ const Controller = () => {
       const audioCtx = audioCtxRef.current;
       if (audioCtx) {
         const audioBuffer = await audioCtx.decodeAudioData(buffer);
+        // ---------------------------------------------------------
+        // const source = audioCtx.createBufferSource();
+        // source.buffer = audioBuffer;
+        // ---------------------------------------------------------
         const myShift = new PitchShifter(audioCtx, audioBuffer, 16384);
         myShift.tempo = tempo;
         myShift.pitch = pitch;
         shiftRef.current = myShift;
+        // ----------------------------------------------------------
+        // source.connect(myShift.getDestination());
+        // source.onended = handleAudioEnded; // 오디오가 끝날 때 호출될 함수
+        // myShift.on("ended", handleAudioEnded)
+        // ----------------------------------------------------------
         if (isPlaying) {
           myShift.connect(audioCtx.destination);
           audioCtx.resume();
         }
+        
+        // 모니터링을 시작합니다.
+        monitorPlayback(myShift, audioBuffer.duration);
       }
     }
+  };
+
+  const monitorPlayback = (source: PitchShifter, duration: number) => {
+    const checkEnded = () => {
+      if (audioCtxRef.current && audioCtxRef.current.currentTime >= duration) {
+        handleAudioEnded();
+      } else {
+        requestAnimationFrame(checkEnded);
+      }
+    };
+    checkEnded();
   };
 
   // 저장되어있는 파일 사용하기
@@ -64,6 +88,12 @@ const Controller = () => {
       }
     };
   }, []);
+
+  const handleAudioEnded = () => {
+    // 오디오가 끝났을 때 할 작업
+    setIsPlaying(false)
+    console.log('오디오가 끝났습니다.');
+  };
 
   const togglePlayback = () => {
     if (shiftRef.current) {

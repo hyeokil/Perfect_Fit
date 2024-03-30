@@ -8,64 +8,54 @@ import Camera from "@/components/sing/Camera";
 import DisplayRecord from "@/components/sing/DisplayRecord";
 import { MusicInfoType } from "@/types/apiType";
 import SingRecorder from "@/components/sing/SingRecorder";
-
-const Background = styled.div`
-  height: fit-content;
-  width: "100%";
-  position: relative;
-  overflow: hidden;
-  z-index: -999;
-  background-image: url("https://cdn.music-flo.com/image/v2/album/714/417/05/04/405417714_5fb63783_s.jpg?1605777283588/dims/resize/500x500/quality/90");
-  background-size: cover;
-  background-position: center;
-`;
-const Filter = styled.div`
-  position: absolute;
-  left: 0.56%;
-  right: -0.56%;
-  top: 11.88%;
-  bottom: 0.38%;
-
-  background: rgba(191, 191, 191, 0.05);
-  backdrop-filter: blur(10px);
-`;
-const ContentWrapper = styled.div`
-  position: relative;
-  z-index: 1; /* 배경 이미지 위로 올리기 */
-`;
-
+import Toggle from "@/components/sing/Toggle";
+import { useRef, useState } from "react";
+import { VideoId } from "@/util/videoUrl";
+import YouTube, { YouTubePlayer } from "react-youtube";
+import SaveAlert from "@/components/sing/SaveAlert";
 
 const Single = () => {
+  const musicRef = useRef<HTMLAudioElement>(null)
+  const [camera, setCamera] = useState<boolean>(true);
   const info: MusicInfoType = {
-    songTitle: "Life Goes On",
-    artist: "방탄소년단",
-    genre: "힙합",
-    songUrl: "www.youtube.com/watch?v=cMqfPYCQXTY",
+    songTitle: "Star",
+    artist: "폴킴",
+    genre: "발라드",
+    songUrl: "https://www.youtube.com/watch?v=i9YiO08yYgg",
     songThumbnail:
-      "https://cdn.music-flo.com/image/v2/album/714/417/05/04/405417714_5fb63783_s.jpg?1605777283588/dims/resize/500x500/quality/90",
-    songReleaseDate: "20201120",
-    songLength: "3:28",
+      "https://cdn.music-flo.com/image/v2/album/943/280/23/04/423280943_65fa99ed_s.jpg?1710922227367/dims/resize/500x500/quality/90",
+    songReleaseDate: "20240321",
+    songLength: "3:22",
     myListDisplay: false,
-    songView: 536458370,
+    songView: 45929,
   };
+  const videoUrl = VideoId(info.songUrl);
+  console.log(videoUrl);
   return (
     <div>
       {/* title, state, page */}
       {/* page 부르기 메인 페이지로 이동하게 주소 수정 */}
       <Header title="싱글 모드" state="close" page="" />
       {/* <DisplayRecord /> */}
-      <SingRecorder />
-      <Background>
-        {/* <Filter></Filter> */}
-        <ContentWrapper>
-          <Camera />
-          <div className={styles.container}>
-            <AlbumCover musicInfo={info} />
-            <Lyrics />
+      {/* <SingRecorder /> */}
+      <div className={styles.content}>
+        {camera ? (
+          <div className={styles.albumcover}>
+            <Camera />
           </div>
-        </ContentWrapper>
-      </Background>
-        <Controller />
+        ) : (
+          <div className={styles.albumcover}>
+            <AlbumCover musicInfo={info} />
+          </div>
+        )}
+        <Lyrics />
+        {/* <YouTube videoId={videoUrl} className={styles.player} /> */}
+        <div>
+          <Toggle camera={camera} setCamera={setCamera} />
+          <Controller />
+        </div>
+      </div>
+      <SaveAlert />
     </div>
   );
 };
