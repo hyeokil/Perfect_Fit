@@ -1,0 +1,83 @@
+.genre {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.genre-border {
+  width: 30%; /* 각 요소의 너비는 50% - 20px */
+  height: 100px;
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* 각 장르에 맞는 그라데이션 색상을 적용 */
+.genre-border.pop {
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+}
+
+.genre-border.rock {
+  background: linear-gradient(to right, #ff4e50, #fc913a);
+}
+
+.genre-border.hiphop {
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+}
+
+.genre-border.acoustic {
+  background: linear-gradient(to right, #00b09b, #96c93d);
+}
+
+.genre-border.jazz {
+  background: linear-gradient(to right, #4568dc, #b06ab3);
+}
+
+.genre-border.ballade {
+  background: linear-gradient(to right, #1d976c, #93f9b9);
+}
+
+.genre-border.dance {
+  background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
+}
+
+.genre-border.rnb {
+  background: linear-gradient(to right, #f12711, #f5af19);
+}
+
+.genre-border.ost {
+  background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
+}
+
+.genre-border.agitation {
+  background: linear-gradient(to right, #159957, #155799);
+}
+
+.genre-border.trot {
+  background: linear-gradient(to right, #ff758c, #ff7eb3);
+}
+
+.genre-border:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.genre-border h3 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #f7f7f7;
+}
+
+.genre-border p {
+  font-size: 1rem;
+  color: #777;
+}
+
+h2 {
+  padding: 15px;
+}

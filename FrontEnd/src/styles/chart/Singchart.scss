@@ -1,6 +1,9 @@
 .sing-container {
   margin: 10px;
   margin-top: 20px;
+  h3 {
+    margin-bottom: 10px;
+  }
   .sing-content {
     border-radius: 20px;
     background-color: #f3f3f3;
@@ -18,19 +21,22 @@
       margin-top: 5px;
       margin-bottom: 5px;
       width: 90%;
+      
       .sing-song-info {
         margin-left: 15px;
+        // border: 1px solid blue;
+        width: 70%;
         white-space: nowrap; /* 한 줄만 표시하도록 설정 */
         overflow: hidden; /* 내용이 넘칠 때 숨김 처리 */
         text-overflow: ellipsis; /* 넘친 내용에 대해 "..."으로 가려지도록 설정 */
         p {
           font-size: 13px;
           color: #8b8b8b;
-          
         }
       }
       .sing-song-like {
         margin-left: auto;
+        
         img {
           width: 12px;
         }
@@ -39,5 +45,6 @@
     img {
       width: 50px;
     }
+
   }
 }

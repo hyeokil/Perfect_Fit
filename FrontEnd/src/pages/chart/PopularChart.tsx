@@ -3,9 +3,20 @@ import React, { useEffect, useState } from "react";
 import "@/styles/chart/Singchart.scss";
 import axios from "axios";
 import Loading from "@/components/common/Loading";
+import BottomSheet from "@/components/charts/BottomSheet";
 
 const PopularChart: React.FC = () => {
   const [popularSongs, setPopularSongs] = useState<any[] | null>(null);
+  const [selectedSong, setSelectedSong] = useState<any | null>(null);
+
+  const openBottomSheet = (song: any) => {
+    console.log(song);
+    setSelectedSong(song);
+  };
+
+  const closeBottomSheet = () => {
+    setSelectedSong(null);
+  };
 
   useEffect(() => {
     const fetchLatestSongs = async () => {
@@ -88,7 +99,7 @@ const PopularChart: React.FC = () => {
             {popularSongs.map((song, index) => (
               <div key={index} className="sing-song">
                 <img src={song.songThumbnail} alt={song.songThumbnail} />
-                <div className="sing-song-info">
+                <div className="sing-song-info" onClick={() => openBottomSheet(song)}>
                   <h3>{song.songTitle}</h3>
                   <p>{song.artist}</p>
                 </div>
@@ -110,6 +121,30 @@ const PopularChart: React.FC = () => {
                 </div>
               </div>
             ))}
+            {/* 바텀시트 */}
+            <BottomSheet
+              isOpen={selectedSong !== null}
+              onClose={closeBottomSheet}
+              backgroundImageUrl={selectedSong && selectedSong.songThumbnail} // 배경 이미지 URL을 전달
+            >
+              {selectedSong && (
+                <div className="song-bottom">
+                  {/* 선택된 노래의 정보 표시 */}
+                  <img
+                    src={selectedSong.songThumbnail}
+                    alt={selectedSong.songTitle}
+                  />
+                  <div className="song-info">
+                    <h2>{selectedSong.songTitle}</h2>
+                    <p>{selectedSong.artist}</p>
+                  </div>
+                </div>
+              )}
+              <div className="song-button">
+                <button>솔로 모드</button>
+                <button>듀엣 모드</button>
+              </div>
+            </BottomSheet>
           </div>
         </div>
       </div>

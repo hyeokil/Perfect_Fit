@@ -1,6 +1,9 @@
 import Loading from "@/components/common/Loading";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import BottomSheet from "./BottomSheet";
+import "@/styles/chart/Singchart.scss";
+import Header from "../layout/Header";
 
 interface Song {
   songId: number;
@@ -16,6 +19,16 @@ interface GenreProps {
 
 const Genres: React.FC<GenreProps> = ({ genre }) => {
   const [songs, setSongs] = useState<Song[] | null>(null);
+  const [selectedSong, setSelectedSong] = useState<any | null>(null);
+
+  const openBottomSheet = (song: any) => {
+    console.log(song);
+    setSelectedSong(song);
+  };
+
+  const closeBottomSheet = () => {
+    setSelectedSong(null);
+  };
 
   useEffect(() => {
     const fetchSongs = async () => {
@@ -75,13 +88,18 @@ const Genres: React.FC<GenreProps> = ({ genre }) => {
 
   return (
     <div>
+      <Header title={genre} state={["back", "close"]} />
       <div className="sing-container">
         <div className="sing-content">
           <div className="sing-chart">
+            {/* 최신곡 차트들 여기에 쫙 뿌리기 */}
             {songs.map((song, index) => (
               <div key={index} className="sing-song">
                 <img src={song.songThumbnail} alt={song.songThumbnail} />
-                <div className="sing-song-info">
+                <div
+                  className="sing-song-info"
+                  onClick={() => openBottomSheet(song)}
+                >
                   <h3>{song.songTitle}</h3>
                   <p>{song.artist}</p>
                 </div>
@@ -91,18 +109,42 @@ const Genres: React.FC<GenreProps> = ({ genre }) => {
                 >
                   {song.myListDisplay ? (
                     <img
-                      src="././src/assets/icon/chart/liketrue.png"
-                      alt="찜하기"
+                      src="/src/assets/icon/chart/liketrue.png"
+                      alt="좋아요"
                     />
                   ) : (
                     <img
-                      src="././src/assets/icon/chart/likefalse.png"
-                      alt="찜하기 취소"
+                      src="/src/assets/icon/chart/likefalse.png"
+                      alt="좋아요 취소"
                     />
                   )}
                 </div>
               </div>
             ))}
+            {/* 바텀시트 */}
+            <BottomSheet
+              isOpen={selectedSong !== null}
+              onClose={closeBottomSheet}
+              backgroundImageUrl={selectedSong && selectedSong.songThumbnail} // 배경 이미지 URL을 전달
+            >
+              {selectedSong && (
+                <div className="song-bottom">
+                  {/* 선택된 노래의 정보 표시 */}
+                  <img
+                    src={selectedSong.songThumbnail}
+                    alt={selectedSong.songTitle}
+                  />
+                  <div className="song-info">
+                    <h2>{selectedSong.songTitle}</h2>
+                    <p>{selectedSong.artist}</p>
+                  </div>
+                </div>
+              )}
+              <div className="song-button">
+                <button>솔로 모드</button>
+                <button>듀엣 모드</button>
+              </div>
+            </BottomSheet>
           </div>
         </div>
       </div>

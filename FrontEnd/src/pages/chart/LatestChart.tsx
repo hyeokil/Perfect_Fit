@@ -11,7 +11,6 @@ const LatestChart: React.FC = () => {
 
   const openBottomSheet = (song: any) => {
     console.log(song);
-    console.log("클릭 됨");
     setSelectedSong(song);
   };
 
@@ -99,13 +98,12 @@ const LatestChart: React.FC = () => {
           <div className="sing-chart">
             {/* 최신곡 차트들 여기에 쫙 뿌리기 */}
             {latestSongs.map((song, index) => (
-              <div
-                key={index}
-                className="sing-song"
-                onClick={() => openBottomSheet(song)}
-              >
+              <div key={index} className="sing-song">
                 <img src={song.songThumbnail} alt={song.songThumbnail} />
-                <div className="sing-song-info">
+                <div
+                  className="sing-song-info"
+                  onClick={() => openBottomSheet(song)}
+                >
                   <h3>{song.songTitle}</h3>
                   <p>{song.artist}</p>
                 </div>
@@ -131,15 +129,25 @@ const LatestChart: React.FC = () => {
             <BottomSheet
               isOpen={selectedSong !== null}
               onClose={closeBottomSheet}
+              backgroundImageUrl={selectedSong && selectedSong.songThumbnail} // 배경 이미지 URL을 전달
             >
               {selectedSong && (
-                <div>
+                <div className="song-bottom">
                   {/* 선택된 노래의 정보 표시 */}
-                  <h3>{selectedSong.songTitle}</h3>
-                  <p>{selectedSong.artist}</p>
-                  {/* 추가적인 기능 등 */}
+                  <img
+                    src={selectedSong.songThumbnail}
+                    alt={selectedSong.songTitle}
+                  />
+                  <div className="song-info">
+                    <h2>{selectedSong.songTitle}</h2>
+                    <p>{selectedSong.artist}</p>
+                  </div>
                 </div>
               )}
+              <div className="song-button">
+                <button>솔로 모드</button>
+                <button>듀엣 모드</button>
+              </div>
             </BottomSheet>
           </div>
         </div>
