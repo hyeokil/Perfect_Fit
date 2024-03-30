@@ -5,7 +5,11 @@
   // border: 1px solid black;
   margin-top: 5%;
   margin-bottom: 8%;
-  width: 80%;
+  // width: 80%;
+  width: 100%;
+  max-width: 300px; /* AlbumCover의 최대 너비를 설정 */
+  height: 100%; /* 높이는 내용에 따라 자동으로 조정되도록 설정 */
+
   img {
     // border: 1px solid red;
     width: 100px;

@@ -1,18 +1,14 @@
-
-
 .lyricsbox {
   border: 1px solid gray;
-  // position: absolute;
-  // z-index: 1;
   width: 90%;
   height: fit-content;
   padding-top: 10%;
   padding-bottom: 10%;
   p {
     text-align: center;
-    color: #0086D1;
+    color: #0086d1;
     margin: 3%;
     font-size: large;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: "Noto Sans KR", sans-serif;
   }
 }
