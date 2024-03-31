@@ -19,7 +19,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   };
 
   const handleContentClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation(); 
+    event.stopPropagation();
   };
 
   return (
@@ -36,6 +36,10 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
           }}
         >
           <div className="song-thumbnail">{children}</div>
+          <div className="song-button">
+            <button>솔로 모드</button>
+            <button>듀엣 모드</button>
+          </div>
         </div>
         {isOpen && (
           <div

@@ -3,25 +3,25 @@ import React, { useEffect, useState } from "react";
 
 const UserSearch: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [recentSearches, setResentSearches] = useState<string[]>([]);
-  const [searchResults, setSearchResults] = useState<any[]>([]); // 검색 결과를 저장할 배열
-  const [showRecentSearches, setShowRecentSearhces] = useState<boolean>(true); // 최근 검색어 on off
-  const [showResults, setShowResults] = useState<boolean>(false); // 검색 결과 on off
+  const [recentSearches, setRecentSearches] = useState<Set<string>>(new Set());
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [showRecentSearches, setShowRecentSearches] = useState<boolean>(true);
+  const [showResults, setShowResults] = useState<boolean>(false);
 
-  // 새고해도 남아있게
+  // 로컬 스토리지에서 최근 검색어 불러오기
   useEffect(() => {
     const storedSearches = localStorage.getItem("userRecentSearches");
     if (storedSearches) {
-      setResentSearches(JSON.parse(storedSearches));
+      setRecentSearches(new Set(JSON.parse(storedSearches)));
     }
   }, []);
 
-  // 검색 입력
+  // 검색 입력 핸들러
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
-  // 유저 api
+  // 유저 api 검색 실행
   const executeSearch = async (term: string) => {
     if (term.trim() !== "") {
       try {
@@ -39,18 +39,15 @@ const UserSearch: React.FC = () => {
             },
           }
         );
-        console.log(response.data.dataBody);
-        setSearchResults(response.data.dataBody);
-        setShowResults(true); // 검색 완료시 검색 결과 화면 on
-        setShowRecentSearhces(false); // 검색 완료시 최근 검색어 off
 
-        // 검색을 실행할 때마다 최신 검색어를 로컬 저장소에 저장합니다.
-        const updatedSearches = [term, ...recentSearches.slice(0, 10)];
-        setResentSearches(updatedSearches);
-        localStorage.setItem(
-          "userRecentSearches",
-          JSON.stringify(updatedSearches)
-        );
+        setSearchResults(response.data.dataBody);
+        setShowResults(true);
+        setShowRecentSearches(false);
+
+        // 최근 검색어 업데이트
+        const updatedSearches = new Set([term, ...Array.from(recentSearches)].slice(0, 10));
+        setRecentSearches(updatedSearches);
+        localStorage.setItem("userRecentSearches", JSON.stringify(Array.from(updatedSearches)));
       } catch (error) {
         console.error("검색 실패:", error);
       }
@@ -58,41 +55,33 @@ const UserSearch: React.FC = () => {
   };
 
   // 검색 실행
-  const execueSearch = () => {
+  const executeSearchAndUpdate = () => {
     if (searchTerm.trim() !== "") {
-      const updateSearches = [searchTerm, ...recentSearches.slice(0, 10)]; // 10개까지 저장
-      setResentSearches(updateSearches);
-      localStorage.setItem(
-        "userRecentSearches",
-        JSON.stringify(updateSearches)
-      ); // 최근 검색 로컬 저장
-      console.log("유저 검색:", searchTerm);
-      setSearchTerm("");
-
       executeSearch(searchTerm);
+      setSearchTerm(""); // 검색어 초기화
     }
   };
 
-  // 검색 아이콘 클릭
+  // 검색 아이콘 클릭 핸들러
   const handleSearchButtonClick = () => {
-    execueSearch();
+    executeSearchAndUpdate();
   };
 
-  // 엔터 키 눌러도 검색 실행
+  // 엔터 키 입력 시 검색 실행
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      execueSearch();
+      executeSearchAndUpdate();
     }
   };
 
   // 최근 검색어 삭제
-  const handleDeleteRecentSearch = (index: number) => {
-    const updatedSearches = recentSearches.filter((_, idx) => idx !== index);
-    setResentSearches(updatedSearches);
-    localStorage.setItem("userRecentSearches", JSON.stringify(updatedSearches));
+  const handleDeleteRecentSearch = (search: string) => {
+    const updatedSearches = new Set(Array.from(recentSearches).filter(item => item !== search));
+    setRecentSearches(updatedSearches);
+    localStorage.setItem("userRecentSearches", JSON.stringify(Array.from(updatedSearches)));
   };
 
-  // 최근 검색어 클릭시 검색 실행
+  // 최근 검색어 클릭 시 검색 실행
   const handleRecentSearchClick = (search: string) => {
     setSearchTerm(search); // 검색어 설정
     executeSearch(search); // 검색 실행
@@ -123,12 +112,12 @@ const UserSearch: React.FC = () => {
             </div>
             <hr />
             <div className="search-history-content">
-              {recentSearches.map((search, index) => (
+              {Array.from(recentSearches).map((search, index) => (
                 <div key={index} className="shc">
                   <p onClick={() => handleRecentSearchClick(search)}>
                     {search}
                   </p>
-                  <button onClick={() => handleDeleteRecentSearch(index)}>
+                  <button onClick={() => handleDeleteRecentSearch(search)}>
                     <img src="../../src/assets/icon/chart/cancel.png" alt="" />
                   </button>
                 </div>

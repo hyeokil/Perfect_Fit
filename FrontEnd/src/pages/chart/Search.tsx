@@ -15,6 +15,7 @@ const Search: React.FC = () => {
     <div>
       <Header title="검색" state={["close", "back"]} page="mainchart" />
       <TabMenu items={tabMenuItems} localStorageKey="searchTab" />
+      
     </div>
   );
 };

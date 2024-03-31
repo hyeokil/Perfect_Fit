@@ -144,10 +144,6 @@ const LatestChart: React.FC = () => {
                   </div>
                 </div>
               )}
-              <div className="song-button">
-                <button>솔로 모드</button>
-                <button>듀엣 모드</button>
-              </div>
             </BottomSheet>
           </div>
         </div>

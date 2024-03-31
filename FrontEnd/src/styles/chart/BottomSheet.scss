@@ -42,14 +42,26 @@
       padding: 10px;
       background-color: #f1f1f1;
       opacity: 0.9;
-      z-index: 1;
+      
       img {
         width: 80px;
+        border-radius: 5px;
       }
       .song-info {
         margin-left: 10px;
+        // display: flex;
+        // justify-content: center;
+        // flex-direction: column;
+        // align-items: center;
+        h2 {
+          padding: 0px;
+        }
+        h3 {
+          font-size: 22px;
+        }
         p {
           color: #7b7b7b;
+          margin-left: 5px;
         }
       }
     }
@@ -61,7 +73,8 @@
     padding: 10px;
     width: 90%;
     opacity: 0.9;
-    z-index: 1;
+    z-index: 2;
+    
 
     button {
       margin-top: 20px;
@@ -72,6 +85,7 @@
       border-radius: 15px;
       font-size: 17px;
       background: #f1f1f1;
+      border: none;
     }
   }
 }

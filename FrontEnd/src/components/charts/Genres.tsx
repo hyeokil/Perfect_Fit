@@ -88,7 +88,7 @@ const Genres: React.FC<GenreProps> = ({ genre }) => {
 
   return (
     <div>
-      <Header title={genre} state={["back", "close"]} />
+      <Header title={genre} state={["back", "close"]} page="mainchart" />
       <div className="sing-container">
         <div className="sing-content">
           <div className="sing-chart">
@@ -140,10 +140,6 @@ const Genres: React.FC<GenreProps> = ({ genre }) => {
                   </div>
                 </div>
               )}
-              <div className="song-button">
-                <button>솔로 모드</button>
-                <button>듀엣 모드</button>
-              </div>
             </BottomSheet>
           </div>
         </div>

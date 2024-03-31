@@ -124,7 +124,10 @@ const AllChart: React.FC = () => {
         </div>
       </div>
       <div className="sing-container">
-        <h3>{`${currentTime} 기준 사람들이 많이 부르는 노래`}</h3>
+        <div className="sing-title">
+          <h3>{`${currentTime} 기준 많이 부르는 노래`}</h3>
+          <p onClick={() => handleNavigate("/preferencechart")}>전체 보기</p>
+        </div>
         <div className="sing-content">
           <div className="sing-chart">
             {/* 최신곡 차트들 여기에 쫙 뿌리기 */}
@@ -175,10 +178,6 @@ const AllChart: React.FC = () => {
                   </div>
                 </div>
               )}
-              <div className="song-button">
-                <button>솔로 모드</button>
-                <button>듀엣 모드</button>
-              </div>
             </BottomSheet>
           </div>
         </div>

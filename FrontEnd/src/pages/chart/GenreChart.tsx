@@ -12,7 +12,7 @@ const GenreChart: React.FC = () => {
 
   return (
     <>
-      <Header title="장르별 차트" state={["back", "close"]} />
+      <Header title="장르별 차트" state={["back", "close"]} page="mainchart" />
       <h2>가장 많이 부르는 장르</h2>
       <div className="genre">
         <div

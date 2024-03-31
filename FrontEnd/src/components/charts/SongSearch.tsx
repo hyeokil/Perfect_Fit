@@ -1,44 +1,37 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import BottomSheet from "./BottomSheet";
 
 const SongSearch: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [recentSearches, setRecentSearches] = useState<Set<string>>(new Set());
   const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [showRecentSearches, setShowRecentSearhces] = useState<boolean>(true);
+  const [showRecentSearches, setShowRecentSearches] = useState<boolean>(true);
   const [showResults, setShowResults] = useState<boolean>(false);
+  const [selectedSong, setSelectedSong] = useState<any | null>(null);
 
-  // 새고해도 남아있게
+  const openBottomSheet = (song: any) => {
+    setSelectedSong(song);
+  };
+
+  const closeBottomSheet = () => {
+    setSelectedSong(null);
+  };
+
+  // 로컬 스토리지에서 최근 검색어 불러오기
   useEffect(() => {
     const storedSearches = localStorage.getItem("songRecentSearches");
     if (storedSearches) {
-      setRecentSearches(JSON.parse(storedSearches));
+      setRecentSearches(new Set(JSON.parse(storedSearches)));
     }
   }, []);
 
-  // 검색 입력
+  // 검색어 입력 핸들러
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
-  // 검색 실행
-  const execueSearch = () => {
-    if (searchTerm.trim() !== "") {
-      const keyword = searchTerm.trim();
-      const updateSearches = [searchTerm, ...recentSearches.slice(0, 10)]; // 10개까지 저장
-      setRecentSearches(updateSearches);
-      localStorage.setItem(
-        "songRecentSearches",
-        JSON.stringify(updateSearches)
-      ); // 최근 검색 로컬 저장
-      console.log("검색어:", keyword);
-      setSearchTerm("");
-
-      executeSearch(keyword);
-    }
-  };
-
-  // 노래 api
+  // 검색 실행 핸들러
   const executeSearch = async (keyword: string) => {
     if (keyword.trim() !== "") {
       try {
@@ -56,79 +49,80 @@ const SongSearch: React.FC = () => {
             },
           }
         );
-        console.log(response.data.dataBody);
+
         setSearchResults(response.data.dataBody);
         setShowResults(true);
-        setShowRecentSearhces(false);
+        setShowRecentSearches(false);
 
-        const updatedSearches = [keyword, ...recentSearches.slice(0, 10)];
+        // 최근 검색어 업데이트
+        const updatedSearches = new Set([keyword, ...Array.from(recentSearches)].slice(0, 10));
         setRecentSearches(updatedSearches);
-        localStorage.setItem(
-          "songRecentSearches",
-          JSON.stringify(updatedSearches)
-        );
+        localStorage.setItem("songRecentSearches", JSON.stringify(Array.from(updatedSearches)));
       } catch (error) {
         console.error("검색 실패:", error);
       }
     }
   };
 
-  // 검색 아이콘 클릭
-  const handleSearchButtonClick = () => {
-    execueSearch();
-  };
-
-  // 엔터 키 눌러도 검색 실행
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      execueSearch();
+  // 검색 실행
+  const executeSearchAndUpdate = () => {
+    if (searchTerm.trim() !== "") {
+      const keyword = searchTerm.trim();
+      setSearchTerm("");
+      executeSearch(keyword);
     }
   };
 
-  // 최근 검색어 삭제
-  const handleDeleteRecentSearch = (index: number) => {
-    const updatedSearches = recentSearches.filter((_, idx) => idx !== index);
-    setRecentSearches(updatedSearches);
-    localStorage.setItem("songRecentSearches", JSON.stringify(updatedSearches));
+  // 엔터 키 입력 시 검색 실행
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      executeSearchAndUpdate();
+    }
   };
 
-  // 최근 검색어 클릭시 실행
+  // 최근 검색어 클릭 시 검색 실행
   const handleRecentSearchClick = (search: string) => {
-    setSearchTerm(search); // 클릭한 검색어로 검색어를 설정합니다.
-    executeSearch(search); // 해당 검색어로 검색을 실행합니다.
+    setSearchTerm(search);
+    executeSearch(search);
+  };
+
+  // 최근 검색어 삭제
+  const handleDeleteRecentSearch = (search: string) => {
+    const updatedSearches = new Set(Array.from(recentSearches).filter(item => item !== search));
+    setRecentSearches(updatedSearches);
+    localStorage.setItem("songRecentSearches", JSON.stringify(Array.from(updatedSearches)));
   };
 
   return (
-    <div>
+    <div className="search-div">
       <div className="search-container">
         <div className="search-header">
           <input
             type="text"
             placeholder="노래 제목 및 가수를 입력하세요"
-            value={searchTerm} // 입력하면 초기화
+            value={searchTerm}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
           />
           <img
             src="../../src/assets/icon/chart/search.png"
             alt="search"
-            onClick={handleSearchButtonClick}
+            onClick={executeSearchAndUpdate}
           />
         </div>
         {showRecentSearches && (
           <>
             <div className="search-history-header">
               <h3>최근 검색어</h3>
-              {/* <p>1시간 전 업데이트</p> */}
             </div>
             <hr />
             <div className="search-history-content">
-              {recentSearches.map((search, index) => (
+              {Array.from(recentSearches).map((search, index) => (
                 <div key={index} className="shc">
                   <p onClick={() => handleRecentSearchClick(search)}>
                     {search}
                   </p>
-                  <button onClick={() => handleDeleteRecentSearch(index)}>
+                  <button onClick={() => handleDeleteRecentSearch(search)}>
                     <img src="../../src/assets/icon/chart/cancel.png" alt="" />
                   </button>
                 </div>
@@ -137,7 +131,6 @@ const SongSearch: React.FC = () => {
           </>
         )}
       </div>
-      {/* 검색 결과를 표시하는 부분 */}
       {showResults && (
         <div className="search-results">
           <h3>검색 결과</h3>
@@ -145,7 +138,11 @@ const SongSearch: React.FC = () => {
           {searchResults.length > 0 ? (
             <ul>
               {searchResults.map((result, index) => (
-                <div key={index} className="search-results-contents">
+                <div
+                  key={index}
+                  className="search-results-contents"
+                  onClick={() => openBottomSheet(result)}
+                >
                   <div className="img-border">
                     <img src={result.songThumbnail} alt="" />
                   </div>
@@ -161,6 +158,21 @@ const SongSearch: React.FC = () => {
           )}
         </div>
       )}
+      <BottomSheet
+        isOpen={selectedSong !== null}
+        onClose={closeBottomSheet}
+        backgroundImageUrl={selectedSong && selectedSong.songThumbnail}
+      >
+        {selectedSong && (
+          <div className="song-bottom">
+            <img src={selectedSong.songThumbnail} alt={selectedSong.songTitle} />
+            <div className="song-info">
+              <h3>{selectedSong.songTitle}</h3>
+              <p>{selectedSong.artist}</p>
+            </div>
+          </div>
+        )}
+      </BottomSheet>
     </div>
   );
 };
