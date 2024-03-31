@@ -5,8 +5,8 @@ spring:
 #    username : root
 #    password : c205c205
     url: jdbc:mysql://localhost:3306/perfectfit?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true       # 데이터베이스 URL
-    username : root
-    password : skehahffk1@!
+    username : ssafy
+    password : ssafy
 
   jpa:
     open-in-view: false
