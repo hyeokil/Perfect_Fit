@@ -1,0 +1,17 @@
+// script.module.scss
+.script {
+  padding-top: 20px;
+}
+@keyframes colorChange {
+  from {
+    color: black;
+  }
+  to {
+    color:  #46B8E0;
+  }
+}
+
+.lyricsline {
+  animation: none; // 초기 상태: 애니메이션 비활성화
+}
+//------------------------------------------------
