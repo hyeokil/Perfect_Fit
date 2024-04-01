@@ -87,9 +87,10 @@ const Voicetraining: React.FC = () => {
       console.log("미디어 상태:", media.state);
 
       try {
-        media.ondataavailable = function (e) {
+        media.ondataavailable = async function (e) {
           console.log("녹음 데이터 사용 가능", e.data);
           setAudioUrl(e.data);
+          await handleUpload(e.data)
         };
 
         if (media.state === "recording") {
@@ -106,12 +107,6 @@ const Voicetraining: React.FC = () => {
         console.log("오디오 소스 연결 해제");
 
         setState(true);
-        if (
-          window.confirm("녹음이 완료되었습니다. 다음으로 넘어가시겠습니까?")
-        ) {
-          UploadFile();
-          navigate("/");
-        }
       } catch (err) {
         console.error("녹음 중지 과정에서 오류 발생", err);
       }
@@ -119,18 +114,19 @@ const Voicetraining: React.FC = () => {
       console.log("미디어 레코더가 설정되지 않음");
     }
   };
-
-  const UploadFile = () => {
-    if (audioUrl !== null) {
-      const sound: File = new File([audioUrl], "userAudio.wav", {
+  const handleUpload = async (data : Blob) => {
+    if (window.confirm("녹음이 완료되었습니다. 다음으로 넘어가시겠습니까?")) {
+        await UploadFile(data);
+        navigate("/");
+    }
+};
+  const UploadFile =async (data:Blob) => {
+      const sound: File = new File([data], "userAudio.wav", {
         lastModified: new Date().getTime(),
         type: "audio/wav",
       });
-      SendRecord(sound);
+      await SendRecord(sound);
       logOnDev("전송완료!");
-    } else {
-      window.alert("녹음이 완료되지 않았습니다.");
-    }
   };
 
   return (
