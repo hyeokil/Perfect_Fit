@@ -19,5 +19,5 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/perfectfit/', include('voiceData.urls')),  # voiceData 앱의 URL 포함
+    path('api/v1/', include('voiceData.urls')),  # voiceData 앱의 URL 포함
 ]

@@ -60,3 +60,8 @@ class SoundFeature(models.Model):
     zero_crossing_rate_var = models.FloatField()
     chroma_stft_mean = models.FloatField()
     chroma_stft_var = models.FloatField()
+    min_pitch = models.FloatField()
+    max_pitch = models.FloatField()
+    avg_pitch = models.FloatField()
+    min_note = models.CharField(max_length=5)
+    max_note = models.CharField(max_length=5)

@@ -13,27 +13,44 @@ import logging
 # import matplotlib.pyplot as plt
 import numpy as np
 
+# 파일 업로드
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+
 logging.getLogger('matplotlib').setLevel(logging.WARNING)
 logger = logging.getLogger('voiceData')
 
+
 @api_view(['POST', 'PUT'])
-# def record(request, userSeq):
-def record(request):
+# def record(request):  # Local Teest
+def record(request, user_id):
+    if 'file' not in request.FILES:
+        return Response({'error': 'No file Exception'}, status=status.HTTP_400_BAD_REQUEST)
+
+    file = request.FILES['file']  # 파일 가져오기
+    # 서버에 임시 저장
+    file_name = default_storage.save(file.name, ContentFile(file.read()))
+    file_path = default_storage.path(file_name)
+
+    logger.info(f'File Type : {type(file)}')  # <class 'django.core.files.uploadedfile.InMemoryUploadedFile'>
+    logger.info(file.name)
+
     # 분석 데이터 보관
     data = {}
-    # data['user_pk'] = userSeq
+    data['user_pk'] = user_id
 
-    # 오디오 파일 가져오기 -> s3로 변경해야함.
-    # "./F_000001.wav"
-    song_sample = "./samples/SINGER_46_10TO29_NORMAL_FEMALE_BALLAD_C1925.wav"
-    y, sr = librosa.load(song_sample)
+    # 오디오 파일 가져오기 -> 파일로 받기.
+    # song_sample = "./samples/SINGER_46_10TO29_NORMAL_FEMALE_BALLAD_C1925.wav"
+    # y, sr = librosa.load(song_sample)
+
+    y, sr = librosa.load(file_path)
     logger.info("========== 음성 데이터 로드 완료 ==========")
     # print("========== 음성 데이터 로드 완료 ==========")
 
     # 템포, 비트 -> BPM
     tempo, beats = librosa.beat.beat_track(y=y, sr=sr)
     data['tempo'] = tempo
-    # data['beats'] = beats
+    # data['beats'] = beats  # 비트를 어디에 사용할까..?
 
     # 음파가 양에서 음으로 / 음에서 양으로 바뀌는 비율
     zero_crossings = librosa.zero_crossings(y, pad=False)
@@ -58,17 +75,15 @@ def record(request):
     spectral_rolloff = librosa.feature.spectral_rolloff(y=y, sr=sr)[0]
     data['rolloff_mean'], data['rolloff_var'] = spectral_rolloff.mean(), spectral_rolloff.var()
 
-    '''
-    Mel - Frequency Cepstral Coefficients(MFCCs)
-    mfccs = librosa.feature.mfcc(y, sr=sr)
-    mfccs = normalize(mfccs, axis=1)
-    '''
+    # Mel - Frequency Cepstral Coefficients(MFCCs)
+    # mfccs = librosa.feature.mfcc(y, sr=sr)
+    # mfccs = normalize(mfccs, axis=1)
 
     # Chroma Frequencies
     # 음악의 흥미롭고 강렬한 표현
     # 인간 청각이 옥타브 차이가 나는 주파수를 가진 두 음을 유사음으로 인지한다는 음악이론에 기반.
     # 모든 스펙트럼을 12개의 Bin으로 표현.
-    # 12개의 Bin은 옥타브에서 12개의 각기 다른 반응(Semitones(반음) = Chroma)을 의미.
+    # 12개의 Bin은 옥타브에서 12개의 각기 다른 반응(Semitones(반음) = Chroma)을 의미. -> 보통 반대 성별의 키값을 맞출 때 12옥타브 만큼 차이 냄.
     chromagram = librosa.feature.chroma_stft(y=y, sr=sr, hop_length=512)
     data['chroma_stft_mean'], data['chroma_stft_var'] = chromagram.mean(), chromagram.var()
     # librosa.display.specshow(chromagram, y_axis='chroma', x_axis='time')
@@ -86,21 +101,42 @@ def record(request):
     logger.info("logger.info")
 
     for i in range(len(mfccs)):
-        data['mfcc'+ str(i) + '_mean'], data['mfcc' + str(i) + '_var'] = mfccs[i].mean(),mfccs[i].var()
+        data['mfcc' + str(i) + '_mean'], data['mfcc' + str(i) + '_var'] = mfccs[i].mean(), mfccs[i].var()
 
     logger.info(f"현재까지 저장된 data -> {data}")
 
     pitches, magnitudes = librosa.piptrack(y=y, sr=sr)
     pitches = pitches[magnitudes > np.median(magnitudes)]
     logger.info(f'모든 Pitches -> {pitches}')
-    minPitch, maxPitch = min(pitches), max(pitches)
-    average_pitch = np.mean(pitches[pitches > 0])
+    min_pitch, max_pitch = min(pitches), max(pitches)
+    avg_pitch = np.mean(pitches[pitches > 0])
     logger.info(f'최소 Pitch : {min(pitches)} / 최대 Pitch : {max(pitches)}')
-    logger.info(f'Pitch의 길이 : {len(pitches)} / 평균 Pitch : {average_pitch}')
-    result = librosa.hz_to_midi([minPitch, maxPitch])
+    logger.info(f'Pitch의 길이 : {len(pitches)} / 평균 Pitch : {avg_pitch}')
+    result = librosa.hz_to_midi([min_pitch, max_pitch])
     result = librosa.midi_to_note(result)
     # result = librosa.hz_to_note([minPitch, maxPitch])
-    print(f'최소 음계 = {result[0]} / 최대 음계 = {result[1]}')  # data dictionary에 컬럼 생성 해야함.
 
-    return Response({'data': data}, status=status.HTTP_200_OK)
+    data['min_pitch'], data['max_pitch'] = min_pitch, max_pitch
+    data['min_note'], data['max_note'] = str(result[0]), str(result[1])
+    data['avg_pitch'] = avg_pitch
+    print(type(result[0]), type(result[1]))
+
+    print(f'최소 피치 = {round(min_pitch)} / 최대 피치 = {round(max_pitch)}')
+    print(f'최소 음계 = {result[0]} / 최대 음계 = {result[1]}')
+
+    # if SoundFeature.objects.filter(user_pk = user_id).exists():
+    #     sound = SoundFeature.objects.get(user_pk = user_id)
+    #     serializer = SoundFeatureSerializer(sound, data = data)
+
+    serializer = SoundFeatureSerializer(data=data)
+
+    # raise_exception = True
+    # 데이터가 유효하지 않을 경우 자동으로 'ValidationError' 예외 발생
+    # 클라이언트에게 400 Bad Request 반환.
+    if serializer.is_valid(raise_exception=True):
+        serializer.save()
+
+    default_storage.delete(file_name)  # 서버에서 사용이 끝난 파일을 삭제
+    return Response({'data': data}, status=status.HTTP_200_OK)  # json
+    # return Response(status=status.HTTP_200_OK)
 
