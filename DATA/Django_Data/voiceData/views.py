@@ -152,6 +152,29 @@ def record(request, user_id):
         logger.error(e.detail)
         return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
 
-    # return Response({'data': data}, status=status.HTTP_200_OK)  # json
-    # return Response(status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def record_view(request, user_id):
+    sound_features = SoundFeature.objects.filter(user_pk=user_id)
+    serializer = SoundFeatureSerializer(sound_features, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def user_recommend(request, user_id, cnt):
+    sound_features = SoundFeature.objects.all()
+
+
+
+
+
+
+
+'''
+[ 마페 ]
+1. 남/여 평균 주파수대 + 사용자 주파수대 = 막대 그래프
+2. 옥타브 범위 그래프 = chart.js
+3. ++?
+
+requirements.txt 갱신
+'''
