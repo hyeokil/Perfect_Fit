@@ -4,9 +4,9 @@ spring:
     url: jdbc:mysql://j10c205.p.ssafy.io:3306/perfectfit?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true       # 데이터베이스 URL
     username : root
     password : c205c205
-    # url: jdbc:mysql://localhost:3306/perfectfit?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true       # 데이터베이스 URL
-    # username : ssafy
-    # password : ssafy
+#    url: jdbc:mysql://localhost:3306/perfectfit?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true       # 데이터베이스 URL
+#    username : ssafy
+#    password : ssafy
 
   jpa:
     open-in-view: false
@@ -28,10 +28,10 @@ spring:
     init:
       mode: always
       data-locations:
-        - 'classpath:/data_member.sql'
         - 'classpath:/data_artist.sql'
         - 'classpath:/data_genre.sql'
         - 'classpath:/data_song.sql'
+        - 'classpath:/data_member.sql'
         - 'classpath:/data_my_list.sql'
         - 'classpath:/data_song_count.sql'
         - 'classpath:/data_song_history.sql'

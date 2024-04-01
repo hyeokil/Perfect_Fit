@@ -10,7 +10,6 @@ import com.ssafy.backend.domain.recording.service.DuetService;
 import com.ssafy.backend.global.common.dto.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.mortbay.log.Log;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -27,22 +26,20 @@ public class DuetController {
     private final DuetService duetService;
 
     // duet으로 부른 노래 upload
-    @PostMapping("/create/{songId}")
+    @PostMapping("/create")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Message<Void>> createDuet(@AuthenticationPrincipal MemberLoginActiveDto loginActiveDto,
-                                                    @RequestBody DuetCreateRequestDto duetCreateRequestDto,
-                                                    @PathVariable("songId") Long songId) {
-        duetService.createDuet(loginActiveDto.getId(), songId, duetCreateRequestDto);
+                                                      @RequestBody DuetCreateRequestDto duetCreateRequestDto) {
+        duetService.createDuet(loginActiveDto.getId(), duetCreateRequestDto);
         return ResponseEntity.ok().body(Message.success());
     }
 
     // duet 참여하기
-    @PostMapping("/participate/{songId}")
+    @PostMapping("/participate")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Message<Void>> participateDuet(@AuthenticationPrincipal MemberLoginActiveDto loginActiveDto,
-                                                         @RequestBody DuetParticipateReqeustDto duetParticipateReqeustDto,
-                                                         @PathVariable("songId") Long songId) {
-        duetService.participateDuet(loginActiveDto.getId(), songId, duetParticipateReqeustDto);
+                                                    @RequestBody DuetParticipateReqeustDto duetParticipateReqeustDto) {
+        duetService.participateDuet(loginActiveDto.getId(), duetParticipateReqeustDto);
         return ResponseEntity.ok().body(Message.success());
     }
 

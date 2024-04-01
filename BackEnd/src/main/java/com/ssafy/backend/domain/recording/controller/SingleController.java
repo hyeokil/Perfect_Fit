@@ -22,12 +22,11 @@ public class SingleController {
     private final SingleService singleService;
 
     // single로 부른 노래 저장
-    @PostMapping("/create/{songId}")
+    @PostMapping("/create")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Message<Void>> createSingle(@AuthenticationPrincipal MemberLoginActiveDto loginActiveDto,
-                                                      @RequestBody SingleCreateRequestDto singleCreateRequestDto,
-                                                      @PathVariable("songId") Long songId) {
-        singleService.createSingle(loginActiveDto.getId(), songId, singleCreateRequestDto);
+                                                         @RequestBody SingleCreateRequestDto singleCreateRequestDto) {
+        singleService.createSingle(loginActiveDto.getId(), singleCreateRequestDto);
         return ResponseEntity.ok().body(Message.success());
     }
 
@@ -40,4 +39,10 @@ public class SingleController {
         return ResponseEntity.ok().body(Message.success(singleList));
     }
 
+    // 더미 데이터 생성
+//    @PostMapping("/UM")
+//    public ResponseEntity<Message<Void>> createRecordings() {
+//        singleService.createRecordings();
+//        return ResponseEntity.ok().body(Message.success());
+//    }
 }

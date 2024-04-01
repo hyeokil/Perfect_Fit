@@ -21,6 +21,12 @@ public class Song {
     // 노래 제목
     private String songTitle;
 
+//    // 가수명
+//    private String songArtist;
+//
+//    // 장르
+//    private String songGenre;
+
     // MR 영상 URL
     private String songUrl;
 
@@ -34,7 +40,7 @@ public class Song {
     private String songReleaseDate;
 
     // 조회수
-    private Long SongView;
+    private Long songView;
 
     // 노래길이
     private String songLength;
@@ -48,5 +54,23 @@ public class Song {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "genre_id")
     private Genre genre;
+
+    // 노래 음정
+    @Column(nullable = true)
+    private int songPitch;
+
+
+//    public void setSongGenre(String songGenre) {
+//        this.songGenre = songGenre;
+//    }
+//
+//    public void setSongReleaseDate(String songReleaseDate) {
+//        this.songReleaseDate = songReleaseDate;
+//    }
+//
+//    public void setSongThumbnail(String songThumbnail) {
+//        this.songThumbnail = songThumbnail;
+//    }
+
 
 }

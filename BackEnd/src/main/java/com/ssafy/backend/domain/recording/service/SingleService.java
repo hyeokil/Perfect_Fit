@@ -9,7 +9,7 @@ import java.util.List;
 public interface SingleService {
 
     //single recording 저장
-    void createSingle(Long memberId, Long songId, SingleCreateRequestDto singleCreateRequestDto);
+    void createSingle(Long memberId, SingleCreateRequestDto singleCreateRequestDto);
 
     // 내 single recording list 조회
     List<SingleResponseDto> getSingleList(Long memberId);

@@ -40,4 +40,7 @@ public class SongChartResponseDto {
     // 노래 좋아요 유무
     private boolean myListDisplay;
 
+    // 노래 음정
+    private int songPitch;
+
 }

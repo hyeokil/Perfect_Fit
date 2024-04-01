@@ -2,7 +2,6 @@ package com.ssafy.backend.domain.recording.dto;
 
 import com.ssafy.backend.domain.member.entity.Member;
 import com.ssafy.backend.domain.recording.entity.Duet;
-import com.ssafy.backend.domain.song.entity.Song;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -14,9 +13,8 @@ public class DuetCreateRequestDto {
 
     private String path;
 
-    public Duet toEntity(Member member, Song song) {
+    public Duet toEntity(Member member) {
         return Duet.builder()
-                .song(song)
                 .name(name)
                 .path(path)
                 .display(true)

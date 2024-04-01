@@ -2,7 +2,6 @@ package com.ssafy.backend.domain.recording.dto;
 
 import com.ssafy.backend.domain.member.entity.Member;
 import com.ssafy.backend.domain.recording.entity.Single;
-import com.ssafy.backend.domain.song.entity.Song;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -15,9 +14,8 @@ public class SingleCreateRequestDto {
     private String path;
 
 
-    public Single toEntity(Member member, Song song) {
+    public Single toEntity(Member member) {
         return Single.builder()
-                .song(song)
                 .member(member)
                 .name(name)
                 .path(path)

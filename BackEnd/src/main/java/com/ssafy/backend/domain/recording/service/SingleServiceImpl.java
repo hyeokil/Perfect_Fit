@@ -8,8 +8,6 @@ import com.ssafy.backend.domain.recording.dto.SingleCreateRequestDto;
 import com.ssafy.backend.domain.recording.dto.SingleResponseDto;
 import com.ssafy.backend.domain.recording.entity.Single;
 import com.ssafy.backend.domain.recording.repository.SingleRepository;
-import com.ssafy.backend.domain.song.entity.Song;
-import com.ssafy.backend.domain.song.repository.SongRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,17 +24,14 @@ public class SingleServiceImpl implements SingleService{
 
     private final SingleRepository singleRepository;
     private final MemberRepository memberRepository;
-    private final SongRepository songRepository;
 
 
     // single recording 저장
     @Override
-    public void createSingle(Long memberId, Long songId, SingleCreateRequestDto singleCreateRequestDto) {
+    public void createSingle(Long memberId, SingleCreateRequestDto singleCreateRequestDto) {
         Member member = memberRepository.findById(memberId).orElseThrow(()
                 -> new MemberException(MemberError.NOT_FOUND_MEMBER));
-        Song song = songRepository.findById(songId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 노래를 찾을 수 없다 ! : " + songId));
-        singleRepository.save(singleCreateRequestDto.toEntity(member,song));
+        singleRepository.save(singleCreateRequestDto.toEntity(member));
     }
 
     // 내가 single모드로 부른 노래 리스트 조회 단순 포문 사용
@@ -49,12 +44,8 @@ public class SingleServiceImpl implements SingleService{
                     single.getId(),
                     single.getName(),
                     single.getPath(),
-                    single.getCreatedAt(),
-                    single.getSong().getSongTitle(),
-                    single.getSong().getArtist().getName(),
-                    single.getSong().getSongThumbnail()
+                    single.getCreatedAt()
             );
-
             singleResponseDtoList.add(singleResponseDto);
         }
         return singleResponseDtoList;
@@ -75,5 +66,23 @@ public class SingleServiceImpl implements SingleService{
 //                .collect(Collectors.toList());
 //    }
 
+
+//    // 단일 single list 조회
+//    @Override
+//    public String getRecording(Long singleId, Long memberId) {
+//        return singleRepository.findByIdAndMemberIdAndDisplayTrue(singleId, memberId)
+//                .map(Single::getPath)
+//                .orElseThrow(() -> new EntityNotFoundException("Single not found"));
+//    }
+
+    // 더미 데이터 생성
+//    @Override
+//    public void createRecordings(){
+//        Member P1 = memberRepository.findById(1L).orElseThrow();
+//        for (int i = 0; i < 10000; i++) {
+//            singleRepository.save(Single.builder().single(P1).display(true).path("wwww").build());
+//            singleRepository.save(Single.builder().single(P1).display(false).path("wewew").build());
+//        }
+//    }
 
 }

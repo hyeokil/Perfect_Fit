@@ -49,6 +49,7 @@ public class SongServiceImpl implements SongService {
                             .SongView(song.getSongView())
                             .songLength(song.getSongLength())
                             .myListDisplay(myListDisplay)
+                            .songPitch(song.getSongPitch())
                             .build();
                 })
                 .collect(Collectors.toList());
@@ -77,6 +78,7 @@ public class SongServiceImpl implements SongService {
                             .SongView(song.getSongView())
                             .songLength(song.getSongLength())
                             .myListDisplay(myListDisplay)
+                            .songPitch(song.getSongPitch())
                             .build();
                 })
                 .collect(Collectors.toList());
@@ -124,6 +126,7 @@ public class SongServiceImpl implements SongService {
                                 .SongView(song.getSongView())
                                 .songLength(song.getSongLength())
                                 .myListDisplay(myListDisplay)
+                                .songPitch(song.getSongPitch())
                                 .build();
                     })
                     .collect(Collectors.toList());
@@ -146,6 +149,7 @@ public class SongServiceImpl implements SongService {
                                 .SongView(song.getSongView())
                                 .songLength(song.getSongLength())
                                 .myListDisplay(myListDisplay)
+                                .songPitch(song.getSongPitch())
                                 .build();
                     })
                     .collect(Collectors.toList());
@@ -175,6 +179,7 @@ public class SongServiceImpl implements SongService {
                             .SongView(song.getSongView())
                             .songLength(song.getSongLength())
                             .myListDisplay(myListDisplay)
+                            .songPitch(song.getSongPitch())
                             .build();
                 })
                 .collect(Collectors.toList());
@@ -197,6 +202,7 @@ public class SongServiceImpl implements SongService {
                             .songReleaseDate(song.getSongReleaseDate())
                             .SongView(song.getSongView())
                             .songLength(song.getSongLength())
+                            .songPitch(song.getSongPitch())
                             .build();
                 })
                 .collect(Collectors.toList());
@@ -224,6 +230,7 @@ public class SongServiceImpl implements SongService {
                             .SongView(song.getSongView())
                             .songLength(song.getSongLength())
                             .myListDisplay(myListDisplay)
+                            .songPitch(song.getSongPitch())
                             .build();
                 })
                 .collect(Collectors.toList());
@@ -251,6 +258,7 @@ public class SongServiceImpl implements SongService {
                             .SongView(song.getSongView())
                             .songLength(song.getSongLength())
                             .myListDisplay(myListDisplay)
+                            .songPitch(song.getSongPitch())
                             .build();
                 })
                 .collect(Collectors.toList());
