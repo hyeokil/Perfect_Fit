@@ -57,7 +57,7 @@ public class Song {
 
     // 노래 음정
     @Column(nullable = true)
-    private int songPitch;
+    private Integer songPitch;
 
 
 //    public void setSongGenre(String songGenre) {

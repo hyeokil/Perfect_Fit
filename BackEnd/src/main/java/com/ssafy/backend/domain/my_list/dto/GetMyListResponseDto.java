@@ -43,6 +43,6 @@ public class GetMyListResponseDto {
     private boolean myListDisplay;
 
     // 노래 음정
-    private int songPitch;
+    private Integer songPitch;
 
 }
