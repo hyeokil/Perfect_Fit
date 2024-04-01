@@ -1,11 +1,12 @@
 import { SendRecord } from "@/api/record";
 import useRecordStore from "@/store/useRecordStore";
-import  { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 const VoiceRecord = () => {
-  const isPlaying = useRecordStore((state) => state.isPlaying)
-  const setMusicUrl = useRecordStore((state) => state.setMusicUrl)
-  const setMusicBlob = useRecordStore((state) => state.setMusicBlob)
+  const isPlaying = useRecordStore((state) => state.isPlaying);
+  const setVoiceUrl = useRecordStore((state) => state.setVoiceUrl);
+  const setVideoUrl = useRecordStore((state) => state.setVideoUrl);
+  const setMusicBlob = useRecordStore((state) => state.setMusicBlob);
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [media, setMedia] = useState<MediaRecorder | null>(null);
   const [source, setSource] = useState<MediaStreamAudioSourceNode | null>(null);
@@ -30,8 +31,6 @@ const VoiceRecord = () => {
         setStream(stream);
         setMedia(mediaRecorder);
         makeSound(stream);
-
-
       })
       .catch((err) => {
         console.log(err);
@@ -44,11 +43,12 @@ const VoiceRecord = () => {
   const offRecord = () => {
     if (media !== null) {
       media.ondataavailable = function (e) {
-        setAudioUrl(e.data)
-        setMusicBlob(e.data)
-        const url : string = URL.createObjectURL(e.data);
+        setAudioUrl(e.data);
+        setMusicBlob(e.data);
+        const url: string = URL.createObjectURL(e.data);
         setUrl(url);
-        setMusicUrl(url)
+        setVoiceUrl(url);
+        setVideoUrl(null);
         // setOnRec(true)
       };
     } else {
@@ -64,6 +64,11 @@ const VoiceRecord = () => {
     source?.disconnect();
   };
 
+//   useEffect(() => {
+//     if (audioUrl) {
+//       setVideoUrl()
+// }}, [audioUrl]);
+
   // const play = useCallback(() => {
   //   if (url) {
   //     const audio = new Audio(url);
@@ -75,7 +80,7 @@ const VoiceRecord = () => {
   // const UploadFile = () => {
   //   if (audioUrl !== null) {
   //     const sound : File = new File([audioUrl] , "userAudio.wav", {
-  //       lastModified: new Date().getTime(), 
+  //       lastModified: new Date().getTime(),
   //       type : "audio/wav"
   //     })
   //     SendRecord(sound)
@@ -86,14 +91,11 @@ const VoiceRecord = () => {
 
   // };
 
-
-  
   useEffect(() => {
     if (isPlaying === true) {
-      startRecord()
-    }
-    else {
-      offRecord()
+      startRecord();
+    } else {
+      offRecord();
     }
   }, [isPlaying]);
 

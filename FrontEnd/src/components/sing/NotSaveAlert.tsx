@@ -13,6 +13,7 @@ const NotSaveAlert = (props:PropType) => {
   const save = () => {
     console.log("메인");
     setShowNoAlert(false)
+    navigate('/preview')
 
   };
   const singAgain = () => {

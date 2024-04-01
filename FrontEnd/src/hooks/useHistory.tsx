@@ -1,41 +1,34 @@
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 const AlertOnNavigation: React.FC = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-
   useEffect(() => {
-    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      // 페이지를 떠날 때 발생하는 이벤트를 감지하여 알림창을 띄웁니다.
-      event.preventDefault();
-      event.returnValue = '';
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      // 페이지를 나가려고 할 때 알림창 표시
+      e.preventDefault();
+      e.returnValue = "으아아아";
     };
 
-    // 페이지를 벗어날 때 이벤트를 감지합니다.
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
-    // 페이지 전환 시 확인창을 띄우고, 이동을 위해 navigate를 호출합니다.
-    const handleNavigation = (event: any) => {
-      // 이동 여부를 확인하기 위해 사용자에게 확인창을 띄웁니다.
-      const confirmNavigation = window.confirm('이 페이지를 떠나시겠습니까?');
-      if (!confirmNavigation) {
-        // 사용자가 이동을 취소한 경우 현재 위치로 다시 이동합니다.
-        navigate(location.pathname);
-        // 이벤트를 취소하여 기본 페이지 이동을 막습니다.
-        event.preventDefault();
+    const handlePopstate = () => {
+      // 뒤로가기를 누를 때 알림창 표시
+      if (
+        window.confirm(
+          "변경사항을 저장하지 않았습니다. 정말로 이 페이지를 나가시겠습니까?"
+        )
+      ) {
+        navigate(-1);
       }
     };
 
-    // 페이지 전환 시 이벤트를 감지하여 사용자에게 확인창을 띄웁니다.
-    window.addEventListener('popstate', handleNavigation);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("popstate", handlePopstate);
 
-    // 컴포넌트가 언마운트될 때 이벤트를 정리합니다.
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-      window.removeEventListener('popstate', handleNavigation);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("popstate", handlePopstate);
     };
-  }, [navigate, location.pathname]);
+  }, [navigate]);
 
   return null; // 이 컴포넌트는 화면에 렌더링되지 않습니다.
 };
