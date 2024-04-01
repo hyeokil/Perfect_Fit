@@ -1,5 +1,7 @@
 import { SendRecord } from "@/api/record";
 import useRecordStore from "@/store/useRecordStore";
+import useSaveStore from "@/store/useSaveStore";
+import S3Upload from "@/util/S3Upload";
 import { useEffect, useState, useCallback } from "react";
 
 const VoiceRecord = () => {
@@ -13,6 +15,8 @@ const VoiceRecord = () => {
   const [audioUrl, setAudioUrl] = useState<Blob | null>(null);
   const [url, setUrl] = useState<string | null>(null);
 
+  const saveVoiceBlob = useSaveStore(state => state.setVoiceBlob)
+  const saveVideoBlob = useSaveStore(state => state.setVideoBlob)
   // 녹음 시작 버튼
   const startRecord = () => {
     const audioCtx = new AudioContext();
@@ -45,6 +49,9 @@ const VoiceRecord = () => {
       media.ondataavailable = function (e) {
         setAudioUrl(e.data);
         setMusicBlob(e.data);
+        saveVideoBlob(null)
+        saveVoiceBlob(e.data)
+
         const url: string = URL.createObjectURL(e.data);
         setUrl(url);
         setVoiceUrl(url);
@@ -64,10 +71,10 @@ const VoiceRecord = () => {
     source?.disconnect();
   };
 
-//   useEffect(() => {
-//     if (audioUrl) {
-//       setVideoUrl()
-// }}, [audioUrl]);
+  //   useEffect(() => {
+  //     if (audioUrl) {
+  //       setVideoUrl()
+  // }}, [audioUrl]);
 
   // const play = useCallback(() => {
   //   if (url) {
@@ -99,8 +106,17 @@ const VoiceRecord = () => {
     }
   }, [isPlaying]);
 
+  // const goS3 = () => {
+  //   console.log(typeof audioUrl);
+  //   console.log(audioUrl);
+  //   if (audioUrl) {
+  //     S3Upload(audioUrl);
+  //   }
+  // };
+
   return (
     <div>
+      {/* <button onClick={goS3}>전송,,,,</button> */}
       {/* <h1>ㅎㅇㅎㅇ</h1>
       <button onClick={startRecord}>녹음!!</button>
       <button onClick={offRecord}>녹음 중ㅈ지</button>

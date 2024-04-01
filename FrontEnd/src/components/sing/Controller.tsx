@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import styles from "@styles/sing/Controller.module.scss";
 import useRecordStore from "@/store/useRecordStore";
+import useSaveStore from "@/store/useSaveStore";
 
 type PropType = {
   setUserPitch : React.Dispatch<React.SetStateAction<number>>;
@@ -34,6 +35,11 @@ const Controller = (props: PropType) => {
   const state = audioCtx.state;
   console.log("현재 피치 : ", pitch);
   console.log("오디오 상태 : ", state);
+
+const saveMusicBlob = useSaveStore(state => state.setMusicBlob)
+
+
+
 
   const shiftRef = useRef<PitchShifter | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
@@ -178,6 +184,7 @@ const Controller = (props: PropType) => {
         console.log(blob);
         setRecordedBlobs((prevBlobs) => [...prevBlobs, blob]); // Blob 데이터 저장
         setMusicBlob(blob);
+        saveMusicBlob(blob)
         const url: string = URL.createObjectURL(blob);
         console.log(url);
         setMusicUrl(url);

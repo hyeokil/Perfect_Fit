@@ -1,6 +1,6 @@
 import useRecordStore from "@/store/useRecordStore";
-import { blobToFile, uploadBlobToS3 } from "@/util/S3FileUpload";
-import { fetchBlobFromUrl } from "@/util/blob";
+// import { blobToFile, uploadBlobToS3 } from "@/util/S3FileUpload";
+// import { fetchBlobFromUrl } from "@/util/blob";
 import styles from "@styles/sing/SaveAlert.module.scss";
 import logo from "public/image/logo.png";
 import { useNavigate } from "react-router-dom";
@@ -9,26 +9,16 @@ type PropType = {
   setShowSaveAlert: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const SaveAlert = (props: PropType) => {
-  const { musicBlob, videoBlob, musicUrl, videoUrl } = useRecordStore();
+  // const { musicBlob, videoBlob, musicUrl, videoUrl } = useRecordStore();
   const { setShowSaveAlert } = props;
-  const setResetRecord = useRecordStore((state) => state.setResetRecord);
   const navigate = useNavigate();
   const save = () => {
-    if (musicUrl) {
-      fetchBlobFromUrl(musicUrl)
-      .then(blob => {
-        const audioFile = blobToFile(blob, 'fileName')
-        console.log(audioFile)
-      })
-      // mixAudioAndVideo(videoBlob, musicBlob)
-      navigate("/preview");
+    navigate("/preview");
 
-      console.log("메인");
-    }
+    console.log("메인");
   };
   const singAgain = () => {
     console.log("메인");
-    setResetRecord(false);
     setShowSaveAlert(false);
   };
 

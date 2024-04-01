@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 type MusicStoreType = {
   info: {
+    songId : number
     songTitle: string;
     artist: string;
     genre: string;
@@ -10,6 +11,7 @@ type MusicStoreType = {
     songReleaseDate: string;
     songLength: string;
     myListDisplay: boolean;
+    songPitch : number | null
     songView: number;
   };
   setInfo: (newInfo: MusicStoreType["info"]) => void;
@@ -19,6 +21,7 @@ export const useMusicStore = create(
   persist<MusicStoreType>(
     (set) => ({
       info: {
+        songId : 28062,
         songTitle: "작은 것들을 위한 시(Boy With Luv)(Feat.Halsey)...",
         artist: "방탄소년단",
         genre: "알앤비",
@@ -28,6 +31,7 @@ export const useMusicStore = create(
         songReleaseDate: "20190412",
         songLength: "3:49",
         myListDisplay: false,
+        songPitch : null,
         songView: 1757237231,
       },
       setInfo: (newInfo) => set({ info: newInfo }),
