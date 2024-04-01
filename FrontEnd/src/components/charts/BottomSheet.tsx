@@ -27,29 +27,33 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   };
 
   const handleSoloClick = () => {
-    console.log("솔로모드 누름")
-    console.log(selectedSong)
-  }
+    console.log("솔로모드 누름");
+    console.log(selectedSong);
+  };
 
   const handleDuetClick = () => {
-    console.log("듀엣모드 누름")
-  }
+    console.log("듀엣모드 누름");
+    console.log(selectedSong);
+  };
 
   return (
     <div className="bottom-sheet-all">
-      <div
-        className={`bottom-sheet ${isOpen ? "open" : ""}`}
-        onClick={onClose}
-      >
-        <div
-          className="bottom-sheet-content"
-          onClick={handleContentClick}
-          style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-        >
-          <div className="song-thumbnail">{children}</div>
-          <div className="song-button">
-            <button onClick={handleSoloClick}>솔로 모드</button>
-            <button onClick={handleDuetClick}>듀엣 모드</button>
+      <div className={`bottom-sheet ${isOpen ? "open" : ""}`} onClick={onClose}>
+        <div className="blur">
+          <div
+            className="bottom-sheet-content"
+            onClick={handleContentClick}
+            style={{
+              backgroundImage: `url(${backgroundImageUrl})`,
+            }}
+          >
+            <div>
+              <div className="song-thumbnail">{children}</div>
+              <div className="song-button">
+                <button onClick={handleSoloClick}>솔로 모드</button>
+                <button onClick={handleDuetClick}>듀엣 모드</button>
+              </div>
+            </div>
           </div>
         </div>
         {isOpen && (
