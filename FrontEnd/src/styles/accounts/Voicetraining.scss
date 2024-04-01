@@ -3,12 +3,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 30px;
+  padding: 10px;
   height: 700px;
 }
 
 .voice-header {
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 50px;
 }
 
@@ -21,6 +21,10 @@
   }
   h3 {
     word-break: keep-all;
+    margin-bottom: 3px;
+  }
+  p {
+    font-size: small;
   }
 }
 .voice-button {

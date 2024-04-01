@@ -7,31 +7,102 @@
 .play {
   width: fit-content;
   display: flex;
-  border: 1px solid black;
   justify-content: center;
+  margin-top: 3px;
 }
 .icon {
+  color:  #46B8E0; 
   font-size: xx-large;
-  color: gray;
 }
+
 .controlbutton {
   border: 0;
   background-color: transparent;
 }
 
 .controlbox {
-  input[type=range] {
-    -webkit-appearance: none;
-    width: 100%;
-    background: linear-gradient(to right, #FFE283 0%, #FFE283 50%, #ececec 50%, #ececec 100%);
-    border-radius: 8px;
-    outline: none;
-    // transition: background 450ms ease-in;
-    accent-color: #ffca1d;
+  margin-top: 20%;
+  width: 100%; // Added width for full-width slider in its container
+  h4 {
+    margin-bottom: 5%;
+
   }
-  input[type=range] ::-webkit-slider-thumb {
-    -webkit-appearance: none;
+  input[type="range"] {
+    -webkit-appearance: none; // Remove default appearance
+    appearance: none;
+    width: 100%; // Full width of the container
+    height: 4px; // Slider track height
+    background: #ddd; // Light grey track, adjust the color as needed
+    border-radius: 2px; // Slight rounding of the corners of the track
+    cursor: pointer; // Change cursor to pointer when over the slider
+
+    &:focus {
+      outline: none; // Remove the focus outline
+    }
+
+    // Track styling
+    &::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 4px;
+      background: #ddd;
+      border-radius: 2px;
+    }
+
+    &::-moz-range-track {
+      width: 100%;
+      height: 4px;
+      background: #ddd;
+      border-radius: 2px;
+    }
+
+    &::-ms-track {
+      width: 100%;
+      height: 4px;
+      background: #ddd;
+      border-radius: 2px;
+    }
+
+    // Thumb styling
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 20px; // Thumb height, adjust as needed
+      width: 20px; // Thumb width, adjust as needed
+      background: #3DB9FF; // Thumb color, matching your image
+      border-radius: 50%; // Circular thumb
+      margin-top: -8px; // Adjust thumb position to align it with the track
+      border: 3px solid white; // White border for the thumb, adjust as needed
+    }
+
+    &::-moz-range-thumb {
+      height: 20px;
+      width: 20px;
+      background:#3DB9FF;
+      border-radius: 50%;
+      border: 3px solid white;
+    }
+
+    &::-ms-thumb {
+      height: 20px;
+      width: 20px;
+      background:#3DB9FF;
+      border-radius: 50%;
+      border: 3px solid white;
+    }
   }
+}
+
+.textbox {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; // Ensure the textbox spans the full width of its container
+  margin-top: 10px; // Add some space above the textbox
+
+  p {
+    margin-left: auto;
+  }
+  label {
+    margin-right: auto;
+  }
 }

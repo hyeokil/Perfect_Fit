@@ -1,6 +1,7 @@
 .buttonwrapper {
-  border: 1px solid black;
-  width: 361px;
+  // border: 1px solid wheat;
+  border-radius: 5px;
+  width: 350px;
   height: 266px;
   background: linear-gradient(
     180deg,
@@ -12,17 +13,20 @@
   flex-direction: column;
   align-items: center;
   justify-content: center; /* 수직 가운데 정렬 */
-  position: relative; /* 자식 요소에 대한 절대 위치 지정을 위한 설정 */
-  text-align: center; /* 수평 가운데 정렬 */
+  position: fixed; /* 화면 상단에 고정 */
+  top: 50%; /* 화면 세로 중앙에 위치 */
+  left: 50%; /* 화면 가로 중앙에 위치 */
+  transform: translate(-50%, -50%); /* 화면 가운데 정렬을 위한 트랜스폼 */
+  text-align: center;
+  z-index: 1000; /* 다른 요소 위에 떠 있도록 설정 */
 
-  p {
-    position: absolute;
-    top: 10px; /* 상단으로 10px만큼 이동 */
-  }
-
+  // p {
+  //   position: absolute;
+  //   top: 10px; /* 상단으로 10px만큼 이동 */
+  // }
 
   button {
-    margin-top: 10px;
+    margin-top: 15px;
     width: 315px;
     height: 30px;
 
@@ -31,54 +35,29 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
+    color: white;
+
+    border-radius: 10px;
+    border: 0;
+    background: linear-gradient(
+      180deg,
+      #3DB9FF 0%,
+      #46B8E0 54.5%,
+      #83E4F1 100%
+    );
   }
 }
 
-/* Group 54 */
+.guide {
+  display: flex;
+  justify-content: space-between;
+  img {
+    width: 80px;
+    height: 80px;
+  }
+  h4 {
+    margin-top: 30px;
+    margin-left: 30px;
 
-// position: absolute;
-
-// left: 5568px;
-// top: 4011px;
-
-/* Rectangle 28 */
-
-// position: absolute;
-// width: 361px;
-// height: 266px;
-// left: 5539px;
-// top: 3893px;
-
-// background: linear-gradient(180deg, rgba(138, 213, 255, 0.9) 0%, rgba(152, 227, 255, 0.9) 54.5%, rgba(213, 250, 255, 0.9) 100%);
-
-/* 노래 리스트 */
-
-// position: absolute;
-// width: 315px;
-// height: 30px;
-// left: 5568px;
-// top: 4011px;
-
-// /* duet */
-// background: linear-gradient(180deg, #3DB9FF 0%, #46B8E0 54.5%, #83E4F1 100%);
-// border-radius: 10px;
-
-/* 부른 곡 저장하기 */
-
-// position: absolute;
-// width: 138px;
-// height: 18px;
-// left: 80px;
-// top: 6px;
-
-// font-family: 'Roboto';
-// font-style: normal;
-// font-weight: 500;
-// font-size: 16px;
-// line-height: 20px;
-// /* or 125% */
-// display: flex;
-// align-items: center;
-// text-align: center;
-
-// color: #FFFFFF;
+  }
+}

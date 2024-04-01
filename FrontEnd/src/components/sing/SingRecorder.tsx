@@ -1,16 +1,20 @@
 import { SendVideo } from "@/api/record";
-import axios from "axios";
+import useRecordStore from "@/store/useRecordStore";
 import { useEffect, useRef, useState } from "react";
 
 const SingRecorder = () => {
+  const isPlaying = useRecordStore((state) => state.isPlaying)
+  const setDisplayUrl = useRecordStore((state) => state.setDisplayUrl)
+  const setDisplayBlob = useRecordStore((state) => state.setDisplayBlob)
+  const displayBlob = useRecordStore((state) => state.displayBlob)
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
     null
   );
   const [recordedBlobs, setRecordedBlobs] = useState<Blob[]>([]);
   console.log(recordedBlobs)
+  console.log(displayBlob)
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null)
 
   const getMedia = async () => {
     const options = {
@@ -31,6 +35,7 @@ const SingRecorder = () => {
 
   const startRecord = () => {
     setRecordedBlobs([]);
+    setDisplayBlob([])
     try {
       const media = new MediaRecorder(stream as MediaStream, {
         mimeType: "video/webm",
@@ -51,7 +56,9 @@ const SingRecorder = () => {
         }
         // const blob = new Blob(recordedBlobs)
         const url: string = URL.createObjectURL(e.data);
+        console.log(url)
         setVideoUrl(url);
+        setDisplayUrl(url)
       };
       mediaRecorder.stop();
     } else {
@@ -61,12 +68,14 @@ const SingRecorder = () => {
 
   const handleDataAvailable = (event: BlobEvent) => {
     if (event.data && event.data.size > 0) {
-      console.log(event.data)
+      // console.log(event.data)
       setRecordedBlobs((prevBlobs) => [...prevBlobs, event.data]);
     }
   };
 
-
+useEffect(() => {
+  setDisplayBlob(recordedBlobs)
+}, [recordedBlobs])
 
   useEffect(() => {
     if (!stream) {
@@ -92,11 +101,18 @@ const SingRecorder = () => {
     }
   }
 
+  useEffect(() => {
+    if (isPlaying) {
+      startRecord()
+    }
+    else {
+      stopRecord()
+    }
+  }, [isPlaying])
+
   return (
     <div>
-      <iframe src='https://www.youtube.com/embed/OvIk6BDkVE4' />
-
-      <button onClick={startRecord}>Start Recording</button>
+      {/* <button onClick={startRecord}>Start Recording</button>
       <button onClick={stopRecord}>Stop Recording</button>
       {videoUrl !== null && (
         <video controls src={videoUrl} width={"80%"}>
@@ -104,7 +120,7 @@ const SingRecorder = () => {
         </video>
       )}
       <hr />
-      <button onClick={UploadFile}>파일 전송!!</button>
+      <button onClick={UploadFile}>파일 전송!!</button> */}
     </div>
   );
 };

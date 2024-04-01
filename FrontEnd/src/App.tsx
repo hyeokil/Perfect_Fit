@@ -8,7 +8,7 @@ import Information from "./pages/accounts/Information.tsx";
 import Voicetraining from "./pages/accounts/Voicetraining.tsx";
 import KakaoRedirect from "./components/accounts/KakaoRedirect.tsx";
 import Layout from "./layout/Layout";
-import Record from "./components/sing/Record.tsx";
+import Record from "./components/record/Record.tsx";
 import "@/api/axios.ts";
 import Single from "./pages/single/Single.tsx";
 import MainChart from "./pages/chart/MainChart.tsx";
@@ -31,6 +31,7 @@ import Ost from "./pages/chart/genres/ost.tsx";
 import Agitation from "./pages/chart/genres/agitation.tsx";
 import Trot from "./pages/chart/genres/trot.tsx";
 import RecordRtc from "./components/sing/RecordRtc.tsx";
+import Preview from "./pages/sing/Preview.tsx";
 
 
 const App: React.FC = () => {
@@ -45,7 +46,7 @@ const App: React.FC = () => {
         <Route path="/voicetraining" element={<Voicetraining />} />
         <Route path="/record" element={<Record />} />
         <Route path="/single" element={<Single />} />
-        <Route path="/rtc" element={<RecordRtc />} />
+        <Route path="/preview" element={<Preview />} />
         {/* 로그인 상태에 따라 수정하기 // 중첩 라우팅 사용하기 */}
         <Route element={<Layout />}>
           {/* 차트 */}

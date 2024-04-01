@@ -1,4 +1,3 @@
-
 .albumcover {
   display: flex;
   flex-direction: column;
@@ -10,27 +9,36 @@
   // background-size: cover;
 }
 .content {
-  // position: fixed;
-  // top: 45px; /* 위에서부터 45px 위치 */
-  // bottom: 45px; /* 아래에서부터 45px 위치 */
-  // left: 0;
-  // right: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 60px; /* 헤더의 높이와 동일한 여백을 줍니다. */
-  border: 1px solid red;
+  align-items: center; /* 수직 가운데 정렬을 위해 추가 */
+  z-index: 999;
 }
 
 .player {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  height: 100px;
+  height: fit-content;
+  margin-top: 10%;
 }
-// .background {
-//   // background-image: url('../../assets/image/logo.png') ;
-//   background-image: url('../../../public/icons/android-chrome-512x512.png');
-//   background-size: cover;
-// }
 
+.toggle {
+  margin-left: 5%;
+}
 
+.controller {
+  text-align: center; /* 텍스트를 가운데 정렬합니다. */
+  justify-self: center;
+  // margin-right: 33%;
+}
 
+.pitch {
+  margin-right: 5%;
+  margin-left: 10%;
+  button {
+    border: 0;
+    background-color: transparent;
+  }
+}
