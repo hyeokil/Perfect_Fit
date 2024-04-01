@@ -118,7 +118,7 @@ const Controller = (props: PropType) => {
     if (shiftRef.current) {
       if (isPlaying) {
         shiftRef.current.disconnect();
-        // stopRecording(); //--------------
+        stopRecording(); //--------------
         const recordedAudioLength = recordedBlobs.reduce(
           (totalLength, blob) => totalLength + blob.size,
           0
@@ -132,7 +132,7 @@ const Controller = (props: PropType) => {
       } else {
         shiftRef.current.connect(audioCtxRef.current!.destination);
         audioCtxRef.current!.resume();
-        // startRecording(); //=--------------------
+        startRecording(); //=--------------------
       }
       setIsPlaying(!isPlaying);
     }
@@ -242,9 +242,9 @@ const Controller = (props: PropType) => {
       {recordedBlobs.map((blob, index) => (
         <audio key={index} controls src={URL.createObjectURL(blob)}></audio>
       ))}
-      <hr />
-      {musicUrl && <audio controls src={musicUrl}></audio>}
-      {videoUrl && <video controls src={videoUrl}></video>} */}
+      <hr /> */}
+      {/* {musicUrl && <audio controls src={musicUrl}></audio>} */}
+      {/* {videoUrl && <video controls src={videoUrl}></video>} */}
     </div>
   );
 };

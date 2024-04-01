@@ -9,6 +9,7 @@ type RecordType = {
   musicBlob: Blob | null;
   videoUrl: string | null;
   musicUrl: string | null;
+  voiceUrl: string | null;
   displayUrl: string | null;
   resetRecord: boolean | null;
   setResetRecord: (resetRecord: boolean) => void;
@@ -18,6 +19,7 @@ type RecordType = {
   setDisplayBlob: (displayBlob: Blob[]) => void;
   setMusicBlob: (musicBlob: Blob | null) => void;
   setVideoUrl: (videoUrl: string | null) => void;
+  setVoiceUrl: (voiceUrl: string | null) => void;
   setMusicUrl: (musicUrl: string | null) => void;
   setDisplayUrl: (displayUrl: string | null) => void;
 };
@@ -34,10 +36,12 @@ const useRecordStore = create(
       musicBlob: null,
       videoUrl: null,
       musicUrl: null,
+      voiceUrl: null,
       displayUrl: null,
       setIsPlaying: (isPlaying: boolean) => set({ isPlaying }),
       setMusicUrl: (musicUrl: string | null) => set({ musicUrl }),
       setVideoUrl: (videoUrl: string | null) => set({ videoUrl }),
+      setVoiceUrl: (voiceUrl: string | null) => set({ voiceUrl }),
       setDisplayUrl: (displayUrl: string | null) => set({ displayUrl }),
       setIsRecording: (isRecording: boolean) => set({ isRecording }),
       setResetRecord: (resetRecord: boolean) => set({ resetRecord }),

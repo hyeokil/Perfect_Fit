@@ -9,20 +9,26 @@ import { useEffect, useState } from "react";
 import { VideoId } from "@/util/videoUrl";
 import SaveAlert from "@/components/sing/SaveAlert";
 import NotSaveAlert from "@/components/sing/NotSaveAlert";
+import { useNavigate } from "react-router-dom";
 import VoiceRecord from "@/components/sing/VoiceRecord";
 import useRecordStore from "@/store/useRecordStore";
 import YouTube from "react-youtube";
 import { useMusicStore } from "@/store/useMusicStore";
 import { logOnDev } from "@/util/logging";
 import AlertOnNavigation from "@/hooks/useHistory";
-const Single = () => {
-  //---------------------------------------------------
+import { getHalfTime } from "@/util/songtimes";
+
+
+
+const FirstDuet = () => {
   // 저장여부
   const [showSaveAlert, setShowSaveAlert] = useState<boolean>(false);
   const [showNoAlert, setShowNoAlert] = useState<boolean>(false);
   const [userPitch, setUserPitch] = useState<number>(1.0);
   // ---------------------------------------------------
   const isPlaying = useRecordStore((state) => state.isPlaying);
+  // 안정함 0 선공 1 후공 2
+  const [turn, setTurn] = useState<number>(0)
   const Filter = styled.div`
     position: absolute;
     top: 50px;
@@ -49,6 +55,7 @@ const Single = () => {
   const [camera, setCamera] = useState<boolean>(true);
   logOnDev(`카메라, : ${camera}`)
   const { info } = useMusicStore();
+  const songLength = getHalfTime(info.songLength)
   console.log(info);
   const videoUrl = VideoId(info.songUrl);
   const [player, setPlayer] = useState<any>(null);
@@ -75,8 +82,9 @@ const Single = () => {
   console.log(videoUrl);
   return (
     <div>
+      {/* 페이지 이동 감지 */}
       <AlertOnNavigation />
-      <Header title="싱글 모드" state={["back", "close"]} page="mainchart" />
+      <Header title="듀엣 모드" state={["back", "close"]} page="mainchart" />
       <Background />
       <Filter />
       <div className={styles.content}>
@@ -90,6 +98,11 @@ const Single = () => {
             <VoiceRecord />
           </div>
         )}
+        {/* <iframe
+          width="90%"
+          height="200px"
+          src="https://www.youtube.com/embed/OvIk6BDkVE4"
+        /> */}
         {videoUrl && (
           <YouTube videoId={videoUrl} opts={opts} onReady={onReady} />
         )}
@@ -122,4 +135,4 @@ const Single = () => {
   );
 };
 
-export default Single;
+export default FirstDuet;

@@ -8,6 +8,7 @@ const Camera = () => {
   // 노래 시작을 알려주는 상태!
   const isPlaying = useRecordStore((state) => state.isPlaying)
   const setVideoUrl = useRecordStore((state) => state.setVideoUrl)
+  const setVoiceUrl = useRecordStore((state) => state.setVoiceUrl);
   const videoRef = useRef<HTMLVideoElement>(null)
   // mediastream
   const [stream, setStream] = useState<MediaStream | null>(null);
@@ -49,14 +50,14 @@ const resetRecord = useRecordStore(state => state.resetRecord)
     }
   },[stream])
 
-  // useEffect(() => {
-  //   if (isPlaying === true) {
-  //     handlStartVideoRecord();
-  //   }
-  //   if (isPlaying === false) {
-  //     handlStopVideoRecord()
-  //   }
-  // }, [isPlaying]);
+  useEffect(() => {
+    if (isPlaying === true) {
+      handlStartVideoRecord();
+    }
+    if (isPlaying === false) {
+      handlStopVideoRecord()
+    }
+  }, [isPlaying]);
 
 
   const handlStartVideoRecord = () => {
@@ -73,6 +74,7 @@ const resetRecord = useRecordStore(state => state.resetRecord)
         const url: string = URL.createObjectURL(e.data);
         console.log(url)
         setVideoUrl(url)
+        setVoiceUrl(null)
       }
       mediaRecorderRef.current.start()
       setRecording(true)
