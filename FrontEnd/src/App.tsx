@@ -31,6 +31,7 @@ import Agitation from "./pages/chart/genres/agitation.tsx";
 import Trot from "./pages/chart/genres/trot.tsx";
 import Preview from "./pages/sing/Preview.tsx";
 import FirstDuet from "./pages/duet/FirstDuet.tsx";
+import ReadReels from "./pages/reels/ReadReels.tsx";
 
 
 const App: React.FC = () => {
@@ -47,6 +48,7 @@ const App: React.FC = () => {
         <Route path="/single" element={<Single />} />
         <Route path="/firstduet" element={<FirstDuet />} />
         <Route path="/preview" element={<Preview />} />
+        <Route path="/reels" element={<ReadReels />} />
         {/* 로그인 상태에 따라 수정하기 // 중첩 라우팅 사용하기 */}
         <Route element={<Layout />}>
           {/* 차트 */}

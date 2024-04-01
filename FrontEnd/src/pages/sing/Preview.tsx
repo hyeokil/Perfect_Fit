@@ -18,6 +18,7 @@ const Preview: React.FC = () => {
   const [videoPath, setVideoPath] = useState<string>('')
   const [voicePath, setVoicePath] = useState<string>('')
   const [musicPath, setMusicPath] = useState<string>('')
+  console.log(`musicPath : ${musicPath}`)
   const { voiceBlob, musicBlob, videoBlob } = useSaveStore();
 
 //---모드 =----
