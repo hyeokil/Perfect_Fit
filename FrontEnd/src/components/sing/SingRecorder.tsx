@@ -47,8 +47,7 @@ const SingRecorder = () => {
       console.log(err);
     }
   };
-  //blob:http://localhost:5173/e66289cf-5f3c-4e5a-a86d-51a96aa325c9
-//http://localhost:5173/single
+
   const stopRecord = () => {
     if (mediaRecorder !== null) {
       mediaRecorder.ondataavailable = (e) => {

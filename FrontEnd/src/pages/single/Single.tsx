@@ -15,6 +15,7 @@ import YouTube from "react-youtube";
 import { useMusicStore } from "@/store/useMusicStore";
 import { logOnDev } from "@/util/logging";
 import AlertOnNavigation from "@/hooks/useHistory";
+import useSaveStore from "@/store/useSaveStore";
 const Single = () => {
   //---------------------------------------------------
   // 저장여부
@@ -22,7 +23,10 @@ const Single = () => {
   const [showNoAlert, setShowNoAlert] = useState<boolean>(false);
   const [userPitch, setUserPitch] = useState<number>(1.0);
   // ---------------------------------------------------
+  // const [camerablob, setCameraBlob] = 
+  // ---------------------------------------------------
   const isPlaying = useRecordStore((state) => state.isPlaying);
+  const setMode = useSaveStore((state) => state.setMode);
   const Filter = styled.div`
     position: absolute;
     top: 50px;
@@ -63,6 +67,9 @@ const Single = () => {
     }
   }, [isPlaying, player]);
 
+  useEffect(() => {
+    setMode('single')
+  }, [])
   const opts = {
     height: "200px",
     width: "100%",
@@ -72,7 +79,6 @@ const Single = () => {
       // 추가적인 플레이어 옵션들
     },
   };
-  console.log(videoUrl);
   return (
     <div>
       <AlertOnNavigation />
@@ -116,8 +122,6 @@ const Single = () => {
       </div>
       {showSaveAlert && <SaveAlert setShowSaveAlert={setShowSaveAlert} />}
       {showNoAlert && <NotSaveAlert setShowNoAlert={setShowNoAlert} />}
-      {/* <SingRecorder /> */}
-      {/* <VoiceRecord /> */}
     </div>
   );
 };
