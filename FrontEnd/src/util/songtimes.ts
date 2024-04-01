@@ -16,6 +16,6 @@ export function getHalfTime(timeString: string): string {
 }
 
 // 예시 사용
-const songLength = "3:49";
-const halfSongLength = getHalfTime(songLength);
-console.log(halfSongLength); // 출력: 1:54
+// const songLength = "3:49";
+// const halfSongLength = getHalfTime(songLength);
+// console.log(halfSongLength); // 출력: 1:54
