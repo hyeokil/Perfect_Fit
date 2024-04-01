@@ -41,6 +41,9 @@ class Member(Base):
     reels_play_time = relationship('ReelsPlayTime', back_populates="member")
     nickname = Column(String)
     reels = relationship('Reels', back_populates='member')
+    followers = relationship('Follow', foreign_keys='Follow.follower_id', back_populates='follower')
+    following = relationship('Follow', foreign_keys='Follow.following_id', back_populates='following')
+
 
 class ReelsPlayTime(Base):
     __tablename__ = 'reels_play_time'
@@ -65,3 +68,14 @@ class Genre(Base):
     id = Column(Integer, primary_key=True)
     genre = Column(String)
     song = relationship('Song', back_populates="genre")
+
+    
+class Follow(Base):
+    __tablename__ = 'follow'
+    # id = Column(Integer, primary_key=True)
+    active = Column(Boolean)
+    follower_id = Column(Integer, ForeignKey('member.id'), primary_key=True)
+    following_id = Column(Integer, ForeignKey('member.id'), primary_key=True)
+
+    follower = relationship('Member', foreign_keys=[follower_id], back_populates="followers")
+    following = relationship('Member', foreign_keys=[following_id], back_populates="following")

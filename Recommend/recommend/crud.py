@@ -3,7 +3,7 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
-from .models import Song, Reels, ReelsPlayTime, Member
+from .models import Follow, Song, Reels, ReelsPlayTime, Member
 from decimal import Decimal
 
 
@@ -34,6 +34,16 @@ def fetch_reels_playtime_data(db: Session):
     ).group_by(ReelsPlayTime.member_id, ReelsPlayTime.reels_id
                ).all()
     return results
+
+
+def follow_data(db: Session):
+    results = (db.query(
+        Reels.id.label("reels_id"),
+        Reels.member_id.label('creator_id')
+    )).all()
+    df_reels = pd.DataFrame(results, columns=['reels_id', 'creator_id'])
+    return df_reels
+
 
 # member_id 행, reels_id 열, total_play_time 값
 def create_reels_playtime_dataframe(results, db: Session):
@@ -167,6 +177,18 @@ def calculate_content_based_score(df_videos, user_prefer):
         scores.at[index] = score
     return scores
 
+
+def calculate_follow_score(df_reels, member_id, following_ids):
+    scores = pd.Series(0.0, index=df_reels.index)
+
+    if following_ids:
+        for index, video in df_reels.iterrows():
+            if video['creator_id'] in following_ids:
+                scores.at[index] += 0.4
+
+    return scores
+
+
 # 정규화
 def normalize_scores(scores):
     min_score = scores.min()
@@ -185,10 +207,17 @@ def generate_hybrid_recommendations(member_id, db, n_recommendations=200):
     similar_user = top_similar_user(db)
     reels = fetch_reels_playtime_data(db)
 
+    df_reels = follow_data(db)
+    df_reels.set_index('reels_id', inplace=True)
+    following_ids = db.query(Follow.follower_id).filter(Follow.following_id == member_id).all()
+    following_ids = [id[0] for id in following_ids]
+
     df_videos = create_reels_playtime_dataframe(reels, db)
 
     user_prefer = generate_user_preferences(db, member_id, df_watch_times,5)
     content_scores = calculate_content_based_score(df_watch_times, user_prefer)
+
+    follow_scores = calculate_follow_score(df_reels, member_id, following_ids)
 
     # 협업 필터링 점수
     collaborative_scores = recommend_videos_for_user(member_id, db, df_videos, similar_user)
@@ -200,7 +229,7 @@ def generate_hybrid_recommendations(member_id, db, n_recommendations=200):
     collaborative_scores_normalized = normalize_scores(collaborative_scores)
     content_scores_normalized = normalize_scores(content_scores)
 
-    final_scores = (collaborative_scores_normalized * 0.6) + (content_scores_normalized * 0.3)
+    final_scores = (collaborative_scores_normalized * 0.6) + (content_scores_normalized * 0.3) + follow_scores
 
     recommendations = final_scores.sort_values(ascending=False)
 
