@@ -41,7 +41,7 @@ const mode = useSaveStore(state => state.mode)
     const uploads = []
 
     if (videoBlob) {
-      const fileName = `video/${timestamp}_${songTitle}`;
+      const fileName = `video/${songTitle}__${timestamp}`;
       const videoUpload = S3Upload(videoBlob, fileName)
       .then(location => {
         console.log(location)
@@ -55,7 +55,7 @@ const mode = useSaveStore(state => state.mode)
       
     } 
     if (voiceBlob) {
-      const fileName = `voice/${timestamp}_${songTitle}`;
+      const fileName = `voice/${songTitle}__${timestamp}`;
       const voiceUpload = S3Upload(voiceBlob, fileName)
       .then(location => {
         console.log(location)
@@ -67,7 +67,7 @@ const mode = useSaveStore(state => state.mode)
       uploads.push(voiceUpload)
     }
     if (musicBlob) {
-      const fileName = `music/${timestamp}_${songTitle}`;
+      const fileName = `music/${songTitle}__${timestamp}`;
       const musicUpload = S3Upload(musicBlob, fileName)
       .then(location => {
         console.log(location)
