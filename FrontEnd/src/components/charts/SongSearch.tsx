@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import BottomSheet from "./BottomSheet";
+import { useSongStore } from "@/store/useSongStore";
 
 const SongSearch: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -8,7 +9,8 @@ const SongSearch: React.FC = () => {
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [showRecentSearches, setShowRecentSearches] = useState<boolean>(true);
   const [showResults, setShowResults] = useState<boolean>(false);
-  const [selectedSong, setSelectedSong] = useState<any | null>(null);
+  const setSelectedSong = useSongStore((state) => state.setSelectedSong); // useSongStore에서 setSelectedSong 함수를 가져옵니다.
+  const selectedSong = useSongStore((state) => state.selectedSong);
 
   const openBottomSheet = (song: any) => {
     setSelectedSong(song);
@@ -55,9 +57,14 @@ const SongSearch: React.FC = () => {
         setShowRecentSearches(false);
 
         // 최근 검색어 업데이트
-        const updatedSearches = new Set([keyword, ...Array.from(recentSearches)].slice(0, 10));
+        const updatedSearches = new Set(
+          [keyword, ...Array.from(recentSearches)].slice(0, 10)
+        );
         setRecentSearches(updatedSearches);
-        localStorage.setItem("songRecentSearches", JSON.stringify(Array.from(updatedSearches)));
+        localStorage.setItem(
+          "songRecentSearches",
+          JSON.stringify(Array.from(updatedSearches))
+        );
       } catch (error) {
         console.error("검색 실패:", error);
       }
@@ -88,9 +95,14 @@ const SongSearch: React.FC = () => {
 
   // 최근 검색어 삭제
   const handleDeleteRecentSearch = (search: string) => {
-    const updatedSearches = new Set(Array.from(recentSearches).filter(item => item !== search));
+    const updatedSearches = new Set(
+      Array.from(recentSearches).filter((item) => item !== search)
+    );
     setRecentSearches(updatedSearches);
-    localStorage.setItem("songRecentSearches", JSON.stringify(Array.from(updatedSearches)));
+    localStorage.setItem(
+      "songRecentSearches",
+      JSON.stringify(Array.from(updatedSearches))
+    );
   };
 
   return (
@@ -161,11 +173,14 @@ const SongSearch: React.FC = () => {
       <BottomSheet
         isOpen={selectedSong !== null}
         onClose={closeBottomSheet}
-        backgroundImageUrl={selectedSong && selectedSong.songThumbnail}
+        backgroundImageUrl={selectedSong ? selectedSong.songThumbnail : ""}
       >
         {selectedSong && (
           <div className="song-bottom">
-            <img src={selectedSong.songThumbnail} alt={selectedSong.songTitle} />
+            <img
+              src={selectedSong.songThumbnail}
+              alt={selectedSong.songTitle}
+            />
             <div className="song-info">
               <h3>{selectedSong.songTitle}</h3>
               <p>{selectedSong.artist}</p>

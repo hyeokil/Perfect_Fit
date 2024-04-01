@@ -3,15 +3,16 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "@/styles/chart/AllChart.scss";
 import BottomSheet from "./BottomSheet";
+import { useSongStore } from "@/store/useSongStore";
 
 const AllChart: React.FC = () => {
   const navigate = useNavigate();
   const [songs, setSongs] = useState<any[]>([]); // songs의 타입을 any[]로 수정
   const [currentTime, setCurrentTime] = useState<string>("");
-  const [selectedSong, setSelectedSong] = useState<any | null>(null);
+  const setSelectedSong = useSongStore((state) => state.setSelectedSong); // useSongStore에서 setSelectedSong 함수를 가져옵니다.
+  const selectedSong = useSongStore((state) => state.selectedSong);
 
   const openBottomSheet = (song: any) => {
-    console.log(song);
     setSelectedSong(song);
   };
 
@@ -38,7 +39,7 @@ const AllChart: React.FC = () => {
           }
         );
         setSongs(response.data.dataBody.slice(0, 3)); // 받아온 데이터를 최대 3개로 슬라이스하여 저장합니다.
-        console.log(response.data.dataBody);
+        // console.log(response.data.dataBody);
       } catch (error) {
         console.error("Failed to fetch songs", error);
       }
@@ -50,9 +51,9 @@ const AllChart: React.FC = () => {
     const interval = setInterval(() => {
       const date = new Date();
       const hours = date.getHours().toString().padStart(2, "0");
-      const minutes = date.getMinutes().toString().padStart(2, "0");
-      setCurrentTime(`${hours}:${minutes}`);
-    }, 1000); // 매 초마다 현재 시간 업데이트
+      
+      setCurrentTime(`${hours}:00`);
+    }, 100); // 매 초마다 현재 시간 업데이트
 
     // 컴포넌트가 언마운트될 때 clearInterval을 호출하여 setInterval을 정리
     return () => clearInterval(interval);
@@ -126,7 +127,7 @@ const AllChart: React.FC = () => {
       <div className="sing-container">
         <div className="sing-title">
           <h3>{`${currentTime} 기준 많이 부르는 노래`}</h3>
-          <p onClick={() => handleNavigate("/preferencechart")}>전체 보기</p>
+          <p onClick={() => handleNavigate("/songtimerec")}>전체 보기</p>
         </div>
         <div className="sing-content">
           <div className="sing-chart">
@@ -163,7 +164,9 @@ const AllChart: React.FC = () => {
             <BottomSheet
               isOpen={selectedSong !== null}
               onClose={closeBottomSheet}
-              backgroundImageUrl={selectedSong && selectedSong.songThumbnail} // 배경 이미지 URL을 전달
+              backgroundImageUrl={
+                selectedSong ? selectedSong.songThumbnail : ""
+              }
             >
               {selectedSong && (
                 <div className="song-bottom">
