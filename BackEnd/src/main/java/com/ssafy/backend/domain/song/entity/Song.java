@@ -21,12 +21,6 @@ public class Song {
     // 노래 제목
     private String songTitle;
 
-//    // 가수명
-//    private String songArtist;
-//
-//    // 장르
-//    private String songGenre;
-
     // MR 영상 URL
     private String songUrl;
 
@@ -54,19 +48,5 @@ public class Song {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "genre_id")
     private Genre genre;
-
-
-//    public void setSongGenre(String songGenre) {
-//        this.songGenre = songGenre;
-//    }
-//
-//    public void setSongReleaseDate(String songReleaseDate) {
-//        this.songReleaseDate = songReleaseDate;
-//    }
-//
-//    public void setSongThumbnail(String songThumbnail) {
-//        this.songThumbnail = songThumbnail;
-//    }
-
 
 }

@@ -17,7 +17,9 @@ public class SingleResponseDto {
 
     private LocalDateTime createdAt;
 
-    // 추가할 내용
-    // 노래 제목, 가수 이름, 앨범 이미지, 영상 길이
+    private String songTitle;
+    private String artistName;
+    private String songThumbnail;
+
 
 }
