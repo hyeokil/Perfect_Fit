@@ -1,5 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import serializers
 from .serializers import SoundFeatureSerializer
 from .models import SoundFeature
 from rest_framework import status
@@ -27,13 +28,14 @@ def record(request, user_id):
     if 'file' not in request.FILES:
         return Response({'error': 'No file Exception'}, status=status.HTTP_400_BAD_REQUEST)
 
+    logger.info(f'@@@@@@@@@ {request.data}')
     file = request.FILES['file']  # 파일 가져오기
     # 서버에 임시 저장
     file_name = default_storage.save(file.name, ContentFile(file.read()))
     file_path = default_storage.path(file_name)
 
     logger.info(f'File Type : {type(file)}')  # <class 'django.core.files.uploadedfile.InMemoryUploadedFile'>
-    logger.info(file.name)
+    logger.info(file.name)  # voiceData:F_000001.wav
 
     # 분석 데이터 보관
     data = {}
@@ -103,7 +105,6 @@ def record(request, user_id):
     for i in range(len(mfccs)):
         data['mfcc' + str(i) + '_mean'], data['mfcc' + str(i) + '_var'] = mfccs[i].mean(), mfccs[i].var()
 
-    logger.info(f"현재까지 저장된 data -> {data}")
 
     pitches, magnitudes = librosa.piptrack(y=y, sr=sr)
     pitches = pitches[magnitudes > np.median(magnitudes)]
@@ -118,25 +119,39 @@ def record(request, user_id):
 
     data['min_pitch'], data['max_pitch'] = min_pitch, max_pitch
     data['min_note'], data['max_note'] = str(result[0]), str(result[1])
-    data['avg_pitch'] = avg_pitch
-    print(type(result[0]), type(result[1]))
+    data['avg_pitch'] = float(avg_pitch)
+    logger.info(type(result[0]), type(result[1]))  # <class 'numpy.str_'>
 
-    print(f'최소 피치 = {round(min_pitch)} / 최대 피치 = {round(max_pitch)}')
-    print(f'최소 음계 = {result[0]} / 최대 음계 = {result[1]}')
+    logger.info(f'최소 피치 = {round(min_pitch)} / 최대 피치 = {round(max_pitch)}')
+    logger.info(f'최소 음계 = {result[0]} / 최대 음계 = {result[1]}')
+    logger.info(f'avg_pitch -> {data["avg_pitch"]}')
 
     # if SoundFeature.objects.filter(user_pk = user_id).exists():
     #     sound = SoundFeature.objects.get(user_pk = user_id)
     #     serializer = SoundFeatureSerializer(sound, data = data)
 
     serializer = SoundFeatureSerializer(data=data)
+    logger.info(f"현재까지 저장된 data -> {data}")
 
     # raise_exception = True
     # 데이터가 유효하지 않을 경우 자동으로 'ValidationError' 예외 발생
     # 클라이언트에게 400 Bad Request 반환.
-    if serializer.is_valid(raise_exception=True):
-        serializer.save()
+    try:
+        # 유효성 검사 후 데이터 저장
+        if serializer.is_valid():
+            serializer.save()
+            logger.info("Serializer Success !")
+            default_storage.delete(file_name)  # 서버에서 사용이 끝난 파일을 삭제
+            return Response({'data': data}, status=status.HTTP_200_OK)  # json
+        else:
+            logger.info("Serializer validation failed")
+            logger.info(serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except serializers.ValidationError as e:
+        logger.error("ValidationError caught")
+        logger.error(e.detail)
+        return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
 
-    default_storage.delete(file_name)  # 서버에서 사용이 끝난 파일을 삭제
-    return Response({'data': data}, status=status.HTTP_200_OK)  # json
+    # return Response({'data': data}, status=status.HTTP_200_OK)  # json
     # return Response(status=status.HTTP_200_OK)
 

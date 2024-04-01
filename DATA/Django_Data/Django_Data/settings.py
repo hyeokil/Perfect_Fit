@@ -14,8 +14,10 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'  #
 
 
 # Quick-start development settings - unsuitable for production
@@ -41,8 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'voiceData.apps.VoicedataConfig',
-    # 'voiceData',  # 앱 등록
+    'voiceData.apps.VoicedataConfig',  # App 등록
     'rest_framework',  # restframework 등록
 ]
 
@@ -83,8 +84,12 @@ WSGI_APPLICATION = "Django_Data.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'perfectfit',
+        'USER': 'ssafy',
+        'PASSWORD': 'ssafy',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
