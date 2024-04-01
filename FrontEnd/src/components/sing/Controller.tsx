@@ -3,11 +3,33 @@ import { PitchShifter } from "soundtouchjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import styles from "@styles/sing/Controller.module.scss";
-const Controller = () => {
+import useRecordStore from "@/store/useRecordStore";
+
+type PropType = {
+  setUserPitch : React.Dispatch<React.SetStateAction<number>>;
+  setShowNoAlert: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowSaveAlert: React.Dispatch<React.SetStateAction<boolean>>;
+  userPitch: number;
+};
+
+const Controller = (props: PropType) => {
   // -------------------------------------------------------
-  const [pitch, setPitch] = useState<number>(1.0);
+  const {setShowNoAlert, setShowSaveAlert, userPitch , setUserPitch } = props;
+  const [pitch, setPitch] = useState<number>(userPitch);
   const [tempo, setTempo] = useState<number>(1.0);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+
+  const { isPlaying, setIsPlaying } = useRecordStore();
+  const setMusicBlob = useRecordStore((state) => state.setMusicBlob);
+  const setMusicUrl = useRecordStore((state) => state.setMusicUrl);
+  const musicUrl = useRecordStore((state) => state.musicUrl);
+  const videoUrl = useRecordStore((state) => state.videoUrl);
+  const isRecording = useRecordStore((state) => state.isRecording);
+  const setIsRecording = useRecordStore((state) => state.setIsRecording);
+  // ----------------------------------------------------
+  const [recordedBlobs, setRecordedBlobs] = useState<Blob[]>([]);
+  const [media, setMedia] = useState<MediaRecorder | null>(null);
+  // ----------------------------------------------------
+  console.log(isPlaying);
   const audioCtx = new AudioContext();
   const state = audioCtx.state;
   console.log("현재 피치 : ", pitch);
@@ -15,7 +37,6 @@ const Controller = () => {
 
   const shiftRef = useRef<PitchShifter | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
-
 
   useEffect(() => {
     audioCtxRef.current = new AudioContext();
@@ -33,25 +54,15 @@ const Controller = () => {
       const audioCtx = audioCtxRef.current;
       if (audioCtx) {
         const audioBuffer = await audioCtx.decodeAudioData(buffer);
-        // ---------------------------------------------------------
-        // const source = audioCtx.createBufferSource();
-        // source.buffer = audioBuffer;
-        // ---------------------------------------------------------
         const myShift = new PitchShifter(audioCtx, audioBuffer, 16384);
         myShift.tempo = tempo;
         myShift.pitch = pitch;
         shiftRef.current = myShift;
-        // ----------------------------------------------------------
-        // source.connect(myShift.getDestination());
-        // source.onended = handleAudioEnded; // 오디오가 끝날 때 호출될 함수
-        // myShift.on("ended", handleAudioEnded)
-        // ----------------------------------------------------------
         if (isPlaying) {
           myShift.connect(audioCtx.destination);
           audioCtx.resume();
         }
-        
-        // 모니터링을 시작합니다.
+        // 모니터링을 시작
         monitorPlayback(myShift, audioBuffer.duration);
       }
     }
@@ -89,19 +100,39 @@ const Controller = () => {
     };
   }, []);
 
+  useEffect(() => {
+    setPitch(userPitch);
+    if (shiftRef.current) {
+      shiftRef.current.pitch = userPitch;
+    } // userPitch가 변경될 때마다 pitch state를 업데이트
+  }, [userPitch]);
+
+  // 오디오가 끝났을 때 할 작업
   const handleAudioEnded = () => {
-    // 오디오가 끝났을 때 할 작업
-    setIsPlaying(false)
-    console.log('오디오가 끝났습니다.');
+    setIsPlaying(false);
+    setShowSaveAlert(true);
+    console.log("오디오가 끝났습니다.");
   };
 
   const togglePlayback = () => {
     if (shiftRef.current) {
       if (isPlaying) {
         shiftRef.current.disconnect();
+        // stopRecording(); //--------------
+        const recordedAudioLength = recordedBlobs.reduce(
+          (totalLength, blob) => totalLength + blob.size,
+          0
+        );
+  
+        if (recordedAudioLength < 60 * 1000) {
+          setShowNoAlert(true); // 녹음된 음성의 길이가 1분 미만일 때
+        } else {
+          setShowSaveAlert(true); // 녹음된 음성의 길이가 1분 이상일 때
+        }
       } else {
         shiftRef.current.connect(audioCtxRef.current!.destination);
         audioCtxRef.current!.resume();
+        // startRecording(); //=--------------------
       }
       setIsPlaying(!isPlaying);
     }
@@ -109,22 +140,61 @@ const Controller = () => {
 
   const handleChangePitch = (e: ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
+    setUserPitch(value)
     setPitch(value);
     if (shiftRef.current) {
       shiftRef.current.pitch = value;
     }
   };
-  const handleChangeTempo = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value);
-    setTempo(value);
-    if (shiftRef.current) {
-      shiftRef.current.tempo = value;
+  // const handleChangeTempo = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const value = parseFloat(e.target.value);
+  //   setTempo(value);
+  //   if (shiftRef.current) {
+  //     shiftRef.current.tempo = value;
+  //   }
+  // };
+  // -----------------------------------------------------------------
+  // 오디오 녹음 시작
+
+  const startRecording = () => {
+    if (audioCtxRef.current) {
+      const streamDestination =
+        audioCtxRef.current.createMediaStreamDestination();
+      if (shiftRef.current) {
+        shiftRef.current.node.connect(streamDestination);
+      }
+      const recorder = new MediaRecorder(streamDestination.stream, {
+        mimeType: "audio/webm",
+      });
+      setMedia(recorder);
+      recorder.start();
+      setIsRecording(true);
     }
   };
+  const stopRecording = () => {
+    if (media !== null) {
+      media.ondataavailable = (e) => {
+        const blob = new Blob([e.data], { type: "audio/webm" }); // Blob 생성
+        console.log(blob);
+        setRecordedBlobs((prevBlobs) => [...prevBlobs, blob]); // Blob 데이터 저장
+        setMusicBlob(blob);
+        const url: string = URL.createObjectURL(blob);
+        console.log(url);
+        setMusicUrl(url);
+      };
+      media.stop();
+    }
+  };
+  useEffect(() => {
+    if (isRecording === false) {
+      setRecordedBlobs([]); // 녹음된 Blob 초기화
+      setMusicUrl(null); // 음악 URL 초기화
+      setIsRecording(false); // 녹음 상태를 false로 설정
+    }
+  }, [isRecording])
 
   return (
     <div className={styles.wrapper}>
-      <h1>컨트롤러!!!</h1>
       <div className={styles.play}>
         <button className={styles.controlbutton} onClick={togglePlayback}>
           {isPlaying ? (
@@ -135,6 +205,7 @@ const Controller = () => {
         </button>
       </div>
       <div className={styles.controlbox}>
+        <h4>음정조절</h4>
         <input
           type="range"
           onChange={handleChangePitch}
@@ -143,12 +214,17 @@ const Controller = () => {
           max="2"
           step="0.01"
         />
-        <div>
-          <p>{pitch}</p>
+        <div className={styles.textbox}>
           <label>피치</label>
+          <p>{pitch}</p>
+          <p>
+            {" "}
+            {pitch >= 1.0 ? "+" : "-"}
+            {Math.abs(100 - Math.round(pitch * 100))} %
+          </p>
         </div>
       </div>
-      <div className={styles.controlbox}>
+      {/* <div className={styles.controlbox}>
         <input
           type="range"
           onChange={handleChangeTempo}
@@ -161,7 +237,14 @@ const Controller = () => {
           <p>{tempo}</p>
           <label>템포</label>
         </div>
-      </div>
+      </div> */}
+      {/* <hr />
+      {recordedBlobs.map((blob, index) => (
+        <audio key={index} controls src={URL.createObjectURL(blob)}></audio>
+      ))}
+      <hr />
+      {musicUrl && <audio controls src={musicUrl}></audio>}
+      {videoUrl && <video controls src={videoUrl}></video>} */}
     </div>
   );
 };

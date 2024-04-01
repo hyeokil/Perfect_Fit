@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import RecordRTC from "recordrtc";
-
+// 사용안함
 const RecordRtc = () => {
   const divRef = useRef<HTMLDivElement>(null);
   const recordRef = useRef<RecordRTC | null>(null);

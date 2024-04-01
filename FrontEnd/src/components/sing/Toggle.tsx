@@ -51,17 +51,16 @@ const Toggle = (props:ToggleType) => {
   return (
     <div>
       <Stack direction="row" spacing={1} alignItems="center">
-        <FormControlLabel
-          labelPlacement="start"
-          label="카메라"
-          control={
-            <Android12Switch
-              checked={camera}
-              onChange={handleChange}
-              defaultChecked
-            />
-          }
+        <img src="/public/icon/camera.png"/>
+        <Android12Switch
+          checked={camera}
+          onChange={handleChange}
+          defaultChecked
         />
+        {/* <FormControlLabel
+          control={
+          }
+        /> */}
       </Stack>
     </div>
   );
