@@ -4,12 +4,15 @@ import axios from "axios";
 import "@/styles/chart/AllChart.scss";
 import BottomSheet from "./BottomSheet";
 import { useSongStore } from "@/store/useSongStore";
+import Loading from "../common/Loading";
 
 const AllChart: React.FC = () => {
   const navigate = useNavigate();
-  const [songs, setSongs] = useState<any[]>([]); // songs의 타입을 any[]로 수정
+  const [loading, setLoading] = useState(true);
+  const [songs, setSongs] = useState<any[]>([]);
+  const [ostSongs, setOstSongs] = useState<any[]>([]);
   const [currentTime, setCurrentTime] = useState<string>("");
-  const setSelectedSong = useSongStore((state) => state.setSelectedSong); // useSongStore에서 setSelectedSong 함수를 가져옵니다.
+  const setSelectedSong = useSongStore((state) => state.setSelectedSong);
   const selectedSong = useSongStore((state) => state.selectedSong);
 
   const openBottomSheet = (song: any) => {
@@ -20,7 +23,6 @@ const AllChart: React.FC = () => {
     setSelectedSong(null);
   };
 
-  // 타입 선언해서 네비게이트 한번에 관리
   const handleNavigate = (chartType: string) => {
     navigate(chartType);
   };
@@ -38,58 +40,54 @@ const AllChart: React.FC = () => {
             },
           }
         );
-        setSongs(response.data.dataBody.slice(0, 3)); // 받아온 데이터를 최대 3개로 슬라이스하여 저장합니다.
-        // console.log(response.data.dataBody);
+
+        const ostResponse = await axios.get(
+          `https://j10c205.p.ssafy.io/api/v1/song/chart/genre/ost`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setSongs(response.data.dataBody.slice(0, 3));
+        console.log(response.data.dataBody)
+        setOstSongs(ostResponse.data.dataBody.slice(0, 3));
       } catch (error) {
         console.error("Failed to fetch songs", error);
+      } finally {
+        setLoading(false)
       }
     };
 
     fetchSongs();
 
-    // 현재 시간 설정
     const interval = setInterval(() => {
       const date = new Date();
       const hours = date.getHours().toString().padStart(2, "0");
-      
-      setCurrentTime(`${hours}:00`);
-    }, 100); // 매 초마다 현재 시간 업데이트
 
-    // 컴포넌트가 언마운트될 때 clearInterval을 호출하여 setInterval을 정리
+      setCurrentTime(`${hours}:00`);
+    }, 10);
+
     return () => clearInterval(interval);
   }, []);
 
-  // 찜하기
   const toggleLike = async (song: any) => {
     try {
       const token = localStorage.getItem("accessToken");
-
-      // 서버에 보낼 데이터 구성
-      const updatedSongData = {
-        ...song,
-        myListDisplay: !song.myListDisplay, // 토글
-      };
-      // console.log(updatedSongData);
+      const updatedSongData = { ...song, myListDisplay: !song.myListDisplay };
 
       await axios.post(
-        `https://j10c205.p.ssafy.io/api/v1/myList/like/${song.songId}`, // 곡 ID에 따라 업데이트
+        `https://j10c205.p.ssafy.io/api/v1/myList/like/${song.songId}`,
         updatedSongData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // UI 갱신을 위해 상태 업데이트
       setSongs((prevSongs) => {
         if (prevSongs) {
-          return prevSongs.map((prevSong) => {
-            if (prevSong.songId === song.songId) {
-              return updatedSongData;
-            }
-            return prevSong;
-          });
+          return prevSongs.map((prevSong) =>
+            prevSong.songId === song.songId ? updatedSongData : prevSong
+          );
         }
         return [];
       });
@@ -97,6 +95,10 @@ const AllChart: React.FC = () => {
       console.log("토글 실패", error);
     }
   };
+
+  if (loading) {
+    return <Loading />
+  }
 
   return (
     <div className="all-container">
@@ -125,13 +127,68 @@ const AllChart: React.FC = () => {
         </div>
       </div>
       <div className="sing-container">
+        <BottomSheet
+          isOpen={selectedSong !== null}
+          onClose={closeBottomSheet}
+          backgroundImageUrl={selectedSong ? selectedSong.songThumbnail : ""}
+        >
+          {selectedSong && (
+            <div className="song-bottom">
+              <img
+                src={selectedSong.songThumbnail}
+                alt={selectedSong.songTitle}
+              />
+              <div className="song-info">
+                <h2>{selectedSong.songTitle}</h2>
+                <p>{selectedSong.artist}</p>
+              </div>
+            </div>
+          )}
+        </BottomSheet>
+
+        <div className="sing-title">
+          <h3>인기 드라마 OST</h3>
+          <p onClick={() => handleNavigate("/genre/ost")}>전체 보기</p>
+        </div>
+        <div className="sing-content">
+          <div className="sing-chart">
+            {ostSongs.map((song, index) => (
+              <div key={index} className="sing-song">
+                <img src={song.songThumbnail} alt={song.songThumbnail} />
+                <div
+                  className="sing-song-info"
+                  onClick={() => openBottomSheet(song)}
+                >
+                  <h3>{song.songTitle}</h3>
+                  <p>{song.artist}</p>
+                </div>
+                <div
+                  className="sing-song-like"
+                  onClick={() => toggleLike(song)}
+                >
+                  {song.myListDisplay ? (
+                    <img
+                      src="/src/assets/icon/chart/liketrue.png"
+                      alt="좋아요"
+                    />
+                  ) : (
+                    <img
+                      src="/src/assets/icon/chart/likefalse.png"
+                      alt="좋아요 취소"
+                    />
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="sing-title">
           <h3>{`${currentTime} 기준 많이 부르는 노래`}</h3>
           <p onClick={() => handleNavigate("/songtimerec")}>전체 보기</p>
         </div>
         <div className="sing-content">
           <div className="sing-chart">
-            {/* 최신곡 차트들 여기에 쫙 뿌리기 */}
             {songs.map((song, index) => (
               <div key={index} className="sing-song">
                 <img src={song.songThumbnail} alt={song.songThumbnail} />
@@ -160,28 +217,6 @@ const AllChart: React.FC = () => {
                 </div>
               </div>
             ))}
-            {/* 바텀시트 */}
-            <BottomSheet
-              isOpen={selectedSong !== null}
-              onClose={closeBottomSheet}
-              backgroundImageUrl={
-                selectedSong ? selectedSong.songThumbnail : ""
-              }
-            >
-              {selectedSong && (
-                <div className="song-bottom">
-                  {/* 선택된 노래의 정보 표시 */}
-                  <img
-                    src={selectedSong.songThumbnail}
-                    alt={selectedSong.songTitle}
-                  />
-                  <div className="song-info">
-                    <h2>{selectedSong.songTitle}</h2>
-                    <p>{selectedSong.artist}</p>
-                  </div>
-                </div>
-              )}
-            </BottomSheet>
           </div>
         </div>
       </div>

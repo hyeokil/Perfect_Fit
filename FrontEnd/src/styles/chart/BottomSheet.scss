@@ -1,6 +1,6 @@
 .bottom-sheet-all {
   background-color: rgba(0, 0, 0, 0); /* 초기 배경 투명 설정 */
-
+  
   .bottom-sheet {
     position: fixed;
     bottom: 0; /* 화면 하단에 고정 */
@@ -12,10 +12,12 @@
 
     &.open {
       height: 100vh;
+      z-index: 0;
     }
 
     .bottom-sheet-content {
       position: absolute;
+      z-index: 1;
       bottom: 0;
       left: 0;
       width: 90%;
@@ -23,6 +25,28 @@
       padding: 20px;
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
+      .song-button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        width: 90%;
+        opacity: 0.9;
+        z-index: 2;
+    
+        button {
+          margin-top: 20px;
+          width: 36vw;
+          height: 8vh;
+          border-color: #9f9f9f;
+          box-shadow: none;
+          border-radius: 15px;
+          font-size: 17px;
+          background: #f1f1f1;
+          border: none;
+          z-index: 2;
+        }
+      }
     }
 
     .bottom-sheet-overlay {
@@ -42,7 +66,7 @@
       padding: 10px;
       background-color: #f1f1f1;
       opacity: 0.9;
-      
+
       img {
         width: 80px;
         border-radius: 5px;
@@ -66,26 +90,5 @@
       }
     }
   }
-  .song-button {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    width: 90%;
-    opacity: 0.9;
-    z-index: 2;
-    
 
-    button {
-      margin-top: 20px;
-      width: 36vw;
-      height: 8vh;
-      border-color: #9f9f9f;
-      box-shadow: none;
-      border-radius: 15px;
-      font-size: 17px;
-      background: #f1f1f1;
-      border: none;
-    }
-  }
 }
