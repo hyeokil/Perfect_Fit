@@ -251,7 +251,8 @@ def generate_hybrid_recommendations(member_id, db, n_recommendations=200):
         final_recommendations.append({
             "reels_id": reels.id,
             "score": score,
-            "reels_path": reels.path,
+            "reels_user_path": reels.user_path,
+            "reels_audio_path": reels.audio_path,
             "reels_time": reels.time,
             "member_id": reels.member_id,
             "song_id": reels.song_id

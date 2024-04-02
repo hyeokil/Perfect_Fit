@@ -19,7 +19,8 @@ def get_db():
 
 class ReelsResponse(BaseModel):
     id: int
-    path: str
+    user_path: str
+    audio_path: str
     time: int
     score: float
     # member_id: int
@@ -46,7 +47,7 @@ async def read_recommendations(memberId: int, db: Session = Depends(get_db)):
             song = db.query(models.Song).filter(models.Song.id == reel.song_id).first()
             song_title = song.song_title if song else "Unknown Title"
 
-            response_list.append(ReelsResponse(id=reel.id, path=reel.path, time=reel.time, score=recommendation["score"], member_nickname=member_nickname, song_title=song_title))
+            response_list.append(ReelsResponse(id=reel.id, user_path=reel.user_path, audio_path=reel.audio_path, time=reel.time, score=recommendation["score"], member_nickname=member_nickname, song_title=song_title))
     return Recommendation(recommendations=response_list)
 
 
