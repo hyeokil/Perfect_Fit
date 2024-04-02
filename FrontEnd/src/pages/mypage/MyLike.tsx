@@ -1,25 +1,11 @@
-import Loading from "@/components/common/Loading";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import BottomSheet from "./BottomSheet";
-import "@/styles/chart/Singchart.scss";
-import Header from "../layout/Header";
+import Header from "@/components/layout/Header";
+import axios from "axios";
 import { useSongStore } from "@/store/useSongStore";
+import BottomSheet from "@/components/charts/BottomSheet";
 
-interface Song {
-  songId: number;
-  songThumbnail: string;
-  songTitle: string;
-  artist: string;
-  myListDisplay: boolean;
-}
-
-interface GenreProps {
-  genre: string;
-}
-
-const Genres: React.FC<GenreProps> = ({ genre }) => {
-  const [songs, setSongs] = useState<Song[] | null>(null);
+const MyLike: React.FC = () => {
+  const [likedSongs, setLikedSongs] = useState<any[]>([]);
   const setSelectedSong = useSongStore((state) => state.setSelectedSong); // useSongStore에서 setSelectedSong 함수를 가져옵니다.
   const selectedSong = useSongStore((state) => state.selectedSong);
 
@@ -32,30 +18,33 @@ const Genres: React.FC<GenreProps> = ({ genre }) => {
   };
 
   useEffect(() => {
-    const fetchSongs = async () => {
+    const fetchLikedSongs = async () => {
       try {
         const token = localStorage.getItem("accessToken");
         const response = await axios.get(
-          `https://j10c205.p.ssafy.io/api/v1/song/chart/genre/${genre}`,
+          "https://j10c205.p.ssafy.io/api/v1/myList/get",
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
-        setSongs(response.data.dataBody);
+        setLikedSongs(response.data.dataBody);
       } catch (error) {
-        console.error("최신곡 못 받아옴", error);
+        console.error("찜한 노래 목록을 가져오지 못했습니다.", error);
       }
     };
 
-    fetchSongs();
-  }, [genre]);
+    fetchLikedSongs();
+  }, []);
 
-  const toggleLike = async (song: Song) => {
+  const toggleLike = async (song: any) => {
     try {
       const token = localStorage.getItem("accessToken");
-      const updatedSongData = { ...song, myListDisplay: !song.myListDisplay };
+      const updatedSongData = {
+        ...song,
+        myListDisplay: !song.myListDisplay,
+      };
       await axios.post(
         `https://j10c205.p.ssafy.io/api/v1/myList/like/${song.songId}`,
         updatedSongData,
@@ -66,37 +55,27 @@ const Genres: React.FC<GenreProps> = ({ genre }) => {
         }
       );
 
-      setSongs((prevSongs) => {
+      setLikedSongs((prevSongs) => {
         if (prevSongs) {
-          return prevSongs.map((prevSong) =>
-            prevSong.songId === song.songId ? updatedSongData : prevSong
-          );
+          // 새로운 배열 생성하여 좋아요가 취소된 노래를 제외한 나머지 노래들로 설정
+          return prevSongs.filter((prevSong) => prevSong.songId !== song.songId);
         }
-        return null;
+        return [];
       });
     } catch (error) {
-      console.log("토글 실패", error);
+      console.error("토글 실패", error);
     }
   };
 
-  if (songs === null) {
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
-  }
-
   return (
     <div>
-      <Header title={genre} state={["back", "close"]} page="mainchart" />
+      <Header title="찜한 목록" state={["back"]} />
       <div className="sing-container">
         <div className="sing-content">
           <div className="sing-chart">
-            {/* 최신곡 차트들 여기에 쫙 뿌리기 */}
-            {songs.map((song, index) => (
-              <div key={index} className="sing-song">
-                <img src={song.songThumbnail} alt={song.songThumbnail} />
+            {likedSongs.map((song) => (
+              <div key={song.songId} className="sing-song">
+                <img src={song.songThumbnail} alt={song.songTitle} />
                 <div
                   className="sing-song-info"
                   onClick={() => openBottomSheet(song)}
@@ -110,19 +89,18 @@ const Genres: React.FC<GenreProps> = ({ genre }) => {
                 >
                   {song.myListDisplay ? (
                     <img
-                      src="/src/assets/icon/chart/liketrue.png"
+                      src="././src/assets/icon/chart/liketrue.png"
                       alt="좋아요"
                     />
                   ) : (
                     <img
-                      src="/src/assets/icon/chart/likefalse.png"
+                      src="././src/assets/icon/chart/likefalse.png"
                       alt="좋아요 취소"
                     />
                   )}
                 </div>
               </div>
             ))}
-            {/* 바텀시트 */}
             <BottomSheet
               isOpen={selectedSong !== null}
               onClose={closeBottomSheet}
@@ -132,7 +110,6 @@ const Genres: React.FC<GenreProps> = ({ genre }) => {
             >
               {selectedSong && (
                 <div className="song-bottom">
-                  {/* 선택된 노래의 정보 표시 */}
                   <img
                     src={selectedSong.songThumbnail}
                     alt={selectedSong.songTitle}
@@ -151,4 +128,4 @@ const Genres: React.FC<GenreProps> = ({ genre }) => {
   );
 };
 
-export default Genres;
+export default MyLike;

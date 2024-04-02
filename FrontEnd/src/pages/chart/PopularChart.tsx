@@ -4,13 +4,14 @@ import "@/styles/chart/Singchart.scss";
 import axios from "axios";
 import Loading from "@/components/common/Loading";
 import BottomSheet from "@/components/charts/BottomSheet";
+import { useSongStore } from "@/store/useSongStore";
 
 const PopularChart: React.FC = () => {
-  const [popularSongs, setPopularSongs] = useState<any[] | null>(null);
-  const [selectedSong, setSelectedSong] = useState<any | null>(null);
+  const [Songs, setSongs] = useState<any[] | null>(null);
+  const setSelectedSong = useSongStore((state) => state.setSelectedSong); // useSongStore에서 setSelectedSong 함수를 가져옵니다.
+  const selectedSong = useSongStore((state) => state.selectedSong);
 
   const openBottomSheet = (song: any) => {
-    console.log(song);
     setSelectedSong(song);
   };
 
@@ -32,7 +33,7 @@ const PopularChart: React.FC = () => {
           }
         );
 
-        setPopularSongs(response.data.dataBody);
+        setSongs(response.data.dataBody);
         // console.log(response.data.dataBody);
       } catch (error) {
         console.error("최신곡 못 받아옴", error);
@@ -65,7 +66,7 @@ const PopularChart: React.FC = () => {
       );
 
       // UI 갱신을 위해 상태 업데이트
-      setPopularSongs((prevSongs) => {
+      setSongs((prevSongs) => {
         if (prevSongs) {
           return prevSongs.map((prevSong) => {
             if (prevSong.songId === song.songId) {
@@ -81,7 +82,7 @@ const PopularChart: React.FC = () => {
     }
   };
 
-  if (popularSongs === null) {
+  if (Songs === null) {
     return (
       <div>
         <Loading />
@@ -96,10 +97,13 @@ const PopularChart: React.FC = () => {
         <div className="sing-content">
           <div className="sing-chart">
             {/* 최신곡 차트들 여기에 쫙 뿌리기 */}
-            {popularSongs.map((song, index) => (
+            {Songs.map((song, index) => (
               <div key={index} className="sing-song">
                 <img src={song.songThumbnail} alt={song.songThumbnail} />
-                <div className="sing-song-info" onClick={() => openBottomSheet(song)}>
+                <div
+                  className="sing-song-info"
+                  onClick={() => openBottomSheet(song)}
+                >
                   <h3>{song.songTitle}</h3>
                   <p>{song.artist}</p>
                 </div>
@@ -125,7 +129,9 @@ const PopularChart: React.FC = () => {
             <BottomSheet
               isOpen={selectedSong !== null}
               onClose={closeBottomSheet}
-              backgroundImageUrl={selectedSong && selectedSong.songThumbnail} // 배경 이미지 URL을 전달
+              backgroundImageUrl={
+                selectedSong ? selectedSong.songThumbnail : ""
+              }
             >
               {selectedSong && (
                 <div className="song-bottom">

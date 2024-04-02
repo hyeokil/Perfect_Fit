@@ -31,8 +31,11 @@ import Agitation from "./pages/chart/genres/agitation.tsx";
 import Trot from "./pages/chart/genres/trot.tsx";
 import Preview from "./pages/sing/Preview.tsx";
 import FirstDuet from "./pages/duet/FirstDuet.tsx";
-import ReadReelsPage from './pages/reels/ReadReelsPage';
-
+import ReadReelsPage from "./pages/reels/ReadReelsPage";
+import MyLike from "./pages/mypage/MyLike.tsx";
+import MySolo from "./pages/mypage/MySolo.tsx";
+import MyDuet from "./pages/mypage/MyDuet.tsx";
+import SongTimeRec from "./pages/chart/genres/SongTimeRec.tsx";
 
 const App: React.FC = () => {
   return (
@@ -53,6 +56,7 @@ const App: React.FC = () => {
         <Route element={<Layout />}>
           {/* 차트 */}
           <Route path="mainchart" element={<MainChart />} />
+          <Route path="songtimerec" element={<SongTimeRec />} />
           <Route path="latestchart" element={<LatestChart />} />
           <Route path="popularchart" element={<PopularChart />} />
           <Route path="genrechart" element={<GenreChart />} />
@@ -64,7 +68,7 @@ const App: React.FC = () => {
           <Route path="genre/hiphop" element={<Hiphop />} />
           <Route path="genre/acoustic" element={<Acoustic />} />
           <Route path="genre/jazz" element={<Jazz />} />
-          <Route path="genre/ballad" element={<Ballade />} />
+          <Route path="genre/ballade" element={<Ballade />} />
           <Route path="genre/dance" element={<Dance />} />
           <Route path="genre/rnb" element={<Rnb />} />
           <Route path="genre/ost" element={<Ost />} />
@@ -72,6 +76,9 @@ const App: React.FC = () => {
           <Route path="genre/trot" element={<Trot />} />
           {/* 마이페이지 */}
           <Route path="mainmypage" element={<MainMypage />} />
+          <Route path="mylike" element={<MyLike />} />
+          <Route path="mysolo" element={<MySolo />} />
+          <Route path="myduet" element={<MyDuet />} />
         </Route>
       </Routes>
     </BrowserRouter>

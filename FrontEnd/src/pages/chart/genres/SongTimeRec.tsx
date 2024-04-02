@@ -1,25 +1,13 @@
-import Loading from "@/components/common/Loading";
+import BottomSheet from "@/components/charts/BottomSheet";
+import Header from "@/components/layout/Header";
+import { useSongStore } from "@/store/useSongStore";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import BottomSheet from "./BottomSheet";
-import "@/styles/chart/Singchart.scss";
-import Header from "../layout/Header";
-import { useSongStore } from "@/store/useSongStore";
 
-interface Song {
-  songId: number;
-  songThumbnail: string;
-  songTitle: string;
-  artist: string;
-  myListDisplay: boolean;
-}
+const SongTimeRec: React.FC = () => {
+  const [currentTime, setCurrentTime] = useState<string>("");
 
-interface GenreProps {
-  genre: string;
-}
-
-const Genres: React.FC<GenreProps> = ({ genre }) => {
-  const [songs, setSongs] = useState<Song[] | null>(null);
+  const [songs, setSongs] = useState<any[]>([]);
   const setSelectedSong = useSongStore((state) => state.setSelectedSong); // useSongStore에서 setSelectedSong 함수를 가져옵니다.
   const selectedSong = useSongStore((state) => state.selectedSong);
 
@@ -35,27 +23,43 @@ const Genres: React.FC<GenreProps> = ({ genre }) => {
     const fetchSongs = async () => {
       try {
         const token = localStorage.getItem("accessToken");
+
         const response = await axios.get(
-          `https://j10c205.p.ssafy.io/api/v1/song/chart/genre/${genre}`,
+          "https://j10c205.p.ssafy.io/api/v1/song/chart/current",
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
-        setSongs(response.data.dataBody);
+        setSongs(response.data.dataBody); // 받아온 데이터를 최대 3개로 슬라이스하여 저장합니다.
+        // console.log(response.data.dataBody);
       } catch (error) {
-        console.error("최신곡 못 받아옴", error);
+        console.error("Failed to fetch songs", error);
       }
     };
 
     fetchSongs();
-  }, [genre]);
 
-  const toggleLike = async (song: Song) => {
+    // 현재 시간 설정
+    const interval = setInterval(() => {
+      const date = new Date();
+      const hours = date.getHours().toString().padStart(2, "0");
+      const minutes = date.getMinutes().toString().padStart(2, "0");
+      setCurrentTime(`${hours}:${minutes}`);
+    }, 100); // 매 초마다 현재 시간 업데이트
+
+    // 컴포넌트가 언마운트될 때 clearInterval을 호출하여 setInterval을 정리
+    return () => clearInterval(interval);
+  }, []);
+
+  const toggleLike = async (song: any) => {
     try {
       const token = localStorage.getItem("accessToken");
-      const updatedSongData = { ...song, myListDisplay: !song.myListDisplay };
+      const updatedSongData = {
+        ...song,
+        myListDisplay: !song.myListDisplay,
+      };
       await axios.post(
         `https://j10c205.p.ssafy.io/api/v1/myList/like/${song.songId}`,
         updatedSongData,
@@ -68,35 +72,32 @@ const Genres: React.FC<GenreProps> = ({ genre }) => {
 
       setSongs((prevSongs) => {
         if (prevSongs) {
-          return prevSongs.map((prevSong) =>
-            prevSong.songId === song.songId ? updatedSongData : prevSong
-          );
+          return prevSongs.map((prevSong) => {
+            if (prevSong.songId === song.songId) {
+              return updatedSongData;
+            }
+            return prevSong;
+          });
         }
-        return null;
+        return [];
       });
     } catch (error) {
-      console.log("토글 실패", error);
+      console.error("토글 실패", error);
     }
   };
 
-  if (songs === null) {
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
-  }
-
   return (
     <div>
-      <Header title={genre} state={["back", "close"]} page="mainchart" />
+      <Header
+        title={`${currentTime} 기준 많이 부르는 노래`}
+        state={["back", "search"]}
+      />
       <div className="sing-container">
         <div className="sing-content">
           <div className="sing-chart">
-            {/* 최신곡 차트들 여기에 쫙 뿌리기 */}
-            {songs.map((song, index) => (
-              <div key={index} className="sing-song">
-                <img src={song.songThumbnail} alt={song.songThumbnail} />
+            {songs.map((song) => (
+              <div key={song.songId} className="sing-song">
+                <img src={song.songThumbnail} alt={song.songTitle} />
                 <div
                   className="sing-song-info"
                   onClick={() => openBottomSheet(song)}
@@ -110,19 +111,18 @@ const Genres: React.FC<GenreProps> = ({ genre }) => {
                 >
                   {song.myListDisplay ? (
                     <img
-                      src="/src/assets/icon/chart/liketrue.png"
+                      src="././src/assets/icon/chart/liketrue.png"
                       alt="좋아요"
                     />
                   ) : (
                     <img
-                      src="/src/assets/icon/chart/likefalse.png"
+                      src="././src/assets/icon/chart/likefalse.png"
                       alt="좋아요 취소"
                     />
                   )}
                 </div>
               </div>
             ))}
-            {/* 바텀시트 */}
             <BottomSheet
               isOpen={selectedSong !== null}
               onClose={closeBottomSheet}
@@ -132,7 +132,6 @@ const Genres: React.FC<GenreProps> = ({ genre }) => {
             >
               {selectedSong && (
                 <div className="song-bottom">
-                  {/* 선택된 노래의 정보 표시 */}
                   <img
                     src={selectedSong.songThumbnail}
                     alt={selectedSong.songTitle}
@@ -151,4 +150,4 @@ const Genres: React.FC<GenreProps> = ({ genre }) => {
   );
 };
 
-export default Genres;
+export default SongTimeRec;
