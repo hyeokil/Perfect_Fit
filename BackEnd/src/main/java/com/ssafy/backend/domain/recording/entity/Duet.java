@@ -32,7 +32,7 @@ public class Duet extends BaseEntity {
     @JoinColumn(name = "participant_id")
     private Member participant;
 
-    // 재훈이 코드가 완성되서 db가 넘어와야 song_id에 관한 코드 구현
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "song_id")
     private Song song;

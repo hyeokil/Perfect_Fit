@@ -1,7 +1,5 @@
 package com.ssafy.backend.domain.reels.dto;
 
-import com.ssafy.backend.domain.member.entity.Member;
-import com.ssafy.backend.domain.reels.entity.Reels;
 import com.ssafy.backend.domain.reels.entity.ReelsPlayTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

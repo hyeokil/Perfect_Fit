@@ -38,7 +38,6 @@ public class ReelsServiceImpl implements ReelsService{
         Song song = songRepository.findById(reelsCreateRequestDto.getSongId()).orElseThrow(()
                 -> new IllegalArgumentException("노래없다"));
         Reels reels = reelsRepository.save(reelsCreateRequestDto.toEntity(member, song));
-
         return reels.getId();
     }
 
@@ -47,40 +46,19 @@ public class ReelsServiceImpl implements ReelsService{
         List<Reels> reels = reelsRepository.findByMemberId(memberId);
         List<ReelsListResponseDto> reelsListResposeDtoList = new ArrayList<>();
         for (Reels reel : reels) {
-            String artistName = reel.getSong().getArtist().getName();
             ReelsListResponseDto reelsListResponseDto = new ReelsListResponseDto(
                     reel.getId(),
                     reel.getTime(),
+                    reel.getUserPath(),
+                    reel.getAudioPath(),
                     reel.getSong().getSongTitle(),
-//                    reel.getSong().getSongArtist(),
-                    artistName,
+                    reel.getSong().getArtist().getName(),
+                    reel.getSong().getSongThumbnail(),
                     reel.getCreatedAt()
             );
             reelsListResposeDtoList.add(reelsListResponseDto);
         }
-
         return reelsListResposeDtoList;
     }
 
-//    public class OneHotEncoding {
-//        private Map<String, Integer> indexMapping;
-//
-//        public OneHotEncoding(List<String> categories)
-//    }
-
-//    @Override
-//    public List<Reels> recommendReels(Long reelsId, Pageable pageable) {
-//        Reels reels = reelsRepository.findById(reelsId)
-//                .orElseThrow(() -> new IllegalArgumentException("릴스 없음"));
-//
-//        double[] reelsVector = extractFeatures(reels);
-//
-//        List<Reels> allReels = reelsRepository.findAll();
-//        Map<Reels, Double> similarity = new HashMap<>();
-//
-//        for (Reels reel : allReels) {
-//            double[] reelVector = extractFeatures(reel);
-//            double similar = consinSimilarity();
-//        }
-//    }
 }

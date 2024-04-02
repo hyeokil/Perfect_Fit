@@ -18,15 +18,16 @@ public class Reels extends BaseEntity {
 
     private Long time;
 
-    private String path;
+    private String userPath;
 
-    @ManyToOne
+    private String audioPath;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "song_id")
     private Song song;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    // 노래 정보 넣어야 됨
 }

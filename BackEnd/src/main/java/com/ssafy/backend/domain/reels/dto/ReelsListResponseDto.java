@@ -1,8 +1,6 @@
 package com.ssafy.backend.domain.reels.dto;
 
-import com.ssafy.backend.domain.member.entity.Member;
-import com.ssafy.backend.domain.song.entity.Artist;
-import com.ssafy.backend.domain.song.entity.Song;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -15,9 +13,15 @@ public class ReelsListResponseDto {
 
     private Long time;
 
+    private String userPath;
+
+    private String audioPath;
+
     private String songTitle;
 
-    private String songArtist;
+    private String artistName;
+
+    private String songThumbnail;
 
     private LocalDateTime createdAt;
 }

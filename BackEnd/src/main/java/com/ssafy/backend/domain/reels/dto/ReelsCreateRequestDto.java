@@ -14,7 +14,9 @@ public class ReelsCreateRequestDto {
 
     private Long time;
 
-    private String path;
+    private String userPath;
+
+    private String audioPath;
 
 
     // 노래 정보에 관한 코드 넣어야 됨
@@ -22,7 +24,8 @@ public class ReelsCreateRequestDto {
         return Reels.builder()
                 .time(time)
                 .member(member)
-                .path(path)
+                .userPath(userPath)
+                .audioPath(audioPath)
                 .song(song)
                 .build();
     }
