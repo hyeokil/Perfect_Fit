@@ -11,8 +11,7 @@ public class ReelsPlayTimeRequestDto {
     private Long playTime;
 
     private Long reelsId;
-
-
+    
     public ReelsPlayTime toEntity(Long member) {
         return ReelsPlayTime.builder()
                 .memberId(member)
