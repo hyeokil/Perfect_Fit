@@ -1,13 +1,15 @@
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Boolean
 from sqlalchemy.orm import relationship
 from .database import Base
 from pydantic import BaseModel
 
+
 class ResponseModel(BaseModel):
    some_field: Optional[str] = None
+
 
 class Song(Base):
     __tablename__ = 'song'
@@ -20,7 +22,10 @@ class Song(Base):
     reels = relationship('Reels', back_populates="song")
     artist = relationship('Artist', back_populates="song")
     genre = relationship('Genre', back_populates="song")
-
+    song_pitch = Column(Integer)
+    song_view = Column(Integer)
+    song_thumbnail = Column(String)
+    song_release_date = Column(String)
 
 class Reels(Base):
     __tablename__ = 'reels'
@@ -59,17 +64,32 @@ class Artist(Base):
     __tablename__ = 'artist'
     id = Column(Integer, primary_key=True)
     # name = Column(String)
-    artist = Column(String)
+    name = Column(String)
     song = relationship('Song', back_populates="artist")
-
 
 class Genre(Base):
     __tablename__ = 'genre'
     id = Column(Integer, primary_key=True)
-    genre = Column(String)
+    name = Column(String)
     song = relationship('Song', back_populates="genre")
 
-    
+class SongHistory(Base):
+    __tablename__ = 'song_history'
+    created_at = Column(DateTime)
+    id = Column(Integer, primary_key=True)
+    member_id = Column(Integer, ForeignKey('member.id'))
+    song_id = Column(Integer, ForeignKey('song.id'))
+    updated_at = Column(DateTime)
+
+class MyList(Base):
+    __tablename__ = 'my_list'
+    my_list_display = Column(Boolean)
+    created_at = Column(DateTime)
+    id = Column(Integer, primary_key=True)
+    member_id = Column(Integer, ForeignKey('member.id'))
+    song_id = Column(Integer, ForeignKey('song.id'))
+    updated_at = Column(DateTime)
+
 class Follow(Base):
     __tablename__ = 'follow'
     # id = Column(Integer, primary_key=True)

@@ -118,6 +118,11 @@ def create_empty_df(index, columns):
 # artist, genre, creator에 대한 코사인 유사도를 구한 후 평균
 def sum_cosine_similarity(results, db:Session):
     all_member_ids = member_data(db)
+    df_cosine_sim = pd.DataFrame(0, index=all_member_ids, columns=all_member_ids)
+
+    if not results:
+        return df_cosine_sim
+
     df = pd.DataFrame(results, columns=['member_id', 'reels_id', 'artist_id', 'genre_id', 'creator_id', 'total_play_time'])
     all_artist_ids = df['artist_id'].unique()
     all_genre_ids = df['genre_id'].unique()
@@ -137,10 +142,13 @@ def sum_cosine_similarity(results, db:Session):
         if row['member_id'] in df_empty_creator.index and row['creator_id'] in df_empty_creator.columns:
             df_empty_creator.at[row['member_id'], row['creator_id']] = int(row['total_play_time'])
 
-    cosine_sim_artist = cosine_similarity(df_empty_artist)
-    cosine_sim_genre = cosine_similarity(df_empty_genre)
-    cosine_sim_creator = cosine_similarity(df_empty_creator)
-
+    if df_empty_artist.shape[1] > 0:
+        cosine_sim_artist = cosine_similarity(df_empty_artist)
+    if df_empty_genre.shape[1] > 0:
+        cosine_sim_genre = cosine_similarity(df_empty_genre)
+    if df_empty_creator.shape[1] > 0:
+        cosine_sim_creator = cosine_similarity(df_empty_creator)
+    
     avg_cosine_sim = (cosine_sim_artist + cosine_sim_genre + cosine_sim_creator) / 3
     np.fill_diagonal(avg_cosine_sim, 0)
 
