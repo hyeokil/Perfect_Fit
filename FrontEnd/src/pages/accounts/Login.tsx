@@ -22,14 +22,14 @@ const Login: React.FC = () => {
     <div className="login-container">
       <div className="logo">
         <img
-          src="././src/assets/image/logo.png"
+          src="/image/logo.png"
           alt="logo"
           className="logo-image"
         />
         <h2>안쏭맞춤</h2>
       </div>
       <button className="kakao-login" onClick={handleKakaoLogin}>
-        <img src="././src/assets/icon/kakao.png" alt="kakao" />
+        <img src="/public/icon/kakao.png" alt="kakao" />
         카카오 로그인
       </button>
     </div>
