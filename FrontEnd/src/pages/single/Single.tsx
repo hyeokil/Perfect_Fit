@@ -73,6 +73,7 @@ const Single = () => {
   const opts = {
     height: "200px",
     width: "100%",
+    
     playerVars: {
       autoplay: 0,
       mute: 1, // 자동재생 설정

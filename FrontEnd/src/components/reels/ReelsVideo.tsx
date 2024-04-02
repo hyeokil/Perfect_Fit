@@ -1,13 +1,30 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import styles from "@styles/reels/ReelsVideo.module.scss";
+const reelsItem = {
+  id: 22,
+  path: "www",
+  time: 5119,
+  score: 0.3323460473044961,
+  member_nickname: "테스트 616트",
+  song_title: "Home",
+};
+
 type PathType = {
   userPath: string;
   musicPath: string;
-  index : number
+  index: number;
+  data : any
 };
-const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, index }) => {
+const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, index , data}) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
+  const { id, path, time, score, member_nickname, song_title } = data;
+//---------------------------------------------------------------------------
+//playtime 기록 ㅠㅠ??
+
+
+//---------------------------------------------------------------------------
   const handlePlayVideo = () => {
     if (videoRef.current && audioRef.current) {
       if (videoRef.current.paused && audioRef.current.paused) {
@@ -21,18 +38,31 @@ const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, index }) => {
       }
     }
   };
+  useEffect(() => {
+    // props가 변경될 때마다 실행됩니다.
+    if (videoRef.current) {
+      videoRef.current.load();
+    }
+    if (audioRef.current) {
+      audioRef.current.load();
+    }
+  }, [userPath, musicPath]);
+
 
   return (
     <div>
-      <h3>릴스 한개...</h3>
-      <h4>{index}</h4>
-      <div onClick={handlePlayVideo}>
-        <video ref={videoRef}>
+      <div onClick={handlePlayVideo} className={styles.player}>
+        <video ref={videoRef} className={styles.video}>
           <source src={userPath} />
         </video>
         <audio ref={audioRef}>
           <source src={musicPath} />
         </audio>
+      </div>
+
+      <div>
+        <h1>{song_title}</h1>
+        <h3>{member_nickname}</h3>
       </div>
     </div>
   );

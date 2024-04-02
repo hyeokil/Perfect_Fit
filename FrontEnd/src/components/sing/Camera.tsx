@@ -12,15 +12,12 @@ const Camera = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   // mediastream
   const [stream, setStream] = useState<MediaStream | null>(null);
-  console.log(stream)
 
   // 녹화 여부 확인
   const [recording, setRecording] = useState(false);
   // 녹화 결과물
-  const [videoBlob, setVideoBlob] = useState<Blob | null>(null);
   // 녹화 기능 수행
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-
   // 녹화 결과물 
   const saveVideoBlob = useSaveStore(state => state.setVideoBlob)
 
@@ -67,8 +64,6 @@ const Camera = () => {
       });
       mediaRecorderRef.current.ondataavailable = (e) => {
         if (e.data && e.data.size > 0) {
-          // setRecordedBlobs((prev) => [...prev, e.data]);
-          setVideoBlob(e.data)
           saveVideoBlob(e.data)
         }
         const url: string = URL.createObjectURL(e.data);
@@ -87,21 +82,13 @@ const Camera = () => {
     if (mediaRecorderRef.current && recording) {
       mediaRecorderRef.current.stop();
       setRecording(false);
-      // setVideoBlob(recordedBlobs);
     }
   };
 
-  // const goS3 = () => {
-  //   console.log(typeof videoBlob);
-  //   console.log(videoBlob);
-  //   if (videoBlob) {
-  //     S3Upload(videoBlob);
-  //   }
-  // };
+
 
   return (
     <div>
-      {/* <button onClick={goS3}>전송,,,,</button> */}
       <video autoPlay muted ref={videoRef} className={styles.video}></video>
     </div>
   );

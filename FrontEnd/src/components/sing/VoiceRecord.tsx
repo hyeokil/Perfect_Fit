@@ -12,9 +12,6 @@ const VoiceRecord = () => {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [media, setMedia] = useState<MediaRecorder | null>(null);
   const [source, setSource] = useState<MediaStreamAudioSourceNode | null>(null);
-  const [audioUrl, setAudioUrl] = useState<Blob | null>(null);
-  const [url, setUrl] = useState<string | null>(null);
-
   const saveVoiceBlob = useSaveStore(state => state.setVoiceBlob)
   const saveVideoBlob = useSaveStore(state => state.setVideoBlob)
   // 녹음 시작 버튼
@@ -47,16 +44,13 @@ const VoiceRecord = () => {
   const offRecord = () => {
     if (media !== null) {
       media.ondataavailable = function (e) {
-        setAudioUrl(e.data);
         setMusicBlob(e.data);
         saveVideoBlob(null)
         saveVoiceBlob(e.data)
 
         const url: string = URL.createObjectURL(e.data);
-        setUrl(url);
         setVoiceUrl(url);
         setVideoUrl(null);
-        // setOnRec(true)
       };
     } else {
       console.log("녹음 안됐음");
@@ -71,33 +65,6 @@ const VoiceRecord = () => {
     source?.disconnect();
   };
 
-  //   useEffect(() => {
-  //     if (audioUrl) {
-  //       setVideoUrl()
-  // }}, [audioUrl]);
-
-  // const play = useCallback(() => {
-  //   if (url) {
-  //     const audio = new Audio(url);
-  //     audio.play();
-  //     console.log("되고 있는거 마즌?");
-  //   }
-  // }, [url]);
-
-  // const UploadFile = () => {
-  //   if (audioUrl !== null) {
-  //     const sound : File = new File([audioUrl] , "userAudio.wav", {
-  //       lastModified: new Date().getTime(),
-  //       type : "audio/wav"
-  //     })
-  //     SendRecord(sound)
-  //   }
-  //   else {
-  //     window.alert('녹음이 완료되지 않았습니다.')
-  //   }
-
-  // };
-
   useEffect(() => {
     if (isPlaying === true) {
       startRecord();
@@ -106,28 +73,8 @@ const VoiceRecord = () => {
     }
   }, [isPlaying]);
 
-  // const goS3 = () => {
-  //   console.log(typeof audioUrl);
-  //   console.log(audioUrl);
-  //   if (audioUrl) {
-  //     S3Upload(audioUrl);
-  //   }
-  // };
-
   return (
     <div>
-      {/* <button onClick={goS3}>전송,,,,</button> */}
-      {/* <h1>ㅎㅇㅎㅇ</h1>
-      <button onClick={startRecord}>녹음!!</button>
-      <button onClick={offRecord}>녹음 중ㅈ지</button>
-      <button onClick={play}>재생</button>
-      <button onClick={UploadFile}>파일 저장</button>
-      <p>{url}</p> */}
-      {/* {url !== null && (
-        <audio src={url} controls>
-          사용할 수 있는 오디오가 업습니다.ㅇ//
-        </audio>
-      )} */}
     </div>
   );
 };

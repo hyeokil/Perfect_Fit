@@ -17,24 +17,17 @@ const Controller = (props: PropType) => {
   // -------------------------------------------------------
   const {setShowNoAlert, setShowSaveAlert, userPitch , setUserPitch } = props;
   const [pitch, setPitch] = useState<number>(userPitch);
-  const [tempo, setTempo] = useState<number>(1.0);
-
+  // const [tempo, setTempo] = useState<number>(1.0);
   const { isPlaying, setIsPlaying } = useRecordStore();
   const setMusicBlob = useRecordStore((state) => state.setMusicBlob);
   const setMusicUrl = useRecordStore((state) => state.setMusicUrl);
-  const musicUrl = useRecordStore((state) => state.musicUrl);
-  const videoUrl = useRecordStore((state) => state.videoUrl);
   const isRecording = useRecordStore((state) => state.isRecording);
   const setIsRecording = useRecordStore((state) => state.setIsRecording);
   // ----------------------------------------------------
   const [recordedBlobs, setRecordedBlobs] = useState<Blob[]>([]);
   const [media, setMedia] = useState<MediaRecorder | null>(null);
   // ----------------------------------------------------
-  console.log(isPlaying);
-  const audioCtx = new AudioContext();
-  const state = audioCtx.state;
-  console.log("현재 피치 : ", pitch);
-  console.log("오디오 상태 : ", state);
+
 
 const saveMusicBlob = useSaveStore(state => state.setMusicBlob)
 
@@ -61,7 +54,7 @@ const saveMusicBlob = useSaveStore(state => state.setMusicBlob)
       if (audioCtx) {
         const audioBuffer = await audioCtx.decodeAudioData(buffer);
         const myShift = new PitchShifter(audioCtx, audioBuffer, 16384);
-        myShift.tempo = tempo;
+        // myShift.tempo = tempo;
         myShift.pitch = pitch;
         shiftRef.current = myShift;
         if (isPlaying) {

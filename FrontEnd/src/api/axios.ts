@@ -52,7 +52,7 @@ const onResponse = (res: AxiosResponse): AxiosResponse => {
   // const data : object = res.data.dataBody
   if (dataHeader.successCode === 0 && dataBody) {
     logOnDev(
-      `💌 [API - RESPONSE] | ${method?.toUpperCase()} | ${url}`
+      `💌 [API - RESPONSE] | SUCCESS |${method?.toUpperCase()} | ${url}`
     );
     logOnDev(dataBody);
   }

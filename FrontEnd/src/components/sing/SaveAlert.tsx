@@ -32,7 +32,7 @@ const SaveAlert = (props: PropType) => {
           <img src={logo} alt="logo" />
           <h4>멋진 노래를 불렀어요!</h4>
         </div>
-        <button onClick={save}>부른 곡 저장하기</button>
+        <button onClick={save}>부른 곡 미리 듣기</button>
         <button onClick={singAgain}>다시 부르기</button>
         <button onClick={goMain}>그냥 끝내기</button>
       </div>
