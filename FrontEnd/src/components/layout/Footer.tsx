@@ -25,7 +25,7 @@ const Footer = () => {
         <p>노래방</p>
       </div>
       <div>
-        <Link to="/">
+        <Link to="/reels">
           <StyledFontAwesomeIcon icon={faTowerBroadcast} size="lg" />
         </Link>
         <p>릴스</p>

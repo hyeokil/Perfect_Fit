@@ -3,7 +3,12 @@ $aspect-ratio-height: 9;
 
 .video {
   width: 100%; // 화면 가로 전체를 사용하도록 설정
-  height: 60vh; // 높이는 50vh로 고정
+  height: 85vh; // 높이는 50vh로 고정
   object-fit: cover;
   transform: scaleX(-1); // 컨텐츠를 컨테이너에 맞추고, 필요한 경우 크롭
+}
+
+
+.player {
+  // height: 700px;
 }
