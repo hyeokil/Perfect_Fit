@@ -9,3 +9,16 @@ export type MusicInfoType = {
   myListDisplay: boolean,
   songView: number
 }
+
+export type ReelsDataType = {
+  id: number; // 릴스 아이디
+  userPath: string;
+  audioPath: string;
+  path: string;
+  time: number;
+  score: number;
+  memberNickname: string;
+  songTitle: string;
+  follow : boolean
+  memberId : number // userId
+};

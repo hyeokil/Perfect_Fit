@@ -138,7 +138,7 @@ const Voicetraining: React.FC = () => {
       <div className="voice-mic">
         <img src="././src/assets/icon/Record.png" alt="마이크1" />
         <h3>음색 검사 절차 및 유의 사항</h3>
-        <p>1. 조용한 환경에서 녹음을 실시한다.</p>
+        <p>1. 조용한 환경에서 녹음을 실시합니다.</p>
         <p>2. 녹음시작을 클릭하고 아래 제시된 노래를 부릅니다.</p>
         <p>3. 중간 제출을 원하는 경우 녹음 완료 버튼을 누릅니다.</p>
         <Script isTrackingStarted={isTrackingStarted} />
