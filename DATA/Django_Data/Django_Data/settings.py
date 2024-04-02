@@ -19,7 +19,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'  #
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -32,11 +31,24 @@ SECRET_KEY = 'django-insecure-&fn1&3$q!j)2(p^-f@3f^=$%9)^mbd!gzh$5-7z4$fw$2myvh+
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+# CORS_ORIGIN_WHITELIST = []  # 선언 하지 않고 기본값 사용
+CORS_ALLOW_ALL_ORIGINS = True  # CORS : 모든 포트 허용
 
 # Application definition
 
+CORS_ALLOW_METHODS = (
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+)
+
+# CORS_ALLOW_HEADERS = ()  # 선언 하지 않고 기본값 사용
+
 INSTALLED_APPS = [
+    "corsheaders",  # CORS 설정
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -48,6 +60,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # CORS 설정(최상단)
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
