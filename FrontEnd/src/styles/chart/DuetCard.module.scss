@@ -1,0 +1,25 @@
+.box {
+  display: flex;
+  // margin-bottom: 5px;
+  .textbox {
+    display: flex;
+    p {
+      font-size: medium;
+    }
+
+  }
+  .userbox {
+    display: flex;
+    border: 1px solid #2988d6;
+    border-radius: 20px;
+
+    img {
+      width: 30%;
+      border-radius: 50%;
+    }
+  }
+}
+.thumbnail {
+  width: 30%;
+  border-radius: 10px;
+}
