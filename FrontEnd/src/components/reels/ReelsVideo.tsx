@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "@styles/reels/ReelsVideo.module.scss";
+import { ReelsDataType } from "@/types/apiType";
 
 type PathType = {
   userPath: string;
   musicPath: string;
   index: number;
-  data: any;
+  data: ReelsDataType;
 };
 const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, data }) => {
   const videoRef = useRef<HTMLVideoElement>(null);

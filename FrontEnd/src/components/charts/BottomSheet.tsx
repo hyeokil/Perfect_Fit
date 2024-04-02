@@ -2,6 +2,7 @@
 import React, { ReactNode } from "react";
 import "@styles/chart/BottomSheet.scss";
 import { useSongStore } from "@/store/useSongStore";
+import { useNavigate } from "react-router";
 
 interface BottomSheetProps {
   isOpen: boolean;
@@ -16,6 +17,8 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   backgroundImageUrl,
   children,
 }) => {
+
+  const navigate = useNavigate()
   const selectedSong = useSongStore((state) => state.selectedSong); // Zustand 스토어를 사용하여 선택한 노래 정보 가져오기
 
   const handleOverlayClick = () => {
@@ -28,12 +31,18 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
 
   const handleSoloClick = () => {
     console.log("솔로모드 누름");
+
     console.log(selectedSong);
+    navigate('/single')
+    
   };
 
   const handleDuetClick = () => {
     console.log("듀엣모드 누름");
     console.log(selectedSong);
+
+    navigate('/firstduet')
+
   };
 
   return (
