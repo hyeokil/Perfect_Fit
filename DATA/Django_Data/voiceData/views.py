@@ -8,9 +8,9 @@ import librosa
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 import sklearn
-import os
-import urllib.request
 import logging
+# from numba.core.errors import NumbaWarning
+# import warnings
 # import matplotlib.pyplot as plt
 import numpy as np
 
@@ -19,8 +19,9 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 
 logging.getLogger('matplotlib').setLevel(logging.WARNING)
+logging.getLogger('numba').setLevel(logging.WARNING)
 logger = logging.getLogger('voiceData')
-
+# warnings.simplefilter('ignore', category=NumbaWarning)
 
 @api_view(['POST', 'PUT'])
 # def record(request):  # Local Teest
@@ -35,7 +36,7 @@ def record(request, user_id):
     file_path = default_storage.path(file_name)
 
     logger.info(f'File Type : {type(file)}')  # <class 'django.core.files.uploadedfile.InMemoryUploadedFile'>
-    logger.info(file.name)  # voiceData:F_000001.wav
+    logger.info(f'File Name : {file.name}')  # voiceData:F_000001.wav
 
     # 분석 데이터 보관
     data = {}
@@ -47,7 +48,6 @@ def record(request, user_id):
 
     y, sr = librosa.load(file_path)
     logger.info("========== 음성 데이터 로드 완료 ==========")
-    # print("========== 음성 데이터 로드 완료 ==========")
 
     # 템포, 비트 -> BPM
     tempo, beats = librosa.beat.beat_track(y=y, sr=sr)
@@ -59,7 +59,6 @@ def record(request, user_id):
     data['zero_crossing_rate_mean'] = zero_crossings.mean()
     data['zero_crossing_rate_var'] = zero_crossings.var()
     logger.info(f"zero_crossings(음-양 이동 횟수) : {sum(zero_crossings)}")
-    # print(sum(zero_crossings))  # 음 <-> 양 이동한 횟수
 
     # Harmonics: 사람의 귀로 구분할 수 없는 특징들(음악의 색깔)
     # Percussives: 리듬과 감정을 나타내는 충격파
@@ -100,11 +99,9 @@ def record(request, user_id):
     mfccs = librosa.feature.mfcc(y=y, sr=sr)  # n_mfcc 매개변수의 값을 따라 지정하지 않을 경우, 기본값 = 20
     # mfccs = normalize(mfccs, axis=1)
     logger.info(f"mfccs의 길이 : {len(mfccs)}")
-    logger.info("logger.info")
 
     for i in range(len(mfccs)):
         data['mfcc' + str(i) + '_mean'], data['mfcc' + str(i) + '_var'] = mfccs[i].mean(), mfccs[i].var()
-
 
     pitches, magnitudes = librosa.piptrack(y=y, sr=sr)
     pitches = pitches[magnitudes > np.median(magnitudes)]
@@ -120,7 +117,7 @@ def record(request, user_id):
     data['min_pitch'], data['max_pitch'] = min_pitch, max_pitch
     data['min_note'], data['max_note'] = str(result[0]), str(result[1])
     data['avg_pitch'] = float(avg_pitch)
-    logger.info(type(result[0]), type(result[1]))  # <class 'numpy.str_'>
+    logger.info(f'Type 확인 : {type(result[0])}, {type(result[1])}')
 
     logger.info(f'최소 피치 = {round(min_pitch)} / 최대 피치 = {round(max_pitch)}')
     logger.info(f'최소 음계 = {result[0]} / 최대 음계 = {result[1]}')
@@ -142,7 +139,8 @@ def record(request, user_id):
             serializer.save()
             logger.info("Serializer Success !")
             default_storage.delete(file_name)  # 서버에서 사용이 끝난 파일을 삭제
-            return Response({'data': data}, status=status.HTTP_200_OK)  # json
+            # return Response({'data': data}, status=status.HTTP_200_OK)  # json
+            return Response({'message': "음성 데이터 저장 완료."}, status=status.HTTP_200_OK)
         else:
             logger.info("Serializer validation failed")
             logger.info(serializer.errors)
@@ -196,19 +194,3 @@ def user_recommend(request, user_id):
     logger.info(f'result -> {result}')
 
     return Response(result)
-
-
-
-
-
-
-
-
-'''
-[ 마페 ]
-1. 남/여 평균 주파수대 + 사용자 주파수대 = 막대 그래프
-2. 옥타브 범위 그래프 = chart.js
-3. ++?
-
-requirements.txt 갱신
-'''
