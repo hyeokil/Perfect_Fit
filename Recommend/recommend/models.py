@@ -26,6 +26,7 @@ class Song(Base):
     song_view = Column(Integer)
     song_thumbnail = Column(String)
     song_release_date = Column(String)
+    mr_path = Column(String)
 
 class Reels(Base):
     __tablename__ = 'reels'

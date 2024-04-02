@@ -37,6 +37,7 @@ def song_to_dict(song):
         'song_release_date': song.song_release_date,
         'song_view': song.song_view,
         'song_thumbnail': song.song_thumbnail,
+        'mr_path': song.mr_path
     }
 
 
