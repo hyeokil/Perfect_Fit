@@ -25,7 +25,7 @@ logger = logging.getLogger('voiceData')
 
 @api_view(['POST', 'PUT'])
 # def record(request):  # Local Teest
-def record(request, user_id):
+def record(request, userId):
     if 'file' not in request.FILES:
         return Response({'error': 'No file Exception'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -40,7 +40,7 @@ def record(request, user_id):
 
     # 분석 데이터 보관
     data = {}
-    data['user_pk'] = user_id
+    data['user_pk'] = userId
 
     # 오디오 파일 가져오기 -> 파일로 받기.
     # song_sample = "./samples/SINGER_46_10TO29_NORMAL_FEMALE_BALLAD_C1925.wav"
@@ -152,15 +152,15 @@ def record(request, user_id):
 
 
 @api_view(['GET'])
-def record_view(request, user_id):
-    sound_features = SoundFeature.objects.filter(user_pk=user_id)
+def record_view(request, userId):
+    sound_features = SoundFeature.objects.filter(user_pk=userId)
     serializer = SoundFeatureSerializer(sound_features, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def user_recommend(request, user_id):
-    logger.info(f'request 확인 : {user_id}')
+def user_recommend(request, userId):
+    logger.info(f'request 확인 : {userId}')
 
     sound = SoundFeature.objects.all()
     df = pd.DataFrame(list(sound.values()))
@@ -176,11 +176,11 @@ def user_recommend(request, user_id):
     similar_df = pd.DataFrame(similar, index=idx['user_pk'], columns=idx['user_pk'])
 
     # 상위부터 cnt 명 수 만큼 찾기 / asce = 역순
-    logger.info(similar_df.loc[user_id].sort_values(ascending=False))
-    cur_user = similar_df.loc[user_id].sort_values(ascending=False)[1:4]
+    logger.info(similar_df.loc[userId].sort_values(ascending=False))
+    cur_user = similar_df.loc[userId].sort_values(ascending=False)[1:4]
     logger.info(f'cur_user: {cur_user}')
 
-    res_user = cur_user[cur_user >= 0.7]
+    res_user = cur_user[cur_user >= 0.5]
     logger.info(f'res_user: {type(res_user.index.tolist())}')  # list
 
     # 1. 딕셔너리로 반환
