@@ -189,7 +189,7 @@ public class SongServiceImpl implements SongService {
     // 노래 검색
     @Override
     public List<SongChartResponseDto> searchSongs(String keyword) {
-        return songRepository.searchSongs(keyword)
+        return songRepository.searchSongs("%" + keyword + "%")
                 .stream()
                 .map(song -> {
                     return SongChartResponseDto.builder()
