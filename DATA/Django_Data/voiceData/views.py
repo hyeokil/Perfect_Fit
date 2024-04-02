@@ -9,10 +9,12 @@ from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 import sklearn
 import logging
-# from numba.core.errors import NumbaWarning
-# import warnings
 # import matplotlib.pyplot as plt
 import numpy as np
+import os
+import json
+from django.conf import settings
+from django.http import JsonResponse
 
 # 파일 업로드
 from django.core.files.storage import default_storage
@@ -196,4 +198,24 @@ def user_recommend(request, userId):
     return Response(result)
 
 
-# + GET 추가
+@api_view(['GET'])
+def chart_data(request):
+    # 프로젝트 루트 경로를 기반으로 파일 경로 설정
+    octave_data = os.path.join(settings.BASE_DIR, 'data_preprocess', 'octave_data.json')
+    artist_data = os.path.join(settings.BASE_DIR, 'data_preprocess', 'artist_data.json')
+
+    # 파일 1 읽기
+    with open(octave_data, 'r', encoding='utf-8') as file:
+        octave_json = json.load(file)
+
+    # 파일 2 읽기
+    with open(artist_data, 'r', encoding='utf-8') as file:
+        artist_json = json.load(file)
+
+    # 두 파일의 데이터를 합쳐서 하나의 응답으로 반환
+    chart_dataset = {
+        'octaveData': octave_json,
+        'artistData': artist_json
+    }
+
+    return JsonResponse(chart_dataset)

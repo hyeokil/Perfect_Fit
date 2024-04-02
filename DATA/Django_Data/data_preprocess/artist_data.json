@@ -1,0 +1,1793 @@
+[
+    {
+        "artist": "강승윤",
+        "min_note": "D#2",
+        "max_note": "A#4",
+        "min_pitch": 78,
+        "max_pitch": 466,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "김동률",
+        "min_note": "D2",
+        "max_note": "C5",
+        "min_pitch": 73,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "김영흠",
+        "min_note": "D2",
+        "max_note": "B4",
+        "min_pitch": 73,
+        "max_pitch": 494,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "김진호",
+        "min_note": "F2",
+        "max_note": "B4",
+        "min_pitch": 87,
+        "max_pitch": 494,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "로이킴",
+        "min_note": "G2",
+        "max_note": "C5",
+        "min_pitch": 98,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "박명수",
+        "min_note": "F2",
+        "max_note": "G#4",
+        "min_pitch": 87,
+        "max_pitch": 415,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "박재정",
+        "min_note": "F2",
+        "max_note": "E5",
+        "min_pitch": 87,
+        "max_pitch": 659,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "뷔",
+        "min_note": "C3",
+        "max_note": "A4",
+        "min_pitch": 131,
+        "max_pitch": 440,
+        "min_octave": 3,
+        "max_octave": 4
+    },
+    {
+        "artist": "성시경",
+        "min_note": "C2",
+        "max_note": "B4",
+        "min_pitch": 65,
+        "max_pitch": 494,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "육성재",
+        "min_note": "F#2",
+        "max_note": "B4",
+        "min_pitch": 92,
+        "max_pitch": 494,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "윤민수",
+        "min_note": "C2",
+        "max_note": "D#5",
+        "min_pitch": 65,
+        "max_pitch": 622,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "이석훈",
+        "min_note": "E2",
+        "max_note": "C#5",
+        "min_pitch": 82,
+        "max_pitch": 554,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "이찬원",
+        "min_note": "G2",
+        "max_note": "G4",
+        "min_pitch": 98,
+        "max_pitch": 392,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "임영웅",
+        "min_note": "C2",
+        "max_note": "C5",
+        "min_pitch": 65,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "임현식",
+        "min_note": "F#2",
+        "max_note": "A4",
+        "min_pitch": 92,
+        "max_pitch": 440,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "장범준",
+        "min_note": "D2",
+        "max_note": "G#4",
+        "min_pitch": 73,
+        "max_pitch": 415,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "존박",
+        "min_note": "G2",
+        "max_note": "F4",
+        "min_pitch": 98,
+        "max_pitch": 349,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "준호",
+        "min_note": "F#2",
+        "max_note": "A4",
+        "min_pitch": 92,
+        "max_pitch": 440,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "폴킴",
+        "min_note": "G2",
+        "max_note": "B4",
+        "min_pitch": 98,
+        "max_pitch": 494,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "한동근",
+        "min_note": "G2",
+        "max_note": "C#5",
+        "min_pitch": 98,
+        "max_pitch": 554,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "환희",
+        "min_note": "A2",
+        "max_note": "C5",
+        "min_pitch": 110,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "규현",
+        "min_note": "A2",
+        "max_note": "D5",
+        "min_pitch": 110,
+        "max_pitch": 587,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "강균성",
+        "min_note": "G#2",
+        "max_note": "F5",
+        "min_pitch": 104,
+        "max_pitch": 698,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "강태현",
+        "min_note": "G2",
+        "max_note": "E5",
+        "min_pitch": 98,
+        "max_pitch": 659,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "권인하",
+        "min_note": "G2",
+        "max_note": "C#5",
+        "min_pitch": 98,
+        "max_pitch": 554,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "권정열",
+        "min_note": "G2",
+        "max_note": "B4",
+        "min_pitch": 98,
+        "max_pitch": 494,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "김경호",
+        "min_note": "A#2",
+        "max_note": "D5",
+        "min_pitch": 116,
+        "max_pitch": 587,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "김길중",
+        "min_note": "F2",
+        "max_note": "E5",
+        "min_pitch": 87,
+        "max_pitch": 659,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "김동현",
+        "min_note": "G2",
+        "max_note": "D#5",
+        "min_pitch": 98,
+        "max_pitch": 622,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "김범수",
+        "min_note": "G2",
+        "max_note": "E5",
+        "min_pitch": 98,
+        "max_pitch": 659,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "김민석",
+        "min_note": "A2",
+        "max_note": "F5",
+        "min_pitch": 110,
+        "max_pitch": 698,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "김연우",
+        "min_note": "A2",
+        "max_note": "D5",
+        "min_pitch": 110,
+        "max_pitch": 587,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "김장훈",
+        "min_note": "D2",
+        "max_note": "A#4",
+        "min_pitch": 73,
+        "max_pitch": 466,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "김재중",
+        "min_note": "A2",
+        "max_note": "E5",
+        "min_pitch": 110,
+        "max_pitch": 659,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "김재환",
+        "min_note": "B2",
+        "max_note": "F5",
+        "min_pitch": 123,
+        "max_pitch": 698,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "김종국",
+        "min_note": "A2",
+        "max_note": "A5",
+        "min_pitch": 110,
+        "max_pitch": 880,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "김종서",
+        "min_note": "A#2",
+        "max_note": "E5",
+        "min_pitch": 116,
+        "max_pitch": 659,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "김준수",
+        "min_note": "C3",
+        "max_note": "C#5",
+        "min_pitch": 131,
+        "max_pitch": 554,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "김창열",
+        "min_note": "B2",
+        "max_note": "D#5",
+        "min_pitch": 123,
+        "max_pitch": 622,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "김호중",
+        "min_note": "G2",
+        "max_note": "D#5",
+        "min_pitch": 98,
+        "max_pitch": 622,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "김희재",
+        "min_note": "A#2",
+        "max_note": "C5",
+        "min_pitch": 116,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "나얼",
+        "min_note": "G2",
+        "max_note": "F#5",
+        "min_pitch": 98,
+        "max_pitch": 740,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "나성호",
+        "min_note": "A2",
+        "max_note": "B4",
+        "min_pitch": 110,
+        "max_pitch": 494,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "닐로",
+        "min_note": "A#2",
+        "max_note": "F5",
+        "min_pitch": 116,
+        "max_pitch": 698,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "대성",
+        "min_note": "G2",
+        "max_note": "C#5",
+        "min_pitch": 98,
+        "max_pitch": 554,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "더원",
+        "min_note": "F2",
+        "max_note": "D5",
+        "min_pitch": 87,
+        "max_pitch": 587,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "도영",
+        "min_note": "G2",
+        "max_note": "B4",
+        "min_pitch": 98,
+        "max_pitch": 494,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "디오",
+        "min_note": "A2",
+        "max_note": "C5",
+        "min_pitch": 110,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "려욱",
+        "min_note": "C3",
+        "max_note": "F5",
+        "min_pitch": 131,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "마크툽",
+        "min_note": "F2",
+        "max_note": "D#5",
+        "min_pitch": 87,
+        "max_pitch": 622,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "문명진",
+        "min_note": "A2",
+        "max_note": "C5",
+        "min_pitch": 110,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "박완규",
+        "min_note": "C3",
+        "max_note": "E5",
+        "min_pitch": 131,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "박장현",
+        "min_note": "A2",
+        "max_note": "E5",
+        "min_pitch": 110,
+        "max_pitch": 659,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "박재범",
+        "min_note": "G2",
+        "max_note": "A4",
+        "min_pitch": 98,
+        "max_pitch": 440,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "박효신",
+        "min_note": "G2",
+        "max_note": "E5",
+        "min_pitch": 98,
+        "max_pitch": 659,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "백현",
+        "min_note": "G#2",
+        "max_note": "E5",
+        "min_pitch": 104,
+        "max_pitch": 659,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "샤오쥔",
+        "min_note": "A2",
+        "max_note": "C5",
+        "min_pitch": 110,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "서은광",
+        "min_note": "G#2",
+        "max_note": "E5",
+        "min_pitch": 104,
+        "max_pitch": 659,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "손진욱",
+        "min_note": "G#2",
+        "max_note": "A5",
+        "min_pitch": 104,
+        "max_pitch": 880,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "신용재",
+        "min_note": "C#3",
+        "max_note": "E5",
+        "min_pitch": 139,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "아이언",
+        "min_note": "F#2",
+        "max_note": "C#5",
+        "min_pitch": 92,
+        "max_pitch": 554,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "영탁",
+        "min_note": "F2",
+        "max_note": "C5",
+        "min_pitch": 87,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "예성",
+        "min_note": "A2",
+        "max_note": "C#5",
+        "min_pitch": 110,
+        "max_pitch": 554,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "온유",
+        "min_note": "A2",
+        "max_note": "B4",
+        "min_pitch": 110,
+        "max_pitch": 494,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "유회승",
+        "min_note": "A#2",
+        "max_note": "F#5",
+        "min_pitch": 116,
+        "max_pitch": 740,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "윤종신",
+        "min_note": "F2",
+        "max_note": "C#5",
+        "min_pitch": 87,
+        "max_pitch": 554,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "윤도현",
+        "min_note": "E2",
+        "max_note": "E5",
+        "min_pitch": 82,
+        "max_pitch": 659,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "이라온",
+        "min_note": "A#2",
+        "max_note": "F5",
+        "min_pitch": 116,
+        "max_pitch": 698,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "이상곤",
+        "min_note": "A2",
+        "max_note": "D#5",
+        "min_pitch": 110,
+        "max_pitch": 622,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "이솔로몬",
+        "min_note": "F2",
+        "max_note": "D5",
+        "min_pitch": 87,
+        "max_pitch": 587,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "이수",
+        "min_note": "C#3",
+        "max_note": "F5",
+        "min_pitch": 139,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "이승기",
+        "min_note": "F#2",
+        "max_note": "D5",
+        "min_pitch": 92,
+        "max_pitch": 587,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "이승철",
+        "min_note": "F#2",
+        "max_note": "B4",
+        "min_pitch": 92,
+        "max_pitch": 494,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "이승환",
+        "min_note": "F2",
+        "max_note": "C5",
+        "min_pitch": 87,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "이적",
+        "min_note": "E2",
+        "max_note": "C#5",
+        "min_pitch": 82,
+        "max_pitch": 554,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "이진성",
+        "min_note": "F#2",
+        "max_note": "C5",
+        "min_pitch": 92,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "이창섭",
+        "min_note": "B2",
+        "max_note": "C#5",
+        "min_pitch": 123,
+        "max_pitch": 554,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "이혁",
+        "min_note": "G#2",
+        "max_note": "G#5",
+        "min_pitch": 104,
+        "max_pitch": 831,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "이홍기",
+        "min_note": "G2",
+        "max_note": "D#5",
+        "min_pitch": 98,
+        "max_pitch": 622,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "임창정",
+        "min_note": "D#2",
+        "max_note": "D#5",
+        "min_pitch": 78,
+        "max_pitch": 622,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "임한별",
+        "min_note": "A2",
+        "max_note": "G5",
+        "min_pitch": 110,
+        "max_pitch": 784,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "임재범",
+        "min_note": "C#2",
+        "max_note": "D#5",
+        "min_pitch": 69,
+        "max_pitch": 622,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "전상근",
+        "min_note": "G#2",
+        "max_note": "F5",
+        "min_pitch": 104,
+        "max_pitch": 698,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "전우성",
+        "min_note": "F2",
+        "max_note": "D#5",
+        "min_pitch": 87,
+        "max_pitch": 622,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "정국",
+        "min_note": "A2",
+        "max_note": "D5",
+        "min_pitch": 110,
+        "max_pitch": 587,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "정동하",
+        "min_note": "A#2",
+        "max_note": "D#5",
+        "min_pitch": 116,
+        "max_pitch": 622,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "정승환",
+        "min_note": "G#2",
+        "max_note": "A#4",
+        "min_pitch": 104,
+        "max_pitch": 466,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "조미",
+        "min_note": "G2",
+        "max_note": "C#5",
+        "min_pitch": 98,
+        "max_pitch": 554,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "조용필",
+        "min_note": "F2",
+        "max_note": "A#4",
+        "min_pitch": 87,
+        "max_pitch": 466,
+        "min_octave": 2,
+        "max_octave": 4
+    },
+    {
+        "artist": "종현",
+        "min_note": "A2",
+        "max_note": "C#5",
+        "min_pitch": 110,
+        "max_pitch": 554,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "지드래곤",
+        "min_note": "D3",
+        "max_note": "C5",
+        "min_pitch": 147,
+        "max_pitch": 523,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "첸",
+        "min_note": "G#2",
+        "max_note": "C#5",
+        "min_pitch": 104,
+        "max_pitch": 554,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "케이윌",
+        "min_note": "G#2",
+        "max_note": "D5",
+        "min_pitch": 104,
+        "max_pitch": 587,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "태민",
+        "min_note": "B2",
+        "max_note": "C5",
+        "min_pitch": 123,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "태양",
+        "min_note": "F2",
+        "max_note": "C#5",
+        "min_pitch": 87,
+        "max_pitch": 554,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "태일",
+        "min_note": "A2",
+        "max_note": "E5",
+        "min_pitch": 110,
+        "max_pitch": 659,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "하은",
+        "min_note": "A#2",
+        "max_note": "D#5",
+        "min_pitch": 116,
+        "max_pitch": 622,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "하현상",
+        "min_note": "F#2",
+        "max_note": "C5",
+        "min_pitch": 92,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "하현우",
+        "min_note": "A#1",
+        "max_note": "A#5",
+        "min_pitch": 58,
+        "max_pitch": 932,
+        "min_octave": 1,
+        "max_octave": 5
+    },
+    {
+        "artist": "황인욱",
+        "min_note": "F#2",
+        "max_note": "C5",
+        "min_pitch": 92,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "황치열",
+        "min_note": "G2",
+        "max_note": "C5",
+        "min_pitch": 98,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "DK",
+        "min_note": "A#2",
+        "max_note": "D#5",
+        "min_pitch": 116,
+        "max_pitch": 622,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "KCM",
+        "min_note": "C#3",
+        "max_note": "F#5",
+        "min_pitch": 139,
+        "max_pitch": 740,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "가을",
+        "min_note": "D#3",
+        "max_note": "C#5",
+        "min_pitch": 156,
+        "max_pitch": 554,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "공민지",
+        "min_note": "E3",
+        "max_note": "C#5",
+        "min_pitch": 165,
+        "max_pitch": 554,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "김보아",
+        "min_note": "F3",
+        "max_note": "E5",
+        "min_pitch": 175,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "리즈",
+        "min_note": "D#3",
+        "max_note": "G5",
+        "min_pitch": 156,
+        "max_pitch": 784,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "알리",
+        "min_note": "F#3",
+        "max_note": "F#5",
+        "min_pitch": 185,
+        "max_pitch": 740,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "이하이",
+        "min_note": "E3",
+        "max_note": "D5",
+        "min_pitch": 165,
+        "max_pitch": 587,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "선미",
+        "min_note": "C#3",
+        "max_note": "C5",
+        "min_pitch": 139,
+        "max_pitch": 523,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "하니",
+        "min_note": "E3",
+        "max_note": "C5",
+        "min_pitch": 165,
+        "max_pitch": 523,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "허윤진",
+        "min_note": "E3",
+        "max_note": "G#5",
+        "min_pitch": 165,
+        "max_pitch": 831,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "가인",
+        "min_note": "E3",
+        "max_note": "E5",
+        "min_pitch": 165,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "강민경",
+        "min_note": "F3",
+        "max_note": "E5",
+        "min_pitch": 175,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "거미",
+        "min_note": "D#3",
+        "max_note": "F#5",
+        "min_pitch": 156,
+        "max_pitch": 740,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "권은비",
+        "min_note": "E3",
+        "max_note": "F5",
+        "min_pitch": 165,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "김세정",
+        "min_note": "E3",
+        "max_note": "E5",
+        "min_pitch": 165,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "김연지",
+        "min_note": "D#3",
+        "max_note": "G5",
+        "min_pitch": 156,
+        "max_pitch": 784,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "김채원",
+        "min_note": "E3",
+        "max_note": "E5",
+        "min_pitch": 165,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "나르샤",
+        "min_note": "F3",
+        "max_note": "G5",
+        "min_pitch": 175,
+        "max_pitch": 784,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "나연",
+        "min_note": "G#3",
+        "max_note": "F5",
+        "min_pitch": 208,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "닝닝",
+        "min_note": "G3",
+        "max_note": "F5",
+        "min_pitch": 196,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "다나",
+        "min_note": "F#3",
+        "max_note": "F5",
+        "min_pitch": 185,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "다니엘",
+        "min_note": "F3",
+        "max_note": "D5",
+        "min_pitch": 175,
+        "max_pitch": 587,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "다현",
+        "min_note": "E3",
+        "max_note": "B4",
+        "min_pitch": 165,
+        "max_pitch": 494,
+        "min_octave": 3,
+        "max_octave": 4
+    },
+    {
+        "artist": "류진",
+        "min_note": "E3",
+        "max_note": "E5",
+        "min_pitch": 165,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "리아",
+        "min_note": "F3",
+        "max_note": "F#5",
+        "min_pitch": 175,
+        "max_pitch": 740,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "린",
+        "min_note": "D#3",
+        "max_note": "E5",
+        "min_pitch": 156,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "에이나",
+        "min_note": "G3",
+        "max_note": "E5",
+        "min_pitch": 196,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "먼데이",
+        "min_note": "E3",
+        "max_note": "D5",
+        "min_pitch": 165,
+        "max_pitch": 587,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "민지",
+        "min_note": "E3",
+        "max_note": "D5",
+        "min_pitch": 165,
+        "max_pitch": 587,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "바다",
+        "min_note": "E3",
+        "max_note": "G5",
+        "min_pitch": 165,
+        "max_pitch": 784,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "박정현",
+        "min_note": "C#3",
+        "max_note": "G#5",
+        "min_pitch": 139,
+        "max_pitch": 831,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "배이",
+        "min_note": "F3",
+        "max_note": "E5",
+        "min_pitch": 175,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "백지영",
+        "min_note": "E3",
+        "max_note": "F5",
+        "min_pitch": 165,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "백예린",
+        "min_note": "F3",
+        "max_note": "G5",
+        "min_pitch": 175,
+        "max_pitch": 784,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "박기영",
+        "min_note": "G#2",
+        "max_note": "G#5",
+        "min_pitch": 104,
+        "max_pitch": 831,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "벤",
+        "min_note": "F#3",
+        "max_note": "F5",
+        "min_pitch": 185,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "보아",
+        "min_note": "F#3",
+        "max_note": "D#5",
+        "min_pitch": 185,
+        "max_pitch": 622,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "샤넌",
+        "min_note": "A3",
+        "max_note": "F#5",
+        "min_pitch": 220,
+        "max_pitch": 740,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "서현",
+        "min_note": "E3",
+        "max_note": "E5",
+        "min_pitch": 165,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "선예",
+        "min_note": "E3",
+        "max_note": "C#5",
+        "min_pitch": 165,
+        "max_pitch": 554,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "설윤",
+        "min_note": "E3",
+        "max_note": "F#5",
+        "min_pitch": 165,
+        "max_pitch": 740,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "소유",
+        "min_note": "E3",
+        "max_note": "F#5",
+        "min_pitch": 165,
+        "max_pitch": 740,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "소향",
+        "min_note": "E3",
+        "max_note": "B5",
+        "min_pitch": 165,
+        "max_pitch": 988,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "손승연",
+        "min_note": "E3",
+        "max_note": "G5",
+        "min_pitch": 165,
+        "max_pitch": 784,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "솔라",
+        "min_note": "D#3",
+        "max_note": "E5",
+        "min_pitch": 156,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "솔지",
+        "min_note": "F3",
+        "max_note": "F#5",
+        "min_pitch": 175,
+        "max_pitch": 740,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "송하예",
+        "min_note": "F3",
+        "max_note": "G#5",
+        "min_pitch": 175,
+        "max_pitch": 831,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "슬기",
+        "min_note": "E3",
+        "max_note": "D5",
+        "min_pitch": 165,
+        "max_pitch": 587,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "승희",
+        "min_note": "F3",
+        "max_note": "F#5",
+        "min_pitch": 175,
+        "max_pitch": 740,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "써니",
+        "min_note": "D#3",
+        "max_note": "D#5",
+        "min_pitch": 156,
+        "max_pitch": 622,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "시은",
+        "min_note": "D#3",
+        "max_note": "D5",
+        "min_pitch": 156,
+        "max_pitch": 587,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "심규선",
+        "min_note": "E3",
+        "max_note": "D5",
+        "min_pitch": 165,
+        "max_pitch": 587,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "아이사",
+        "min_note": "F3",
+        "max_note": "D#5",
+        "min_pitch": 175,
+        "max_pitch": 622,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "아이유",
+        "min_note": "D3",
+        "max_note": "F#5",
+        "min_pitch": 147,
+        "max_pitch": 740,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "안유진",
+        "min_note": "E3",
+        "max_note": "E5",
+        "min_pitch": 165,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "에일리",
+        "min_note": "F3",
+        "max_note": "F5",
+        "min_pitch": 175,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "예지",
+        "min_note": "F#3",
+        "max_note": "D#5",
+        "min_pitch": 185,
+        "max_pitch": 622,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "옥주현",
+        "min_note": "F3",
+        "max_note": "F5",
+        "min_pitch": 175,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "웬디",
+        "min_note": "G3",
+        "max_note": "C#5",
+        "min_pitch": 196,
+        "max_pitch": 554,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "윈터",
+        "min_note": "F3",
+        "max_note": "E5",
+        "min_pitch": 175,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "유나",
+        "min_note": "F#3",
+        "max_note": "E5",
+        "min_pitch": 185,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "유주",
+        "min_note": "G3",
+        "max_note": "G5",
+        "min_pitch": 196,
+        "max_pitch": 784,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "은가은",
+        "min_note": "E3",
+        "max_note": "G#5",
+        "min_pitch": 165,
+        "max_pitch": 831,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "은하",
+        "min_note": "D3",
+        "max_note": "G5",
+        "min_pitch": 147,
+        "max_pitch": 784,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "윤하",
+        "min_note": "F3",
+        "max_note": "E5",
+        "min_pitch": 175,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "이선희",
+        "min_note": "D3",
+        "max_note": "E5",
+        "min_pitch": 147,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "이소정",
+        "min_note": "C#3",
+        "max_note": "D#5",
+        "min_pitch": 139,
+        "max_pitch": 622,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "이수현",
+        "min_note": "D#3",
+        "max_note": "F5",
+        "min_pitch": 156,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "이영현",
+        "min_note": "F3",
+        "max_note": "F#5",
+        "min_pitch": 175,
+        "max_pitch": 740,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "이해리",
+        "min_note": "E3",
+        "max_note": "F#5",
+        "min_pitch": 165,
+        "max_pitch": 740,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "자우림",
+        "min_note": "D#3",
+        "max_note": "D#5",
+        "min_pitch": 156,
+        "max_pitch": 622,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "장원영",
+        "min_note": "G3",
+        "max_note": "C5",
+        "min_pitch": 196,
+        "max_pitch": 523,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "정연",
+        "min_note": "E3",
+        "max_note": "E5",
+        "min_pitch": 165,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "정유지",
+        "min_note": "E3",
+        "max_note": "D#5",
+        "min_pitch": 165,
+        "max_pitch": 622,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "정은지",
+        "min_note": "F#2",
+        "max_note": "G5",
+        "min_pitch": 92,
+        "max_pitch": 784,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "제시카",
+        "min_note": "G#3",
+        "max_note": "E5",
+        "min_pitch": 208,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "제아",
+        "min_note": "E3",
+        "max_note": "E5",
+        "min_pitch": 165,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "조유진",
+        "min_note": "F3",
+        "max_note": "A5",
+        "min_pitch": 175,
+        "max_pitch": 880,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "지우",
+        "min_note": "F3",
+        "max_note": "G5",
+        "min_pitch": 175,
+        "max_pitch": 784,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "지젤",
+        "min_note": "F3",
+        "max_note": "F5",
+        "min_pitch": 175,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "지효",
+        "min_note": "E3",
+        "max_note": "F5",
+        "min_pitch": 165,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "채령",
+        "min_note": "F#3",
+        "max_note": "F5",
+        "min_pitch": 185,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "최예나",
+        "min_note": "E3",
+        "max_note": "F#5",
+        "min_pitch": 165,
+        "max_pitch": 740,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "카리나",
+        "min_note": "C#3",
+        "max_note": "C#5",
+        "min_pitch": 139,
+        "max_pitch": 554,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "케이시",
+        "min_note": "D#3",
+        "max_note": "D5",
+        "min_pitch": 156,
+        "max_pitch": 587,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "태연",
+        "min_note": "D#3",
+        "max_note": "F#5",
+        "min_pitch": 156,
+        "max_pitch": 740,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "티파니 영",
+        "min_note": "G3",
+        "max_note": "D#5",
+        "min_pitch": 196,
+        "max_pitch": 622,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "하니",
+        "min_note": "E3",
+        "max_note": "D#5",
+        "min_pitch": 165,
+        "max_pitch": 622,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "핫펠트",
+        "min_note": "G3",
+        "max_note": "D5",
+        "min_pitch": 196,
+        "max_pitch": 587,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "해원",
+        "min_note": "G#3",
+        "max_note": "D#5",
+        "min_pitch": 208,
+        "max_pitch": 622,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "화사",
+        "min_note": "D3",
+        "max_note": "F5",
+        "min_pitch": 147,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "효린",
+        "min_note": "D#3",
+        "max_note": "F#5",
+        "min_pitch": 156,
+        "max_pitch": 740,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "효정",
+        "min_note": "E3",
+        "max_note": "F5",
+        "min_pitch": 165,
+        "max_pitch": 698,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "휘인",
+        "min_note": "F#3",
+        "max_note": "E5",
+        "min_pitch": 185,
+        "max_pitch": 659,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "ASH ISLAND",
+        "min_note": "G2",
+        "max_note": "C5",
+        "min_pitch": 98,
+        "max_pitch": 523,
+        "min_octave": 2,
+        "max_octave": 5
+    },
+    {
+        "artist": "HYNN",
+        "min_note": "G#3",
+        "max_note": "B5",
+        "min_pitch": 208,
+        "max_pitch": 988,
+        "min_octave": 3,
+        "max_octave": 5
+    },
+    {
+        "artist": "Kei",
+        "min_note": "F3",
+        "max_note": "D#5",
+        "min_pitch": 175,
+        "max_pitch": 622,
+        "min_octave": 3,
+        "max_octave": 5
+    }
+]
