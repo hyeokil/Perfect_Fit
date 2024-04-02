@@ -14,14 +14,17 @@
   justify-content: center;
   align-items: center; /* 수직 가운데 정렬을 위해 추가 */
   z-index: 999;
+  height: 90%;
+  position: relative;
 }
 
 .player {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: fit-content;
-  margin-top: 10%;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 5vh;
 }
 
 .toggle {

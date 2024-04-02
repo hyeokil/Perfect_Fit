@@ -51,10 +51,10 @@ const App: React.FC = () => {
         <Route path="/single" element={<Single />} />
         <Route path="/firstduet" element={<FirstDuet />} />
         <Route path="/preview" element={<Preview />} />
-        <Route path="/reels" element={<ReadReelsPage />} />
         {/* 로그인 상태에 따라 수정하기 // 중첩 라우팅 사용하기 */}
         <Route element={<Layout />}>
           {/* 차트 */}
+          <Route path="/reels" element={<ReadReelsPage />} />
           <Route path="mainchart" element={<MainChart />} />
           <Route path="songtimerec" element={<SongTimeRec />} />
           <Route path="latestchart" element={<LatestChart />} />
