@@ -22,7 +22,7 @@ def get_db():
 # CORS 미들웨어 추가
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # 로컬 프론트엔드의 주소
+    allow_origins=["http://localhost:5173","https://j10c205.p.ssafy.io"],  # 로컬 프론트엔드의 주소
     allow_credentials=True,
     allow_methods=["GET"]  # 필요한 HTTP 메서드
 )
