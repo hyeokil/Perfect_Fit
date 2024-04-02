@@ -146,6 +146,7 @@ const Controller = (props: PropType) => {
       shiftRef.current.pitch = value;
     }
   };
+<<<<<<< HEAD
   // const handleChangeTempo = (e: ChangeEvent<HTMLInputElement>) => {
   //   const value = parseFloat(e.target.value);
   //   setTempo(value);
@@ -195,6 +196,19 @@ const Controller = (props: PropType) => {
 
   return (
     <div className={styles.wrapper}>
+=======
+  const handleChangeTempo = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
+    setTempo(value);
+    if (shiftRef.current) {
+      shiftRef.current.tempo = value;
+    }
+  };
+
+  return (
+    <div className={styles.wrapper}>
+      <h1>컨트롤러!!!</h1>
+>>>>>>> e2fce56 (feat: 피치조절 구현)
       <div className={styles.play}>
         <button className={styles.controlbutton} onClick={togglePlayback}>
           {isPlaying ? (
@@ -237,6 +251,7 @@ const Controller = (props: PropType) => {
           <p>{tempo}</p>
           <label>템포</label>
         </div>
+<<<<<<< HEAD
       </div> */}
       {/* <hr />
       {recordedBlobs.map((blob, index) => (
@@ -245,6 +260,23 @@ const Controller = (props: PropType) => {
       <hr />
       {musicUrl && <audio controls src={musicUrl}></audio>}
       {videoUrl && <video controls src={videoUrl}></video>} */}
+=======
+      </div>
+      <div className={styles.controlbox}>
+        <input
+          type="range"
+          onChange={handleChangeTempo}
+          value={tempo}
+          min="0.5"
+          max="2"
+          step="0.01"
+        />
+        <div>
+          <p>{tempo}</p>
+          <label>템포</label>
+        </div>
+      </div>
+>>>>>>> e2fce56 (feat: 피치조절 구현)
     </div>
   );
 };
