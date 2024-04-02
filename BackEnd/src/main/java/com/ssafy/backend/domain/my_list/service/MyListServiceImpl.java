@@ -71,7 +71,8 @@ public class MyListServiceImpl implements MyListService{
                         myList.getSong().getSongView(),
                         myList.getSong().getSongLength(),
                         myList.getMyListDisplay(),
-                        myList.getSong().getSongPitch()
+                        myList.getSong().getSongPitch(),
+                        myList.getSong().getMrPath()
                 ))
                 .collect(Collectors.toList());
     }

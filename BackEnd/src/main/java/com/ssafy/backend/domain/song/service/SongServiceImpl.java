@@ -50,6 +50,7 @@ public class SongServiceImpl implements SongService {
                             .songLength(song.getSongLength())
                             .myListDisplay(myListDisplay)
                             .songPitch(song.getSongPitch())
+                            .mrPath(song.getMrPath())
                             .build();
                 })
                 .collect(Collectors.toList());
@@ -79,6 +80,7 @@ public class SongServiceImpl implements SongService {
                             .songLength(song.getSongLength())
                             .myListDisplay(myListDisplay)
                             .songPitch(song.getSongPitch())
+                            .mrPath(song.getMrPath())
                             .build();
                 })
                 .collect(Collectors.toList());
@@ -127,6 +129,7 @@ public class SongServiceImpl implements SongService {
                                 .songLength(song.getSongLength())
                                 .myListDisplay(myListDisplay)
                                 .songPitch(song.getSongPitch())
+                                .mrPath(song.getMrPath())
                                 .build();
                     })
                     .collect(Collectors.toList());
@@ -150,6 +153,7 @@ public class SongServiceImpl implements SongService {
                                 .songLength(song.getSongLength())
                                 .myListDisplay(myListDisplay)
                                 .songPitch(song.getSongPitch())
+                                .mrPath(song.getMrPath())
                                 .build();
                     })
                     .collect(Collectors.toList());
@@ -180,6 +184,7 @@ public class SongServiceImpl implements SongService {
                             .songLength(song.getSongLength())
                             .myListDisplay(myListDisplay)
                             .songPitch(song.getSongPitch())
+                            .mrPath(song.getMrPath())
                             .build();
                 })
                 .collect(Collectors.toList());
@@ -203,6 +208,7 @@ public class SongServiceImpl implements SongService {
                             .SongView(song.getSongView())
                             .songLength(song.getSongLength())
                             .songPitch(song.getSongPitch())
+                            .mrPath(song.getMrPath())
                             .build();
                 })
                 .collect(Collectors.toList());
@@ -231,6 +237,7 @@ public class SongServiceImpl implements SongService {
                             .songLength(song.getSongLength())
                             .myListDisplay(myListDisplay)
                             .songPitch(song.getSongPitch())
+                            .mrPath(song.getMrPath())
                             .build();
                 })
                 .collect(Collectors.toList());
@@ -259,6 +266,7 @@ public class SongServiceImpl implements SongService {
                             .songLength(song.getSongLength())
                             .myListDisplay(myListDisplay)
                             .songPitch(song.getSongPitch())
+                            .mrPath(song.getMrPath())
                             .build();
                 })
                 .collect(Collectors.toList());

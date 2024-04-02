@@ -45,4 +45,7 @@ public class GetMyListResponseDto {
     // 노래 음정
     private Integer songPitch;
 
+    // s3 경로
+    private String mrPath;
+
 }

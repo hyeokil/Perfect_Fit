@@ -59,6 +59,9 @@ public class Song {
     @Column(nullable = true)
     private Integer songPitch;
 
+    // s3 경로
+    private String mrPath;
+
 
 //    public void setSongGenre(String songGenre) {
 //        this.songGenre = songGenre;
