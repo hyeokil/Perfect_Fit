@@ -52,7 +52,7 @@ const AllChart: React.FC = () => {
 
         setSongs(response.data.dataBody.slice(0, 3));
         // console.log(response.data.dataBody)
-        setOstSongs(ostResponse.data.dataBody.slice(0, 3));
+        setOstSongs(ostResponse.data.dataBody.slice(6, 9));
       } catch (error) {
         console.error("Failed to fetch songs", error);
       } finally {

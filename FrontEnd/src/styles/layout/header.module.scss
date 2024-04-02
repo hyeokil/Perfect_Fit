@@ -3,11 +3,12 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: white; /* 예시로 배경색을 흰색으로 설정 */
+  background-color: #1a1a1a; /* 예시로 배경색을 흰색으로 설정 */
   z-index: 1000; /* 다른 요소보다 위에 표시되도록 설정 */
   height: 45px;
   border-bottom: 1px solid gray;
   align-items: center;
+  color: #ececec;
 
   div {
     display: flex;
