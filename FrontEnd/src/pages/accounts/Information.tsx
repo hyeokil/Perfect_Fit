@@ -36,7 +36,8 @@ const Information: React.FC = () => {
 
         // console.log(response);
         console.log(response.data.dataBody.image); // 사용자 프로필 사진
-        console.log(response.data.dataBody.nickname); // 사용자 이름
+        console.log(response.data.dataBody); // 사용자 이름
+        
       } catch (error) {
         console.error("정보를 가져올 수 없습니다", error);
       }

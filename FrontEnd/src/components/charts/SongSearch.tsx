@@ -52,6 +52,8 @@ const SongSearch: React.FC = () => {
           }
         );
 
+        console.log(response.data)
+
         setSearchResults(response.data.dataBody);
         setShowResults(true);
         setShowRecentSearches(false);
