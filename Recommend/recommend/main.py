@@ -4,11 +4,21 @@ from recommend.database import engine, SessionLocal
 from fastapi import FastAPI, Depends, HTTPException
 from . import crud, models, chart_crud
 from typing import List
+from fastapi.middleware.cors import CORSMiddleware
 
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+# CORS 미들웨어 추가
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # 로컬 프론트엔드의 주소
+    allow_credentials=True,
+    allow_methods=["GET"]  # 필요한 HTTP 메서드
+    allow_headers=["*"],  # 모든 헤더 허용
+)
 
 def get_db():
     db = SessionLocal()
