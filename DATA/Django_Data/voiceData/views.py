@@ -194,3 +194,6 @@ def user_recommend(request, userId):
     logger.info(f'result -> {result}')
 
     return Response(result)
+
+
+# + GET 추가
