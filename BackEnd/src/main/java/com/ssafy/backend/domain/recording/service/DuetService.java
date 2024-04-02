@@ -10,13 +10,16 @@ import java.util.List;
 public interface DuetService {
 
     // duet recording upload
-    void createDuet(Long memberId, DuetCreateRequestDto duetCreateRequestDto);
+    void createDuet(Long memberId, Long songId, DuetCreateRequestDto duetCreateRequestDto);
     // duet 참여하기
-    void participateDuet(Long memberId, DuetParticipateReqeustDto duetParticipateReqeustDto);
+    void participateDuet(Long memberId, Long songId, DuetParticipateReqeustDto duetParticipateReqeustDto);
     // 완성안된 모든 duet 조회
     List<DuetListResponseDto> getAllDuetList();
     // 완성안된 내 duet list 조회
     List<DuetListResponseDto> getMyDuetList(Long memberId);
 
     List<DuetFinishedListResponseDto> getMyDuetFinishedList(Long memberId);
+
+    //단일 조회
+    DuetFinishedListResponseDto getDuet(Long duetId);
 }

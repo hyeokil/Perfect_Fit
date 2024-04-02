@@ -9,14 +9,11 @@ import java.util.List;
 public interface SingleService {
 
     //single recording 저장
-    void createSingle(Long memberId, SingleCreateRequestDto singleCreateRequestDto);
+    void createSingle(Long memberId, Long songId, SingleCreateRequestDto singleCreateRequestDto);
 
     // 내 single recording list 조회
     List<SingleResponseDto> getSingleList(Long memberId);
 
-//    // 단일 single list 조회
-//    String getRecording(Long singleId, Long memberId);
+    SingleResponseDto getSingle(Long singleId);
 
-    // 더미데이터 생성
-//    void createRecordings();
 }
