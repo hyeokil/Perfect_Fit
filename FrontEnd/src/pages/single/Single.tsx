@@ -16,6 +16,7 @@ import { useMusicStore } from "@/store/useMusicStore";
 import { logOnDev } from "@/util/logging";
 import AlertOnNavigation from "@/hooks/useHistory";
 import useSaveStore from "@/store/useSaveStore";
+import Lyrics from "@/components/single/Lyrics";
 const Single = () => {
   //---------------------------------------------------
   // 저장여부
@@ -29,10 +30,11 @@ const Single = () => {
   const setMode = useSaveStore((state) => state.setMode);
   const Filter = styled.div`
     position: absolute;
-    top: 50px;
+    top: 45px;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 95vh;
+
     background-color: rgba(0, 0, 0, 0.5); /* 오버레이 배경색 */
     z-index: -1;
   `;
@@ -41,13 +43,13 @@ const Single = () => {
     background-size: cover;
     background-position: center;
     width: 100vw;
-    height: 100vh;
+    height: 80vh;
     z-index: -1;
     position: absolute; /* 배경 이미지가 페이지에 고정되도록 설정 */
-    top: 50px;
+    top: 45px;
     left: 0;
     width: 100vw;
-    height: 95vh;
+    height: 80vh;
     filter: blur(7px);
   `;
   const [camera, setCamera] = useState<boolean>(true);
@@ -70,16 +72,16 @@ const Single = () => {
   useEffect(() => {
     setMode('single')
   }, [])
-  const opts = {
-    height: "200px",
-    width: "100%",
+  // const opts = {
+  //   height: "200px",
+  //   width: "100%",
     
-    playerVars: {
-      autoplay: 0,
-      mute: 1, // 자동재생 설정
-      // 추가적인 플레이어 옵션들
-    },
-  };
+  //   playerVars: {
+  //     autoplay: 0,
+  //     mute: 1, // 자동재생 설정
+  //     // 추가적인 플레이어 옵션들
+  //   },
+  // };
   return (
     <div>
       <AlertOnNavigation />
@@ -97,10 +99,10 @@ const Single = () => {
             <VoiceRecord />
           </div>
         )}
-        {videoUrl && (
+        {/* {videoUrl && (
           <YouTube videoId={videoUrl} opts={opts} onReady={onReady} />
-        )}
-        {/* <Lyrics /> */}
+        )} */}
+        <Lyrics />
         <div className={styles.player}>
           <div className={styles.toggle}>
             <Toggle camera={camera} setCamera={setCamera} />

@@ -78,10 +78,11 @@ const saveMusicBlob = useSaveStore(state => state.setMusicBlob)
     checkEnded();
   };
 
+  const mr = import.meta.env.VITE_MR_URL
   // 저장되어있는 파일 사용하기
   const loadFile = async () => {
     try {
-      const res = await fetch("/src/assets/sounds/꽃길.mp3");
+      const res = await fetch(mr);
       const buffer = await res.arrayBuffer();
       onLoad({ target: { result: buffer } });
     } catch (error) {
@@ -90,6 +91,7 @@ const saveMusicBlob = useSaveStore(state => state.setMusicBlob)
   };
 
   useEffect(() => {
+    setIsPlaying(false)
     loadFile();
     return () => {
       // 컴포넌트가 언마운트 될 때 PitchShifter를 해제
@@ -184,7 +186,7 @@ const saveMusicBlob = useSaveStore(state => state.setMusicBlob)
       };
       media.stop();
     }
-  };
+  };            
   useEffect(() => {
     if (isRecording === false) {
       setRecordedBlobs([]); // 녹음된 Blob 초기화

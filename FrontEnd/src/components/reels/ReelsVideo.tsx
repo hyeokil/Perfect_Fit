@@ -5,15 +5,15 @@ type PathType = {
   userPath: string;
   musicPath: string;
   index: number;
-  data : any
+  data: any;
 };
-const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, data}) => {
+const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, data }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const {member_nickname, song_title } = data;
-//---------------------------------------------------------------------------
-//playtime 기록 ㅠㅠ??
+  const { memberNickname, songTitle } = data;
+  //---------------------------------------------------------------------------
+  // playtime 기록 ㅠㅠ??
   // 재생 시간을 추적하기 위한 state
   const [playTime, setPlayTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -43,21 +43,20 @@ const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, data}) => {
       // 여기에서 재생 시간을 서버에 보내거나 상태를 업데이트 할 수 있습니다.
     }
   }, [playTime, isPlaying]);
-//---------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   const handlePlayVideo = () => {
     if (videoRef.current && audioRef.current) {
       if (videoRef.current.paused && audioRef.current.paused) {
         videoRef.current.play();
         audioRef.current.play();
-        setIsPlaying(true)
+        setIsPlaying(true);
       } else {
         videoRef.current.pause();
         audioRef.current.pause();
         videoRef.current.currentTime = 0;
         audioRef.current.currentTime = 0;
-        setIsPlaying(false)
-        setPlayTime(0)
-
+        setIsPlaying(false);
+        setPlayTime(0);
       }
     }
   };
@@ -71,7 +70,6 @@ const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, data}) => {
     }
   }, [userPath, musicPath]);
 
-
   return (
     <div>
       <div onClick={handlePlayVideo} className={styles.player}>
@@ -84,14 +82,12 @@ const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, data}) => {
       </div>
 
       <div className={styles.titleBox}>
-        <h1>{song_title}</h1>
+        <h1>{songTitle}</h1>
         <div>
-
+          <h3>{memberNickname}</h3>
+          <button>{`조아용!!!!>_________<`}</button>
         </div>
-        <h3>{member_nickname}</h3>
-        <button>{`조아용!!!!>_________<`}</button>
       </div>
-
     </div>
   );
 };

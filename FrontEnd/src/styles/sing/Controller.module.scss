@@ -11,7 +11,7 @@
   margin-top: 3px;
 }
 .icon {
-  color:  #46B8E0; 
+  color: #46b8e0;
   font-size: xx-large;
 }
 
@@ -26,7 +26,6 @@
   h4 {
     margin-bottom: 5%;
     color: white;
-
   }
   input[type="range"] {
     -webkit-appearance: none; // Remove default appearance
@@ -69,7 +68,7 @@
       appearance: none;
       height: 20px; // Thumb height, adjust as needed
       width: 20px; // Thumb width, adjust as needed
-      background: #3DB9FF; // Thumb color, matching your image
+      background: #3db9ff; // Thumb color, matching your image
       border-radius: 50%; // Circular thumb
       margin-top: -8px; // Adjust thumb position to align it with the track
       border: 3px solid white; // White border for the thumb, adjust as needed
@@ -78,7 +77,7 @@
     &::-moz-range-thumb {
       height: 20px;
       width: 20px;
-      background:#3DB9FF;
+      background: #3db9ff;
       border-radius: 50%;
       border: 3px solid white;
     }
@@ -86,7 +85,7 @@
     &::-ms-thumb {
       height: 20px;
       width: 20px;
-      background:#3DB9FF;
+      background: #3db9ff;
       border-radius: 50%;
       border: 3px solid white;
     }
