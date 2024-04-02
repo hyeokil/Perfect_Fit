@@ -248,6 +248,7 @@ def generate_hybrid_recommendations(member_id, db, n_recommendations=200):
     final_recommendations = []
     for reels in reels_details:
         score = recommendations.get(reels.id, 0)
+        is_followed = reels.member_id in following_ids
         final_recommendations.append({
             "reels_id": reels.id,
             "score": score,
@@ -255,7 +256,8 @@ def generate_hybrid_recommendations(member_id, db, n_recommendations=200):
             "reels_audio_path": reels.audio_path,
             "reels_time": reels.time,
             "member_id": reels.member_id,
-            "song_id": reels.song_id
+            "song_id": reels.song_id,
+            "is_followed": is_followed
         })
 
     final_recommendations.sort(key=lambda x: x["score"], reverse=True)
