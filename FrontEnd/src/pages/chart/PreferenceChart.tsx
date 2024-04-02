@@ -8,6 +8,7 @@ const PreferenceChart: React.FC = () => {
   const [Songs, setSongs] = useState<any[]>([]);
   const setSelectedSong = useSongStore((state) => state.setSelectedSong); // useSongStore에서 setSelectedSong 함수를 가져옵니다.
   const selectedSong = useSongStore((state) => state.selectedSong);
+  const userId = localStorage.getItem("userId");
 
   const openBottomSheet = (song: any) => {
     setSelectedSong(song);
@@ -18,26 +19,27 @@ const PreferenceChart: React.FC = () => {
   };
 
   useEffect(() => {
-    const fetchLikedSongs = async () => {
+    const fetchSongs = async () => {
       try {
         const token = localStorage.getItem("accessToken");
+        console.log(userId)
         const response = await axios.get(
-          "https://j10c205.p.ssafy.io/recommendations/chart/{memberId}",
+          `https://j10c205.p.ssafy.io/recommendations/chart/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
-        setSongs(response.data.dataBody);
-        // console.log(response.data.dataBody);
+        setSongs(response.data);
+        // console.log(response.data);
       } catch (error) {
-        console.error("찜한 노래 목록을 가져오지 못했습니다.", error);
+        console.error("노래를 못 가져옴 ", error);
       }
     };
 
-    fetchLikedSongs();
-  }, []);
+    fetchSongs();
+  }, [userId]);
 
   const toggleLike = async (song: any) => {
     try {
@@ -79,14 +81,14 @@ const PreferenceChart: React.FC = () => {
         <div className="sing-content">
           <div className="sing-chart">
             {Songs.map((song) => (
-              <div key={song.songId} className="sing-song">
-                <img src={song.songThumbnail} alt={song.songTitle} />
+              <div key={song.id} className="sing-song">
+                <img src={song.song_thumbnail} alt={song.songTitle} />
                 <div
                   className="sing-song-info"
                   onClick={() => openBottomSheet(song)}
                 >
-                  <h3>{song.songTitle}</h3>
-                  <p>{song.artist}</p>
+                  <h3>{song.song_title}</h3>
+                  <p>{song.artist_name}</p>
                 </div>
                 <div
                   className="sing-song-like"
@@ -110,18 +112,18 @@ const PreferenceChart: React.FC = () => {
               isOpen={selectedSong !== null}
               onClose={closeBottomSheet}
               backgroundImageUrl={
-                selectedSong ? selectedSong.songThumbnail : ""
+                selectedSong ? selectedSong.song_thumbnail : ""
               }
             >
               {selectedSong && (
                 <div className="song-bottom">
                   <img
-                    src={selectedSong.songThumbnail}
+                    src={selectedSong.song_thumbnail}
                     alt={selectedSong.songTitle}
                   />
                   <div className="song-info">
-                    <h2>{selectedSong.songTitle}</h2>
-                    <p>{selectedSong.artist}</p>
+                    <h2>{selectedSong.song_title}</h2>
+                    <p>{selectedSong.artist_name}</p>
                   </div>
                 </div>
               )}

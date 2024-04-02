@@ -91,6 +91,15 @@ const AllChart: React.FC = () => {
         }
         return [];
       });
+
+      setOstSongs((prevSongs) => {
+        if (prevSongs) {
+          return prevSongs.map((prevSong) =>
+            prevSong.songId === song.songId ? updatedSongData : prevSong
+          );
+        }
+        return [];
+      });
     } catch (error) {
       console.log("토글 실패", error);
     }

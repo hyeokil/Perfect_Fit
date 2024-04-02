@@ -48,13 +48,13 @@ const MainMypage: React.FC = () => {
 
   return (
     <div className="main-mypage-container">
-      <Header title="마이페이지" state={["back", "setting"]} />
+      <Header title="마이페이지" state={["back"]} />
       <div className="section my-analyze">
         <div className="user-image">
           <img src={profile.photo} alt="" />
           <div className="user-info">
             <h3>{profile.nickname}</h3>
-            <p>게시글 12 팔로워 324 팔로잉 23</p>
+            <p>{profile.email}</p>
           </div>
         </div>
         <div className="user-graph">
@@ -78,6 +78,13 @@ const MainMypage: React.FC = () => {
           <h2>듀엣 녹화</h2>
           <p>내 듀엣 녹화를 볼 수 있는 공간입니다.</p>
         </div>
+      </div>
+      <div
+        className="section my-like"
+        onClick={() => handleNavigate("/mylike")}
+      >
+        <h2>릴스 녹화</h2>
+        <p>내 릴스를 볼 수 있습니다.</p>
       </div>
       <div
         className="section my-like"

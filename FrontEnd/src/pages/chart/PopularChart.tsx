@@ -20,7 +20,7 @@ const PopularChart: React.FC = () => {
   };
 
   useEffect(() => {
-    const fetchLatestSongs = async () => {
+    const fetchSongs = async () => {
       try {
         const token = localStorage.getItem("accessToken");
 
@@ -40,7 +40,7 @@ const PopularChart: React.FC = () => {
       }
     };
 
-    fetchLatestSongs();
+    fetchSongs();
   }, []);
 
   // 찜하기
