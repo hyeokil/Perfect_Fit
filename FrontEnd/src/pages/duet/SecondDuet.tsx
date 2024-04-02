@@ -15,7 +15,6 @@ import YouTube from "react-youtube";
 import { useMusicStore } from "@/store/useMusicStore";
 import { logOnDev } from "@/util/logging";
 import AlertOnNavigation from "@/hooks/useHistory";
-// import { getHalfTime } from "@/util/songtimes";
 import useSaveStore from "@/store/useSaveStore";
 
 
@@ -56,8 +55,6 @@ const FirstDuet = () => {
   const [camera, setCamera] = useState<boolean>(true);
   logOnDev(`카메라, : ${camera}`)
   const { info } = useMusicStore();
-  // const songLength = getHalfTime(info.songLength)
-  console.log(info);
   const videoUrl = VideoId(info.songUrl);
   const [player, setPlayer] = useState<any>(null);
   const onReady = (event: { target: any }) => {
@@ -72,7 +69,7 @@ const FirstDuet = () => {
   }, [isPlaying, player]);
 
   useEffect(() => {
-    setMode('firstDuet')
+    setMode('secondDuet')
   }, [])
 
 

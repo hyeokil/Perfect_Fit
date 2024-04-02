@@ -11,7 +11,6 @@ import { instance } from "@/api/axios";
 
 const Preview: React.FC = () => {
   const { info } = useMusicStore();
-  console.log(info)
   const { videoUrl, musicUrl, voiceUrl } = useRecordStore();
   const { songId, songTitle } = info;
   const videoPlayerRef = useRef<ReactPlayer>(null);
@@ -20,13 +19,15 @@ const Preview: React.FC = () => {
   const [voicePath, setVoicePath] = useState<string>("");
   const [musicPath, setMusicPath] = useState<string>("");
   console.log(`musicPath : ${musicPath}`);
+  console.log(`videoPath : ${videoPath}`);
+  console.log(`voicePath : ${voicePath}`);
   const { voiceBlob, musicBlob, videoBlob } = useSaveStore();
 
   const [save, setSaved] = useState<boolean>(false);
-  console.log(save)
+  console.log(save);
   //---모드 =----
   const mode = useSaveStore((state) => state.mode);
-
+  //-------------------------------------------------------
   const togglePlayback = () => {
     const player = videoPlayerRef.current;
     if (player) {
@@ -45,7 +46,6 @@ const Preview: React.FC = () => {
       const fileName = `video/${songTitle}__${timestamp}`;
       const videoUpload = S3Upload(videoBlob, fileName)
         .then((location) => {
-          console.log(location);
           setVideoPath(location);
         })
         .catch((error) => {
@@ -81,22 +81,23 @@ const Preview: React.FC = () => {
     setSaved(true);
   };
 
-  // useEffect(() => {
-  //   setSaved(false)
-  // }, [])
   useEffect(() => {
     if (save === true) {
       if (mode === "single") {
         console.log(videoPath);
         const data = {
           name: `Single_userId_${songTitle}_${timestamp}`,
-          path: videoPath || voicePath
+          userPath: videoPath || voicePath,
+          audioPath: musicPath,
         };
-        instance.post(`/api/v1/single/create/${songId}`, data).then(res => console.log(res))
+        instance
+          .post(`/api/v1/single/create/${songId}`, data)
+          .then((res) => console.log(res));
       } else if (mode == "firstDuet") {
         const data = {
           name: `First_userId_${songTitle}_${timestamp}`,
-          path: videoPath,
+          userPath: videoPath || voicePath,
+          audioPath: musicPath,
         };
         instance.post(`/api/v1/duet/create/${songId}`, data);
       } else {
@@ -108,38 +109,34 @@ const Preview: React.FC = () => {
         instance.post(`/api/v1/duet/participate/${songId}`, data);
       }
     }
-  }, [save,videoPath]);
+  }, [save, videoPath]);
 
   return (
     <div>
       <Header title="다시 듣기" state={["back", "close"]} page="mainchart" />
       <AlbumCover musicInfo={info} />
-      {videoUrl && musicUrl ? (
-        <>
-          <ReactPlayer
-            ref={videoPlayerRef}
-            url={videoUrl}
-            playing={isPlaying}
-            controls={true}
-            width="100%"
-            height="auto"
-          />
-          <audio src={musicUrl} controls />
-        </>
-      ) : (
-        <>
-          <AlbumCover musicInfo={info} />
-          <ReactPlayer
-            ref={videoPlayerRef}
-            url={voiceUrl}
-            playing={isPlaying}
-            controls={true}
-            width="100%"
-            height="auto"
-          />
-          <audio src={musicUrl} controls />
-        </>
+      {videoUrl && (
+        <ReactPlayer
+          ref={videoPlayerRef}
+          url={videoUrl} // null이 아닌 경우에만 ReactPlayer 렌더링
+          playing={isPlaying}
+          controls={true}
+          width="100%"
+          height="auto"
+        />
       )}
+      {voiceUrl && !videoUrl && (
+        <ReactPlayer
+          ref={videoPlayerRef}
+          url={voiceUrl} // null이 아닌 경우에만 ReactPlayer 렌더링
+          playing={isPlaying}
+          controls={true}
+          width="100%"
+          height="auto"
+        />
+      )}
+      {musicUrl && <audio src={musicUrl} controls />}{" "}
+      {/* musicUrl이 null일 때 audio 태그가 렌더링되지 않도록 조건 추가 */}
       <button onClick={togglePlayback}>{isPlaying ? "Pause" : "Play"}</button>
       <button onClick={handleSave}>저장</button>
     </div>

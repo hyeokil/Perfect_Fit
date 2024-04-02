@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const DisplayRecord = () => {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
   const [recordedBlobs, setRecordedBlobs] = useState<Blob[]>([]);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
-  const [audioStream, setAudioStream] = useState<MediaStream | null>(null);
 
   const getMedia = async () => {
     const displayOptions = {

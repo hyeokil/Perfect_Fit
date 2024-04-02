@@ -20,7 +20,7 @@ const Script: React.FC<ScriptProps> = ({ isTrackingStarted }) => {
       const animateLyrics = () => {
         lyricsRefs.current.forEach((lineRefs, lineIndex) => {
           setTimeout(() => {
-            lineRefs.forEach((charRef, charIndex) => {
+            lineRefs.forEach((charRef) => {
               if (charRef) {
                 charRef.style.color = "black"; // 글자 색상 초기화
               }
@@ -28,7 +28,7 @@ const Script: React.FC<ScriptProps> = ({ isTrackingStarted }) => {
           }, 15000 * lineIndex); // 각 라인의 시작 시간 설정
           
           setTimeout(() => {
-            lineRefs.forEach((charRef, charIndex) => {
+            lineRefs.forEach((charRef) => {
               if (charRef) {
                 charRef.style.color = " #46B8E0"; // 첫 번째 글자부터 빨간색으로 변경
               }
@@ -37,10 +37,11 @@ const Script: React.FC<ScriptProps> = ({ isTrackingStarted }) => {
 
           for (let i = 1; i < lineRefs.length; i++) {
             setTimeout(() => {
-              if (lineRefs[i]) {
-                lineRefs[i].style.color = " #46B8E0"; // 이후 글자들도 빨간색으로 변경
+              const charRef = lineRefs[i];
+              if (charRef) {
+                charRef!.style.color = "#46B8E0"; // Non-null assertion operator 사용
               }
-            }, 15000 * lineIndex + 1000 + i * 1500); // 1초 후부터 1.5초 간격으로 색상 변경
+            }, 15000 * lineIndex + 1000 + i * 1500);
           }
         });
       };
