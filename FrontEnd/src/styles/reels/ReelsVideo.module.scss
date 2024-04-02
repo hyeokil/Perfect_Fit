@@ -3,12 +3,26 @@ $aspect-ratio-height: 9;
 
 .video {
   width: 100%; // 화면 가로 전체를 사용하도록 설정
-  height: 85vh; // 높이는 50vh로 고정
+  height: 96vh; // 높이는 50vh로 고정
   object-fit: cover;
-  transform: scaleX(-1); // 컨텐츠를 컨테이너에 맞추고, 필요한 경우 크롭
+  transform: scaleX(-1);
 }
 
 
 .player {
-  // height: 700px;
+  position: relative; // player div를 상대적 위치로 설정
+  // 기존 스타일...
+}
+
+.titleBox {
+  position: absolute; // titleBox를 절대적 위치로 설정
+  left: 0; 
+  bottom: 0;// player div의 왼쪽으로
+  width: 100%; // player div의 너비만큼
+  text-align: left; // 텍스트 가운데 정렬
+  background-image: linear-gradient(to bottom, #c3c3c3, #505050);background-image: linear-gradient(to bottom, rgba(195, 195, 195, 0.4), rgba(80, 80, 80, 1));
+  color: white; // 글자색 흰색 (선택적)
+  padding: 10px 0; // 패딩 (선택적)
+  // 기타 필요한 스타일...
+  padding-left: 15px;
 }

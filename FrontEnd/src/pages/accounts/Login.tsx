@@ -29,7 +29,7 @@ const Login: React.FC = () => {
         <h2>안쏭맞춤</h2>
       </div>
       <button className="kakao-login" onClick={handleKakaoLogin}>
-        <img src="/public/icon/kakao.png" alt="kakao" />
+        <img src="/icon/kakao.png" alt="kakao" />
         카카오 로그인
       </button>
     </div>

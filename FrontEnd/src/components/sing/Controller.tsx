@@ -62,12 +62,12 @@ const saveMusicBlob = useSaveStore(state => state.setMusicBlob)
           audioCtx.resume();
         }
         // 모니터링을 시작
-        monitorPlayback(myShift, audioBuffer.duration);
+        monitorPlayback(audioBuffer.duration);
       }
     }
   };
 
-  const monitorPlayback = (source: PitchShifter, duration: number) => {
+  const monitorPlayback = (duration: number) => {
     const checkEnded = () => {
       if (audioCtxRef.current && audioCtxRef.current.currentTime >= duration) {
         handleAudioEnded();

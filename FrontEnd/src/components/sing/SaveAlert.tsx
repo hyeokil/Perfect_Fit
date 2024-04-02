@@ -1,10 +1,7 @@
-import useRecordStore from "@/store/useRecordStore";
-// import { blobToFile, uploadBlobToS3 } from "@/util/S3FileUpload";
-// import { fetchBlobFromUrl } from "@/util/blob";
+
 import styles from "@styles/sing/SaveAlert.module.scss";
 import logo from "public/image/logo.png";
 import { useNavigate } from "react-router-dom";
-// import { mixAudioAndVideo } from '@/util/conbine';
 type PropType = {
   setShowSaveAlert: React.Dispatch<React.SetStateAction<boolean>>;
 };

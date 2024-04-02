@@ -1,8 +1,6 @@
-import { SendRecord } from "@/api/record";
 import useRecordStore from "@/store/useRecordStore";
 import useSaveStore from "@/store/useSaveStore";
-import S3Upload from "@/util/S3Upload";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState} from "react";
 
 const VoiceRecord = () => {
   const isPlaying = useRecordStore((state) => state.isPlaying);

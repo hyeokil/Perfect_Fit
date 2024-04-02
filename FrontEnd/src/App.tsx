@@ -35,7 +35,6 @@ import ReadReelsPage from './pages/reels/ReadReelsPage';
 
 
 const App: React.FC = () => {
-
   return (
     <BrowserRouter>
       <Routes>
