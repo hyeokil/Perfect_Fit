@@ -51,12 +51,12 @@ const AllChart: React.FC = () => {
         );
 
         setSongs(response.data.dataBody.slice(0, 3));
-        console.log(response.data.dataBody)
+        // console.log(response.data.dataBody)
         setOstSongs(ostResponse.data.dataBody.slice(0, 3));
       } catch (error) {
         console.error("Failed to fetch songs", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     };
 
@@ -67,7 +67,7 @@ const AllChart: React.FC = () => {
       const hours = date.getHours().toString().padStart(2, "0");
 
       setCurrentTime(`${hours}:00`);
-    }, 10);
+    }, 100);
 
     return () => clearInterval(interval);
   }, []);
@@ -97,7 +97,7 @@ const AllChart: React.FC = () => {
   };
 
   if (loading) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
@@ -145,78 +145,79 @@ const AllChart: React.FC = () => {
             </div>
           )}
         </BottomSheet>
-
-        <div className="sing-title">
-          <h3>인기 드라마 OST</h3>
-          <p onClick={() => handleNavigate("/genre/ost")}>전체 보기</p>
-        </div>
-        <div className="sing-content">
-          <div className="sing-chart">
-            {ostSongs.map((song, index) => (
-              <div key={index} className="sing-song">
-                <img src={song.songThumbnail} alt={song.songThumbnail} />
-                <div
-                  className="sing-song-info"
-                  onClick={() => openBottomSheet(song)}
-                >
-                  <h3>{song.songTitle}</h3>
-                  <p>{song.artist}</p>
-                </div>
-                <div
-                  className="sing-song-like"
-                  onClick={() => toggleLike(song)}
-                >
-                  {song.myListDisplay ? (
-                    <img
-                      src="/src/assets/icon/chart/liketrue.png"
-                      alt="좋아요"
-                    />
-                  ) : (
-                    <img
-                      src="/src/assets/icon/chart/likefalse.png"
-                      alt="좋아요 취소"
-                    />
-                  )}
-                </div>
-              </div>
-            ))}
+        <div className="sing-bottom">
+          <div className="sing-title">
+            <h3>인기 드라마 OST</h3>
+            <p onClick={() => handleNavigate("/genre/ost")}>전체 보기</p>
           </div>
-        </div>
+          <div className="sing-content">
+            <div className="sing-chart">
+              {ostSongs.map((song, index) => (
+                <div key={index} className="sing-song">
+                  <img src={song.songThumbnail} alt={song.songThumbnail} />
+                  <div
+                    className="sing-song-info"
+                    onClick={() => openBottomSheet(song)}
+                  >
+                    <h3>{song.songTitle}</h3>
+                    <p>{song.artist}</p>
+                  </div>
+                  <div
+                    className="sing-song-like"
+                    onClick={() => toggleLike(song)}
+                  >
+                    {song.myListDisplay ? (
+                      <img
+                        src="/src/assets/icon/chart/liketrue.png"
+                        alt="좋아요"
+                      />
+                    ) : (
+                      <img
+                        src="/src/assets/icon/chart/likefalse.png"
+                        alt="좋아요 취소"
+                      />
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        <div className="sing-title">
-          <h3>{`${currentTime} 기준 많이 부르는 노래`}</h3>
-          <p onClick={() => handleNavigate("/songtimerec")}>전체 보기</p>
-        </div>
-        <div className="sing-content">
-          <div className="sing-chart">
-            {songs.map((song, index) => (
-              <div key={index} className="sing-song">
-                <img src={song.songThumbnail} alt={song.songThumbnail} />
-                <div
-                  className="sing-song-info"
-                  onClick={() => openBottomSheet(song)}
-                >
-                  <h3>{song.songTitle}</h3>
-                  <p>{song.artist}</p>
+          <div className="sing-title">
+            <h3>{`${currentTime} 기준 많이 부르는 노래`}</h3>
+            <p onClick={() => handleNavigate("/songtimerec")}>전체 보기</p>
+          </div>
+          <div className="sing-content">
+            <div className="sing-chart">
+              {songs.map((song, index) => (
+                <div key={index} className="sing-song">
+                  <img src={song.songThumbnail} alt={song.songThumbnail} />
+                  <div
+                    className="sing-song-info"
+                    onClick={() => openBottomSheet(song)}
+                  >
+                    <h3>{song.songTitle}</h3>
+                    <p>{song.artist}</p>
+                  </div>
+                  <div
+                    className="sing-song-like"
+                    onClick={() => toggleLike(song)}
+                  >
+                    {song.myListDisplay ? (
+                      <img
+                        src="/src/assets/icon/chart/liketrue.png"
+                        alt="좋아요"
+                      />
+                    ) : (
+                      <img
+                        src="/src/assets/icon/chart/likefalse.png"
+                        alt="좋아요 취소"
+                      />
+                    )}
+                  </div>
                 </div>
-                <div
-                  className="sing-song-like"
-                  onClick={() => toggleLike(song)}
-                >
-                  {song.myListDisplay ? (
-                    <img
-                      src="/src/assets/icon/chart/liketrue.png"
-                      alt="좋아요"
-                    />
-                  ) : (
-                    <img
-                      src="/src/assets/icon/chart/likefalse.png"
-                      alt="좋아요 취소"
-                    />
-                  )}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

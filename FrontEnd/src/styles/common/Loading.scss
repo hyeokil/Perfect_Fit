@@ -1,7 +1,11 @@
-.spinner-container {
+.spinner-back {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* 화면 전체 높이를 기준으로 중앙에 배치합니다. */
-
+  height: 100vh;
 }
+
+.spinner-container {
+  width: 50vw;
+}
+

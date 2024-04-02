@@ -1,56 +1,18 @@
-// .login-container {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   height: 100vh;
-//   background: linear-gradient(rgb(255, 38, 142) 0%, rgb(255, 105, 79) 100%);
-//   font-size: 30px;
-//   font-family: 'Dongle', sans-serif;
-//   position: relative; 
-//   z-index: 0; /* 자식 요소와 겹치지 않도록 초기 z-index 값 설정 */
-
-  
-
-//   &::before {
-//     content: ""; 
-//     background: radial-gradient(at center center, rgb(62, 79, 249) 0%, rgba(62, 79, 249, 0) 64%);
-//     width: 140%;
-//     height: 140%;
-//     position: absolute;
-//     top: -40%;
-//     right: -50%;
-//     z-index: -1;
-//   }
-
-//   &::after {
-//     content: ""; 
-//     background: radial-gradient(at center center, rgb(247, 237, 225) 0%, rgba(247, 237, 225, 0) 70%);
-//     position: absolute;
-//     width: 140%;
-//     height: 140%;
-//     position: absolute;
-//     bottom: -50%;
-//     left: -30%;
-//     z-index: -1;
-//   }
-// }
-
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: linear-gradient(to right, #2DFFF5, #FFF878);
+  background: linear-gradient(to right, #2dfff5, #fff878);
   font-size: 30px;
-  font-family: 'Dongle', sans-serif;
+  font-family: "Dongle", sans-serif;
 }
 
 .logo {
   margin-bottom: 8rem;
   text-align: center;
-  color: black
+  color: black;
 }
 
 @mixin button-style {
@@ -59,13 +21,13 @@
   border: none;
   border-radius: 0.5rem;
   font-size: 1rem;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   width: 300px;
   cursor: pointer;
 }
 
 @mixin button-img {
-  margin-right: 20px
+  margin-right: 20px;
 }
 
 .kakao-login,
@@ -79,7 +41,7 @@
 
 .kakao-login img,
 .naver-login img {
-  @include button-img()
+  @include button-img();
 }
 
 .kakao-login {

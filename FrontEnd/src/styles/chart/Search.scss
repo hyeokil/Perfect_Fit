@@ -68,12 +68,10 @@
     // border: 1px solid blue;
     border-radius: 10px;
     display: flex;
+    align-items: start;
+
     .img-border {
-      background-image: linear-gradient(
-        to bottom,
-        #103ce7,
-        #64e9ff
-      ); 
+      background-image: linear-gradient(to bottom, #103ce7, #64e9ff);
       border-radius: 50px;
       width: 76px;
       height: 76px;
@@ -81,21 +79,23 @@
       align-items: center;
       justify-content: center;
     }
+    .results-name {
+      margin-left: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      p {
+        color: #ababab;
+      }
+    }
+    .follow {
+      margin-left: 25vw;
+    }
   }
   img {
     // border: 1px solid red;
     width: 70px;
     height: 70px;
     border-radius: 50px;
-  }
-
-  .results-name {
-    margin-left: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    p {
-      color: #ababab;
-    }
   }
 }

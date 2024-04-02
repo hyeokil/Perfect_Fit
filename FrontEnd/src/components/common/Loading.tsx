@@ -1,10 +1,32 @@
-import Spinner from "@/assets/image/load.gif";
+import React, { useRef, useEffect } from "react";
+import lottie, { AnimationItem } from "lottie-web";
+import Animation from "@/assets/lottie/Animation.json";
 import "@styles/common/Loading.scss";
 
-const Loading = () => {
+const Loading: React.FC = () => {
+  const animationContainer = useRef<HTMLDivElement>(null);
+  let anim: AnimationItem | null = null;
+
+  useEffect(() => {
+    if (animationContainer.current) {
+      anim = lottie.loadAnimation({
+        container: animationContainer.current,
+        animationData: Animation,
+        loop: true,
+        autoplay: true,
+      });
+    }
+
+    return () => {
+      if (anim) {
+        anim.destroy();
+      }
+    };
+  }, []);
+
   return (
-    <div className="spinner-container">
-      <img src={Spinner} alt="스피너" className="spinner-img" />
+    <div className="spinner-back">
+      <div className="spinner-container" ref={animationContainer}></div>
     </div>
   );
 };
