@@ -12,7 +12,7 @@ const Voicetraining: React.FC = () => {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [media, setMedia] = useState<MediaRecorder | null>(null);
   const [source, setSource] = useState<MediaStreamAudioSourceNode | null>(null);
-  const [audioUrl, setAudioUrl] = useState<Blob | null>(null);
+  // const [audioUrl, setAudioUrl] = useState<Blob | null>(null);
   // const [url, setUrl] = useState<string | null>(null);
   const [state, setState] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -89,7 +89,7 @@ const Voicetraining: React.FC = () => {
       try {
         media.ondataavailable = async function (e) {
           console.log("녹음 데이터 사용 가능", e.data);
-          setAudioUrl(e.data);
+          // setAudioUrl(e.data);
           await handleUpload(e.data)
         };
 

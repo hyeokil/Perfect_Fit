@@ -1,20 +1,16 @@
-import { SendVideo } from "@/api/record";
 import useRecordStore from "@/store/useRecordStore";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const SingRecorder = () => {
   const isPlaying = useRecordStore((state) => state.isPlaying)
   const setDisplayUrl = useRecordStore((state) => state.setDisplayUrl)
   const setDisplayBlob = useRecordStore((state) => state.setDisplayBlob)
-  const displayBlob = useRecordStore((state) => state.displayBlob)
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
     null
   );
   const [recordedBlobs, setRecordedBlobs] = useState<Blob[]>([]);
-  console.log(recordedBlobs)
-  console.log(displayBlob)
-  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+
 
   const getMedia = async () => {
     const options = {
@@ -57,7 +53,6 @@ const SingRecorder = () => {
         // const blob = new Blob(recordedBlobs)
         const url: string = URL.createObjectURL(e.data);
         console.log(url)
-        setVideoUrl(url);
         setDisplayUrl(url)
       };
       mediaRecorder.stop();
@@ -89,17 +84,17 @@ useEffect(() => {
     };
   }, [stream]);
 
-  const UploadFile = () => {
-    console.log(`업로드 파일 ${recordedBlobs}`)
-    if (recordedBlobs) {
-      const videoBlob = new Blob(recordedBlobs, {type : 'mimeType'})
-      console.log(videoBlob)
-      const video : File  = new File([videoBlob], `songName.mp4`, {
-        type : "video/mp4"
-      })
-      SendVideo(video)
-    }
-  }
+  // const UploadFile = () => {
+  //   console.log(`업로드 파일 ${recordedBlobs}`)
+  //   if (recordedBlobs) {
+  //     const videoBlob = new Blob(recordedBlobs, {type : 'mimeType'})
+  //     console.log(videoBlob)
+  //     const video : File  = new File([videoBlob], `songName.mp4`, {
+  //       type : "video/mp4"
+  //     })
+  //     SendVideo(video)
+  //   }
+  // }
 
   useEffect(() => {
     if (isPlaying) {
