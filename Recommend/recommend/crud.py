@@ -217,7 +217,7 @@ def generate_hybrid_recommendations(member_id, db, n_recommendations=200):
 
     df_reels = follow_data(db)
     df_reels.set_index('reels_id', inplace=True)
-    following_ids = db.query(Follow.follower_id).filter(Follow.following_id == member_id).all()
+    following_ids = db.query(Follow.follower_id).filter(Follow.following_id == member_id, Follow.active == True).all()
     following_ids = [id[0] for id in following_ids]
 
     df_videos = create_reels_playtime_dataframe(reels, db)
