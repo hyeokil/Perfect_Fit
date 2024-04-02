@@ -6,6 +6,9 @@ interface Song {
   artist: string;
   songThumbnail: string;
   myListDisplay: boolean;
+  song_thumbnail: string;
+  song_title: string;
+  artist_name: string;
 }
 
 interface SongStore {

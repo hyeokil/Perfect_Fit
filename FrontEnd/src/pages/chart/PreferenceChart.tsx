@@ -1,28 +1,21 @@
+import React, { useEffect, useState } from "react";
 import BottomSheet from "@/components/charts/BottomSheet";
 import Header from "@/components/layout/Header";
+import Loading from "@/components/common/Loading"; // 로딩 컴포넌트 추가
 import { useSongStore } from "@/store/useSongStore";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 
 const PreferenceChart: React.FC = () => {
-  const [Songs, setSongs] = useState<any[]>([]);
-  const setSelectedSong = useSongStore((state) => state.setSelectedSong); // useSongStore에서 setSelectedSong 함수를 가져옵니다.
+  const [loading, setLoading] = useState<boolean>(true); // 로딩 상태 추가
+  const [songs, setSongs] = useState<any[]>([]);
+  const setSelectedSong = useSongStore((state) => state.setSelectedSong);
   const selectedSong = useSongStore((state) => state.selectedSong);
   const userId = localStorage.getItem("userId");
-
-  const openBottomSheet = (song: any) => {
-    setSelectedSong(song);
-  };
-
-  const closeBottomSheet = () => {
-    setSelectedSong(null);
-  };
 
   useEffect(() => {
     const fetchSongs = async () => {
       try {
         const token = localStorage.getItem("accessToken");
-        console.log(userId)
         const response = await axios.get(
           `https://j10c205.p.ssafy.io/recommendations/chart/${userId}`,
           {
@@ -32,9 +25,11 @@ const PreferenceChart: React.FC = () => {
           }
         );
         setSongs(response.data);
-        // console.log(response.data);
+        // console.log(response.data)
+        setLoading(false); // 데이터 로딩 완료 후 상태 변경
       } catch (error) {
         console.error("노래를 못 가져옴 ", error);
+        setLoading(false); // 데이터 로딩 실패 시 상태 변경
       }
     };
 
@@ -74,13 +69,25 @@ const PreferenceChart: React.FC = () => {
     }
   };
 
+  const openBottomSheet = (song: any) => {
+    setSelectedSong(song);
+  };
+
+  const closeBottomSheet = () => {
+    setSelectedSong(null);
+  };
+
+  if (loading) {
+    return <Loading />; // 로딩 중일 때 로딩 컴포넌트 반환
+  }
+
   return (
     <div>
-      <Header title="최신차트" state={["back", "search"]} />
+      <Header title="취향차트" state={["back", "search"]} />
       <div className="sing-container">
         <div className="sing-content">
           <div className="sing-chart">
-            {Songs.map((song) => (
+            {songs.map((song) => (
               <div key={song.id} className="sing-song">
                 <img src={song.song_thumbnail} alt={song.songTitle} />
                 <div
@@ -119,7 +126,7 @@ const PreferenceChart: React.FC = () => {
                 <div className="song-bottom">
                   <img
                     src={selectedSong.song_thumbnail}
-                    alt={selectedSong.songTitle}
+                    alt={selectedSong.song_title}
                   />
                   <div className="song-info">
                     <h2>{selectedSong.song_title}</h2>
