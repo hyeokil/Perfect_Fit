@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useVoiceRecord = (isRecording:boolean) => {
   // const [isRecording, setIsRecording] = useState<boolean>(state)

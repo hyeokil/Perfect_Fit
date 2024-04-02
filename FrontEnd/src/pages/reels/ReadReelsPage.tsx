@@ -66,11 +66,11 @@ const ReadReelsPage = () => {
 
   const touchStartRef = useRef(0);
 
-  const handleTouchStart = (e) => {
+  const handleTouchStart = (e :React.TouchEvent) => {
     touchStartRef.current = e.touches[0].clientY;
   };
 
-  const handleTouchEnd = (e) => {
+  const handleTouchEnd = (e :React.TouchEvent) => {
     const touchEnd = e.changedTouches[0].clientY;
     if (touchEnd > touchStartRef.current) {
       // 스와이프 아래로 이동
