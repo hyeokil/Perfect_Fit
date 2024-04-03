@@ -34,7 +34,7 @@ import FirstDuet from "./pages/duet/FirstDuet.tsx";
 import ReadReelsPage from "./pages/reels/ReadReelsPage";
 import MyLike from "./pages/mypage/MyLike.tsx";
 import MySolo from "./pages/mypage/MySolo.tsx";
-import MyDuet from "./pages/mypage/MyDuetPosting.tsx";
+import MyDuet from "./pages/mypage/MyDuet.tsx";
 import SongTimeRec from "./pages/chart/genres/SongTimeRec.tsx";
 import SecondDuet from "./pages/duet/SecondDuet.tsx";
 import PlayVideoPage from "./pages/single/PlayVideoPage.tsx";
