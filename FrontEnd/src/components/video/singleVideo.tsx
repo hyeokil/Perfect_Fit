@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useEffect } from "react";
 import { Background } from "../single/Background";
 import { instance } from "@/api/axios";
@@ -10,14 +9,6 @@ const dataBody = {
     "https://perfectfitssafy.s3.ap-northeast-2.amazonaws.com/video/Star__2024-04-02T20-56-23.255Z",
   audioPath:
     "https://perfectfitssafy.s3.ap-northeast-2.amazonaws.com/music/Star__2024-04-02T20-56-23.255Z",
-=======
-import React from "react";
-const dataBody = {
-  id: 3,
-  name: "ttest.com",
-  userPath: "https://perfectfitssafy.s3.ap-northeast-2.amazonaws.com/video/Star__2024-04-02T20-56-23.255Z",
-  audioPath: "https://perfectfitssafy.s3.ap-northeast-2.amazonaws.com/music/Star__2024-04-02T20-56-23.255Z",
->>>>>>> 2a13d2c (feat: 참여자가 있는 duet모드 페이지)
   createdAt: "2024-04-02T11:15:51.465526",
   songTitle: "SKYBLUE",
   artistName: "호미들",
