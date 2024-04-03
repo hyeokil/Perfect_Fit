@@ -12,12 +12,12 @@ import { useNavigate } from "react-router";
 
 const Preview: React.FC = () => {
   const mode = useSaveStore((state) => state.mode);
-
   console.log(mode)
   const navigate = useNavigate();
   const selectedSong = useSongStore((state) => state.selectedSong);
   console.log(selectedSong)
   const duetSong = useDuetStore((state) => state.duetData);
+  console.log(duetSong)
   const [albumData, setAlbumData] = useState({
     artist: "",
     songTitle: "",
@@ -52,7 +52,9 @@ const Preview: React.FC = () => {
       });
     }
   }, []);
+  useEffect(() => {
 
+  }, [albumData])
 
   const basicUrl = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMN3Drroa4Vfutn4ARik9LACvb57TO5ADHC5n5sBeTBg&s`;
   const videoPlayerRef = useRef<HTMLVideoElement>(null);
@@ -176,8 +178,8 @@ const Preview: React.FC = () => {
       } else if (mode == "firstDuet") {
         const data = {
           name: `First_userId_${albumData.songTitle}_${timestamp}`,
-          userPath: videoPath || voicePath,
-          audioPath: musicPath,
+          uploaderUserPath: videoPath || voicePath,
+          uploaderAudioPath: musicPath,
         };
         instance
           .post(`/api/v1/duet/create/${albumData.songId}`, data)
@@ -189,12 +191,18 @@ const Preview: React.FC = () => {
       } else {
         const data = {
           name: `Second_userId_${albumData.songTitle}_${timestamp}`,
-          path: videoPath,
-          uploaderId: `${duetSong}`,
+          uploaderUserPath: duetSong?.uploaderUserPath ,
+          uploaderAudioPath : duetSong?.uploaderAudioPath,
+          participantUserPath : videoPath || voicePath,
+          participantAudioPath : musicPath,
+          uploaderId: duetSong?.uploaderId,
         };
         instance
           .post(`/api/v1/duet/participate/${albumData.songId}`, data)
-          .then(() => navigate("/mainchart"));
+          .then((res) => {
+            console.log(res)
+            navigate("/mainchart")
+          });
       }
     }
   }, [save, videoPath, musicPath, voicePath]);
@@ -202,7 +210,7 @@ const Preview: React.FC = () => {
   return (
     <div>
       <Header title="다시 듣기" state={["back", "close"]} page="mainchart" />
-      {selectedSong && (
+      {(selectedSong || duetSong) && (
         <>
           <Background $imageUrl={albumData.songThumbnail || basicUrl} />
           <Filter />

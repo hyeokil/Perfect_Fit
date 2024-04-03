@@ -3,23 +3,51 @@
   // margin-bottom: 5px;
   .textbox {
     display: flex;
+    justify-content: space-between;
+    margin-left: 5%;
+    margin-bottom: 4%;
+    width: 200px;
+    height: auto;
+    h3 {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 5vw;
+      margin-right: 5px;
+    }
     p {
-      font-size: medium;
+      margin-top: 6px;
+      font-size: small;
     }
 
   }
   .userbox {
     display: flex;
     border: 1px solid #2988d6;
-    border-radius: 20px;
+    border-radius: 15px;
+    margin-left: 5%;
+    padding: 5px;
+
 
     img {
-      width: 30%;
+      width: 15%;
       border-radius: 50%;
     }
   }
 }
 .thumbnail {
-  width: 30%;
+  width: 80px;
+  height: 80px;
   border-radius: 10px;
+}
+
+.date {
+  font-size: xx-small;
+  margin-top: 7px;
+  margin-left: 20px;
+}
+
+.name {
+  margin-top: 3px;
+  margin-left: 5%;
 }

@@ -59,16 +59,19 @@ export type PreferChartSong = {
 export type DuetListData = {
   id: number;
   name: string;
-  userPath: string;
-  audioPath: string;
+  uploaderUserPath: string;
+  uploaderAudioPath: string;
+  uploaderId: number;
   uploaderNickname: string;
-  uploaderImage: string | null;
+  uploaderImage: null | string;
   createdAt: string;
   songId: number;
+  songMrPath: null | string;
   songTitle: string;
   artistName: string;
   songThumbnail: string;
 };
+
 
 export type videoInfoType = {
   songId: number;

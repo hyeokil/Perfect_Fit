@@ -26,7 +26,6 @@ const SecondDuet = () => {
   // ---------------------------------------------------
   // const isPlaying = useRecordStore((state) => state.isPlaying);
   const setMode = useSaveStore((state) => state.setMode);
-
   const [camera, setCamera] = useState<boolean>(true);
   logOnDev(`카메라, : ${camera}`);
   const info = useDuetStore((state) => state.duetData);

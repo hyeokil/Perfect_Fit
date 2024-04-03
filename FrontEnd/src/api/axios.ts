@@ -47,26 +47,44 @@ const onRequestError = (error: AxiosError): Promise<AxiosError> => {
 };
 
 //---------------------------------------------------
+
 const onResponse = (res: AxiosResponse): AxiosResponse => {
   const { method, url } = res.config;
   const { dataBody, dataHeader }: ResponseDataType = res.data;
-  // const data : object = res.data.dataBody
+
+  if (!dataHeader) {
+    console.error("dataHeader is undefined in onResponse!");
+    return res;
+  }
+
   if (dataHeader.successCode === 0 && dataBody) {
     logOnDev(
       `💌 [API - RESPONSE] | SUCCESS |${method?.toUpperCase()} | ${url}`
     );
-    logOnDev(dataBody);
   }
   return res;
 };
+
 const onResponseError = (error: AxiosError | Error): Promise<AxiosError> => {
   if (axios.isAxiosError(error)) {
     const { method, url } = error.config as InternalAxiosRequestConfig;
-    const {data, status} = error.response as AxiosResponse
-    const { dataHeader }: ResponseDataType = data
 
+    // 먼저 error.response가 있는지 확인
+    if (!error.response) {
+      console.error("Error response is undefined!");
+      return Promise.reject(error);
+    }
+
+    const { data, status } = error.response;
+
+    // 이후 dataHeader의 존재 여부를 확인
+    if (!data || !data.dataHeader) {
+      console.error("data or dataHeader is undefined in onResponseError!");
+      return Promise.reject(error);
+    }
+
+    const { dataHeader }: ResponseDataType = data;
     logOnDev(`❌[Response error ${status} ${dataHeader.resultCode}] | ${method?.toUpperCase()} | ${url} | ${dataHeader.resultMessage}`);
-
   }
   return Promise.reject(error);
 };

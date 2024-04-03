@@ -23,6 +23,7 @@ const DuetChart: React.FC = () => {
     Data();
   }, []);
   const goSecondDuet = (data:DuetListData) => {
+    console.log(data)
     setDuet(data)
     navigate('/secondduet')
   }

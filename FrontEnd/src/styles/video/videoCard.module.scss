@@ -10,3 +10,21 @@
   width: 20%;
   margin-right: 10%
 }
+
+.modalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); // 흐린 배경
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.singleVideoModal {
+  position: fixed;
+  z-index: 100; // 모달이 다른 요소들 위에 표시되도록
+  // 모달 스타일 (크기, 패딩, 배경색 등)
+}
