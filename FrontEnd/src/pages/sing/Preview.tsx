@@ -8,40 +8,52 @@ import S3Upload from "@/util/S3Upload";
 import { instance } from "@/api/axios";
 import { useDuetStore, useSongStore } from "@/store/useSongStore";
 import { Background, Filter } from "@/components/single/Background";
-import { Song } from "../../types/apiType";
 import { useNavigate } from "react-router";
-import axios from "axios";
 
 const Preview: React.FC = () => {
-  const navigate = useNavigate()
+  const mode = useSaveStore((state) => state.mode);
+
+  console.log(mode)
+  const navigate = useNavigate();
   const selectedSong = useSongStore((state) => state.selectedSong);
+  console.log(selectedSong)
   const duetSong = useDuetStore((state) => state.duetData);
   const [albumData, setAlbumData] = useState({
-    artist: '',
+    artist: "",
     songTitle: "",
     songThumbnail: "",
-    songId : 0
+    songId: 0,
   });
+  console.log(albumData)
   const { videoUrl, musicUrl, voiceUrl } = useRecordStore();
 
   useEffect(() => {
-    if (mode === ("single" || "firstDuet")&& selectedSong) {
+    if (mode === ("single" || "firstDuet") && selectedSong) {
       setAlbumData({
         artist: selectedSong?.artist,
         songTitle: selectedSong?.songTitle,
         songThumbnail: selectedSong?.songThumbnail,
-        songId : selectedSong.songId
+        songId: selectedSong.songId,
       });
-    }
-    else if(duetSong) {
+    }else if (mode === 'firstDuet' && selectedSong) {
+      setAlbumData({
+        artist: selectedSong?.artist,
+        songTitle: selectedSong?.songTitle,
+        songThumbnail: selectedSong?.songThumbnail,
+        songId: selectedSong.songId,
+      });
+    } 
+    else if (mode === 'secondDuet' && duetSong) {
       setAlbumData({
         artist: duetSong?.artistName,
         songTitle: duetSong?.songTitle,
         songThumbnail: duetSong?.songThumbnail,
-        songId : duetSong.songId
-      })
+        songId: duetSong.songId,
+      });
     }
   }, []);
+
+
   const basicUrl = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMN3Drroa4Vfutn4ARik9LACvb57TO5ADHC5n5sBeTBg&s`;
   const videoPlayerRef = useRef<HTMLVideoElement>(null);
   const musicRef = useRef<HTMLAudioElement>(null);
@@ -54,11 +66,12 @@ const Preview: React.FC = () => {
   console.log(`videoPath : ${videoPath}`);
   console.log(`voicePath : ${voicePath}`);
   const { voiceBlob, musicBlob, videoBlob } = useSaveStore();
-
+  console.log(voiceBlob);
+  console.log(musicBlob);
+  console.log(videoBlob);
   const [save, setSaved] = useState<boolean>(false);
   console.log(save);
   //---모드 =----
-  const mode = useSaveStore((state) => state.mode);
   //-------------------------------------------------------
   const togglePlayback = () => {
     const player = videoPlayerRef.current;
@@ -90,22 +103,27 @@ const Preview: React.FC = () => {
   const currentDate = new Date();
   const timestamp = currentDate.toISOString().replace(/:/g, "-");
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const uploads = [];
     if (videoBlob) {
       const fileName = `video/${albumData.songTitle}__${timestamp}`;
       const videoUpload = S3Upload(videoBlob, fileName)
         .then((location) => {
+          console.log("videoPath");
+          console.log(location);
+
           setVideoPath(location);
         })
         .catch((error) => {
           console.error("Upload failed:", error);
         });
       uploads.push(videoUpload);
-    } else if (voiceBlob) {
+    }
+    if (!videoBlob && voiceBlob) {
       const fileName = `voice/${albumData.songTitle}__${timestamp}`;
       const voiceUpload = S3Upload(voiceBlob, fileName)
         .then((location) => {
+          console.log("voicePath");
           console.log(location);
           setVoicePath(location);
         })
@@ -118,6 +136,7 @@ const Preview: React.FC = () => {
       const fileName = `music/${albumData.songTitle}__${timestamp}`;
       const musicUpload = S3Upload(musicBlob, fileName)
         .then((location) => {
+          console.log("musicPath");
           console.log(location);
           setMusicPath(location);
         })
@@ -126,14 +145,19 @@ const Preview: React.FC = () => {
         });
       uploads.push(musicUpload);
     }
+
+    await Promise.all(uploads);
     setSaved(true);
   };
 
   const goMain = () => {
-    navigate('/mainchart')
-  }
+    navigate("/mainchart");
+  };
 
   useEffect(() => {
+    console.log(videoPath);
+    console.log(musicPath);
+    console.log(voicePath);
     if (save === true) {
       if (mode === "single") {
         console.log(videoPath);
@@ -145,8 +169,9 @@ const Preview: React.FC = () => {
         instance
           .post(`/api/v1/single/create/${albumData.songId}`, data)
           .then((res) => {
-            console.log(res)
-            instance.post(`/api/v1/song/history/${albumData.songId}`)
+            console.log(res);
+            instance.post(`/api/v1/song/history/${albumData.songId}`);
+            navigate("/mainchart");
           });
       } else if (mode == "firstDuet") {
         const data = {
@@ -154,17 +179,25 @@ const Preview: React.FC = () => {
           userPath: videoPath || voicePath,
           audioPath: musicPath,
         };
-        instance.post(`/api/v1/duet/create/${albumData.songId}`, data);
+        instance
+          .post(`/api/v1/duet/create/${albumData.songId}`, data)
+          .then((res) => {
+            console.log(res);
+          
+            navigate("/mainchart")
+          });
       } else {
         const data = {
           name: `Second_userId_${albumData.songTitle}_${timestamp}`,
           path: videoPath,
           uploaderId: `${duetSong}`,
         };
-        instance.post(`/api/v1/duet/participate/${albumData.songId}`, data);
+        instance
+          .post(`/api/v1/duet/participate/${albumData.songId}`, data)
+          .then(() => navigate("/mainchart"));
       }
     }
-  }, [save, videoPath]);
+  }, [save, videoPath, musicPath, voicePath]);
 
   return (
     <div>

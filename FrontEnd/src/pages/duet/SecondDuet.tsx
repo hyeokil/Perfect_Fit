@@ -13,7 +13,7 @@ import { logOnDev } from "@/util/logging";
 import AlertOnNavigation from "@/hooks/useHistory";
 import useSaveStore from "@/store/useSaveStore";
 import Lyrics from "@/components/single/Lyrics";
-import { useDuetStore, useSongStore } from "@/store/useSongStore";
+import { useDuetStore } from "@/store/useSongStore";
 import logo from "../../../public/image/logo.png";
 import { Background, Filter } from "@/components/single/Background";
 
@@ -32,6 +32,7 @@ const SecondDuet = () => {
   const [camera, setCamera] = useState<boolean>(true);
   logOnDev(`카메라, : ${camera}`);
   const info = useDuetStore((state) => state.duetData);
+  console.log(info)
   const coverInfo = {
     songThumbnail : info?.songThumbnail || 'null',
     artist : info?.artistName || 'x',

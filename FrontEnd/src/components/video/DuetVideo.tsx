@@ -16,7 +16,7 @@ const dataBody = {
   songThumbnail:
     "https://cdn.music-flo.com/image/v2/album/733/697/22/04/422697733_65e6db72_o.jpg?1709628275596/dims/resize/500x500/quality/90",
 };
-const SingleVideo = () => {
+const DuetVideo = () => {
   useEffect(() => {
     instance
       .get(`/api/v1/single/list`)
@@ -24,11 +24,14 @@ const SingleVideo = () => {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div>
+    <div className={styles.videowrapper}>
       <Background imageUrl={dataBody.songThumbnail} />
-      <video src={url} />
+      <div className={styles.videocontainer}>
+        <video src={dataBody.userPath} className={styles.leftvideo} />
+        <video src={url} className={styles.rightvideo} />
+      </div>
     </div>
   );
 };
 
-export default SingleVideo;
+export default DuetVideo;

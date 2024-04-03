@@ -30,7 +30,7 @@ const ReadReelsPage = () => {
   }, []);
 
   // const [reelsData, setReelsData] = useState<ReelsDataType>()
-  const [currentReelsIndex, setCurrentReelsIndex] = useState(0); // 현재 Reels의 인덱스 상태 추가
+  const [currentReelsIndex, setCurrentReelsIndex] = useState<number>(0); // 현재 Reels의 인덱스 상태 추가
   const reelsData = [
     {
       id: 1,
