@@ -54,10 +54,7 @@ const App: React.FC = () => {
         <Route path="/firstduet" element={<FirstDuet />} />
         <Route path="/secondduet" element={<SecondDuet />} />
         <Route path="/preview" element={<Preview />} />
-<<<<<<< HEAD
         <Route path="/play" element={<PlayVideoPage />} />
-=======
->>>>>>> 8568aef (feat: 릴스 페이지 구현 중)
         {/* 로그인 상태에 따라 수정하기 // 중첩 라우팅 사용하기 */}
         <Route element={<Layout />}>
           {/* 차트 */}

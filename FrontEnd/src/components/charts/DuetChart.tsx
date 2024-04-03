@@ -26,7 +26,6 @@ const DuetChart: React.FC = () => {
     setDuet(data)
     navigate('/secondduet')
   }
-
   return (
     <div className="duet-container">
       <div className="duet-header">
