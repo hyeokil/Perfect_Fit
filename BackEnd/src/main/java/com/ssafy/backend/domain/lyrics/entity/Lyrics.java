@@ -25,5 +25,7 @@ public class Lyrics extends BaseEntity {
 
     private Long lyricsOrder;
 
+    private String time;
+
 
 }
