@@ -12,16 +12,16 @@ public class DuetCreateRequestDto {
 
     private String name;
 
-    private String userPath;
+    private String uploaderUserPath;
 
-    private String audioPath;
+    private String uploaderAudioPath;
 
     public Duet toEntity(Member member, Song song) {
         return Duet.builder()
                 .song(song)
                 .name(name)
-                .userPath(userPath)
-                .audioPath(audioPath)
+                .uploaderUserPath(uploaderUserPath)
+                .uploaderAudioPath(uploaderAudioPath)
                 .display(true)
                 .uploader(member)
                 .build();

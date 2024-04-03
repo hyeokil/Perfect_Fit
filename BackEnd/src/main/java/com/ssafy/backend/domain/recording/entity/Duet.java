@@ -18,9 +18,13 @@ public class Duet extends BaseEntity {
 
     private String name;
 
-    private String userPath;
+    private String uploaderUserPath;
 
-    private String audioPath;
+    private String uploaderAudioPath;
+
+    private String participantUserPath;
+
+    private String participantAudioPath;
 
     private boolean display;
 

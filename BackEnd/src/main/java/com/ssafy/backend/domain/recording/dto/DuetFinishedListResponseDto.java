@@ -10,8 +10,10 @@ import java.time.LocalDateTime;
 public class DuetFinishedListResponseDto {
     private Long id;
     private String name;
-    private String userPath;
-    private String audioPath;
+    private String uploaderUserPath;
+    private String uploaderAudioPath;
+    private String participantUserPath;
+    private String participantAudioPath;
     private String uploaderNickname;
     private String uploaderImage;
     private String participantNickname;

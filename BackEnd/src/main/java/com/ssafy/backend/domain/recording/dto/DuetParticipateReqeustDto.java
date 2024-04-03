@@ -12,9 +12,13 @@ public class DuetParticipateReqeustDto {
 
     private String name;
 
-    private String userPath;
+    private String uploaderUserPath;
 
-    private String audioPath;
+    private String uploaderAudioPath;
+
+    private String participantUserPath;
+
+    private String participantAudioPath;
 
     private Long uploaderId;
 
@@ -22,8 +26,10 @@ public class DuetParticipateReqeustDto {
         return Duet.builder()
                 .song(song)
                 .name(name)
-                .userPath(userPath)
-                .audioPath(audioPath)
+                .uploaderUserPath(uploaderUserPath)
+                .uploaderAudioPath(uploaderAudioPath)
+                .participantUserPath(participantUserPath)
+                .participantAudioPath(participantAudioPath)
                 .display(true)
                 .uploader(uploader)
                 .participant(participant)
