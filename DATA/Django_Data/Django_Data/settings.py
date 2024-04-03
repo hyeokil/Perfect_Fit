@@ -32,9 +32,12 @@ SECRET_KEY = 'django-insecure-&fn1&3$q!j)2(p^-f@3f^=$%9)^mbd!gzh$5-7z4$fw$2myvh+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ["*"]
 # CORS_ORIGIN_WHITELIST = []  # 선언 하지 않고 기본값 사용
 CORS_ALLOW_ALL_ORIGINS = True  # CORS : 모든 포트 허용
+# CORS_ORIGIN_ALLOW_ALL = True  # 모든 도메인에서 요청을 허용합니다.
+CORS_ALLOW_CREDENTIALS = True  # 인증된 요청 허용 여부 설정
 
 # Application definition
 
@@ -47,7 +50,7 @@ CORS_ALLOW_METHODS = (
     "PUT",
 )
 
-# CORS_ALLOW_HEADERS = ()  # 선언 하지 않고 기본값 사용
+CORS_ALLOW_HEADERS = ("*")  # 선언 하지 않고 기본값 사용
 
 INSTALLED_APPS = [
     "corsheaders",  # CORS 설정
@@ -108,13 +111,14 @@ WSGI_APPLICATION = "Django_Data.wsgi.application"
 DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'perfectfit',
-        'USER': 'ssafy',
-        'PASSWORD': 'ssafy',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': 'perfectfitAI',
+        'USER': 'root',
+        'PASSWORD': 'c205c205',
+        'HOST': 'j10c205.p.ssafy.io',
+        'PORT': '3306'
     }
 }
+
 
 
 # Password validation

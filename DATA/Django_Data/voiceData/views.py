@@ -17,7 +17,9 @@ from django.conf import settings
 from django.http import JsonResponse
 import wave
 from django.core.files.uploadedfile import TemporaryUploadedFile
-import urllib.request
+# import urllib.request
+import requests
+
 
 # 파일 업로드
 from django.core.files.storage import default_storage
@@ -78,8 +80,8 @@ def record(request, userId):
         return Response("s3 URL Not Found")
 
     # 오디오 파일 가져오기 -> s3
-    save_name = 'media/music_test.wav'
-    urllib.request.urlretrieve(song_path, save_name)
+    # save_name = 'media/music_test.wav'
+    # urllib.request.urlretrieve(song_path, save_name)
 
     # 오디오 파일 가져오기 -> 파일로 받기.
     # song_sample = "./samples/SINGER_46_10TO29_NORMAL_FEMALE_BALLAD_C1925.wav"
@@ -88,12 +90,18 @@ def record(request, userId):
     # y, sr = librosa.load(file_path)
     # y, sr = librosa.load(test_file_path)
     # y, sr = librosa.load(converted_file_path)
-    y, sr = librosa.load(save_name)
+    with open('temp_audio.wav', 'wb') as f:
+        response = requests.get(song_path)
+        f.write(response.content)
+
+    # 저장한 오디오 파일을 librosa로 로드
+    y, sr = librosa.load('temp_audio.wav', sr=None)
+
     logger.info("========== 음성 데이터 로드 완료 ==========")
 
     # 템포, 비트 -> BPM
-    tempo, beats = librosa.beat.beat_track(y=y, sr=sr)
-    data['tempo'] = tempo
+    # tempo, beats = librosa.beat.beat_track(y=y, sr=sr)
+    # data['tempo'] = tempo
     # data['beats'] = beats  # 비트를 어디에 사용할까..?
 
     # 음파가 양에서 음으로 / 음에서 양으로 바뀌는 비율
@@ -168,8 +176,13 @@ def record(request, userId):
     # if SoundFeature.objects.filter(user_pk = user_id).exists():
     #     sound = SoundFeature.objects.get(user_pk = user_id)
     #     serializer = SoundFeatureSerializer(sound, data = data)
+    try:
+        sound = SoundFeature.objects.get(user_pk=userId)
+        serializer = SoundFeatureSerializer(sound, data=data)  # 가져온 레코드에 새로운 데이터를 업데이트할 준비
+    except SoundFeature.DoesNotExist:
+        serializer = SoundFeatureSerializer(data=data)
 
-    serializer = SoundFeatureSerializer(data=data)
+    # serializer = SoundFeatureSerializer(data=data)
     logger.info(f"현재까지 저장된 data -> {data}")
 
     # raise_exception = True
@@ -181,7 +194,7 @@ def record(request, userId):
             serializer.save()
             logger.info("Serializer Success !")
             # default_storage.delete(file_name)  # 서버에서 사용이 끝난 파일을 삭제
-            # os.remove(save_name)  # 서버에서 사용이 끝난 파일을 삭제 -> s3
+            os.remove('temp_audio.wav')  # 서버에서 사용이 끝난 파일을 삭제 -> s3
             # return Response({'data': data}, status=status.HTTP_200_OK)  # json
             return Response({'message': "음성 데이터 저장 완료."}, status=status.HTTP_200_OK)
         else:
