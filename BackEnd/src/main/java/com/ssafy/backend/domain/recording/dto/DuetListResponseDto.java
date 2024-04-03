@@ -12,6 +12,7 @@ public class DuetListResponseDto {
     private String name;
     private String userPath;
     private String audioPath;
+    private Long uploaderId;
     private String uploaderNickname;
     private String uploaderImage;
     private LocalDateTime createdAt;
