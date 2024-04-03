@@ -26,10 +26,10 @@ const PreferenceChart: React.FC = () => {
         );
         setSongs(response.data);
         // console.log(response.data)
-        setLoading(false); // 데이터 로딩 완료 후 상태 변경
+        setLoading(false);
       } catch (error) {
         console.error("노래를 못 가져옴 ", error);
-        setLoading(false); // 데이터 로딩 실패 시 상태 변경
+        setLoading(false);
       }
     };
 
@@ -44,7 +44,7 @@ const PreferenceChart: React.FC = () => {
         myListDisplay: !song.myListDisplay,
       };
       await axios.post(
-        `https://j10c205.p.ssafy.io/api/v1/myList/like/${song.songId}`,
+        `https://j10c205.p.ssafy.io/api/v1/myList/like/${song.id}`,
         updatedSongData,
         {
           headers: {
@@ -56,7 +56,7 @@ const PreferenceChart: React.FC = () => {
       setSongs((prevSongs) => {
         if (prevSongs) {
           return prevSongs.map((prevSong) => {
-            if (prevSong.songId === song.songId) {
+            if (prevSong.id === song.id) {
               return updatedSongData;
             }
             return prevSong;
@@ -103,12 +103,12 @@ const PreferenceChart: React.FC = () => {
                 >
                   {song.myListDisplay ? (
                     <img
-                      src="././src/assets/icon/chart/liketrue.png"
+                      src="/icon/chart/liketrue.png"
                       alt="좋아요"
                     />
                   ) : (
                     <img
-                      src="././src/assets/icon/chart/likefalse.png"
+                      src="/icon/chart/likefalse.png"
                       alt="좋아요 취소"
                     />
                   )}

@@ -59,28 +59,6 @@ const Voicetraining: React.FC = () => {
     }
   }, [media]);
 
-  // 녹음 정지
-  // const stopRecord = () => {
-  //   console.log('함수 호출!!')
-  //   if (media) {
-  //     console.log("녹음 중지 진행", media.state);
-
-  //     media.ondataavailable = function (e) {
-  //       setAudioUrl(e.data);
-  //       // const url: string = URL.createObjectURL(e.data);
-  //       // setUrl(url);
-  //     };
-  //     setState(false);
-  //     stream?.getAudioTracks().forEach((track) => track.stop());
-  //     media.stop();
-  //     source?.disconnect();
-  //     if (window.confirm("녹음이 완료되었습니다. 다음으로 넘어가시겠습니까?")) {
-  //       UploadFile();
-  //       navigate("/");
-  //       // UploadFile()
-  //     }
-  //   }
-  // };
   const stopRecord = () => {
     console.log("녹음 중지 시도");
     if (media) {
@@ -136,7 +114,7 @@ const Voicetraining: React.FC = () => {
         <h2>내 목소리 학습하기</h2>
       </div>
       <div className="voice-mic">
-        <img src="././src/assets/icon/Record.png" alt="마이크1" />
+        <img src="../../../public/icon/Record.png" alt="마이크1" />
         <h3>음색 검사 절차 및 유의 사항</h3>
         <p>1. 조용한 환경에서 녹음을 실시한다.</p>
         <p>2. 녹음시작을 클릭하고 아래 제시된 노래를 부릅니다.</p>

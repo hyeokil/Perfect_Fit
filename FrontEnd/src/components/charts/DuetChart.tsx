@@ -6,7 +6,7 @@ const DuetChart: React.FC = () => {
   return (
     <div className="duet-container">
       <div className="duet-header">
-        <img src="../../src/assets/image/chart/DuetChart.png" alt="" className="DuetChart"/>
+        <img src="/image/chart/DuetChart.png" alt="" className="DuetChart"/>
       </div>
       <div className="duet-border">
         <div className="duet-content">

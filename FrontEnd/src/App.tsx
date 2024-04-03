@@ -37,54 +37,55 @@ import MySolo from "./pages/mypage/MySolo.tsx";
 import MyDuet from "./pages/mypage/MyDuet.tsx";
 import SongTimeRec from "./pages/chart/genres/SongTimeRec.tsx";
 import MyReels from "./pages/mypage/MyReels.tsx";
+import SongAnalze from "./pages/analyze/SongAnalze.tsx";
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <div className="app-back">
-        <Routes>
-          <Route path="/" element={<Login />} />
-          {/* 멤버 */}
-          <Route path="/member/loading/kakao" element={<KakaoRedirect />} />
-          <Route path="/access" element={<Access />} />
-          <Route path="/information" element={<Information />} />
-          <Route path="/voicetraining" element={<Voicetraining />} />
-          <Route path="/record" element={<Record />} />
-          <Route path="/single" element={<Single />} />
-          <Route path="/firstduet" element={<FirstDuet />} />
-          <Route path="/preview" element={<Preview />} />
-          <Route path="/reels" element={<ReadReelsPage />} />
-          {/* 로그인 상태에 따라 수정하기 // 중첩 라우팅 사용하기 */}
-          <Route element={<Layout />}>
-            {/* 차트 */}
-            <Route path="mainchart" element={<MainChart />} />
-            <Route path="songtimerec" element={<SongTimeRec />} />
-            <Route path="latestchart" element={<LatestChart />} />
-            <Route path="popularchart" element={<PopularChart />} />
-            <Route path="genrechart" element={<GenreChart />} />
-            <Route path="preferencechart" element={<PreferenceChart />} />
-            <Route path="search" element={<Search />} />
-            {/* 장르별 */}
-            <Route path="genre/pop" element={<Pop />} />
-            <Route path="genre/rock" element={<Rock />} />
-            <Route path="genre/hiphop" element={<Hiphop />} />
-            <Route path="genre/acoustic" element={<Acoustic />} />
-            <Route path="genre/jazz" element={<Jazz />} />
-            <Route path="genre/ballade" element={<Ballade />} />
-            <Route path="genre/dance" element={<Dance />} />
-            <Route path="genre/rnb" element={<Rnb />} />
-            <Route path="genre/ost" element={<Ost />} />
-            <Route path="genre/agitation" element={<Agitation />} />
-            <Route path="genre/trot" element={<Trot />} />
-            {/* 마이페이지 */}
-            <Route path="mainmypage" element={<MainMypage />} />
-            <Route path="mylike" element={<MyLike />} />
-            <Route path="mysolo" element={<MySolo />} />
-            <Route path="myduet" element={<MyDuet />} />
-            <Route path="myreels" element={<MyReels />} />
-          </Route>
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        {/* 멤버 */}
+        <Route path="/member/loading/kakao" element={<KakaoRedirect />} />
+        <Route path="/access" element={<Access />} />
+        <Route path="/information" element={<Information />} />
+        <Route path="/voicetraining" element={<Voicetraining />} />
+        <Route path="/record" element={<Record />} />
+        <Route path="/single" element={<Single />} />
+        <Route path="/firstduet" element={<FirstDuet />} />
+        <Route path="/preview" element={<Preview />} />
+        <Route path="/reels" element={<ReadReelsPage />} />
+        {/* 로그인 상태에 따라 수정하기 // 중첩 라우팅 사용하기 */}
+        <Route element={<Layout />}>
+          {/* 차트 */}
+          <Route path="mainchart" element={<MainChart />} />
+          <Route path="songtimerec" element={<SongTimeRec />} />
+          <Route path="latestchart" element={<LatestChart />} />
+          <Route path="popularchart" element={<PopularChart />} />
+          <Route path="genrechart" element={<GenreChart />} />
+          <Route path="preferencechart" element={<PreferenceChart />} />
+          <Route path="search" element={<Search />} />
+          {/* 장르별 */}
+          <Route path="genre/pop" element={<Pop />} />
+          <Route path="genre/rock" element={<Rock />} />
+          <Route path="genre/hiphop" element={<Hiphop />} />
+          <Route path="genre/acoustic" element={<Acoustic />} />
+          <Route path="genre/jazz" element={<Jazz />} />
+          <Route path="genre/ballade" element={<Ballade />} />
+          <Route path="genre/dance" element={<Dance />} />
+          <Route path="genre/rnb" element={<Rnb />} />
+          <Route path="genre/ost" element={<Ost />} />
+          <Route path="genre/agitation" element={<Agitation />} />
+          <Route path="genre/trot" element={<Trot />} />
+          {/* 마이페이지 */}
+          <Route path="mainmypage" element={<MainMypage />} />
+          <Route path="mylike" element={<MyLike />} />
+          <Route path="mysolo" element={<MySolo />} />
+          <Route path="myduet" element={<MyDuet />} />
+          <Route path="myreels" element={<MyReels />} />
+          {/* 분석 */}
+          <Route path="songanalze" element={<SongAnalze />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 };

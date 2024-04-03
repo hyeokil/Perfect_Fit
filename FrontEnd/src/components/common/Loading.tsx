@@ -1,7 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import lottie, { AnimationItem } from "lottie-web";
-import Animation from "@/assets/lottie/Animation.json";
+import Animation from "../../../public/lottie/Animation.json";
 import "@styles/common/Loading.scss";
+
 
 const Loading: React.FC = () => {
   const animationContainer = useRef<HTMLDivElement>(null);

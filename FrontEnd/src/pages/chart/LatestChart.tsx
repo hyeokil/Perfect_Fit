@@ -94,12 +94,12 @@ const LatestChart: React.FC = () => {
                 >
                   {song.myListDisplay ? (
                     <img
-                      src="././src/assets/icon/chart/liketrue.png"
+                      src="/icon/chart/liketrue.png"
                       alt="좋아요"
                     />
                   ) : (
                     <img
-                      src="././src/assets/icon/chart/likefalse.png"
+                      src="/icon/chart/likefalse.png"
                       alt="좋아요 취소"
                     />
                   )}

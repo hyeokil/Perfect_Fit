@@ -1,6 +1,6 @@
 
 import styles from "@styles/sing/SaveAlert.module.scss";
-import logo from "public/image/logo.png";
+import logo from "../../../public/image/logo.png"
 import { useNavigate } from "react-router-dom";
 type PropType = {
   setShowSaveAlert: React.Dispatch<React.SetStateAction<boolean>>;

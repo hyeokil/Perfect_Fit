@@ -1,4 +1,4 @@
-const BASE_URL = `http://j10c205.p.ssafy.io:9002/api/v1/member`;
+const BASE_URL = `https://j10c205.p.ssafy.io/api/v1/member`;
 
 export const getAuthToken = async (
   oAuthDomain: "kakao" | "naver",
