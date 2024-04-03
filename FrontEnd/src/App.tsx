@@ -38,6 +38,7 @@ import MyDuet from "./pages/mypage/MyDuet.tsx";
 import SongTimeRec from "./pages/chart/genres/SongTimeRec.tsx";
 import SecondDuet from "./pages/duet/SecondDuet.tsx";
 import PlayVideoPage from "./pages/single/PlayVideoPage.tsx";
+import MyReels from "./pages/mypage/MyReels.tsx";
 
 const App: React.FC = () => {
   return (

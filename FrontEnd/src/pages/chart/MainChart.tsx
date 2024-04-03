@@ -11,7 +11,7 @@ const MainChart: React.FC = () => {
 
   return (
     <div>
-      <Header title="안쏭차트" state={["search"]} page="search" />
+      <Header title="안쏭차트" state={[]}  />
       <div className="main-event">
         <TabMenu items={tabMenuItems} localStorageKey="mainChartTab" />
       </div>

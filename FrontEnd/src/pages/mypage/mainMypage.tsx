@@ -81,7 +81,7 @@ const MainMypage: React.FC = () => {
       </div>
       <div
         className="section my-like"
-        onClick={() => handleNavigate("/mylike")}
+        onClick={() => handleNavigate("/myreels")}
       >
         <h2>릴스 녹화</h2>
         <p>내 릴스를 볼 수 있습니다.</p>
