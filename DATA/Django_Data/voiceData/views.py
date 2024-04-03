@@ -79,8 +79,8 @@ def record(request, userId):
         return Response("s3 URL Not Found")
 
     # 오디오 파일 가져오기 -> s3
-    save_name = 'media/music_test.wav'
-    urllib.request.urlretrieve(song_path, save_name)
+    # save_name = 'media/music_test.wav'
+    # urllib.request.urlretrieve(song_path, save_name)
 
     # 오디오 파일 가져오기 -> 파일로 받기.
     # song_sample = "./samples/SINGER_46_10TO29_NORMAL_FEMALE_BALLAD_C1925.wav"
@@ -89,7 +89,10 @@ def record(request, userId):
     # y, sr = librosa.load(file_path)
     # y, sr = librosa.load(test_file_path)
     # y, sr = librosa.load(converted_file_path)
-    y, sr = librosa.load(save_name)
+    with urllib.request.urlopen(song_path) as response:
+        y, sr = librosa.load(response)
+        
+    # y, sr = librosa.load(save_name)
     logger.info("========== 음성 데이터 로드 완료 ==========")
 
     # 템포, 비트 -> BPM
