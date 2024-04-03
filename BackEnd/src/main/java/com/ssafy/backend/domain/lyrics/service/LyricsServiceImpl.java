@@ -1,6 +1,7 @@
 package com.ssafy.backend.domain.lyrics.service;
 
 import com.ssafy.backend.domain.lyrics.dto.LyricsDto;
+import com.ssafy.backend.domain.lyrics.dto.LyricsResponseDto;
 import com.ssafy.backend.domain.lyrics.repository.LyricsRepository;
 
 import com.ssafy.backend.domain.song.entity.Song;
@@ -12,6 +13,9 @@ import org.json.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Slf4j
 @Service
@@ -22,6 +26,36 @@ public class LyricsServiceImpl implements LyricsService {
     private final SongRepository songRepository;
     private final LyricsRepository lyricsRepository;
     private final RestTemplate restTemplate;
+
+
+
+    @Override
+    public List<LyricsResponseDto> getLyrics(Long songId) {
+        return lyricsRepository.findLylics(songId)
+                .stream()
+                .map(lyric -> {
+                    return LyricsResponseDto.builder()
+                            .order(lyric.getLyricsOrder())
+                            .script(lyric.getLyricsScript())
+                            .time(lyric.getTime())
+                            .build();
+                })
+                .collect(Collectors.toList());
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
     @Override
