@@ -9,15 +9,15 @@ const SaveAlert = (props: PropType) => {
   const navigate = useNavigate();
   const save = () => {
     navigate("/preview");
-
-    console.log("메인");
   };
-  const singAgain = () => {
-    console.log("메인");
-    setShowSaveAlert(false);
-  };
+  // const singAgain = () => {
+  //   console.log("메인");
+  //   setShowSaveAlert(false);
+  // };
 
   const goMain = () => {
+    setShowSaveAlert(false);
+
     navigate("/mainchart");
   };
   return (
@@ -28,7 +28,7 @@ const SaveAlert = (props: PropType) => {
           <h4>멋진 노래를 불렀어요!</h4>
         </div>
         <button onClick={save}>부른 곡 미리 듣기</button>
-        <button onClick={singAgain}>다시 부르기</button>
+        {/* <button onClick={singAgain}>다시 부르기</button> */}
         <button onClick={goMain}>그냥 끝내기</button>
       </div>
     </div>

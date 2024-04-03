@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; // This sets the height of the wrapper to the full viewport height
+  flex-direction: column; // This stacks the items (image and text) vertically
+
+  img {
+    max-width: 100%; // Ensures the image doesn't overflow the viewport width
+    height: auto; // Keeps the image aspect ratio
+  }
+
+  p {
+    margin-top: 20px; // Adds some space between the image and the text
+  }
+}
