@@ -18,6 +18,7 @@ const ReadReelsPage = () => {
   // fetchData()
   // } , [])
   useEffect(() => {
+<<<<<<< HEAD
     // const data = {
     //   songId: 1,
     //   time: 13334,
@@ -26,6 +27,16 @@ const ReadReelsPage = () => {
     // };
     // instance.get(`/recommendations/1002`).then(res => console.log(res)).catch(err => console.log(err))
     // instance.post(`/api/v1/reels/create`);
+=======
+    const data = {
+      songId: 1,
+      time: 13334,
+      userPath: "wwwuser",
+      audioPath: "wwwaudio",
+    };
+    // instance.get(`/recommendations/1002`).then(res => console.log(res)).catch(err => console.log(err))
+    instance.post(`/api/v1/reels/create`);
+>>>>>>> fa66cb24b5de87e6f22320e212267d0955aaf89c
   }, []);
 
   // const [reelsData, setReelsData] = useState<ReelsDataType>()
@@ -43,7 +54,10 @@ const ReadReelsPage = () => {
       songTitle: "SKYBLUE",
       follow: true,
       memberId: 2,
+<<<<<<< HEAD
       path : 's'
+=======
+>>>>>>> fa66cb24b5de87e6f22320e212267d0955aaf89c
     },
     {
       id: 1,
@@ -57,8 +71,11 @@ const ReadReelsPage = () => {
       songTitle: "SKYBLUE",
       follow: true,
       memberId: 2,
+<<<<<<< HEAD
       path : 's'
 
+=======
+>>>>>>> fa66cb24b5de87e6f22320e212267d0955aaf89c
     },
     {
       id: 1,
@@ -72,8 +89,11 @@ const ReadReelsPage = () => {
       songTitle: "SKYBLUE",
       follow: true,
       memberId: 2,
+<<<<<<< HEAD
       path : 's'
 
+=======
+>>>>>>> fa66cb24b5de87e6f22320e212267d0955aaf89c
     },
     // 다른 Reels들의 경로를 필요에 따라 추가할 수 있습니다
   ];
