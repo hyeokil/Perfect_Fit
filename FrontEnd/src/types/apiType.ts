@@ -41,7 +41,6 @@ export type Song = {
   artist_name: string;
 };
 
-
 export type PreferChartSong = {
   id: number;
   song_title: string;
@@ -55,10 +54,6 @@ export type PreferChartSong = {
   song_thumbnail: string;
   mr_path: null | string;
 };
-
-
-
-
 
 // 참가자가 없는 duet 리스트 조회
 export type DuetListData = {
@@ -82,4 +77,13 @@ export type videoInfoType = {
   audioPath: string;
 };
 
-
+export type SoloVideoType = {
+  id: number;
+  name: string;
+  userPath: string;
+  audioPath: string;
+  createdAt: string;
+  songTitle: string;
+  artistName: string;
+  songThumbnail: string;
+};

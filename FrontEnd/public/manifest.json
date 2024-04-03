@@ -5,7 +5,7 @@
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#46B8E0",
-  "description": "PWA test",
+  "description": "안쏭맞춤:Perfect Fit",
   "icons": [
     {
       "src": "icons/favicon.ico",

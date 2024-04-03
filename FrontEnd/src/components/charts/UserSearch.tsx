@@ -100,7 +100,7 @@ const UserSearch: React.FC = () => {
             onKeyDown={handleKeyDown}
           />
           <img
-            src="../../src/assets/icon/chart/search.png"
+            src="/icon/chart/search.png"
             alt="search"
             onClick={handleSearchButtonClick}
           />
@@ -119,7 +119,7 @@ const UserSearch: React.FC = () => {
                     {search}
                   </p>
                   <button onClick={() => handleDeleteRecentSearch(search)}>
-                    <img src="../../src/assets/icon/chart/cancel.png" alt="" />
+                    <img src="/icon/chart/cancel.png" alt="" />
                   </button>
                 </div>
               ))}

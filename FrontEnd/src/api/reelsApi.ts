@@ -10,3 +10,8 @@ export const getReelsList = async () => {
 export const createReels = async (videoInfo:videoInfoType) => {
   return await instance.post(`/api/v1/reels/create` ,videoInfo)
 }
+
+// follow following
+export const handlefollow =async (followerId:number) => {
+  return instance.post(`/api/v1/follow/update/${followerId}`)  
+}

@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "@styles/reels/ReelsVideo.module.scss";
 import { ReelsDataType } from "@/types/apiType";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserMinus, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { handlefollow } from "./../../api/reelsApi";
 
 type PathType = {
   userPath: string;
@@ -9,6 +12,7 @@ type PathType = {
   data: ReelsDataType;
 };
 const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, data }) => {
+  const { follow, memberId } = data;
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -70,7 +74,18 @@ const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, data }) => {
       audioRef.current.load();
     }
   }, [userPath, musicPath]);
+  //------------------------------------------------
+  const goUnfollow = async () => {
+    try {
+      const response = await handlefollow(memberId);
+      // 여기에 follow 요청 후 처리할 로직을 추가하세요
+      console.log("요청 성공:", response);
+    } catch (error) {
+      console.error("요청 실패:", error);
+    }
+  };
 
+  //------------------------------------------------
   return (
     <div>
       <div onClick={handlePlayVideo} className={styles.player}>
@@ -81,12 +96,25 @@ const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, data }) => {
           <source src={musicPath} />
         </audio>
       </div>
-
       <div className={styles.titleBox}>
         <h1>{songTitle}</h1>
-        <div>
+        <div className={styles.user}>
           <h3>{memberNickname}</h3>
-          <button>{`조아용!!!!>_________<`}</button>
+          <div onClick={goUnfollow}>
+            {follow ? (
+              <FontAwesomeIcon
+                icon={faUserMinus}
+                size="2xl"
+                style={{ color: "#74C0FC" }}
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon={faUserPlus}
+                size="2xl"
+                style={{ color: "#74C0FC" }}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>
