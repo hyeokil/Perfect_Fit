@@ -1,0 +1,30 @@
+.analyze-all {
+  padding: 10px;
+  width: 90vw;
+  height: 100vh;
+  margin-top: 5vh;
+}
+
+.analyze-ment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  strong {
+    color: rgb(0, 81, 255);
+  }
+}
+
+.explore-button {
+  background: linear-gradient(to right, #103ce7, #64e9ff);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin-top: 5vh;
+  cursor: pointer;
+}

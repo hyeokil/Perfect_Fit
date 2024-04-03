@@ -66,7 +66,7 @@ const GenreChart: React.FC = () => {
             className="genre-border rnb"
             onClick={() => handleGenreClick("rnb")}
           >
-            <h3>알앤비</h3>
+            <h3>R&B</h3>
           </div>
           <div
             className="genre-border agitation"
