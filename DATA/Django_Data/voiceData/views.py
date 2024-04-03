@@ -17,8 +17,8 @@ from django.conf import settings
 from django.http import JsonResponse
 import wave
 from django.core.files.uploadedfile import TemporaryUploadedFile
-import urllib.request
-
+# import urllib.request
+import requests
 
 # 파일 업로드
 from django.core.files.storage import default_storage
@@ -89,10 +89,12 @@ def record(request, userId):
     # y, sr = librosa.load(file_path)
     # y, sr = librosa.load(test_file_path)
     # y, sr = librosa.load(converted_file_path)
-    with urllib.request.urlopen(song_path) as response:
-        with open('temp_audio.wav','wb') as f :
-            f.write(response.read())
-    y, sr = librosa.load('temp_audio.wav')
+    with open('temp_audio.wav', 'wb') as f:
+        response = requests.get(song_path)
+        f.write(response.content)
+
+    # 저장한 오디오 파일을 librosa로 로드
+    y, sr = librosa.load('temp_audio.wav', sr=None)
         
     # y, sr = librosa.load(save_name)
     logger.info("========== 음성 데이터 로드 완료 ==========")

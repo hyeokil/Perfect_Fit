@@ -30,7 +30,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'  # s3
 SECRET_KEY = 'django-insecure-&fn1&3$q!j)2(p^-f@3f^=$%9)^mbd!gzh$5-7z4$fw$2myvh+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 # CORS_ORIGIN_WHITELIST = []  # 선언 하지 않고 기본값 사용
