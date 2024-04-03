@@ -90,7 +90,9 @@ def record(request, userId):
     # y, sr = librosa.load(test_file_path)
     # y, sr = librosa.load(converted_file_path)
     with urllib.request.urlopen(song_path) as response:
-        y, sr = librosa.load(response)
+        with open('temp_audio.wav','wb') as f :
+            f.write(response.read())
+    y, sr = librosa.load('temp_audio.wav')
         
     # y, sr = librosa.load(save_name)
     logger.info("========== 음성 데이터 로드 완료 ==========")
