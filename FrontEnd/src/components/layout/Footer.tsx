@@ -5,9 +5,9 @@ import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontaw
 import {
   faUser,
   faMicrophoneAlt,
-  faBell,
   faTowerBroadcast,
   faSearch,
+  faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
@@ -40,10 +40,10 @@ const Footer: React.FC = () => {
         <p>릴스</p>
       </div>
       <div onClick={() => setSelectedIcon("bell")} className={selectedIcon === "bell" ? styles.selected : ""}>
-        <Link to="/">
-          <StyledFontAwesomeIcon icon={faBell} size="lg" selected={selectedIcon === "bell"} />
+        <Link to="/songanalze">
+          <StyledFontAwesomeIcon icon={faChartLine} size="lg" selected={selectedIcon === "bell"} />
         </Link>
-        <p>알림</p>
+        <p>분석</p>
       </div>
       <div onClick={() => setSelectedIcon("mainchart")} className={selectedIcon === "mainchart" ? styles.selected : ""}>
         <Link to="/mainchart">

@@ -29,7 +29,11 @@ const DuetChart: React.FC = () => {
   return (
     <div className="duet-container">
       <div className="duet-header">
+<<<<<<< HEAD
         <img src={cardimage} alt="" className="DuetChart" />
+=======
+        <img src="/image/chart/DuetChart.png" alt="" className="DuetChart"/>
+>>>>>>> 6858a52 (feat: FE 분석 빼고 완료)
       </div>
       <div className="duet-border">
         {duetData.length === 0 ? (

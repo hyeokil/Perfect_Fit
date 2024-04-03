@@ -1,94 +1,39 @@
 .all-container {
   font-family: "Noto Sans KR";
   height: 90vh;
-  background-color: #1a1a1a;
-  color: #ffffff;
-}
 
-.all-category {
-  margin: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border-radius: 20px;
-  background-color: #2c2c2c;
-  width: 95%;
-  height: 110px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  line-height: 1.5;
-  text-align: center;
-}
+  .all-category {
+    margin: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    border: 1px solid #9f9f9f;
+    width: 95%;
+    height: 110px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    line-height: 1.5;
+    text-align: center;
+  }
 
-.all-category div {
-  cursor: pointer;
-}
+  .all-recommend {
+    padding: 10px;
+    margin-top: 30px;
+    img {
+      width: 50px;
+    }
 
-.all-category div:hover {
-  background-color: #3c3c3c;
-}
+    .all-recommend-border {
+      border-radius: 20px;
+      background-color: #f3f3f3;
+      padding: 10px;
+    }
 
-.all-category h4 {
-  margin-top: 10px;
-}
-
-.all-category img {
-}
-
-.all-header img {
-  width: 100%;
-  border-radius: 20px;
-  margin-top: 10px;
-}
-
-.sing-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.sing-title h3 {
-  margin: 20px 0;
-}
-
-.sing-title p {
-  cursor: pointer;
-  color: #808080;
-}
-
-.sing-title p:hover {
-  color: #ffffff;
-}
-
-.sing-content {
-  margin-bottom: 40px;
-}
-
-.sing-song {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.sing-song img {
-  width: 80px;
-  border-radius: 10px;
-}
-
-.sing-song-info {
-  margin-left: 20px;
-}
-
-.sing-song-info h3 {
-  margin-bottom: 5px;
-}
-
-.sing-song-like img {
-  width: 30px;
-  cursor: pointer;
-  margin-left: auto;
-}
-
-.sing-song-like img:hover {
-  filter: brightness(1.2);
+    .recommend-chart {
+      border: 1px solid #dbdbdb;
+      border-radius: 10px;
+      padding: 10px;
+    }
+  }
 }

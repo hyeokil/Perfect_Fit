@@ -39,6 +39,7 @@ import SongTimeRec from "./pages/chart/genres/SongTimeRec.tsx";
 import SecondDuet from "./pages/duet/SecondDuet.tsx";
 import PlayVideoPage from "./pages/single/PlayVideoPage.tsx";
 import MyReels from "./pages/mypage/MyReels.tsx";
+import SongAnalze from "./pages/analyze/SongAnalze.tsx";
 
 const App: React.FC = () => {
   return (
@@ -84,6 +85,9 @@ const App: React.FC = () => {
           <Route path="mylike" element={<MyLike />} />
           <Route path="mysolo" element={<MySolo />} />
           <Route path="myduet" element={<MyDuet />} />
+          <Route path="myreels" element={<MyReels />} />
+          {/* 분석 */}
+          <Route path="songanalze" element={<SongAnalze />} />
         </Route>
       </Routes>
     </BrowserRouter>

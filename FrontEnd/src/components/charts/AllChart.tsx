@@ -52,7 +52,7 @@ const AllChart: React.FC = () => {
 
         setSongs(response.data.dataBody.slice(0, 3));
         // console.log(response.data.dataBody)
-        setOstSongs(ostResponse.data.dataBody.slice(6, 9));
+        setOstSongs(ostResponse.data.dataBody.slice(50, 53));
       } catch (error) {
         console.error("Failed to fetch songs", error);
       } finally {
@@ -112,26 +112,24 @@ const AllChart: React.FC = () => {
   return (
     <div className="all-container">
       <div className="all-header">
-        <img
-          src="../../src/assets/image/chart/AllChart.png"
-          className="AllChart"
-        />
+        <img src="/image/chart/AllChart.png" className="AllChart" />
       </div>
       <div className="all-category">
         <div onClick={() => handleNavigate("/latestchart")}>
-          <img src="../../src/assets/icon/chart/image 22.png" />
+          <img src="/icon/chart/image 22.png" />
           <h4>최신차트</h4>
         </div>
         <div onClick={() => handleNavigate("/popularchart")}>
-          <img src="../../src/assets/icon/chart/image 23.png" />
+          <img src="/icon/chart/image 23.png" />
           <h4>인기차트</h4>
         </div>
         <div onClick={() => handleNavigate("/genrechart")}>
-          <img src="../../src/assets/icon/chart/image 24.png" />
+          <img src="/icon/chart/image 24.png" />
           <h4>장르별</h4>
         </div>
         <div onClick={() => handleNavigate("/preferencechart")}>
-          <img src="../../src/assets/icon/chart/image 26.png" />
+          <img src="/icon/chart/image 26.png" />
+
           <h4>취향추천</h4>
         </div>
       </div>
@@ -177,12 +175,12 @@ const AllChart: React.FC = () => {
                   >
                     {song.myListDisplay ? (
                       <img
-                        src="/src/assets/icon/chart/liketrue.png"
+                        src="/icon/chart/liketrue.png"
                         alt="좋아요"
                       />
                     ) : (
                       <img
-                        src="/src/assets/icon/chart/likefalse.png"
+                        src="/icon/chart/likefalse.png"
                         alt="좋아요 취소"
                       />
                     )}
@@ -213,15 +211,9 @@ const AllChart: React.FC = () => {
                     onClick={() => toggleLike(song)}
                   >
                     {song.myListDisplay ? (
-                      <img
-                        src="/src/assets/icon/chart/liketrue.png"
-                        alt="좋아요"
-                      />
+                      <img src="../icon/chart/liketrue.png" alt="좋아요" />
                     ) : (
-                      <img
-                        src="/src/assets/icon/chart/likefalse.png"
-                        alt="좋아요 취소"
-                      />
+                      <img src="/icon/chart/likefalse.png" alt="좋아요 취소" />
                     )}
                   </div>
                 </div>
