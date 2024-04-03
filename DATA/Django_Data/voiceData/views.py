@@ -16,10 +16,13 @@ import json
 from django.conf import settings
 from django.http import JsonResponse
 import wave
+from django.core.files.uploadedfile import TemporaryUploadedFile
+import urllib.request
 
 # 파일 업로드
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+import subprocess
 
 logging.getLogger('matplotlib').setLevel(logging.WARNING)
 logging.getLogger('numba').setLevel(logging.WARNING)
@@ -30,37 +33,62 @@ logger = logging.getLogger('voiceData')
 @api_view(['POST', 'PUT'])
 # def record(request):  # Local Test
 def record(request, userId):
-    if 'file' not in request.FILES:
-        return Response({'error': 'No file Exception'}, status=status.HTTP_400_BAD_REQUEST)
-
-    logger.info(f'@@@@@@@@@ {request.data}')
-    file = request.FILES['file']  # 파일 가져오기
-    # 서버에 임시 저장
-    file_name = default_storage.save(file.name, ContentFile(file.read()))
-    file_path = default_storage.path(file_name)
-
-    logger.info(f'File Type : {type(file)}')  # <class 'django.core.files.uploadedfile.InMemoryUploadedFile'>
-    logger.info(f'File Name : {file.name}')  # voiceData:F_000001.wav
-    logger.info(f'File Path : {file_path}')
-    # C:\Users\SSAFY\Desktop\repos\AI\S10P22C205\DATA\Django_Data\media\audio-basics_outfoxing.mp3
-
-    '''
-    INFO:voiceData:@@@@@@@@@ <QueryDict: {'userId': ['22'], 'file': [<InMemoryUplo
-adedFile: audio-basics_outfoxing.mp3 (audio/mpeg)>]}>
-INFO:voiceData:File Type : <class 'django.core.files.uploadedfile.InMemoryUplo
-adedFile'>
-
-    '''
+#     if 'file' not in request.FILES:
+#         return Response({'error': 'No file Exception'}, status=status.HTTP_400_BAD_REQUEST)
+#
+#     logger.info(f'@@@@@@@@@ {request.data}')
+#     file = request.FILES['file']  # 파일 가져오기
+#     # 서버에 임시 저장
+#     # file_name = default_storage.save(file.name, ContentFile(file.read()))
+#     # file_path = default_storage.path(file_name)
+#
+#     ###  ffmpeg TEST  ###
+#     converted_file_path = handle_uploaded_file(file)
+#     logger.info(f'converted file path: {converted_file_path}')
+#
+#     # if isinstance(file, TemporaryUploadedFile):
+#     #     test_file_path = file.temporary_file_path()
+#
+#     logger.info(f'File Type : {type(file)}')  # <class 'django.core.files.uploadedfile.InMemoryUploadedFile'>
+#     logger.info(f'File Name : {file.name}')  # voiceData:F_000001.wav
+#     # logger.info(f'File Path : {file_path}')
+#     # logger.info(f'Test File Path : {test_file_path}')
+#     # C:\Users\SSAFY\Desktop\repos\AI\S10P22C205\DATA\Django_Data\media\audio-basics_outfoxing.mp3
+#
+#     '''
+#     INFO:voiceData:@@@@@@@@@ <QueryDict: {'userId': ['22'], 'file': [<InMemoryUplo
+# adedFile: audio-basics_outfoxing.mp3 (audio/mpeg)>]}>
+# INFO:voiceData:File Type : <class 'django.core.files.uploadedfile.InMemoryUplo
+# adedFile'>
+#
+#     '''
 
     # 분석 데이터 보관
     data = {}
     data['user_pk'] = userId
 
+    # s3
+    song_path = request.data.get('url')
+    # song_path = "https://perfectfitssafy.s3.ap-northeast-2.amazonaws.com/voicerecord/%EC%95%A0%EA%B5%AD%EA%B0%801%EC%A0%88.wav"
+    # song_path = "https://perfectfitssafy.s3.ap-northeast-2.amazonaws.com/voicerecord/2024-04-03T10-25-32.098Z.wav"
+    logger.info(f'song_path: {request.data.get("url")}')
+
+    if not song_path:
+        logger.info(f'Song_Path 없음 : {song_path}')
+        return Response("s3 URL Not Found")
+
+    # 오디오 파일 가져오기 -> s3
+    save_name = 'media/music_test.wav'
+    urllib.request.urlretrieve(song_path, save_name)
+
     # 오디오 파일 가져오기 -> 파일로 받기.
     # song_sample = "./samples/SINGER_46_10TO29_NORMAL_FEMALE_BALLAD_C1925.wav"
     # y, sr = librosa.load(song_sample)
 
-    y, sr = librosa.load(file_path)
+    # y, sr = librosa.load(file_path)
+    # y, sr = librosa.load(test_file_path)
+    # y, sr = librosa.load(converted_file_path)
+    y, sr = librosa.load(save_name)
     logger.info("========== 음성 데이터 로드 완료 ==========")
 
     # 템포, 비트 -> BPM
@@ -152,7 +180,8 @@ adedFile'>
         if serializer.is_valid():
             serializer.save()
             logger.info("Serializer Success !")
-            default_storage.delete(file_name)  # 서버에서 사용이 끝난 파일을 삭제
+            # default_storage.delete(file_name)  # 서버에서 사용이 끝난 파일을 삭제
+            os.remove(save_name)  # 서버에서 사용이 끝난 파일을 삭제 -> s3
             # return Response({'data': data}, status=status.HTTP_200_OK)  # json
             return Response({'message': "음성 데이터 저장 완료."}, status=status.HTTP_200_OK)
         else:

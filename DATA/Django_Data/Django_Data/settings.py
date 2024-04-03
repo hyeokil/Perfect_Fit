@@ -17,7 +17,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'  #
+# DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'  #
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'  # s3
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -57,6 +59,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'voiceData.apps.VoicedataConfig',  # App 등록
     'rest_framework',  # restframework 등록
+    'storages',  # s3 설정
 ]
 
 MIDDLEWARE = [
@@ -69,6 +72,13 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+# AWS S3 설정
+AWS_ACCESS_KEY_ID = 'AKIAW3MECNPMTQYOQY6F'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'perfectfitssafy'
+AWS_S3_REGION_NAME = 'ap-northeast-2'
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
 ROOT_URLCONF = "Django_Data.urls"
 
