@@ -15,6 +15,7 @@ import os
 import json
 from django.conf import settings
 from django.http import JsonResponse
+import wave
 
 # 파일 업로드
 from django.core.files.storage import default_storage
@@ -27,7 +28,7 @@ logger = logging.getLogger('voiceData')
 
 
 @api_view(['POST', 'PUT'])
-# def record(request):  # Local Teest
+# def record(request):  # Local Test
 def record(request, userId):
     if 'file' not in request.FILES:
         return Response({'error': 'No file Exception'}, status=status.HTTP_400_BAD_REQUEST)
@@ -40,6 +41,16 @@ def record(request, userId):
 
     logger.info(f'File Type : {type(file)}')  # <class 'django.core.files.uploadedfile.InMemoryUploadedFile'>
     logger.info(f'File Name : {file.name}')  # voiceData:F_000001.wav
+    logger.info(f'File Path : {file_path}')
+    # C:\Users\SSAFY\Desktop\repos\AI\S10P22C205\DATA\Django_Data\media\audio-basics_outfoxing.mp3
+
+    '''
+    INFO:voiceData:@@@@@@@@@ <QueryDict: {'userId': ['22'], 'file': [<InMemoryUplo
+adedFile: audio-basics_outfoxing.mp3 (audio/mpeg)>]}>
+INFO:voiceData:File Type : <class 'django.core.files.uploadedfile.InMemoryUplo
+adedFile'>
+
+    '''
 
     # 분석 데이터 보관
     data = {}
