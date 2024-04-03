@@ -3,7 +3,7 @@ import "@/styles/chart/DuetChart.scss";
 import { getDuetNoPartList } from "@/api/duetApi";
 import { DuetListData } from "@/types/apiType";
 import DuetCard from "./DuetCard";
-import cardimage from "../../../public/image/chart/DuetChart.png";
+// import cardimage from "/image/chart/DuetChart.png";
 import { useDuetStore } from "@/store/useSongStore";
 import { useNavigate } from "react-router";
 const DuetChart: React.FC = () => {
@@ -29,7 +29,8 @@ const DuetChart: React.FC = () => {
   return (
     <div className="duet-container">
       <div className="duet-header">
-        <img src={cardimage} alt="" className="DuetChart" />
+        {/* <img src={cardimage} alt="" className="DuetChart" /> */}
+        <img src='/image/chart/DuetChart.png' alt="" className="DuetChart" />
       </div>
       <div className="duet-border">
         {duetData.length === 0 ? (
