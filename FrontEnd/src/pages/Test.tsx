@@ -1,3 +1,4 @@
+import { SendUrl } from "@/api/record";
 import AWS from "aws-sdk";
 const currentDate = new Date();
 const timestamp = currentDate.toISOString().replace(/:/g, "-");
@@ -33,7 +34,9 @@ const S3test = (audio :Blob | File): Promise<string> => {
     .upload(uploadParams)
     .promise()
     .then((res) => {
-      console.log("업로드 성공");
+      console.log("업로드 성공 1");
+      console.log(res.Location)
+      SendUrl(res.Location)
       return res.Location; // 업로드 성공 시 Location 반환
     })
     .catch((err) => {

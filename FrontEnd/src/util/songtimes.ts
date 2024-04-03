@@ -15,6 +15,14 @@ export function getHalfTime(timeString: string): string {
   return `${halfMinutes}:${halfSeconds.toString().padStart(2, '0')}`;
 }
 
+export function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+
+  return `${year}년 ${month}월 ${day}일`;
+}
 // 예시 사용
 // const songLength = "3:49";
 // const halfSongLength = getHalfTime(songLength);

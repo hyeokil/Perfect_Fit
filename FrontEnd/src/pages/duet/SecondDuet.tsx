@@ -98,6 +98,7 @@ const SecondDuet = () => {
                 setShowNoAlert={setShowNoAlert}
                 setShowSaveAlert={setShowSaveAlert}
                 userPitch={userPitch}
+                mrPath={info.userPath}
               />
             </div>
             <div className={styles.pitch}>

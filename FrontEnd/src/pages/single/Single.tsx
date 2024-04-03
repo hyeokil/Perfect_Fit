@@ -91,6 +91,7 @@ const Single = () => {
                 setShowNoAlert={setShowNoAlert}
                 setShowSaveAlert={setShowSaveAlert}
                 userPitch={userPitch}
+                mrPath={info.mrPath}
               />
             </div>
             <div className={styles.pitch}>
