@@ -189,7 +189,7 @@ def record(request, userId):
             serializer.save()
             logger.info("Serializer Success !")
             # default_storage.delete(file_name)  # 서버에서 사용이 끝난 파일을 삭제
-            os.remove(save_name)  # 서버에서 사용이 끝난 파일을 삭제 -> s3
+            os.remove('temp_audio.wav')  # 서버에서 사용이 끝난 파일을 삭제 -> s3
             # return Response({'data': data}, status=status.HTTP_200_OK)  # json
             return Response({'message': "음성 데이터 저장 완료."}, status=status.HTTP_200_OK)
         else:
