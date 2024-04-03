@@ -124,6 +124,7 @@ public class DuetServiceImpl implements DuetService {
                     duet.getParticipant().getNickname(),
                     duet.getParticipant().getImage(),
                     duet.getCreatedAt(),
+                    duet.getSong().getId(),
                     duet.getSong().getSongTitle(),
                     duet.getSong().getArtist().getName(),
                     duet.getSong().getSongThumbnail()
@@ -151,6 +152,7 @@ public class DuetServiceImpl implements DuetService {
                     null,
                     null,
                     duet.getCreatedAt(),
+                    duet.getSong().getId(),
                     duet.getSong().getSongTitle(),
                     duet.getSong().getArtist().getName(),
                     duet.getSong().getSongThumbnail()
@@ -168,6 +170,7 @@ public class DuetServiceImpl implements DuetService {
                     duet.getParticipant().getNickname(),
                     duet.getParticipant().getImage(),
                     duet.getCreatedAt(),
+                    duet.getSong().getId(),
                     duet.getSong().getSongTitle(),
                     duet.getSong().getArtist().getName(),
                     duet.getSong().getSongThumbnail()

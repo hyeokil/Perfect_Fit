@@ -19,6 +19,7 @@ public class SingleResponseDto {
 
     private LocalDateTime createdAt;
 
+    private Long songId;
     private String songTitle;
     private String artistName;
     private String songThumbnail;

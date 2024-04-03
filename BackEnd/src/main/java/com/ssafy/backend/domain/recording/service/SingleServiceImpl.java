@@ -51,6 +51,7 @@ public class SingleServiceImpl implements SingleService{
                     single.getUserPath(),
                     single.getAudioPath(),
                     single.getCreatedAt(),
+                    single.getSong().getId(),
                     single.getSong().getSongTitle(),
                     single.getSong().getArtist().getName(),
                     single.getSong().getSongThumbnail()
@@ -70,6 +71,7 @@ public class SingleServiceImpl implements SingleService{
                 single.getUserPath(),
                 single.getAudioPath(),
                 single.getCreatedAt(),
+                single.getSong().getId(),
                 single.getSong().getSongTitle(),
                 single.getSong().getArtist().getName(),
                 single.getSong().getSongThumbnail()

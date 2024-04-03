@@ -19,6 +19,7 @@ public class DuetFinishedListResponseDto {
     private String participantNickname;
     private String participantImage;
     private LocalDateTime createdAt;
+    private Long songId;
     private String songTitle;
     private String artistName;
     private String songThumbnail;
