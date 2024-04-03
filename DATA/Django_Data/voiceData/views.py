@@ -25,6 +25,7 @@ logging.getLogger('numba').setLevel(logging.WARNING)
 logger = logging.getLogger('voiceData')
 # warnings.simplefilter('ignore', category=NumbaWarning)
 
+
 @api_view(['POST', 'PUT'])
 # def record(request):  # Local Teest
 def record(request, userId):
@@ -219,3 +220,44 @@ def chart_data(request):
     }
 
     return JsonResponse(chart_dataset)
+
+
+@api_view(["GET"])
+def sing_auto_pitch(request, userId):
+    octave_data = os.path.join(settings.BASE_DIR, 'data_preprocess', 'octave_data.json')
+    # auto_pitch_data = os.path.join(settings.BASE_DIR, 'data_preprocess', 'auto_pitches.json')
+    with open("data_preprocess/auto_pitches.json", 'r', encoding='utf-8') as file:
+        auto_pitch_data = json.load(file)
+
+    try:
+        sound_features = SoundFeature.objects.get(user_pk=userId)
+        avg_pitch = int(sound_features.avg_pitch)
+
+        # note로 변환 및 유니코드 문자 존재시 치환.
+        avg_note = librosa.hz_to_note(avg_pitch).replace("♯", "#")
+        note_key, note_value = avg_note[:-1], int(avg_note[-1])
+        # avg_note = auto_pitch_data['avg_note']
+        logger.info(f'test : {type(note_key)} {note_key} | {type(note_value)} {note_value}')
+        avg_note = auto_pitch_data["D#"][note_value]
+
+        # INFO:voiceData:avg_pitch: 1260 / avg_note: D#6
+        logger.info(f'avg_pitch: {avg_pitch} / avg_note: {avg_note}')
+
+        msg = "유저의 평균 Pitch 반환 완료."
+
+        result = {
+            # 'avg_pitch': avg_pitch,
+            'avg_note': avg_note,
+            'msg': msg,
+        }
+
+    except SoundFeature.DoesNotExist as e:
+        avg_pitch = 0
+        msg = "유저의 데이터를 찾을 수 없음."
+        result = {
+            'avg_pitch': avg_pitch,
+            'msg': msg,
+        }
+
+    return Response(result)
+
