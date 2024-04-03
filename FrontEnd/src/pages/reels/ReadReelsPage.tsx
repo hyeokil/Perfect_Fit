@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import Header from "@/components/layout/Header";
 import ReelsVideo from "@/components/reels/ReelsVideo";
+
 // import { instance } from "@/api/axios";
 // import { ReelsDataType } from "@/types/apiType";
 
@@ -34,9 +35,9 @@ const ReadReelsPage = () => {
     {
       id: 1,
       userPath:
-        "https://perfectfitssafy.s3.ap-northeast-2.amazonaws.com/video/%EC%9E%91%EC%9D%80+%EA%B2%83%EB%93%A4%EC%9D%84+%EC%9C%84%ED%95%9C+%EC%8B%9C%28Boy+With+Luv%29%28Feat.Halsey%29...__2024-04-02T05-12-09.177Z",
+        "https://perfectfitssafy.s3.ap-northeast-2.amazonaws.com/video/%EC%9D%B8%EC%83%9D%EA%B8%B8__2024-04-03T00-17-42.428Z",
       audioPath:
-        "https://perfectfitssafy.s3.ap-northeast-2.amazonaws.com/music/%EC%9E%91%EC%9D%80%20%EA%B2%83%EB%93%A4%EC%9D%84%20%EC%9C%84%ED%95%9C%20%EC%8B%9C%28Boy%20With%20Luv%29%28Feat.Halsey%29...__2024-04-02T05-12-09.177Z",
+        "https://perfectfitssafy.s3.ap-northeast-2.amazonaws.com/music/%EC%9D%B8%EC%83%9D%EA%B8%B8__2024-04-03T00-17-42.428Z",
       time: 1,
       score: 0.4,
       memberNickname: "테스트 2트",
@@ -70,7 +71,7 @@ const ReadReelsPage = () => {
       score: 0.4,
       memberNickname: "테스asg",
       songTitle: "SKYBLUE",
-      follow: true,
+      follow: false,
       memberId: 2,
       path : 's'
 

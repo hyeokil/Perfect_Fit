@@ -30,3 +30,8 @@ $aspect-ratio-height: 9;
   // 기타 필요한 스타일...
   padding-left: 15px;
 }
+
+.user {
+  display: flex;
+  justify-content: space-between;
+}

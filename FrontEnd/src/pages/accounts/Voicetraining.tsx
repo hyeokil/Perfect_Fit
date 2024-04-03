@@ -6,6 +6,7 @@ import { getSoundMedia } from "@/util/record";
 import VolumeStatus from "@components/record/VolumeStatus";
 import { useNavigate } from "react-router-dom";
 import Script from "@/components/record/Script";
+import S3test from "../Test";
 
 const Voicetraining: React.FC = () => {
   const userId = localStorage.getItem("userId");
@@ -94,18 +95,37 @@ const Voicetraining: React.FC = () => {
     }
   };
   const handleUpload = async (data: Blob) => {
+    await UploadFile(data)
     if (window.confirm("녹음이 완료되었습니다. 다음으로 넘어가시겠습니까?")) {
       await UploadFile(data);
-      navigate("/");
+      navigate("/mainchart");
     }
   };
+  // const UploadFile = async (data: Blob) => {
+  //   const sound: File = new File([data], `${userId}.wav`, {
+  //     lastModified: new Date().getTime(),
+  //     type: "audio/wav",
+  //   });
+  //   await SendRecord(sound);
+  // };
   const UploadFile = async (data: Blob) => {
-    const sound: File = new File([data], `${userId}.wav`, {
-      lastModified: new Date().getTime(),
-      type: "audio/wav",
-    });
-    await SendRecord(sound);
+    try {
+      const sound: File = new File([data], `${userId}.wav`, {
+        lastModified: new Date().getTime(),
+        type: "audio/wav",
+      });
+  
+      // S3test 함수를 사용하여 오디오 파일을 S3에 업로드
+      const s3Url = await S3test(sound);
+      console.log("S3에 업로드된 파일 URL:", s3Url);
+  
+      // 필요한 경우 추가 처리
+      // await SendRecord(sound);
+    } catch (error) {
+      console.error("파일 업로드 중 오류 발생:", error);
+    }
   };
+  
 
   return (
     <div className="voicetraining-container">
