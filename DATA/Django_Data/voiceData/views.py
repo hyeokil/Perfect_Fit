@@ -176,8 +176,13 @@ def record(request, userId):
     # if SoundFeature.objects.filter(user_pk = user_id).exists():
     #     sound = SoundFeature.objects.get(user_pk = user_id)
     #     serializer = SoundFeatureSerializer(sound, data = data)
-
-    serializer = SoundFeatureSerializer(data=data)
+    # user_pk로 레코드 가져오기
+    try:
+        sound = SoundFeature.objects.get(user_pk=userId)
+        serializer = SoundFeatureSerializer(sound, data=data)  # 가져온 레코드에 새로운 데이터를 업데이트할 준비
+    except SoundFeature.DoesNotExist:
+        serializer = SoundFeatureSerializer(data=data) 
+    # serializer = SoundFeatureSerializer(data=data)
     logger.info(f"현재까지 저장된 data -> {data}")
 
     # raise_exception = True
