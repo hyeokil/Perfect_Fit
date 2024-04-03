@@ -1,6 +1,4 @@
-import { instance } from "@/api/axios";
 import { createReels } from "@/api/reelsApi";
-import React from "react";
 const data = {
   songId: 28062,
   time: 13334,

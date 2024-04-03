@@ -1,9 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import Header from "@/components/layout/Header";
 import ReelsVideo from "@/components/reels/ReelsVideo";
-import { instance } from "@/api/axios";
+// import { instance } from "@/api/axios";
 // import { ReelsDataType } from "@/types/apiType";
-import { getReelsList } from "@/api/reelsApi";
 
 const ReadReelsPage = () => {
   // useEffect( ()=> {
@@ -19,14 +18,14 @@ const ReadReelsPage = () => {
   // fetchData()
   // } , [])
   useEffect(() => {
-    const data = {
-      songId: 1,
-      time: 13334,
-      userPath: "wwwuser",
-      audioPath: "wwwaudio",
-    };
+    // const data = {
+    //   songId: 1,
+    //   time: 13334,
+    //   userPath: "wwwuser",
+    //   audioPath: "wwwaudio",
+    // };
     // instance.get(`/recommendations/1002`).then(res => console.log(res)).catch(err => console.log(err))
-    instance.post(`/api/v1/reels/create`);
+    // instance.post(`/api/v1/reels/create`);
   }, []);
 
   // const [reelsData, setReelsData] = useState<ReelsDataType>()
@@ -44,6 +43,7 @@ const ReadReelsPage = () => {
       songTitle: "SKYBLUE",
       follow: true,
       memberId: 2,
+      path : 's'
     },
     {
       id: 1,
@@ -57,6 +57,8 @@ const ReadReelsPage = () => {
       songTitle: "SKYBLUE",
       follow: true,
       memberId: 2,
+      path : 's'
+
     },
     {
       id: 1,
@@ -70,6 +72,8 @@ const ReadReelsPage = () => {
       songTitle: "SKYBLUE",
       follow: true,
       memberId: 2,
+      path : 's'
+
     },
     // 다른 Reels들의 경로를 필요에 따라 추가할 수 있습니다
   ];

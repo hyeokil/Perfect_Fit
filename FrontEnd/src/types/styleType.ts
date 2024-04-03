@@ -1,3 +1,3 @@
 export type BackgroundProps = {
-  imageUrl : string
+  $imageUrl : string
 }

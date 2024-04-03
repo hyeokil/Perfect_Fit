@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import SaveAlert from "@/components/sing/SaveAlert";
 import NotSaveAlert from "@/components/sing/NotSaveAlert";
 import VoiceRecord from "@/components/sing/VoiceRecord";
-import useRecordStore from "@/store/useRecordStore";
 import { logOnDev } from "@/util/logging";
 import AlertOnNavigation from "@/hooks/useHistory";
 import useSaveStore from "@/store/useSaveStore";
@@ -26,7 +25,7 @@ const SecondDuet = () => {
   // ---------------------------------------------------
   // const [camerablob, setCameraBlob] =
   // ---------------------------------------------------
-  const isPlaying = useRecordStore((state) => state.isPlaying);
+  // const isPlaying = useRecordStore((state) => state.isPlaying);
   const setMode = useSaveStore((state) => state.setMode);
 
   const [camera, setCamera] = useState<boolean>(true);
@@ -72,7 +71,7 @@ const SecondDuet = () => {
     <div>
       <AlertOnNavigation />
       <Header title="듀엣 모드" state={["back", "close"]} page="mainchart" />
-      <Background imageUrl={songThumbnail} />
+      <Background $imageUrl={songThumbnail} />
       <Filter />
       {info && (
         <div className={styles.content}>

@@ -8,11 +8,9 @@ import { useEffect, useState } from "react";
 import SaveAlert from "@/components/sing/SaveAlert";
 import NotSaveAlert from "@/components/sing/NotSaveAlert";
 import VoiceRecord from "@/components/sing/VoiceRecord";
-import useRecordStore from "@/store/useRecordStore";
 import { logOnDev } from "@/util/logging";
 import AlertOnNavigation from "@/hooks/useHistory";
 import useSaveStore from "@/store/useSaveStore";
-import Lyrics from "@/components/single/Lyrics";
 import { useSongStore } from "@/store/useSongStore";
 import logo from "../../../public/image/logo.png";
 import { Background, Filter } from "@/components/single/Background";
@@ -67,7 +65,7 @@ const Single = () => {
     <div>
       <AlertOnNavigation />
       <Header title="싱글 모드" state={["back", "close"]} page="mainchart" />
-      <Background imageUrl={songThumbnail} />
+      <Background $imageUrl={songThumbnail} />
       <Filter />
       {info && (
         <div className={styles.content}>

@@ -204,7 +204,7 @@ const Preview: React.FC = () => {
       <Header title="다시 듣기" state={["back", "close"]} page="mainchart" />
       {selectedSong && (
         <>
-          <Background imageUrl={albumData.songThumbnail || basicUrl} />
+          <Background $imageUrl={albumData.songThumbnail || basicUrl} />
           <Filter />
           <div className={styles.box}>
             <div className={styles.cover}>

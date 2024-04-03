@@ -12,7 +12,7 @@ background-color: rgba(0, 0, 0, 0.5); /* 오버레이 배경색 */
 z-index: -1;
 `;
 export const Background = styled.div<BackgroundProps>`
-background: url(${props => props.imageUrl});
+background: url(${props => props.$imageUrl});
 background-size: cover;
 background-position: center;
 width: 100vw;

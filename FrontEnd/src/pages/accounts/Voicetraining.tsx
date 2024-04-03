@@ -5,7 +5,6 @@ import "@styles/accounts/Voicetraining.scss";
 import { getSoundMedia } from "@/util/record";
 import VolumeStatus from "@components/record/VolumeStatus";
 import { useNavigate } from "react-router-dom";
-import { logOnDev } from "@/util/logging";
 import Script from "@/components/record/Script";
 
 const Voicetraining: React.FC = () => {

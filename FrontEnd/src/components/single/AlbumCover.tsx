@@ -1,6 +1,6 @@
 // import logo from "@assets/image/logo.png";
 import styles from '@styles/single/AlbumCover.module.scss'
-import { AlbumCover } from '@/types/proptypse';
+import type { AlbumCover } from '@/types/proptypse';
 
 
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Background } from "../single/Background";
 import { instance } from "@/api/axios";
 import styles from "@styles/video/singleVideo.module.scss";
@@ -25,7 +25,7 @@ const DuetVideo = () => {
   }, []);
   return (
     <div className={styles.videowrapper}>
-      <Background imageUrl={dataBody.songThumbnail} />
+      <Background $imageUrl={dataBody.songThumbnail} />
       <div className={styles.videocontainer}>
         <video src={dataBody.userPath} className={styles.leftvideo} />
         <video src={url} className={styles.rightvideo} />

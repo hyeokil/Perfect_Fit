@@ -36,7 +36,29 @@ export type Song = {
   songPitch: number | null;
   mrPath: string | null;
   songView: number;
+  song_thumbnail: string;
+  song_title: string;
+  artist_name: string;
 };
+
+
+export type PreferChartSong = {
+  id: number;
+  song_title: string;
+  artist_name: string;
+  genre_name: string;
+  song_url: string;
+  song_origin_url: string;
+  song_pitch: null | string;
+  song_release_date: string;
+  song_view: number;
+  song_thumbnail: string;
+  mr_path: null | string;
+};
+
+
+
+
 
 // 참가자가 없는 duet 리스트 조회
 export type DuetListData = {
@@ -59,3 +81,5 @@ export type videoInfoType = {
   userPath: string;
   audioPath: string;
 };
+
+
