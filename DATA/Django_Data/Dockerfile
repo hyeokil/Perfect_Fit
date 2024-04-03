@@ -9,6 +9,7 @@ COPY requirements.txt /app/
 
 # 의존성 설치
 RUN pip install --no-cache-dir -r requirements.txt
+RUN apt update
 RUN apt install ffmpeg -y
 
 # 소스 코드 복사
