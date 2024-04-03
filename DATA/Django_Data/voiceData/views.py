@@ -181,7 +181,7 @@ def record(request, userId):
             serializer.save()
             logger.info("Serializer Success !")
             # default_storage.delete(file_name)  # 서버에서 사용이 끝난 파일을 삭제
-            os.remove(save_name)  # 서버에서 사용이 끝난 파일을 삭제 -> s3
+            # os.remove(save_name)  # 서버에서 사용이 끝난 파일을 삭제 -> s3
             # return Response({'data': data}, status=status.HTTP_200_OK)  # json
             return Response({'message': "음성 데이터 저장 완료."}, status=status.HTTP_200_OK)
         else:
@@ -194,6 +194,7 @@ def record(request, userId):
         return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
 
 
+# 특정 유저의 목소리 샘플 데이터 조회
 @api_view(['GET'])
 def record_view(request, userId):
     sound_features = SoundFeature.objects.filter(user_pk=userId)
@@ -201,9 +202,10 @@ def record_view(request, userId):
     return Response(serializer.data)
 
 
+# 특정 유저와 목소리 유사도가 비슷한 다른 유저를 3명까지 추천하여 반환.
 @api_view(['GET'])
 def user_recommend(request, userId):
-    logger.info(f'request 확인 : {userId}')
+    logger.info(f'request 확인(user_recommend) : {userId}')
 
     sound = SoundFeature.objects.all()
     df = pd.DataFrame(list(sound.values()))
@@ -239,6 +241,7 @@ def user_recommend(request, userId):
     return Response(result)
 
 
+# 차트 분석에 쓰일 데이터 반환
 @api_view(['GET'])
 def chart_data(request):
     # 프로젝트 루트 경로를 기반으로 파일 경로 설정
@@ -261,7 +264,7 @@ def chart_data(request):
 
     return JsonResponse(chart_dataset)
 
-
+# 음정 자동 조절 계산용 데이터 반환
 @api_view(["GET"])
 def sing_auto_pitch(request, userId):
     octave_data = os.path.join(settings.BASE_DIR, 'data_preprocess', 'octave_data.json')
@@ -301,3 +304,15 @@ def sing_auto_pitch(request, userId):
 
     return Response(result)
 
+# 유저가 목소리 샘플 분석용 데이터가 존재하는지 조회.
+@api_view(['GET'])
+def isSoundFeature(request, userId):
+    logger.info(f'request 확인(isSoundFeature) : {userId}')
+    sound_features = SoundFeature.objects.filter(user_pk=userId)
+    is_sf = True
+
+    if sound_features.exists():
+        return Response(is_sf)
+    else:
+        is_sf = False
+        return Response(is_sf)
