@@ -37,6 +37,7 @@ import MySolo from "./pages/mypage/MySolo.tsx";
 import MyDuet from "./pages/mypage/MyDuet.tsx";
 import SongTimeRec from "./pages/chart/genres/SongTimeRec.tsx";
 import SecondDuet from "./pages/duet/SecondDuet.tsx";
+import PlayVideoPage from "./pages/single/PlayVideoPage.tsx";
 
 const App: React.FC = () => {
   return (
@@ -53,6 +54,7 @@ const App: React.FC = () => {
         <Route path="/firstduet" element={<FirstDuet />} />
         <Route path="/secondduet" element={<SecondDuet />} />
         <Route path="/preview" element={<Preview />} />
+        <Route path="/play" element={<PlayVideoPage />} />
         {/* 로그인 상태에 따라 수정하기 // 중첩 라우팅 사용하기 */}
         <Route element={<Layout />}>
           {/* 차트 */}

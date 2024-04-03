@@ -1,0 +1,34 @@
+.videowrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.video {
+  width: 100%;
+  height: auto; // 비율을 유지하기 위해
+  object-fit: cover; // 화면에 꽉 차게 비디오를 표시
+}
+
+// 만약 비디오가 두 개라면
+.videocontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.leftvideo, .rightvideo {
+  height: 50vh;
+  object-fit: cover;
+}
+
+// .leftvideo {
+//   // 필요한 경우 추가적인 스타일
+// }
+
+// .rightvideo {
+//   // 필요한 경우 추가적인 스타일
+// }

@@ -26,7 +26,7 @@ const Single = () => {
   // ---------------------------------------------------
   // const [camerablob, setCameraBlob] =
   // ---------------------------------------------------
-  const isPlaying = useRecordStore((state) => state.isPlaying);
+  // const isPlaying = useRecordStore((state) => state.isPlaying);
   const setMode = useSaveStore((state) => state.setMode);
 
   const [camera, setCamera] = useState<boolean>(true);
@@ -84,7 +84,7 @@ const Single = () => {
           {/* {videoUrl && (
           <YouTube videoId={videoUrl} opts={opts} onReady={onReady} />
         )} */}
-          <Lyrics />
+          {/* <Lyrics /> */}
           <div className={styles.player}>
             <div className={styles.toggle}>
               <Toggle camera={camera} setCamera={setCamera} />

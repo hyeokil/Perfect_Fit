@@ -1,11 +1,10 @@
 // import logo from "@assets/image/logo.png";
 import styles from '@styles/single/AlbumCover.module.scss'
-import { MusicInfoType } from '@/types/apiType';
-// import styled from "styled-components";
+import { AlbumCover } from '@/types/proptypse';
 
 
 
-const AlbumCover = (props : {musicInfo : MusicInfoType}) => {
+const AlbumCover = (props : {musicInfo : AlbumCover}) => {
   const {songThumbnail, artist, songTitle} = props.musicInfo
 
   return (
