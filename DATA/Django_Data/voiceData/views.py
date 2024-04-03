@@ -304,7 +304,7 @@ def sing_auto_pitch(request, userId):
 
     return Response(result)
 
-# 유저가 목소리 샘플 분석용 데이터가 존재하는지 조회.
+# 특정 유저가 목소리 샘플 분석용 데이터가 존재하는지 조회.
 @api_view(['GET'])
 def isSoundFeature(request, userId):
     logger.info(f'request 확인(isSoundFeature) : {userId}')
