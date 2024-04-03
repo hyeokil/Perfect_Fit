@@ -25,11 +25,7 @@ const DuetVideo = () => {
   }, []);
   return (
     <div className={styles.videowrapper}>
-<<<<<<< HEAD
       <Background $imageUrl={dataBody.songThumbnail} />
-=======
-      <Background imageUrl={dataBody.songThumbnail} />
->>>>>>> fa66cb24b5de87e6f22320e212267d0955aaf89c
       <div className={styles.videocontainer}>
         <video src={dataBody.userPath} className={styles.leftvideo} />
         <video src={url} className={styles.rightvideo} />

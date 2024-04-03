@@ -66,11 +66,7 @@ const FirstDuet = () => {
     <div>
       <AlertOnNavigation />
       <Header title="듀엣 모드" state={["back", "close"]} page="mainchart" />
-<<<<<<< HEAD
       <Background $imageUrl={songThumbnail} />
-=======
-      <Background imageUrl={songThumbnail} />
->>>>>>> fa66cb24b5de87e6f22320e212267d0955aaf89c
       <Filter />
       {info && (
         <div className={styles.content}>
