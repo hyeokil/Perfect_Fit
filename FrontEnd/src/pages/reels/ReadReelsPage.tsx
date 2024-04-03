@@ -1,14 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import Header from "@/components/layout/Header";
 import ReelsVideo from "@/components/reels/ReelsVideo";
-<<<<<<< HEAD
 // import { instance } from "@/api/axios";
 // import { ReelsDataType } from "@/types/apiType";
-=======
-import { instance } from "@/api/axios";
-// import { ReelsDataType } from "@/types/apiType";
-import { getReelsList } from "@/api/reelsApi";
->>>>>>> 0f0d4ae (feat: 릴스 페이지 구현 중)
 
 const ReadReelsPage = () => {
   // useEffect( ()=> {
@@ -24,7 +18,6 @@ const ReadReelsPage = () => {
   // fetchData()
   // } , [])
   useEffect(() => {
-<<<<<<< HEAD
     // const data = {
     //   songId: 1,
     //   time: 13334,
@@ -33,16 +26,6 @@ const ReadReelsPage = () => {
     // };
     // instance.get(`/recommendations/1002`).then(res => console.log(res)).catch(err => console.log(err))
     // instance.post(`/api/v1/reels/create`);
-=======
-    const data = {
-      songId: 1,
-      time: 13334,
-      userPath: "wwwuser",
-      audioPath: "wwwaudio",
-    };
-    // instance.get(`/recommendations/1002`).then(res => console.log(res)).catch(err => console.log(err))
-    instance.post(`/api/v1/reels/create`);
->>>>>>> 0f0d4ae (feat: 릴스 페이지 구현 중)
   }, []);
 
   // const [reelsData, setReelsData] = useState<ReelsDataType>()
@@ -60,10 +43,7 @@ const ReadReelsPage = () => {
       songTitle: "SKYBLUE",
       follow: true,
       memberId: 2,
-<<<<<<< HEAD
       path : 's'
-=======
->>>>>>> 0f0d4ae (feat: 릴스 페이지 구현 중)
     },
     {
       id: 1,
@@ -77,11 +57,8 @@ const ReadReelsPage = () => {
       songTitle: "SKYBLUE",
       follow: true,
       memberId: 2,
-<<<<<<< HEAD
       path : 's'
 
-=======
->>>>>>> 0f0d4ae (feat: 릴스 페이지 구현 중)
     },
     {
       id: 1,
