@@ -25,11 +25,7 @@ const DuetVideo = () => {
   }, []);
   return (
     <div className={styles.videowrapper}>
-<<<<<<< HEAD
       <Background $imageUrl={dataBody.songThumbnail} />
-=======
-      <Background imageUrl={dataBody.songThumbnail} />
->>>>>>> fa66cb2 (chore: 참여자가 없는 듀엣모드 미리보기 에러 해결)
       <div className={styles.videocontainer}>
         <video src={dataBody.userPath} className={styles.leftvideo} />
         <video src={url} className={styles.rightvideo} />
