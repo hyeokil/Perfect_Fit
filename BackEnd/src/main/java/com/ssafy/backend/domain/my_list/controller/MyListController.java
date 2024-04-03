@@ -1,6 +1,7 @@
 package com.ssafy.backend.domain.my_list.controller;
 
 import com.ssafy.backend.domain.member.dto.MemberLoginActiveDto;
+import com.ssafy.backend.domain.my_list.dto.GetGenreCountDto;
 import com.ssafy.backend.domain.my_list.dto.GetMyListResponseDto;
 import com.ssafy.backend.domain.my_list.service.MyListService;
 import com.ssafy.backend.global.common.dto.Message;
@@ -37,6 +38,15 @@ public class MyListController {
     @PreAuthorize("isAuthenticated()") // 로그인 한 사용자만 접근 가능
     public ResponseEntity<Message<List<GetMyListResponseDto>>> getLikedSongs(@AuthenticationPrincipal MemberLoginActiveDto loginActiveDto) {
         List<GetMyListResponseDto> myLikedSongs = myListService.getLikedSongs(loginActiveDto.getId());
+        return ResponseEntity.ok().body(Message.success(myLikedSongs));
+    }
+
+
+    // 내가 좋아요 한 노래 장르별 갯수 조회
+    @GetMapping("/get/count")
+    @PreAuthorize("isAuthenticated()") // 로그인 한 사용자만 접근 가능
+    public ResponseEntity<Message<List<GetGenreCountDto>>> getCount(@AuthenticationPrincipal MemberLoginActiveDto loginActiveDto) {
+        List<GetGenreCountDto> myLikedSongs = myListService.getCount(loginActiveDto.getId());
         return ResponseEntity.ok().body(Message.success(myLikedSongs));
     }
 

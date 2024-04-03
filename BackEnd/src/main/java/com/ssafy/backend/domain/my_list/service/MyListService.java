@@ -1,6 +1,7 @@
 package com.ssafy.backend.domain.my_list.service;
 
 
+import com.ssafy.backend.domain.my_list.dto.GetGenreCountDto;
 import com.ssafy.backend.domain.my_list.dto.GetMyListResponseDto;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface MyListService {
     List<GetMyListResponseDto> getLikedSongs(Long memberId);
 
 
+    List<GetGenreCountDto> getCount(Long memberId);
 }
