@@ -10,12 +10,9 @@ export const SendRecord = async (audio : File) => {
     // const userId = res.data.dataBody.id
   })
   console.log(audio)
-  console.log("----------------------------------")
-  console.log(userId);
-  
   const formData = new FormData()
   formData.append('file', audio) 
-  instance.post(`/ai/${userId}/record`, formData, {
+  instance.post(`/api/v1/${userId}/record`, formData, {
     headers : {
       "Content-Type" : 'multipart/form-data',
     }
