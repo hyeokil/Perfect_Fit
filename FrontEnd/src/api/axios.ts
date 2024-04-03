@@ -35,7 +35,8 @@ const onRequest = (
     config.headers.Authorization = `Bearer ${token}`;
     return config;
   } else {
-    window.location.href = "/";
+    // window.alert('로그인이 필요합니다.')
+    // window.location.href = "/";
   }
   return config;
 };
