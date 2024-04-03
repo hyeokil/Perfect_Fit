@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { Background } from "../single/Background";
+// import { Background } from "../single/Background";
 import { instance } from "@/api/axios";
 import { SoloVideoType } from "@/types/apiType";
 import Header from "../layout/Header";
 import styles from "@styles/video/videoCard.module.scss";
+import { formatDate } from "@/util/songtimes";
 // const url = `https://perfectfitssafy.s3.ap-northeast-2.amazonaws.com/video/%EC%9E%91%EC%9D%80+%EA%B2%83%EB%93%A4%EC%9D%84+%EC%9C%84%ED%95%9C+%EC%8B%9C(Boy+With+Luv)(Feat.Halsey)...__2024-04-02T05-12-09.177Z`
 // const dataBody = {
 //   id: 3,
@@ -19,7 +20,7 @@ import styles from "@styles/video/videoCard.module.scss";
 //     "https://cdn.music-flo.com/image/v2/album/733/697/22/04/422697733_65e6db72_o.jpg?1709628275596/dims/resize/500x500/quality/90",
 // };
 const VideoCard = ({
-  key,
+  // key,
   soloVideo,
 }: {
   key: number;
@@ -27,8 +28,8 @@ const VideoCard = ({
 }) => {
   const {
     songThumbnail,
-    userPath,
-    audioPath,
+    // userPath,
+    // audioPath,
     songTitle,
     artistName,
     createdAt,
@@ -39,13 +40,17 @@ const VideoCard = ({
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   }, []);
+  const Date = formatDate(createdAt)
   return (
     <div>
       <Header title="나의 노래" state={["back", "close"]} page="mainmypage" />
       {/* <Background $imageUrl={songThumbnail} /> */}
-      <div className={styles.wrapper}>
-        <div className={styles.card}>
-          <img src={songThumbnail} />
+      <div className={styles.card}>
+        <img src={songThumbnail} />
+        <div>
+          <h3>{songTitle}</h3>
+          <p>{artistName}</p>
+          <p>{Date}</p>
         </div>
       </div>
     </div>

@@ -11,11 +11,12 @@ type PropType = {
   setShowNoAlert: React.Dispatch<React.SetStateAction<boolean>>;
   setShowSaveAlert: React.Dispatch<React.SetStateAction<boolean>>;
   userPitch: number;
+  mrPath : string | null
 };
 
 const Controller = (props: PropType) => {
   // -------------------------------------------------------
-  const {setShowNoAlert, setShowSaveAlert, userPitch , setUserPitch } = props;
+  const {setShowNoAlert, setShowSaveAlert, userPitch , setUserPitch, mrPath } = props;
   const [pitch, setPitch] = useState<number>(userPitch);
   // const [tempo, setTempo] = useState<number>(1.0);
   const { isPlaying, setIsPlaying } = useRecordStore();
@@ -78,7 +79,7 @@ const saveMusicBlob = useSaveStore(state => state.setMusicBlob)
     checkEnded();
   };
 
-  const mr = import.meta.env.VITE_MR_URL
+  const mr = mrPath || import.meta.env.VITE_MR_URL
   // 저장되어있는 파일 사용하기
   const loadFile = async () => {
     try {

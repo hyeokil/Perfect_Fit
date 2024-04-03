@@ -1,15 +1,12 @@
-.wrapper {
-  margin-top: 50px;
-}
-
-
 .card {
   margin-bottom: 30px;
   background-color: #f8f8f8;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
 }
 .card img {
-  width: 10%;
+  width: 20%;
+  margin-right: 10%
 }
