@@ -20,40 +20,11 @@ const Single = () => {
   const [showSaveAlert, setShowSaveAlert] = useState<boolean>(false);
   const [showNoAlert, setShowNoAlert] = useState<boolean>(false);
   const [userPitch, setUserPitch] = useState<number>(1.0);
-  // ---------------------------------------------------
-  // const [camerablob, setCameraBlob] =
-  // ---------------------------------------------------
-  // const isPlaying = useRecordStore((state) => state.isPlaying);
   const setMode = useSaveStore((state) => state.setMode);
   const [camera, setCamera] = useState<boolean>(true);
   logOnDev(`카메라, : ${camera}`);
   const info = useSongStore((state) => state.selectedSong);
   const songThumbnail = info?.songThumbnail || '/image/logo.png';
-
-  // -----------------------------------------------------Youtube-----------
-  // const videoUrl = VideoId(info.songUrl);
-  // const [player, setPlayer] = useState<any>(null);
-  // const onReady = (event: { target: any }) => {
-  //   // YouTube 플레이어가 준비되면 player 상태 업데이트
-  //   setPlayer(event.target);
-  // };
-
-  // useEffect(() => {
-  //   if (player) {
-  //     isPlaying ? player.playVideo() : player.pauseVideo();
-  //   }
-  // }, [isPlaying, player]);
-  // const opts = {
-  //   height: "200px",
-  //   width: "100%",
-
-  //   playerVars: {
-  //     autoplay: 0,
-  //     mute: 1, // 자동재생 설정
-  //     // 추가적인 플레이어 옵션들
-  //   },
-  // };
-  // -----------------------------------------------------Youtube-----------
 
   useEffect(() => {
     setMode("single");
@@ -77,9 +48,6 @@ const Single = () => {
               <VoiceRecord />
             </div>
           )}
-          {/* {videoUrl && (
-          <YouTube videoId={videoUrl} opts={opts} onReady={onReady} />
-        )} */}
           {/* <Lyrics /> */}
           <div className={styles.player}>
             <div className={styles.toggle}>

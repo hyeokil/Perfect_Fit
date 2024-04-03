@@ -87,3 +87,19 @@ export type SoloVideoType = {
   artistName: string;
   songThumbnail: string;
 };
+
+
+export type DuetVideoType = {
+  id: number;
+  name: string;
+  userPath: string;
+  audioPath: string;
+  uploaderNickname: string;
+  uploaderImage: null | string;
+  participantNickname: string;
+  participantImage: null | string;
+  createdAt: string;
+  songTitle: string;
+  artistName: string;
+  songThumbnail: string;
+}

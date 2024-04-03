@@ -15,9 +15,9 @@ const NotSaveAlert = (props:PropType) => {
     navigate('/preview')
 
   };
-  const singAgain = () => {
-    setShowNoAlert(false)
-  };
+  // const singAgain = () => {
+  //   setShowNoAlert(false)
+  // };
 
   const goMain = () => {
     navigate("/mainchart");
@@ -30,7 +30,7 @@ const NotSaveAlert = (props:PropType) => {
           <h4>1분 이상의 레코딩만 저장됩니다.</h4>
         </div>
         <button onClick={save}>이어부르기</button>
-        <button onClick={singAgain}>다시 부르기</button>
+        {/* <button onClick={singAgain}>다시 부르기</button> */}
         <button onClick={goMain}>그냥 끝내기</button>
       </div>
     </div>
