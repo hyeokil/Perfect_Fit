@@ -100,8 +100,8 @@ def record(request, userId):
     logger.info("========== 음성 데이터 로드 완료 ==========")
 
     # 템포, 비트 -> BPM
-    tempo, beats = librosa.beat.beat_track(y=y, sr=sr)
-    data['tempo'] = tempo
+    # tempo, beats = librosa.beat.beat_track(y=y, sr=sr)
+    # data['tempo'] = tempo
     # data['beats'] = beats  # 비트를 어디에 사용할까..?
 
     # 음파가 양에서 음으로 / 음에서 양으로 바뀌는 비율
