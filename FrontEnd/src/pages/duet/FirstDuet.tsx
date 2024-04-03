@@ -12,7 +12,6 @@ import { logOnDev } from "@/util/logging";
 import AlertOnNavigation from "@/hooks/useHistory";
 import useSaveStore from "@/store/useSaveStore";
 import { useSongStore } from "@/store/useSongStore";
-import logo from "../../../public/image/logo.png";
 import { Background, Filter } from "@/components/single/Background";
 
 const FirstDuet = () => {
@@ -31,7 +30,7 @@ const FirstDuet = () => {
   logOnDev(`카메라, : ${camera}`);
   const info = useSongStore((state) => state.selectedSong);
   console.log(info)
-  const songThumbnail = info?.songThumbnail || logo;
+  const songThumbnail = info?.songThumbnail || '/image/logo.png';
 
   // -----------------------------------------------------Youtube-----------
   // const videoUrl = VideoId(info.songUrl);
@@ -98,7 +97,7 @@ const FirstDuet = () => {
             </div>
             <div className={styles.pitch}>
               <button onClick={() => setUserPitch(1.5)}>
-                <img src="/public/image/pitchbutton.png" />
+                <img src="/image/pitchbutton.png" />
                 <p>안쏭맞춤!</p>
               </button>
             </div>

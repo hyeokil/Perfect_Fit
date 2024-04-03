@@ -12,7 +12,6 @@ import { logOnDev } from "@/util/logging";
 import AlertOnNavigation from "@/hooks/useHistory";
 import useSaveStore from "@/store/useSaveStore";
 import { useSongStore } from "@/store/useSongStore";
-import logo from "../../../public/image/logo.png";
 import { Background, Filter } from "@/components/single/Background";
 
 const Single = () => {
@@ -29,7 +28,7 @@ const Single = () => {
   const [camera, setCamera] = useState<boolean>(true);
   logOnDev(`카메라, : ${camera}`);
   const info = useSongStore((state) => state.selectedSong);
-  const songThumbnail = info?.songThumbnail || logo;
+  const songThumbnail = info?.songThumbnail || '/image/logo.png';
 
   // -----------------------------------------------------Youtube-----------
   // const videoUrl = VideoId(info.songUrl);
@@ -96,7 +95,7 @@ const Single = () => {
             </div>
             <div className={styles.pitch}>
               <button onClick={() => setUserPitch(1.5)}>
-                <img src="/public/image/pitchbutton.png" />
+                <img src="/image/pitchbutton.png" />
                 <p>안쏭맞춤!</p>
               </button>
             </div>

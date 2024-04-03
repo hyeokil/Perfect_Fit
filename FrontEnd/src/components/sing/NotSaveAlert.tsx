@@ -1,5 +1,4 @@
 import styles from "@styles/sing/SaveAlert.module.scss";
-import logo from "public/image/logo.png";
 import { useNavigate } from "react-router-dom";
 
 type PropType = {
@@ -27,7 +26,7 @@ const NotSaveAlert = (props:PropType) => {
     <div>
       <div className={styles.buttonwrapper}>
         <div className={styles.guide}>
-          <img src={logo} alt="logo" />
+          <img src='/image/logo.png' alt="logo" />
           <h4>1분 이상의 레코딩만 저장됩니다.</h4>
         </div>
         <button onClick={save}>이어부르기</button>

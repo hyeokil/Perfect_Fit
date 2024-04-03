@@ -1,18 +1,28 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import lottie, { AnimationItem } from "lottie-web";
-import Animation from "../../../public/lottie/Animation.json";
 import "@styles/common/Loading.scss";
-
 
 const Loading: React.FC = () => {
   const animationContainer = useRef<HTMLDivElement>(null);
+  const [animationData, setAnimationData] = useState(null);
   let anim: AnimationItem | null = null;
 
   useEffect(() => {
-    if (animationContainer.current) {
+    fetch('/lottie/Animation.json')
+      .then(response => response.json())
+      .then(data => {
+        setAnimationData(data);
+      })
+      .catch(error => {
+        console.error('Error fetching animation data:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (animationContainer.current && animationData) {
       anim = lottie.loadAnimation({
         container: animationContainer.current,
-        animationData: Animation,
+        animationData: animationData,
         loop: true,
         autoplay: true,
       });
@@ -23,7 +33,7 @@ const Loading: React.FC = () => {
         anim.destroy();
       }
     };
-  }, []);
+  }, [animationData]);
 
   return (
     <div className="spinner-back">

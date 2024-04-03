@@ -22,21 +22,21 @@ const Access: React.FC = () => {
         <p>선택 권한</p>
         <div className="permission-item">
           <span className="icon">
-            <img src="../../../public/icon/notice.png" alt="notice" />
+            <img src="/icon/notice.png" alt="notice" />
           </span>
           <span>알림</span>&nbsp;&nbsp;&nbsp;
           <p>알림 메시지 발송</p>
         </div>
         <div className="permission-item">
           <span className="icon">
-            <img src="../../../public/icon/camera.png" alt="camera" />
+            <img src="/icon/camera.png" alt="camera" />
           </span>
           <span>카메라</span>
           <p>노래 중 화면 녹화</p>
         </div>
         <div className="permission-item">
           <span className="icon">
-            <img src="../../../public/icon/mic.png" alt="mic" />
+            <img src="/icon/mic.png" alt="mic" />
           </span>
           <span>마이크</span>
           <p>음성 녹음</p>

@@ -50,7 +50,7 @@ const Toggle = (props:ToggleType) => {
   return (
     <div>
       <Stack direction="row" spacing={1} alignItems="center">
-        <img src="/public/icon/camera.png"/>
+        <img src="/icon/camera.png"/>
         <Android12Switch
           checked={camera}
           onChange={handleChange}

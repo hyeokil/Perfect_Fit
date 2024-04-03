@@ -13,7 +13,6 @@ import AlertOnNavigation from "@/hooks/useHistory";
 import useSaveStore from "@/store/useSaveStore";
 import Lyrics from "@/components/single/Lyrics";
 import { useDuetStore } from "@/store/useSongStore";
-import logo from "../../../public/image/logo.png";
 import { Background, Filter } from "@/components/single/Background";
 
 const SecondDuet = () => {
@@ -37,7 +36,7 @@ const SecondDuet = () => {
     artist : info?.artistName || 'x',
     songTitle : info?.songTitle || 'x'
   }
-  const songThumbnail = info?.songThumbnail || logo;
+  const songThumbnail = info?.songThumbnail || '/image/logo.png';
   // -----------------------------------------------------Youtube-----------
   // const videoUrl = VideoId(info.songUrl);
   // const [player, setPlayer] = useState<any>(null);
@@ -103,7 +102,7 @@ const SecondDuet = () => {
             </div>
             <div className={styles.pitch}>
               <button onClick={() => setUserPitch(1.5)}>
-                <img src="/public/image/pitchbutton.png" />
+                <img src="/image/pitchbutton.png" />
                 <p>안쏭맞춤!</p>
               </button>
             </div>

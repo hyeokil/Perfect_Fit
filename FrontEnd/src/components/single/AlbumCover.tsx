@@ -1,4 +1,3 @@
-// import logo from "@assets/image/logo.png";
 import styles from '@styles/single/AlbumCover.module.scss'
 import type { AlbumCover } from '@/types/proptypse';
 
