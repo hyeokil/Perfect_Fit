@@ -8,4 +8,5 @@ urlpatterns = [
     path('<int:userId>/recordView/', views.record_view),  # 특정 유저 샘플 오디오 파일 조회
     path('<int:userId>/userRecommend/', views.user_recommend),  # 자신의 목소리와 비슷한 유저 목록 조회
     path('chartData/', views.chart_data),  # chart에 사용될 데이터셋
+    path('autoPitch/<int:userId>/', views.sing_auto_pitch),  # 음정 자동 조절에 사용될 데이터
 ]
