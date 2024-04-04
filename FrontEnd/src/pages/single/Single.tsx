@@ -64,7 +64,7 @@ const Single = () => {
               />
             </div>
             <div className={styles.pitch}>
-              <button onClick={() => setUserPitch(1.5)}>
+              <button onClick={() => setUserPitch(0.9)}>
                 <img src="/image/pitchbutton.png" />
                 <p>안쏭맞춤!</p>
               </button>

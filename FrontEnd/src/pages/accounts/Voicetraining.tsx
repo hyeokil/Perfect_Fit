@@ -124,6 +124,7 @@ const Voicetraining: React.FC = () => {
       console.log("S3에 업로드된 파일 URL:222", s3Url);
       // 필요한 경우 추가 처리
       // await SendRecord(sound);
+      
     } catch (error) {
       console.error("파일 업로드 중 오류 발생:", error);
     }

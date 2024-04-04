@@ -1,7 +1,6 @@
 import axios from "axios";
 import { instance } from "./axios";
 const userId = localStorage.getItem("userId");
-
 // 음성 녹음 후 서버에 전송----이거 안씀;;--------------
 export const SendRecord = async (audio: File) => {
   console.log(audio);
@@ -13,7 +12,9 @@ export const SendRecord = async (audio: File) => {
         "Content-Type": "multipart/form-data",
       },
     })
-    .then((res) => console.log(res))
+    .then((res) => {
+      console.log(res);
+    })
     .catch((error) => {
       // console.error('파일전송 중 오류 발생 :', error)
       console.log(error);
@@ -28,7 +29,11 @@ export const SendUrl = async (voiceUrl: string) => {
   };
   instance
     .post(`/ai/${userId}/record/`, data)
-    .then((res) => console.log(res))
+    .then((res) => {
+      window.location.href = "/mainchart";
+
+      console.log(res);
+    })
     .catch((err) => console.log(err));
 };
 
@@ -42,6 +47,9 @@ export const SendVideo = (video: File) => {
         "Content-Type": "multipart/form-data",
       },
     })
-    .then((res) => console.log(res))
+    .then((res) => {
+      console.log(res);
+      window.location.href = "/mainchart";
+    })
     .catch((err) => console.error(err));
 };
