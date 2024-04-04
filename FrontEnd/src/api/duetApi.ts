@@ -7,3 +7,6 @@ export const getReelsList = async () => {
 export const getDuetNoPartList =async () => {
   return await instance.get(`/api/v1/duet/unfinished/list`)
 }
+
+export const getMyReelsList = async () => {
+  return await instance.get(`/api/v1/reels/myList`)}

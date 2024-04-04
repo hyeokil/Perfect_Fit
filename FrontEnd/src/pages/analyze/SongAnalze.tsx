@@ -2,7 +2,7 @@ import GenreAnalyze from "@/components/analyze/GenreAnalyze";
 import Header from "@/components/layout/Header";
 import React from "react";
 import "@styles/analyzed/SongAnalze.scss";
-import SingerAnalyze from "@/components/analyze/SingerAnalyze";
+// import SingerAnalyze from "@/components/analyze/SingerAnalyze";
 
 const SongAnalze: React.FC = () => {
   return (

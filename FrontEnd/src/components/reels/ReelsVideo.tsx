@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "@styles/reels/ReelsVideo.module.scss";
 import { ReelsDataType } from "@/types/apiType";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserMinus, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { handlefollow } from "./../../api/reelsApi";
 
 type PathType = {
@@ -10,18 +10,24 @@ type PathType = {
   musicPath: string;
   index: number;
   data: ReelsDataType;
+  // userId: string; // 문자열로 변경된 userId prop
 };
-const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, data }) => {
+
+const ReelsVideo: React.FC<PathType> = ({
+  userPath,
+  musicPath,
+  data,
+}) => {
   const { follow, memberId } = data;
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const userId = localStorage.getItem('userId') || '0'
 
   const { memberNickname, songTitle } = data;
-  //---------------------------------------------------------------------------
-  // playtime 기록 ㅠㅠ??
-  // 재생 시간을 추적하기 위한 state
+
   const [playTime, setPlayTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [state, setState] = useState(follow);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -43,12 +49,15 @@ const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, data }) => {
   }, []);
 
   useEffect(() => {
+    setState(follow);
+  }, [follow]);
+
+  useEffect(() => {
     if (isPlaying && playTime >= 5) {
       console.log(`재생 시간 기록: ${playTime}초`);
-      // 여기에서 재생 시간을 서버에 보내거나 상태를 업데이트 할 수 있습니다.
     }
   }, [playTime, isPlaying]);
-  //---------------------------------------------------------------------------
+
   const handlePlayVideo = () => {
     if (videoRef.current && audioRef.current) {
       if (videoRef.current.paused && audioRef.current.paused) {
@@ -65,8 +74,8 @@ const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, data }) => {
       }
     }
   };
+  console.log(memberId, userId)
   useEffect(() => {
-    // props가 변경될 때마다 실행됩니다.
     if (videoRef.current) {
       videoRef.current.load();
     }
@@ -74,18 +83,17 @@ const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, data }) => {
       audioRef.current.load();
     }
   }, [userPath, musicPath]);
-  //------------------------------------------------
+
   const goUnfollow = async () => {
     try {
       const response = await handlefollow(memberId);
-      // 여기에 follow 요청 후 처리할 로직을 추가하세요
+      setState(!state);
       console.log("요청 성공:", response);
     } catch (error) {
       console.error("요청 실패:", error);
     }
   };
 
-  //------------------------------------------------
   return (
     <div>
       <div onClick={handlePlayVideo} className={styles.player}>
@@ -100,24 +108,27 @@ const ReelsVideo: React.FC<PathType> = ({ userPath, musicPath, data }) => {
         <h1>{songTitle}</h1>
         <div className={styles.user}>
           <h3>{memberNickname}</h3>
-          <div onClick={goUnfollow}>
-            {follow ? (
-              <FontAwesomeIcon
-                icon={faUserMinus}
-                size="2xl"
-                style={{ color: "#74C0FC" }}
-              />
-            ) : (
-              <FontAwesomeIcon
-                icon={faUserPlus}
-                size="2xl"
-                style={{ color: "#74C0FC" }}
-              />
-            )}
-          </div>
+          {parseInt(userId) !== memberId && ( // userId를 숫자로 변환하여 비교
+            <div onClick={goUnfollow}>
+              {state ? (
+                <FontAwesomeIcon
+                  icon={faStar}
+                  size="2xl"
+                  style={{ color: "#74C0FC" }}
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={faStar}
+                  size="2xl"
+                  style={{ color: "#FFFFF" }}
+                />
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
+
 export default ReelsVideo;

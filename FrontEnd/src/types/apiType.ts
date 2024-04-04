@@ -83,6 +83,7 @@ export type videoInfoType = {
 export type SoloVideoType = {
   id: number;
   name: string;
+  songId : number
   userPath: string;
   audioPath: string;
   createdAt: string;
@@ -91,17 +92,36 @@ export type SoloVideoType = {
   songThumbnail: string;
 };
 
-
+// 완성 듀엣
 export type DuetVideoType = {
+  artistName: string;
+  createdAt: string;
   id: number;
   name: string;
-  userPath: string;
-  audioPath: string;
-  uploaderNickname: string;
-  uploaderImage: null | string;
+  participantAudioPath: string;
+  participantImage: string;
   participantNickname: string;
-  participantImage: null | string;
+  participantUserPath: string;
+  songId: number;
+  songThumbnail: string;
+  songTitle: string;
+  uploaderAudioPath: string;
+  uploaderImage: string;
+  uploaderNickname: string;
+  uploaderUserPath: string;}
+
+
+export type UnFinishedDuetTyep = {
+  id: number;
+  name: string;
+  uploaderUserPath: string;
+  uploaderAudioPath: string;
+  uploaderId: number;
+  uploaderNickname: string;
+  uploaderImage: string | null;
   createdAt: string;
+  songId: number;
+  songMrPath: string | null;
   songTitle: string;
   artistName: string;
   songThumbnail: string;

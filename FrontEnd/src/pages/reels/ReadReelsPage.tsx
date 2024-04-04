@@ -3,6 +3,7 @@ import Header from "@/components/layout/Header";
 import ReelsVideo from "@/components/reels/ReelsVideo";
 import { ReelsDataType } from "@/types/apiType";
 import { getReelsList } from "@/api/duetApi";
+import NoReels from "@/components/reels/NoReels";
 
 const ReadReelsPage = () => {
   const [reelsData, setReelsData] = useState<ReelsDataType[]>([]);
@@ -114,7 +115,7 @@ const ReadReelsPage = () => {
   return (
     <div>
       <Header title="릴스" state={["back", "close"]} page="mainchart" />
-      {reelsData.length > 0 && (
+      {reelsData.length > 0 ? (
         <div
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
@@ -130,7 +131,9 @@ const ReadReelsPage = () => {
             index={currentReelsIndex}
           />
         </div>
-      )}
+      )
+    :
+    <NoReels />}
     </div>
   );
 };

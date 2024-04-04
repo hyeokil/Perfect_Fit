@@ -8,7 +8,7 @@ import useSaveStore from "@/store/useSaveStore";
 
 type PropType = {
   setUserPitch : React.Dispatch<React.SetStateAction<number>>;
-  setShowNoAlert: React.Dispatch<React.SetStateAction<boolean>>;
+  // setShowNoAlert: React.Dispatch<React.SetStateAction<boolean>>;
   setShowSaveAlert: React.Dispatch<React.SetStateAction<boolean>>;
   userPitch: number;
   mrPath : string | null
@@ -16,7 +16,7 @@ type PropType = {
 
 const Controller = (props: PropType) => {
   // -------------------------------------------------------
-  const {setShowNoAlert, setShowSaveAlert, userPitch , setUserPitch, mrPath } = props;
+  const {setShowSaveAlert, userPitch , setUserPitch, mrPath } = props;
   const [pitch, setPitch] = useState<number>(userPitch);
   // const [tempo, setTempo] = useState<number>(1.0);
   const { isPlaying, setIsPlaying } = useRecordStore();
@@ -28,7 +28,7 @@ const Controller = (props: PropType) => {
   const [recordedBlobs, setRecordedBlobs] = useState<Blob[]>([]);
   const [media, setMedia] = useState<MediaRecorder | null>(null);
   // ----------------------------------------------------
-
+  console.log(recordedBlobs)
 
 const saveMusicBlob = useSaveStore(state => state.setMusicBlob)
 
@@ -121,16 +121,17 @@ const saveMusicBlob = useSaveStore(state => state.setMusicBlob)
       if (isPlaying) {
         shiftRef.current.disconnect();
         stopRecording(); //--------------
-        const recordedAudioLength = recordedBlobs.reduce(
-          (totalLength, blob) => totalLength + blob.size,
-          0
-        );
+        setShowSaveAlert(true)
+        // const recordedAudioLength = recordedBlobs.reduce(
+        //   (totalLength, blob) => totalLength + blob.size,
+        //   0
+        // );
   
-        if (recordedAudioLength < 60 * 1000) {
-          setShowNoAlert(true); // 녹음된 음성의 길이가 1분 미만일 때
-        } else {
-          setShowSaveAlert(true); // 녹음된 음성의 길이가 1분 이상일 때
-        }
+        // if (recordedAudioLength < 60 * 1000) {
+        //   setShowNoAlert(true); // 녹음된 음성의 길이가 1분 미만일 때
+        // } else {
+        //   setShowSaveAlert(true); // 녹음된 음성의 길이가 1분 이상일 때
+        // }
       } else {
         shiftRef.current.connect(audioCtxRef.current!.destination);
         audioCtxRef.current!.resume();

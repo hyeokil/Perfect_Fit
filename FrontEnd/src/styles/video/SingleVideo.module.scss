@@ -1,0 +1,31 @@
+.buttonbox {
+  // border: 1px solid wheat;
+  border-radius: 5px;
+  width: 350px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around; /* 수직 가운데 정렬 */
+  text-align: center;
+  z-index: 1000; /* 다른 요소 위에 떠 있도록 설정 */
+
+  button {
+    width: 80px;
+    height: 30px;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: white;
+
+    border-radius: 10px;
+    border: 0;
+    background: linear-gradient(
+      180deg,
+      #3db9ff 0%,
+      #46b8e0 54.5%,
+      #83e4f1 100%
+    );
+  }
+}

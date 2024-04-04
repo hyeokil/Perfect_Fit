@@ -6,19 +6,20 @@ import Camera from "@/components/sing/Camera";
 import Toggle from "@/components/sing/Toggle";
 import { useEffect, useState } from "react";
 import SaveAlert from "@/components/sing/SaveAlert";
-import NotSaveAlert from "@/components/sing/NotSaveAlert";
+// import NotSaveAlert from "@/components/sing/NotSaveAlert";
 import VoiceRecord from "@/components/sing/VoiceRecord";
 import { logOnDev } from "@/util/logging";
 import AlertOnNavigation from "@/hooks/useHistory";
 import useSaveStore from "@/store/useSaveStore";
 import { useSongStore } from "@/store/useSongStore";
 import { Background, Filter } from "@/components/single/Background";
+import Lyrics from "@/components/single/Lyrics";
 
 const Single = () => {
   //---------------------------------------------------
   // 저장여부
   const [showSaveAlert, setShowSaveAlert] = useState<boolean>(false);
-  const [showNoAlert, setShowNoAlert] = useState<boolean>(false);
+  // const [showNoAlert, setShowNoAlert] = useState<boolean>(false);
   const [userPitch, setUserPitch] = useState<number>(1.0);
   const setMode = useSaveStore((state) => state.setMode);
   const [camera, setCamera] = useState<boolean>(true);
@@ -48,7 +49,7 @@ const Single = () => {
               <VoiceRecord />
             </div>
           )}
-          {/* <Lyrics /> */}
+          <Lyrics songId={info.songId}/>
           <div className={styles.player}>
             <div className={styles.toggle}>
               <Toggle camera={camera} setCamera={setCamera} />
@@ -56,7 +57,7 @@ const Single = () => {
             <div className={styles.controller}>
               <Controller
                 setUserPitch={setUserPitch}
-                setShowNoAlert={setShowNoAlert}
+                // setShowNoAlert={setShowNoAlert}
                 setShowSaveAlert={setShowSaveAlert}
                 userPitch={userPitch}
                 mrPath={info.mrPath}
@@ -72,7 +73,7 @@ const Single = () => {
         </div>
       )}
       {showSaveAlert && <SaveAlert setShowSaveAlert={setShowSaveAlert} />}
-      {showNoAlert && <NotSaveAlert setShowNoAlert={setShowNoAlert} />}
+      {/* {showNoAlert && <NotSaveAlert setShowNoAlert={setShowNoAlert} />} */}
     </div>
   );
 };

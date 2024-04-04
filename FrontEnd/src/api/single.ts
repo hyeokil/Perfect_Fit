@@ -12,3 +12,8 @@ export const getDuetVideo =async () => {
   return await instance.get(`/api/v1/duet/finished/myList`)
   
 }
+
+//미완성 듀엣
+export const getUnfinishedDuet =async () => {
+  return await instance.get(`/api/v1/duet/unfinished/myList`)
+}

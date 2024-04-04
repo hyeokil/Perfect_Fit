@@ -11,7 +11,7 @@ import VoiceRecord from "@/components/sing/VoiceRecord";
 import { logOnDev } from "@/util/logging";
 import AlertOnNavigation from "@/hooks/useHistory";
 import useSaveStore from "@/store/useSaveStore";
-import Lyrics from "@/components/single/Lyrics";
+// import Lyrics from "@/components/single/Lyrics";
 import { useDuetStore } from "@/store/useSongStore";
 import { Background, Filter } from "@/components/single/Background";
 
@@ -86,7 +86,7 @@ const SecondDuet = () => {
           {/* {videoUrl && (
           <YouTube videoId={videoUrl} opts={opts} onReady={onReady} />
         )} */}
-          <Lyrics />
+          {/* <Lyrics /> */}
           <div className={styles.player}>
             <div className={styles.toggle}>
               <Toggle camera={camera} setCamera={setCamera} />
@@ -94,10 +94,10 @@ const SecondDuet = () => {
             <div className={styles.controller}>
               <Controller
                 setUserPitch={setUserPitch}
-                setShowNoAlert={setShowNoAlert}
+                // setShowNoAlert={setShowNoAlert}
                 setShowSaveAlert={setShowSaveAlert}
                 userPitch={userPitch}
-                mrPath={info.userPath}
+                mrPath={info.uploaderAudioPath}
               />
             </div>
             <div className={styles.pitch}>

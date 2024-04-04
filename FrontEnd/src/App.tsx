@@ -40,6 +40,7 @@ import SecondDuet from "./pages/duet/SecondDuet.tsx";
 import PlayVideoPage from "./pages/single/PlayVideoPage.tsx";
 import MyReels from "./pages/mypage/MyReels.tsx";
 import SongAnalze from "./pages/analyze/SongAnalze.tsx";
+import MyDuetComplete from "./pages/mypage/MyDuetUpload.tsx";
 
 const App: React.FC = () => {
   return (
@@ -85,6 +86,7 @@ const App: React.FC = () => {
           <Route path="mylike" element={<MyLike />} />
           <Route path="mysolo" element={<MySolo />} />
           <Route path="myduet" element={<MyDuet />} />
+          <Route path="unfnishedduet" element={<MyDuetComplete />} />
           <Route path="myreels" element={<MyReels />} />
           {/* 분석 */}
           <Route path="songanalze" element={<SongAnalze />} />

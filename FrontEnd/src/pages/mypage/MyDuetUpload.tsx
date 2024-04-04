@@ -1,17 +1,17 @@
-import { getDuetVideo } from "@/api/single";
-import { DuetVideoType } from "@/types/apiType";
+import { getUnfinishedDuet } from "@/api/single";
+import { UnFinishedDuetTyep } from "@/types/apiType";
 import VideoCard from "@/components/video/VideoCard";
 import React, { useEffect, useState } from "react";
 import styles from "@styles/mypage/VideoPage.module.scss";
 import NoVideo from "@/components/video/NoVideo";
 import Header from "@/components/layout/Header";
 
-const MyDuet: React.FC = () => {
-  const [duetVideoList, setDuetVideoList] = useState<DuetVideoType[]>([]);
+const MyDuetComplete: React.FC = () => {
+  const [duetVideoList, setDuetVideoList] = useState<UnFinishedDuetTyep[]>([]);
   useEffect(() => {
     const data = async () => {
       try {
-        const res = await getDuetVideo();
+        const res = await getUnfinishedDuet();
         console.log(res);
         setDuetVideoList(res.data.dataBody);
       } catch (err) {
@@ -22,7 +22,7 @@ const MyDuet: React.FC = () => {
   }, []);
   return (
     <div>
-      <Header title="나의 듀엣" state={["back", "close"]} page="mainmypage" />
+      <Header title="나의 미완성 노래" state={["back", "close"]} page="mainmypage" />
       <div className={styles.wrapper}>
         {duetVideoList.length > 0 ? (
           duetVideoList.map((duetVideo) => (
@@ -36,4 +36,4 @@ const MyDuet: React.FC = () => {
   );
 };
 
-export default MyDuet;
+export default MyDuetComplete;

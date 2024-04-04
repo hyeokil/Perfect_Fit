@@ -79,7 +79,7 @@ const MainMypage: React.FC = () => {
           <div className="duet-song">
             <div
               className="section my-duet"
-              onClick={() => handleNavigate("/myduet")}
+              onClick={() => handleNavigate("/unfnishedduet")}
             >
               <h3>듀엣 포스팅</h3>
             </div>

@@ -1,8 +1,9 @@
 .lyricsbox {
-  border: 1px solid red;
+  // border: 1px solid red;
   width: 90%;
-  height: fit-content;
-  padding-top: 10%;
+  height: 90px; /* 높이를 조절할 수 있는 원하는 값으로 설정하세요 */
+  overflow-y: auto; /* 세로 스크롤이 필요할 때 스크롤이 나타나도록 설정합니다. */
+  padding-top: 5%;
   padding-bottom: 10%;
   p {
     text-align: center;
@@ -10,5 +11,30 @@
     margin: 3%;
     font-size: large;
     font-family: "Noto Sans KR", sans-serif;
+  }
+}
+@keyframes fillText {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+
+.activeLyric {
+  overflow: hidden; // 애니메이션의 변화를 제한
+  position: relative;
+  color: transparent;
+
+  &:before {
+    content: attr(data-text); // 가사 텍스트
+    position: absolute;
+    color: blue; // 변화할 색상
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    animation: fillText 2.42s linear forwards; // 다음 가사가 시작할 때까지 색상을 채움
   }
 }

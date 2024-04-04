@@ -1,42 +1,65 @@
 import { useEffect, useState } from "react";
-import { SoloVideoType } from "@/types/apiType";
+import {
+  DuetVideoType,
+  SoloVideoType,
+  UnFinishedDuetTyep,
+} from "@/types/apiType";
 import styles from "@styles/video/videoCard.module.scss";
 import { formatDate } from "@/util/songtimes";
 import SingleVideo from "./SingleVideo";
-const VideoCard = ({
-  // key,
-  soloVideo,
-}: {
-  key: number;
-  soloVideo: SoloVideoType;
-}) => {
+import DuetVideo from "./DuetVideo";
+
+type VideoType = SoloVideoType | UnFinishedDuetTyep | DuetVideoType;
+
+const VideoCard: React.FC<{ soloVideo: VideoType }> = ({ soloVideo }) => {
   const {
     songThumbnail,
-    // userPath,
-    // audioPath,
     songTitle,
     artistName,
     createdAt,
   } = soloVideo;
-  const [openVideo, setOpenVideo] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
+  const isDuetVideo = (video: VideoType): video is DuetVideoType => {
+    // DuetVideoType을 확인하는 논리
+    return "특정 속성" in video;
+  };
+
   useEffect(() => {
-    setOpenVideo(false);
+    setOpenModal(false);
   }, []);
+
+  const handleCardClick = () => {
+    setOpenModal(true);
+  };
+
   const Date = formatDate(createdAt);
+
   return (
     <div>
-      {/* <Background $imageUrl={songThumbnail} /> */}
-      <div className={styles.card} onClick={() => setOpenVideo(true)}>
-        <img src={songThumbnail} />
+      <div className={styles.card} onClick={handleCardClick}>
+        <img src={songThumbnail} alt="Song Thumbnail" />
         <div>
           <h3>{songTitle}</h3>
           <p>{artistName}</p>
           <p>{Date}</p>
         </div>
       </div>
-      {openVideo && (
+      {openModal && (
         <div className={styles.modalBackground}>
-          <SingleVideo video={soloVideo} setOpenVideo={setOpenVideo} />
+          <div className={styles.singleVideoModal}>
+            {isDuetVideo(soloVideo) ? (
+              <DuetVideo
+                video={soloVideo as DuetVideoType}
+                setOpenVideo={setOpenModal}
+              />
+            ) : (
+              <SingleVideo
+                video={soloVideo as SoloVideoType | UnFinishedDuetTyep}
+                setOpenVideo={setOpenModal}
+              />
+            )}
+          </div>
         </div>
       )}
     </div>
